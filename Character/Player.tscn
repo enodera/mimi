@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=3 uid="uid://btukobjpqjuii"]
+
+[ext_resource type="Script" uid="uid://dokcww0rbalf1" path="res://Character/player.gd" id="1_lgt04"]
+[ext_resource type="PackedScene" uid="uid://blabqcdjyg1c5" path="res://Models/mimi.tscn" id="2_schp4"]
+[ext_resource type="PackedScene" uid="uid://rwpgyy7ti4it" path="res://MimiModels/1.3/mimi1.3.tscn" id="3_pusnx"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_713gb"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_lgt04"]
+radius = 0.303584
+height = 2.94938
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_lgt04"]
+
+[node name="Player3D" type="CharacterBody3D"]
+script = ExtResource("1_lgt04")
+
+[node name="Mimi1_2" parent="." instance=ExtResource("2_schp4")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, -3.27826e-07, 0, 3.27826e-07, 1, 0, -4.76837e-07, -3.57628e-06)
+visible = false
+
+[node name="Mimi" parent="." instance=ExtResource("3_pusnx")]
+unique_name_in_owner = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+transparency = 0.7
+mesh = SubResource("CapsuleMesh_713gb")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+shape = SubResource("CapsuleShape3D_lgt04")
+
+[node name="CameraPivot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.95169, 0)
+
+[node name="SpringArm3D" type="SpringArm3D" parent="CameraPivot"]
+transform = Transform3D(1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, 0, 1, 2)
+shape = SubResource("SphereShape3D_lgt04")
+spring_length = 8.0
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot/SpringArm3D"]

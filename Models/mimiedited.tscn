@@ -1,0 +1,83 @@
+[gd_scene load_steps=11 format=3 uid="uid://bgwnr5h5sg73g"]
+
+[ext_resource type="PackedScene" uid="uid://bek28bp4uh8en" path="res://Models/Mimi1.1.glb" id="1_marf6"]
+[ext_resource type="Script" uid="uid://cbpgho3cvvjnn" path="res://Models/mimi.gd" id="2_536q6"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_os4be"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4sb14"]
+animation = &"slowrun"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ut0bq"]
+animation = &"run"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_sqd6o"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_4sb14")
+blend_point_0/pos = 0.0
+blend_point_1/node = SubResource("AnimationNodeAnimation_ut0bq")
+blend_point_1/pos = 1.0
+min_space = 0.0
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_7ddtp"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_os4be"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_kvd6t"]
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_sqd6o"]
+states/Start/position = Vector2(284, 65)
+states/idle/node = SubResource("AnimationNodeAnimation_os4be")
+states/idle/position = Vector2(433, 122)
+states/walkrun/node = SubResource("AnimationNodeBlendSpace1D_sqd6o")
+states/walkrun/position = Vector2(569, 55)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_7ddtp"), "idle", "walkrun", SubResource("AnimationNodeStateMachineTransition_os4be"), "walkrun", "idle", SubResource("AnimationNodeStateMachineTransition_kvd6t")]
+
+[node name="Mimi" instance=ExtResource("1_marf6")]
+script = ExtResource("2_536q6")
+
+[node name="Skeleton3D" parent="Armature" index="0"]
+bones/0/position = Vector3(0, -0.172847, 0.0122149)
+bones/1/rotation = Quaternion(-0.0241056, 1.1915e-07, -3.75484e-09, 0.999709)
+bones/2/rotation = Quaternion(0.056836, 7.03353e-15, 1.35508e-08, 0.998384)
+bones/7/rotation = Quaternion(-0.433086, -0.102629, -0.87398, 0.195099)
+bones/8/rotation = Quaternion(1.4301e-08, -1.37068e-07, -0.0081341, 0.999967)
+bones/9/rotation = Quaternion(5.76812e-10, 3.77243e-07, 0.00278906, 0.999996)
+bones/11/rotation = Quaternion(-0.433089, 0.102634, 0.873977, 0.195102)
+bones/12/rotation = Quaternion(4.32426e-09, 1.32266e-07, 0.0081341, 0.999967)
+bones/13/rotation = Quaternion(5.60304e-10, -3.73517e-07, -0.00278908, 0.999996)
+bones/15/rotation = Quaternion(0.722501, -0.0495362, -0.688595, 0.0370886)
+bones/16/rotation = Quaternion(0.0102768, 0.000726635, -0.137181, 0.990492)
+bones/17/rotation = Quaternion(-0.0152987, -0.016424, 0.781057, 0.624056)
+bones/18/rotation = Quaternion(-0.00249637, -2.10091e-09, 0.00321446, 0.999992)
+bones/19/rotation = Quaternion(0.722501, 0.0495362, 0.688595, 0.0370886)
+bones/20/rotation = Quaternion(0.0102768, -0.000726385, 0.137181, 0.990492)
+bones/21/rotation = Quaternion(-0.0152987, 0.016424, -0.781058, 0.624055)
+bones/22/rotation = Quaternion(-0.00249563, -5.05669e-10, -0.00321357, 0.999992)
+bones/23/position = Vector3(-0.797993, -0.321764, 0.0747302)
+bones/24/position = Vector3(0.190384, -0.530389, -0.536765)
+bones/24/rotation = Quaternion(0.999949, -3.65811e-08, 0.010137, -1.99216e-15)
+bones/25/position = Vector3(0.797993, -0.321764, 0.0747302)
+bones/26/position = Vector3(-0.190384, -0.530389, -0.536765)
+bones/26/rotation = Quaternion(0.999949, -6.48341e-16, -0.0101367, 1.80287e-15)
+bones/27/position = Vector3(0.147408, -1.62037, -0.0901504)
+bones/28/position = Vector3(0.794373, -0.490363, 0.0227968)
+bones/30/position = Vector3(-0.147408, -1.62037, -0.0901504)
+bones/31/position = Vector3(-0.794373, -0.490363, 0.0227968)
+bones/33/position = Vector3(2.21717, 1.18712, 0.0959769)
+bones/34/position = Vector3(2.47184, 1.21304, 0.0959769)
+
+[node name="Hair1" parent="Armature/Skeleton3D" index="0"]
+transform = Transform3D(5.87695e-08, 6.43603e-09, -0.248587, -0.00183833, 0.17028, 8.80288e-09, 0.24858, 0.00125928, 6.10052e-08, -0.00891562, 1.48698, 0.14226)
+
+[node name="Hair2" parent="Armature/Skeleton3D" index="1"]
+transform = Transform3D(1.66362e-08, -7.82202e-09, -0.0621839, 0.0255667, 0.305386, -1.82708e-09, 0.151175, -0.0516469, 7.21742e-09, 0.00888656, 1.27769, 0.149904)
+
+[node name="Hair3" parent="Armature/Skeleton3D" index="2"]
+transform = Transform3D(9.83929e-08, 6.77369e-08, -1.21312, 0.167131, 1.09997, 1.07599e-07, 0.901052, -0.204027, 1.60679e-07, 0.00888652, 1.26071, -0.0967702)
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="3"]
+tree_root = SubResource("AnimationNodeStateMachine_sqd6o")
+anim_player = NodePath("../AnimationPlayer")
+parameters/walkrun/blend_position = -0.265568
