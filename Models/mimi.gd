@@ -11,7 +11,7 @@ func set_run_speed(speed: float, limit: float) -> void:
 # Method to update the animation state based on the character's movement speed
 func set_move_state(state_name: String) -> void:
 	if _state_machine:
-		print("Transitioning to state: ", state_name)  # Debugging log
+		# print("Transitioning to state: ", state_name)  # Debugging log
 		_state_machine.travel(state_name)  # Change animation state
 	else:
 		print("Error: State machine playback is null")

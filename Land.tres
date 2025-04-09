@@ -1,0 +1,48 @@
+[gd_resource type="ParticleProcessMaterial" load_steps=9 format=3 uid="uid://byd7qixpxbdey"]
+
+[sub_resource type="Curve" id="Curve_uwaaw"]
+_limits = [-200.0, 200.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_uwaaw"]
+curve = SubResource("Curve_uwaaw")
+
+[sub_resource type="Curve" id="Curve_in43j"]
+_limits = [-200.0, 200.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_in43j"]
+curve = SubResource("Curve_in43j")
+
+[sub_resource type="Curve" id="Curve_e7avo"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.539063, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_job5r"]
+curve = SubResource("Curve_e7avo")
+
+[sub_resource type="Curve" id="Curve_job5r"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.195313, 1), 0.0, 0.0, 0, 0, Vector2(0.604167, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_wn8am"]
+curve = SubResource("Curve_job5r")
+
+[resource]
+emission_shape_scale = Vector3(0.5, 0.01, 0.5)
+emission_shape = 1
+emission_sphere_radius = 1.0
+direction = Vector3(0, 0.1, 0)
+spread = 20.0
+flatness = 0.1
+radial_velocity_min = -2.23517e-05
+radial_velocity_max = 5.99998
+radial_velocity_curve = SubResource("CurveTexture_job5r")
+gravity = Vector3(0, 0, 0)
+linear_accel_curve = SubResource("CurveTexture_uwaaw")
+radial_accel_curve = SubResource("CurveTexture_in43j")
+damping_max = 1.0
+scale_min = 0.0
+scale_curve = SubResource("CurveTexture_wn8am")

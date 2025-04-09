@@ -15,6 +15,7 @@ extends CharacterBody3D
 var state := "idle"
 var _camera_input_direction := Vector2.ZERO
 var _last_movement_direction := Vector3.BACK
+var was_on_floor := false  # Used to detect landing
 
 @onready var _camera_pivot : Node3D = $CameraPivot
 @onready var _camera: Camera3D = $CameraPivot/SpringArm3D/Camera3D
@@ -25,6 +26,9 @@ var _last_movement_direction := Vector3.BACK
 @export var min_zoom_distance := 3.0
 @export var max_zoom_distance := 10.0
 
+func _ready() -> void:
+	was_on_floor = true
+
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("left_click"):
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -33,12 +37,12 @@ func _input(event: InputEvent) -> void:
 		
 	# Zoom in when camera_zoomin is pressed
 	if Input.is_action_pressed("camera_zoomin"):
-		if _spring_arm.spring_length > 1.0:
+		if _spring_arm.spring_length > 0.0:
 			_spring_arm.spring_length -= zoom_speed
 	
 	# Zoom out when camera_zoomout is pressed
 	if Input.is_action_pressed("camera_zoomout"):
-		if _spring_arm.spring_length < 8.0:
+		if _spring_arm.spring_length < 6.0:
 			_spring_arm.spring_length += zoom_speed
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -57,7 +61,6 @@ func _physics_process(delta: float) -> void:
 	# Apply gravity
 	if not is_on_floor():
 		velocity.y -= gravity * delta  # Apply gravity
-			# Check if character is moving up or falling down
 		if velocity.y > 0 and state != "jump":
 			state = "jump"
 			_skin.set_move_state("jump")  # Play jump animation
@@ -73,8 +76,8 @@ func _physics_process(delta: float) -> void:
 		
 	# Check for sprint action
 	var current_move_speed = move_speed
-	if Input.is_action_pressed("sprint"):  # If the sprint action is pressed
-		current_move_speed = sprint_speed  # Use the sprint speed
+	if Input.is_action_pressed("sprint"):
+		current_move_speed = sprint_speed
 
 	var raw_input := Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	var forward := _camera.global_basis.z
@@ -99,11 +102,31 @@ func _physics_process(delta: float) -> void:
 		if state == "air":
 			_skin.set_move_state("squat")
 			state = "squat"
-		elif ground_speed > 0.0:
-			_skin.set_move_state("walkrun")
-			_skin.set_run_speed(ground_speed - move_speed, sprint_speed - move_speed)
-			state = "walkrun"
 		else:
-			_skin.set_move_state("idle")
-			state = "idle"
-			
+			if ground_speed > 0.0:
+				_skin.set_move_state("walkrun")
+				_skin.set_run_speed(ground_speed - move_speed, sprint_speed - move_speed)
+				state = "walkrun"
+			else:
+				_skin.set_move_state("idle")
+				state = "idle"
+	
+	if state == "walkrun":
+		%WalkParticles.emitting = true
+		%RunParticles.emitting = true
+		
+		if current_move_speed <= move_speed:
+			%WalkParticles.amount_ratio = 1
+			%RunParticles.amount_ratio = 0
+		else:
+			%WalkParticles.amount_ratio = 0
+			%RunParticles.amount_ratio = 1
+	else:
+		%WalkParticles.emitting = false
+		%RunParticles.emitting = false
+	
+	# Trigger land particles once upon landing
+	if not was_on_floor and is_on_floor():
+		%LandParticles.restart()
+	
+	was_on_floor = is_on_floor()

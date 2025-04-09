@@ -1,10 +1,22 @@
-[gd_scene load_steps=11 format=3 uid="uid://btukobjpqjuii"]
+[gd_scene load_steps=12 format=3 uid="uid://btukobjpqjuii"]
 
 [ext_resource type="Script" uid="uid://dokcww0rbalf1" path="res://Character/player.gd" id="1_lgt04"]
 [ext_resource type="PackedScene" uid="uid://blabqcdjyg1c5" path="res://Models/mimi.tscn" id="2_schp4"]
 [ext_resource type="PackedScene" uid="uid://rwpgyy7ti4it" path="res://MimiModels/1.3/mimi1.3.tscn" id="3_pusnx"]
-[ext_resource type="Material" uid="uid://diu8uwfq6hsq1" path="res://Character/Run.tres" id="4_dvofn"]
-[ext_resource type="Material" uid="uid://byd7qixpxbdey" path="res://Land.tres" id="5_ly6k5"]
+
+[sub_resource type="Curve" id="Curve_pusnx"]
+_data = [Vector2(0, 0.501514), 0.0, 0.0, 0, 0, Vector2(0.208333, 1), 0.0, 0.0, 0, 0, Vector2(0.606771, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_ssuvf"]
+curve = SubResource("Curve_pusnx")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_dvofn"]
+emission_shape_scale = Vector3(0, 0, 0)
+radial_velocity_min = -2.23517e-05
+radial_velocity_max = 0.999978
+gravity = Vector3(0, 0, -3)
+scale_curve = SubResource("CurveTexture_ssuvf")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pusnx"]
 emission_enabled = true
@@ -14,8 +26,6 @@ emission = Color(1, 1, 1, 1)
 material = SubResource("StandardMaterial3D_pusnx")
 radius = 0.1
 height = 0.2
-radial_segments = 16
-rings = 8
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_713gb"]
 
@@ -26,7 +36,6 @@ height = 2.94938
 [sub_resource type="SphereShape3D" id="SphereShape3D_lgt04"]
 
 [node name="Player3D" type="CharacterBody3D"]
-floor_snap_length = 0.3
 script = ExtResource("1_lgt04")
 
 [node name="Mimi1_2" parent="." instance=ExtResource("2_schp4")]
@@ -40,30 +49,15 @@ unique_name_in_owner = true
 [node name="WalkParticles" type="GPUParticles3D" parent="Mimi"]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.147181, -0.139004)
-amount = 5
-lifetime = 0.4
-fixed_fps = 60
-process_material = ExtResource("4_dvofn")
+amount = 10
+process_material = SubResource("ParticleProcessMaterial_dvofn")
 draw_pass_1 = SubResource("SphereMesh_ly6k5")
 
 [node name="RunParticles" type="GPUParticles3D" parent="Mimi"]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.294361, -0.278008)
-amount = 25
-lifetime = 0.4
-fixed_fps = 60
-process_material = ExtResource("4_dvofn")
-draw_pass_1 = SubResource("SphereMesh_ly6k5")
-
-[node name="LandParticles" type="GPUParticles3D" parent="Mimi"]
-unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0563731, -0.0741475)
-emitting = false
-amount = 40
-one_shot = true
-explosiveness = 1.0
-fixed_fps = 60
-process_material = ExtResource("5_ly6k5")
+amount = 50
+process_material = SubResource("ParticleProcessMaterial_dvofn")
 draw_pass_1 = SubResource("SphereMesh_ly6k5")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]

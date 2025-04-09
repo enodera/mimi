@@ -1,0 +1,58 @@
+[gd_scene load_steps=3 format=3 uid="uid://pakdokc08g3p"]
+
+[ext_resource type="Script" uid="uid://b2bar1lwesm8j" path="res://inventoryui.gd" id="1_0fbet"]
+[ext_resource type="Theme" uid="uid://hfqo7on45yts" path="res://Themes/new_theme.tres" id="2_psafj"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+script = ExtResource("1_0fbet")
+
+[node name="Panel" type="Panel" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -339.0
+offset_top = -174.5
+offset_right = 339.0
+offset_bottom = 174.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_psafj")
+
+[node name="Label" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 22.0
+offset_top = 16.0
+offset_right = 158.0
+offset_bottom = 39.0
+text = "Inventory:"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -310.0
+offset_top = -123.5
+offset_right = 310.0
+offset_bottom = 87.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CloseButton" type="Button" parent="Panel"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -60.0
+offset_top = -76.0
+offset_right = 60.0
+offset_bottom = -35.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Close"
