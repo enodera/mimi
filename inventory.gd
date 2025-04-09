@@ -10,8 +10,6 @@ var items: Array[Dictionary] = []
 # Adds a new item to the inventory or increases its quantity
 func add_item(item_id: String, amount: int = 1):
 	
-	var item = ItemDatabase.items[item_id]
-	
 	for i in items:
 		if i["id"] == item_id:
 			i["quantity"] += amount

@@ -24,19 +24,30 @@ func _ready():
 
 # This function updates the UI with the current inventory items
 func update_ui():
-
+	for child in item_list.get_children():
+		child.queue_free()
 	# Loop through each item in the inventory and create a label for it
 	for item in inventory.get_items():
 		
-		var label = Label.new()
-
-		label.text = ItemDatabase.items[item["id"]]["name"] + " x" + str(item["quantity"])
+		var item_data = ItemDatabase.items[item["id"]]
+		var display_text = item_data["name"] + " x" + str(item["quantity"])
 		
-		# Optional: make it look nicer
-		label.autowrap_mode = TextServer.AUTOWRAP_WORD
-		label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
+		var node
+		
+		if item_data["type"] == "usable":
+			node = Button.new()
+			node.text = display_text
+			# Optional: connect button press to some function
+			node.pressed.connect(_on_item_pressed.bind(item))
+		else:
+			var label = Label.new()
+			label.text = display_text
+			label.autowrap_mode = TextServer.AUTOWRAP_WORD
+			label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+			label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			node = label
 
-		item_list.add_child(label)
+		item_list.add_child(node)
 
 # This function shows the hover text when the mouse enters an item button
 func _on_item_hovered(item_name: String):
@@ -52,3 +63,11 @@ func _on_item_hover_exited():
 func _on_close_button_pressed():
 	visible = false
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)  # Hide the mouse when inventory is closed
+
+func _on_item_pressed(item):
+	print("Used item:", item["id"])
+	if item["quantity"] > 1:
+		item["quantity"] = item["quantity"] - 1
+	else:
+		inventory.remove_item(item["id"])
+	update_ui()
