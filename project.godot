@@ -19,6 +19,7 @@ run/canvas_textures/default_texture_filter=1
 [autoload]
 
 ItemDatabase="*res://itemdatabase.gd"
+Global="*res://global.gd"
 
 [input]
 

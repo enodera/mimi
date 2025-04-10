@@ -62,7 +62,9 @@ func _on_item_hover_exited():
 # Hide the inventory screen when the close button is pressed
 func _on_close_button_pressed():
 	visible = false
+	Global.paused = false
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)  # Hide the mouse when inventory is closed
+	Engine.time_scale = 1
 
 func _on_item_pressed(item):
 	print("Used item:", item["id"])
