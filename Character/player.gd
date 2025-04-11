@@ -173,7 +173,7 @@ func _process(_delta: float) -> void:
 			%InventoryUI.visible = true
 			Global.paused = true
 			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-			Engine.time_scale = 0
+			Engine.time_scale = 0.0001
 		else:
 			print("unpaused")
 			%InventoryUI.visible = false

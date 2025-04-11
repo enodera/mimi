@@ -23,14 +23,12 @@ theme = ExtResource("2_5tt2m")
 
 [node name="Label" type="Label" parent="Panel"]
 layout_mode = 0
-offset_left = 33.0
-offset_top = 16.0
-offset_right = 201.0
-offset_bottom = 62.0
-theme_override_colors/font_outline_color = Color(0.0784314, 0.117647, 0.188235, 1)
-theme_override_constants/outline_size = 8
-theme_override_font_sizes/font_size = 27
-text = "Inventory"
+offset_left = 58.0
+offset_top = 18.5
+offset_right = 203.0
+offset_bottom = 57.5
+theme_override_font_sizes/font_size = 25
+text = "Inventory:"
 vertical_alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
@@ -80,9 +78,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -90.5
-offset_top = 92.0
+offset_top = 87.0
 offset_right = 92.5
-offset_bottom = 178.0
+offset_bottom = 177.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "Placeholder text."

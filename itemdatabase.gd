@@ -8,6 +8,7 @@ var items = {
 		"description": "Restores 50 health.",
 		"type": "usable",
 		"use_effect": "restore_health",
+		"stackable": "yes",
 		"value": 10
 	},
 	"food": {
@@ -15,6 +16,15 @@ var items = {
 		"description": "Tasty!",
 		"type": "unusable",
 		"use_effect": "none",
+		"stackable": "yes",
+		"value": 50
+	},
+	"flour": {
+		"name": "Flour",
+		"description": "Food ingredient.\nUseful!",
+		"type": "usable",
+		"use_effect": "none",
+		"stackable": "no",
 		"value": 50
 	}
 }

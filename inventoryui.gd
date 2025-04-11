@@ -5,6 +5,7 @@ extends CanvasLayer
 @onready var item_list = $Panel/VBoxContainer  # The container that holds item buttons
 @onready var close_button = $Panel/CloseButton
 
+var justupdated = true
 var inventory: Inventory  # Reference to the inventory data
 
 func _ready():
@@ -15,7 +16,7 @@ func _ready():
 	inventory.add_item("health_potion", 5)
 	inventory.add_item("food", 3)
 	inventory.add_item("health_potion", 2)  # Adding 2 more Health Potions to demonstrate quantity increase
-	
+	inventory.add_item("flour", 4)
 	# Update the UI
 	update_ui()
 
@@ -31,6 +32,7 @@ func update_ui():
 		
 		var item_data = ItemDatabase.items[item["id"]]
 		var display_text = item_data["name"] + " x" + str(item["quantity"])
+		var item_description = item_data["description"]
 		
 		var node
 		
@@ -40,25 +42,32 @@ func update_ui():
 			# Optional: connect button press to some function
 			node.pressed.connect(_on_item_pressed.bind(item))
 		else:
-			var label = Label.new()
-			label.text = display_text
-			label.autowrap_mode = TextServer.AUTOWRAP_WORD
-			label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-			label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-			node = label
-
+			node = Label.new()
+			node.text = display_text
+			node.autowrap_mode = TextServer.AUTOWRAP_WORD
+			node.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+			node.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			
 		item_list.add_child(node)
+		node.mouse_entered.connect(_on_item_hovered.bind(item_description))
+		node.mouse_exited.connect(_on_item_hover_exited)
+		
 
 # This function shows the hover text when the mouse enters an item button
-func _on_item_hovered(item_name: String):
+func _on_item_hovered(item_description: String):
 	# Show the hover text
-	print(item_name + "!")
+	%ItemDescription.text = item_description
+	print(item_description + " It works!")
+	justupdated = false
 	
 # This function hides the hover text when the mouse exits the item button
 func _on_item_hover_exited():
 	# Hide the hover text (in this case, we simply print an empty line)
-	print("")
-	
+	await get_tree().create_timer(0.00000001).timeout
+	if not justupdated:
+		%ItemDescription.text = ""
+		print("Bye!")
+
 # Hide the inventory screen when the close button is pressed
 func _on_close_button_pressed():
 	visible = false
@@ -67,9 +76,11 @@ func _on_close_button_pressed():
 	Engine.time_scale = 1
 
 func _on_item_pressed(item):
-	print("Used item:", item["id"])
+	print("Used item: ", item["id"])
 	if item["quantity"] > 1:
 		item["quantity"] = item["quantity"] - 1
 	else:
 		inventory.remove_item(item["id"])
+		%ItemDescription.text = ""
+	justupdated = true
 	update_ui()
