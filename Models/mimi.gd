@@ -1,3 +1,5 @@
+# mimi.gd (This is the animation State Machine.)
+
 class_name MimiSkin extends Node3D
 
 @onready var _animation_tree: AnimationTree = $AnimationTree  # Reference to the AnimationTree

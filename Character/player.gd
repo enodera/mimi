@@ -1,3 +1,4 @@
+# player.gd
 extends CharacterBody3D
 
 # ---------------------
@@ -81,6 +82,13 @@ func _unhandled_input(event: InputEvent) -> void:
 # ---------------------
 
 func _physics_process(delta: float) -> void:
+	
+	# -- CHECK FOR PAUSE --
+	if Global.dialoguepaused:
+		_skin.set_move_state("idle")
+		state = "idle"
+		return
+		
 	# -- CAMERA ROTATION --
 	_camera_pivot.rotation.x -= _camera_input_direction.y * delta
 	_camera_pivot.rotation.x = clamp(_camera_pivot.rotation.x, -PI/6.0, PI/3.0)
@@ -168,7 +176,7 @@ func _physics_process(delta: float) -> void:
 func _process(_delta: float) -> void:
 	# Toggle inventory and pause game
 	if Input.is_action_just_pressed("inventory"):
-		if not Global.paused:
+		if not Global.paused and not Global.dialoguepaused:
 			print("paused")
 			%InventoryUI.visible = true
 			Global.paused = true

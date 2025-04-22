@@ -1,8 +1,6 @@
-[gd_resource type="Theme" load_steps=4 format=3 uid="uid://wuvbsl284ws3"]
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://wuvbsl284ws3"]
 
 [ext_resource type="FontFile" uid="uid://dwuutcq4tl2fm" path="res://Fonts/FOT-Seurat Pro B.otf" id="1_w421r"]
-
-[sub_resource type="SystemFont" id="SystemFont_51034"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ju0yn"]
 bg_color = Color(0.122455, 0.186326, 0.300045, 1)
@@ -14,5 +12,5 @@ corner_radius_bottom_left = 20
 [resource]
 Button/fonts/font = ExtResource("1_w421r")
 Label/fonts/font = ExtResource("1_w421r")
-MenuButton/fonts/font = SubResource("SystemFont_51034")
+MenuButton/fonts/font = ExtResource("1_w421r")
 Panel/styles/panel = SubResource("StyleBoxFlat_ju0yn")

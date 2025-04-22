@@ -1,4 +1,4 @@
-# ItemDatabase.gd (singleton)
+# itemdatabase.gd (dictionary singleton)
 
 extends Node
 

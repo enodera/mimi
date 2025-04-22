@@ -1,0 +1,89 @@
+[gd_scene load_steps=8 format=3 uid="uid://bbcqhkacujydt"]
+
+[ext_resource type="Script" uid="uid://dl5cs3pti02fj" path="res://dialogue.gd" id="1_ypjfj"]
+[ext_resource type="Theme" uid="uid://vmsqngx3kiq2" path="res://dialogue.tres" id="2_es2ql"]
+[ext_resource type="FontFile" uid="uid://dwuutcq4tl2fm" path="res://Fonts/FOT-Seurat Pro B.otf" id="2_tb0xf"]
+[ext_resource type="StyleBox" uid="uid://bw7ax33ldndms" path="res://speakerboxstyle.tres" id="3_ksakb"]
+[ext_resource type="Theme" uid="uid://wuvbsl284ws3" path="res://Themes/inventory.tres" id="5_ksakb"]
+
+[sub_resource type="SystemFont" id="SystemFont_51034"]
+subpixel_positioning = 0
+
+[sub_resource type="Theme" id="Theme_oj686"]
+Button/fonts/font = ExtResource("2_tb0xf")
+Label/fonts/font = ExtResource("2_tb0xf")
+MenuButton/fonts/font = SubResource("SystemFont_51034")
+Panel/styles/panel = ExtResource("3_ksakb")
+
+[node name="DialogueUI" type="CanvasLayer"]
+script = ExtResource("1_ypjfj")
+
+[node name="Panel" type="Panel" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -310.0
+offset_top = -248.0
+offset_right = 310.0
+offset_bottom = -44.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("2_es2ql")
+
+[node name="DialogueText" type="Label" parent="Panel"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -283.0
+offset_top = -158.0
+offset_right = 283.0
+offset_bottom = -31.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 20
+text = "Text"
+
+[node name="Panel" type="Panel" parent="Panel"]
+layout_mode = 1
+offset_left = -26.0
+offset_top = -19.0
+offset_right = 115.0
+offset_bottom = 30.0
+theme = SubResource("Theme_oj686")
+
+[node name="SpeakerLabel" type="Label" parent="Panel/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -35.5
+offset_top = -8.5
+offset_right = 35.5
+offset_bottom = 8.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 22
+text = "Speaker"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -194.0
+offset_top = -139.0
+offset_right = -15.0
+offset_bottom = -13.0
+grow_horizontal = 0
+theme = ExtResource("5_ksakb")
+theme_override_constants/separation = 8
+alignment = 2

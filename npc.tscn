@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://cncrp63v3at5e"]
+
+[ext_resource type="Script" uid="uid://024swtnp6bei" path="res://npc.gd" id="1_ideak"]
+[ext_resource type="FontFile" uid="uid://dwuutcq4tl2fm" path="res://Fonts/FOT-Seurat Pro B.otf" id="2_xxcha"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_v7lw1"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ideak"]
+radius = 3.83755
+height = 7.73368
+
+[node name="NPC" type="Node3D"]
+script = ExtResource("1_ideak")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.02495, 0)
+mesh = SubResource("CapsuleMesh_v7lw1")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0160412, 0)
+shape = SubResource("CapsuleShape3D_ideak")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.57637, 0)
+visible = false
+billboard = 1
+text = "Press E to talk"
+font = ExtResource("2_xxcha")
+font_size = 72

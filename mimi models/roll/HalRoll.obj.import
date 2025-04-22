@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cn50g0bpr1igj"
+path="res://.godot/imported/HalRoll.obj-bdc78f59134bc82bfba16b4d0c948ccc.mesh"
+
+[deps]
+
+files=["res://.godot/imported/HalRoll.obj-bdc78f59134bc82bfba16b4d0c948ccc.mesh"]
+
+source_file="res://mimi models/roll/HalRoll.obj"
+dest_files=["res://.godot/imported/HalRoll.obj-bdc78f59134bc82bfba16b4d0c948ccc.mesh", "res://.godot/imported/HalRoll.obj-bdc78f59134bc82bfba16b4d0c948ccc.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

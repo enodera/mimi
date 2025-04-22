@@ -1,9 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://bh55rf6fyknq0"]
+[gd_scene load_steps=13 format=3 uid="uid://bh55rf6fyknq0"]
 
 [ext_resource type="Texture2D" uid="uid://drkhwpqw3v00a" path="res://PrototypeTextures/Green/texture_08.png" id="1_b5ayd"]
 [ext_resource type="PackedScene" uid="uid://pakdokc08g3p" path="res://inventory.tscn" id="1_iufkg"]
 [ext_resource type="PackedScene" uid="uid://btukobjpqjuii" path="res://Character/Player.tscn" id="2_5lt6y"]
+[ext_resource type="PackedScene" uid="uid://bbcqhkacujydt" path="res://dialogueui.tscn" id="2_qsjrb"]
 [ext_resource type="PackedScene" uid="uid://b5qtuwtqahipp" path="res://MimiImportedTest.tscn" id="3_8k7wh"]
+[ext_resource type="PackedScene" uid="uid://cncrp63v3at5e" path="res://npc.tscn" id="5_0f5h7"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_cguwc"]
 
@@ -29,6 +31,10 @@ data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0
 unique_name_in_owner = true
 visible = false
 
+[node name="DialogueUI" parent="." instance=ExtResource("2_qsjrb")]
+unique_name_in_owner = true
+visible = false
+
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
 omni_range = 91.6423
@@ -44,8 +50,11 @@ surface_material_override/0 = SubResource("StandardMaterial3D_wicfy")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_5lt6y")
 
-[node name="Player3D" parent="." instance=ExtResource("2_5lt6y")]
+[node name="Player" parent="." instance=ExtResource("2_5lt6y")]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.000657201, 0)
+min_zoom_distance = 2.5
+max_zoom_distance = 7.5
 
 [node name="Mimi" parent="." instance=ExtResource("3_8k7wh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.29261, 0, 0.964306)
@@ -68,3 +77,6 @@ mesh = SubResource("BoxMesh_8k7wh")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D2/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_iufkg")
+
+[node name="NPC" parent="." instance=ExtResource("5_0f5h7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.5925, 0, 0)
