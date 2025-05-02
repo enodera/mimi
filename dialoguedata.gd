@@ -41,6 +41,25 @@ var dialogue = {
 		"panics": [
 			"Oh no. We need to hide, now!"
 		]
+	},
+	
+	"narrator": {
+		"intro": [
+			"Shh! Keep your voice down.",
+			{
+				"text": "Are you followed?",
+				"options": [
+					{"text": "I don't think so.", "next": "relieved"},
+					{"text": "Yes.", "next": "panics"}
+				]
+			}
+		],
+		"relieved": [
+			"Good. We don't want any trouble."
+		],
+		"panics": [
+			"Oh no. We need to hide, now!"
+		]
 	}
 	
 }

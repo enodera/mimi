@@ -9,6 +9,11 @@ var items: Array[Dictionary] = []
 
 # Adds a new item to the inventory or increases its quantity
 func add_item(item_id: String, amount: int = 1):
+	var itemname = ItemDatabase.items[item_id]["name"]
+	if amount == 1:
+		NotificationUI.show_notification("You got %s!" % [itemname], 2.0)
+	else:
+		NotificationUI.show_notification("You got %s! (%d)" % [itemname, amount], 2.0)
 	
 	for i in items:
 		if i["id"] == item_id:
@@ -26,6 +31,7 @@ func remove_item(item_id: String, amount: int = 1):
 			if i["quantity"] <= 0:
 				items.erase(i)
 			return
+	
 
 # Retrieves all items from the inventory
 func get_items() -> Array:

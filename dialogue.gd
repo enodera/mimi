@@ -33,10 +33,17 @@ func _ready() -> void:
 
 
 # --- Starting Dialogue ---
-func start_from_global(character_id: String, branch: String = "greeting"):
+func start_from_global(character_id: String, branch: String):
+	$Panel.scale = Vector2(1, 1)  # Reset before anything else
+
 	if DialogueData.dialogue.has(character_id) and DialogueData.dialogue[character_id].has(branch):
 		var dialogue_lines = DialogueData.dialogue[character_id][branch]
 		start_dialogue(dialogue_lines, character_id.capitalize())
+		
+		$Panel.scale = Vector2(0, 0)
+		var tween := create_tween()
+		tween.tween_property($Panel, "scale", Vector2(1, 1), 0.3).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+
 
 
 func start_dialogue(dialogue_lines: Array, speaker_name: String = ""):
@@ -45,6 +52,7 @@ func start_dialogue(dialogue_lines: Array, speaker_name: String = ""):
 	is_active = true
 	visible = true
 	Global.dialoguepaused = true
+
 
 	if speaker_name != "":
 		speaker_label.text = speaker_name
@@ -112,6 +120,7 @@ func show_current_line():
 			if line.has("options"):
 				await wait_for_typing()
 				show_options(line["options"])
+				
 	else:
 		end_dialogue()
 
@@ -131,10 +140,16 @@ func next_line():
 
 func end_dialogue():
 	is_active = false
+	var tween := create_tween()
+	tween.tween_property($Panel, "scale", Vector2(0, 0), 0.3).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	await get_tree().create_timer(0.3).timeout
+	
 	visible = false
-	await get_tree().create_timer(0.00000001).timeout
 	Global.dialoguepaused = false
+	
+	await get_tree().create_timer(0.000000000001).timeout
 	emit_signal("dialogue_finished")
+	print("Dialogue finished!")
 
 
 # --- Typing Effect ---

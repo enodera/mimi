@@ -1,4 +1,4 @@
-# mimi.gd (This is the animation State Machine.)
+# mimi.gd (This is the animation State Machine. (for walking mostly!))
 
 class_name MimiSkin extends Node3D
 

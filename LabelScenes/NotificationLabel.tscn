@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://clhbhd3d1cl64"]
+
+[ext_resource type="Theme" uid="uid://wuvbsl284ws3" path="res://Themes/inventory.tres" id="1_xvusc"]
+
+[node name="NotificationLabel" type="Label"]
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -792.0
+offset_top = -63.0
+offset_right = -52.0
+offset_bottom = -5.0
+grow_horizontal = 0
+grow_vertical = 2
+theme = ExtResource("1_xvusc")
+horizontal_alignment = 2
+vertical_alignment = 1

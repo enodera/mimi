@@ -1,13 +1,37 @@
 # npc.gd
 extends Node3D
 
-@export var dialog_text: String = "Sup, bitch!"
+var dialog_npc: String
+@export var selected_npc: NPCType = NPCType.JOHN
+@export var dialog_text: String = "greeting"
+@export var itemgiven: String = "none"
+
+# Define the NPCs
+enum NPCType {
+	JOHN,
+	LUNA,
+	NARRATOR
+}
+
+enum TextType {
+	GREETING,
+	MISSION1,
+	MISSION2,
+	MISSION3
+}
+
+var npc_dialogue_keys = {
+	NPCType.JOHN: "npc_john",
+	NPCType.LUNA: "npc_luna",
+	NPCType.NARRATOR: "narrator"
+}
 
 var player_in_range = false
 
 func _ready():
 	$Area3D.body_entered.connect(_on_body_entered)
 	$Area3D.body_exited.connect(_on_body_exited)
+	dialog_npc = npc_dialogue_keys[selected_npc]
 
 func _process(_delta):
 	if player_in_range and Input.is_action_just_pressed("interact") and not Global.paused and not Global.dialoguepaused:
@@ -28,15 +52,14 @@ func show_dialog():
 	
 	Global.dialoguepaused = true
 	
-	%DialogueUI.start_dialogue([
-		"Hello, witch!",
-		"What's up? Not much, I assume...",
-		"it works heeheehee"
-	], "Yes")
+	%DialogueUI.start_from_global(dialog_npc, dialog_text)
 	
 	await %DialogueUI.dialogue_finished
 	
-	%DialogueUI.start_from_global("npc_john", "greeting")
-	
-	await %DialogueUI.dialogue_finished
-	
+	#%DialogueUI.start_dialogue([
+		#"Hello, witch!",
+		#"What's up? Not much, I assume...",
+		#"it works heeheehee"
+	#], "Yes")
+	#
+	#await %DialogueUI.dialogue_finished

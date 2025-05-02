@@ -30,6 +30,7 @@ offset_right = 310.0
 offset_bottom = -44.0
 grow_horizontal = 2
 grow_vertical = 0
+pivot_offset = Vector2(310, 102)
 theme = ExtResource("2_es2ql")
 
 [node name="DialogueText" type="Label" parent="Panel"]

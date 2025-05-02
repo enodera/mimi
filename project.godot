@@ -21,6 +21,7 @@ run/canvas_textures/default_texture_filter=1
 ItemDatabase="*res://itemdatabase.gd"
 Global="*res://global.gd"
 DialogueData="*res://dialoguedata.gd"
+NotificationUI="*res://notificationui.gd"
 
 [global_group]
 

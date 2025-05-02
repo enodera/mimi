@@ -1,4 +1,3 @@
-# player.gd
 extends CharacterBody3D
 
 # ---------------------
@@ -7,26 +6,35 @@ extends CharacterBody3D
 
 @export_group("Camera")
 @export_range(0.0, 1.0) var mouse_sensitivity := 0.25
-@export var zoom_speed := 0.5                    # Zoom speed for smoother zooming
-@export var min_zoom_distance := 3.0             # Minimum camera zoom distance
-@export var max_zoom_distance := 10.0            # Maximum camera zoom distance
+@export var zoom_speed := 0.5
+@export var min_zoom_distance := 3.0
+@export var max_zoom_distance := 10.0
 
 @export_group("Movement")
-@export var move_speed := 8.0                    # Normal walking speed
-@export var sprint_speed := 22.0                 # Sprinting speed
-@export var acceleration := 100.0                # Acceleration rate
-@export var rotation_speed := 12.0               # Rotation interpolation speed
-@export var jump_strength := 75.0                # Upward force when jumping
-@export var gravity := 225.0                     # Gravity strength
+@export var move_speed := 8.0
+@export var sprint_speed := 22.0
+@export var acceleration := 100.0
+@export var rotation_speed := 12.0
+@export var jump_strength := 75.0
+@export var gravity := 225.0
 
 # ---------------------
 # ---- VARIABLES -------
 # ---------------------
 
 var state := "idle"
-var _camera_input_direction := Vector2.ZERO       # Mouse input for rotating camera
-var _last_movement_direction := Vector3.BACK      # Last non-zero movement direction
-var was_on_floor := false                         # For detecting landing transitions
+var _camera_input_direction := Vector2.ZERO
+var _last_movement_direction := Vector3.BACK
+var was_on_floor := false
+var _can_move := true
+var _attack_timer: Timer
+var _attack_tween: Tween
+var _attack_lunge_direction := Vector3.ZERO
+var _attack_lunge_strength := 0.0
+
+var combo_step := 0
+var combo_max := 3
+var combo_queued := false
 
 # ---------------------
 # --- NODE REFERENCES -
@@ -44,26 +52,74 @@ var was_on_floor := false                         # For detecting landing transi
 func _ready() -> void:
 	was_on_floor = true
 
+	_attack_timer = Timer.new()
+	_attack_timer.one_shot = true
+	_attack_timer.wait_time = 0.5
+	_attack_timer.timeout.connect(_on_attack_timeout)
+	add_child(_attack_timer)
+
 # ---------------------
 # ---- INPUT ----------
 # ---------------------
 
 func _input(event: InputEvent) -> void:
-	# Lock or unlock the mouse
 	if event.is_action_pressed("left_click") and not Global.paused:
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+
 	if event.is_action_pressed("ui_cancel"):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
-	# Handle camera zoom in
+	if event.is_action_pressed("left_click") and not Global.paused:
+		if state == "attack":
+			combo_queued = true
+		else:
+			perform_attack()
+
 	if Input.is_action_pressed("camera_zoomin"):
 		if _spring_arm.spring_length > min_zoom_distance:
 			_spring_arm.spring_length -= zoom_speed
-	
-	# Handle camera zoom out
 	if Input.is_action_pressed("camera_zoomout"):
 		if _spring_arm.spring_length < max_zoom_distance:
 			_spring_arm.spring_length += zoom_speed
+
+# ---------------------
+# ---- ATTACK ----------
+# ---------------------
+
+func perform_attack() -> void:
+	if combo_step >= combo_max:
+		return
+
+	state = "attack"
+	_can_move = false
+	combo_step += 1
+	print("Attack step:", combo_step)
+
+	# Reset velocity
+	velocity = Vector3.ZERO
+
+	# Direction from camera
+	_attack_lunge_direction = -_camera.global_basis.z
+	_attack_lunge_direction.y = 0
+	_attack_lunge_direction = _attack_lunge_direction.normalized()
+
+	# Rotate character
+	_last_movement_direction = _attack_lunge_direction
+	var target_angle = Vector3.BACK.signed_angle_to(_attack_lunge_direction, Vector3.UP)
+	_skin.global_rotation.y = target_angle
+
+	# Reset previous tween
+	if _attack_tween and _attack_tween.is_running():
+		_attack_tween.kill()
+
+	# Start new tween
+	_attack_lunge_strength = 50.0
+	_attack_tween = create_tween()
+	_attack_tween.tween_property(self, "_attack_lunge_strength", 0.0, 0.5)\
+		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+
+	_skin.set_move_state("attack")
+	_attack_timer.start()
 
 # ----------------------------
 # ---- UNHANDLED MOUSE INPUT -
@@ -71,47 +127,39 @@ func _input(event: InputEvent) -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if not Global.paused:
-		var is_camera_motion := (
-			event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED
-		)
-		if is_camera_motion:
-			_camera_input_direction = event.screen_relative * mouse_sensitivity
+		if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
+			_camera_input_direction = event.relative * mouse_sensitivity
 
 # ---------------------
 # ---- PHYSICS --------
 # ---------------------
 
 func _physics_process(delta: float) -> void:
-	
-	# -- CHECK FOR PAUSE --
 	if Global.dialoguepaused:
 		_skin.set_move_state("idle")
 		state = "idle"
 		return
-		
-	# -- CAMERA ROTATION --
+
+	# CAMERA ROTATION
 	_camera_pivot.rotation.x -= _camera_input_direction.y * delta
 	_camera_pivot.rotation.x = clamp(_camera_pivot.rotation.x, -PI/6.0, PI/3.0)
 	_camera_pivot.rotation.y -= _camera_input_direction.x * delta
 	_camera_input_direction = Vector2.ZERO
 
-	# -- APPLY GRAVITY --
-	if not is_on_floor():
-		velocity.y -= gravity * delta
-		if velocity.y > 0 and state != "jump":
-			state = "jump"
-			_skin.set_move_state("jump")
-		elif velocity.y < -15 and state != "air":
-			state = "air"
-			_skin.set_move_state("air")
+	# ATTACK MOVEMENT OVERRIDE
+	if state == "attack":
+		if not is_on_floor():
+			velocity.y -= gravity * delta
+		else:
+			velocity.y = 0.0
 
-	# -- JUMPING --
-	if is_on_floor() and Input.is_action_just_pressed("jump"):
-		velocity.y = jump_strength
-		_skin.set_move_state("jump")
-		state = "jump"
+		velocity.x = _attack_lunge_direction.x * _attack_lunge_strength
+		velocity.z = _attack_lunge_direction.z * _attack_lunge_strength
 
-	# -- MOVEMENT DIRECTION --
+		move_and_slide()
+		return
+
+	# MOVEMENT INPUT
 	var current_move_speed = move_speed
 	if Input.is_action_pressed("sprint"):
 		current_move_speed = sprint_speed
@@ -123,33 +171,46 @@ func _physics_process(delta: float) -> void:
 	move_direction.y = 0.0
 	move_direction = move_direction.normalized()
 
-	# -- APPLY MOVEMENT --
-	velocity = velocity.move_toward(move_direction * current_move_speed, acceleration * delta)
-	move_and_slide()
+	if _can_move:
+		velocity = velocity.move_toward(move_direction * current_move_speed, acceleration * delta)
 
-	# -- CHARACTER ROTATION --
+	# ROTATION
 	if move_direction.length() > 0.2:
 		_last_movement_direction = move_direction
 	var target_angle := Vector3.BACK.signed_angle_to(_last_movement_direction, Vector3.UP)
 	_skin.global_rotation.y = lerp_angle(_skin.rotation.y, target_angle, rotation_speed * delta)
 
-	# -- ANIMATIONS + STATES --
-	var ground_speed := velocity.length()
+	# GRAVITY & JUMP
+	if not is_on_floor():
+		velocity.y -= gravity * delta
+		if velocity.y > 0 and state != "jump":
+			state = "jump"
+			_skin.set_move_state("jump")
+		elif velocity.y < -15 and state != "air":
+			state = "air"
+			_skin.set_move_state("air")
+	elif Input.is_action_just_pressed("jump"):
+		velocity.y = jump_strength
+		_skin.set_move_state("jump")
+		state = "jump"
+	else:
+		velocity.y = 0.0
 
+	# STATE & ANIMATION
+	var horizontal_speed := Vector2(velocity.x, velocity.z).length()
 	if is_on_floor():
 		if state == "air":
-			_skin.set_move_state("squat")
 			state = "squat"
+			_skin.set_move_state("squat")
+		elif horizontal_speed > 0.1:
+			state = "walkrun"
+			_skin.set_move_state("walkrun")
+			_skin.set_run_speed(horizontal_speed - move_speed, sprint_speed - move_speed)
 		else:
-			if ground_speed > 0.0:
-				_skin.set_move_state("walkrun")
-				_skin.set_run_speed(ground_speed - move_speed, sprint_speed - move_speed)
-				state = "walkrun"
-			else:
-				_skin.set_move_state("idle")
-				state = "idle"
+			state = "idle"
+			_skin.set_move_state("idle")
 
-	# -- PARTICLE EFFECTS --
+	# PARTICLE EFFECTS
 	if state == "walkrun":
 		%WalkParticles.emitting = true
 		%RunParticles.emitting = true
@@ -163,28 +224,44 @@ func _physics_process(delta: float) -> void:
 		%WalkParticles.emitting = false
 		%RunParticles.emitting = false
 
-	# -- LANDING PARTICLES --
 	if not was_on_floor and is_on_floor():
 		%LandParticles.restart()
 
 	was_on_floor = is_on_floor()
+
+	move_and_slide()
+
+# ---------------------
+# ---- ATTACK RESET ---
+# ---------------------
+
+func _on_attack_timeout() -> void:
+	_attack_lunge_strength = 0.0
+	velocity = Vector3.ZERO
+
+	if combo_queued and combo_step < combo_max:
+		combo_queued = false
+		perform_attack()
+	else:
+		_can_move = true
+		state = "idle"
+		_skin.set_move_state("idle")
+		combo_step = 0
+		combo_queued = false
 
 # ---------------------
 # ---- UI / PROCESS ---
 # ---------------------
 
 func _process(_delta: float) -> void:
-	# Toggle inventory and pause game
 	if Input.is_action_just_pressed("inventory"):
 		if not Global.paused and not Global.dialoguepaused:
 			print("paused")
 			%InventoryUI.visible = true
 			Global.paused = true
-			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-			Engine.time_scale = 0.0001
+			%InventoryUI.show_inventory()
 		else:
 			print("unpaused")
+			await %InventoryUI._on_close_button_pressed()
 			%InventoryUI.visible = false
 			Global.paused = false
-			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-			Engine.time_scale = 1

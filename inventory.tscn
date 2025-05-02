@@ -19,6 +19,7 @@ offset_right = 339.0
 offset_bottom = 174.5
 grow_horizontal = 2
 grow_vertical = 2
+pivot_offset = Vector2(339, 174.5)
 theme = ExtResource("2_5tt2m")
 
 [node name="Label" type="Label" parent="Panel"]
@@ -33,19 +34,21 @@ theme_override_font_sizes/font_size = 27
 text = "Inventory"
 vertical_alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel"]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -94.0
-offset_top = -100.5
-offset_right = 310.0
-offset_bottom = 85.5
-grow_horizontal = 2
-grow_vertical = 2
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -426.0
+offset_top = 72.0
+offset_right = -29.0
+offset_bottom = 222.0
+grow_horizontal = 0
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/ScrollContainer"]
+layout_mode = 2
 
 [node name="CloseButton" type="Button" parent="Panel"]
 layout_mode = 1
