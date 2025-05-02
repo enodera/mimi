@@ -29,8 +29,18 @@ height = 2.94938
 [node name="Player" type="CharacterBody3D" groups=["player"]]
 floor_snap_length = 0.3
 script = ExtResource("1_lgt04")
+mouse_sensitivity = null
+zoom_speed = null
+min_zoom_distance = null
+max_zoom_distance = null
+move_speed = null
+sprint_speed = null
+acceleration = null
+rotation_speed = null
+jump_strength = null
+gravity = null
 attack_durations = [0.35, 0.3, 0.55]
-recovery_durations = [0.15, 0.2, 0.1]
+recovery_durations = [1.0, 0.15, 0.1]
 
 [node name="Mimi1_2" parent="." instance=ExtResource("2_schp4")]
 unique_name_in_owner = true
