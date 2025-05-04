@@ -72,10 +72,12 @@ func _input(event: InputEvent) -> void:
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 	if event.is_action_pressed("left_click") and not Global.paused:
-		if state == "attack":
+		if state == "attack" and combo_step < combo_max:
 			combo_queued = true
 		else:
 			perform_attack()
+			
+		_skin.set_broom_visibilty(true)
 
 	if Input.is_action_pressed("camera_zoomin"):
 		if _spring_arm.spring_length > min_zoom_distance:
@@ -95,6 +97,7 @@ func perform_attack() -> void:
 		return
 
 	state = "attack"
+	print("YEA")
 	_can_move = false
 	combo_step += 1
 	print("State changed to: attack (step ", combo_step, ")")
@@ -123,6 +126,8 @@ func perform_attack() -> void:
 			_skin.set_move_state("swing2")
 		3:
 			_skin.set_move_state("swing3")
+			
+	_skin.set_broom_position(combo_step)
 
 	var attack_duration: float = attack_durations[combo_step - 1]
 	_attack_timer.wait_time = attack_duration
@@ -147,8 +152,12 @@ func _unhandled_input(event: InputEvent) -> void:
 # --------------------- 
 func _physics_process(delta: float) -> void:
 	
-	
-	print(state)
+	if state != "attack" and state != "recovery":
+		_skin.set_broom_visibilty(false)
+	elif is_on_floor():
+		_skin.set_broom_visibilty(true)
+	else:
+		_skin.set_broom_visibilty(false)
 	
 	if Global.dialoguepaused:
 		_skin.set_move_state("idle")
@@ -158,10 +167,16 @@ func _physics_process(delta: float) -> void:
 
 	if _attack_timer.time_left > 0 and _can_move:
 		_can_move = false
+
 		
 	if _attack_timer.time_left <= 0 and not _can_move:
 		_can_move = true
-
+	
+	if _attack_timer.time_left > 0.15:
+		_skin.set_broom_particles(true)
+	else:
+		_skin.set_broom_particles(false)
+	
 	# CAMERA ROTATION
 	_camera_pivot.rotation.x -= _camera_input_direction.y * delta
 	_camera_pivot.rotation.x = clamp(_camera_pivot.rotation.x, -PI/6.0, PI/3.0)
@@ -170,7 +185,6 @@ func _physics_process(delta: float) -> void:
 
 	# ATTACK MOVEMENT OVERRIDE
 	if state == "attack" and not _can_move:
-		print("IM ON ATTACK MODE")
 		if not is_on_floor():
 			velocity.y -= gravity * delta
 		else:
@@ -197,7 +211,6 @@ func _physics_process(delta: float) -> void:
 
 	# NORMAL MOVEMENT WHEN NOT IN RECOVERY
 	if _attack_timer.time_left <= 0:
-		print("move!")
 		if state != "walkrun":
 			state = "recovery"
 		velocity = velocity.move_toward(move_direction * current_move_speed, acceleration * delta)
@@ -245,7 +258,6 @@ func _physics_process(delta: float) -> void:
 				_skin.set_run_speed(horizontal_speed - move_speed, sprint_speed - move_speed)
 				print("hi")
 			elif _attack_recovery_timer.time_left <= 0:
-				print("hIIIIIIIIIIIIi")
 				state = "idle"
 				_skin.set_move_state("idle")
 		elif horizontal_speed > 0.1:
@@ -272,10 +284,13 @@ func _physics_process(delta: float) -> void:
 
 	if not was_on_floor and is_on_floor():
 		%LandParticles.restart()
+		
 
 	was_on_floor = is_on_floor()
 
 	move_and_slide()
+
+
 
 # --------------------- 
 # ---- ATTACK TIMEOUT --- 

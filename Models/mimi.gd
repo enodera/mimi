@@ -17,3 +17,31 @@ func set_move_state(state_name: String) -> void:
 		_state_machine.travel(state_name)  # Change animation state
 	else:
 		print("Error: State machine playback is null")
+
+func set_broom_position(combo_step: int) -> void:
+	if %BoneAttachment == null:
+		push_error("BoneAttachment node is missing!")
+		return
+
+	match combo_step:
+		1:
+			%BoneAttachment.bone_name = "hand.l"
+			%broom.position = Vector3(0,0,0)
+			%broom.rotation = Vector3(0, 0, -50)
+			
+		2:
+			%BoneAttachment.bone_name = "hand.r"
+			%broom.position = Vector3(0,0,0)
+			%broom.rotation = Vector3(0, 0, 50)
+		3:
+			%BoneAttachment.bone_name = "uparm.l"
+			%broom.position = Vector3(0,1,0)
+			%broom.rotation = Vector3(0, 0, 0)
+		_:
+			push_warning("Invalid combo_step: %s" % combo_step)
+
+func set_broom_visibilty(state: bool) -> void:
+	%broom.visible = state
+		
+func set_broom_particles(state: bool) -> void:
+	%AttackParticles.emitting = state

@@ -13,7 +13,7 @@ animation = &"idle"
 animation = &"jump"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_703g3"]
-animation = &"squat"
+animation = &"squat2"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_08jc3"]
 animation = &"swing1"
@@ -122,36 +122,36 @@ states/swing3/position = Vector2(658, -74)
 states/walkrun/node = SubResource("AnimationNodeBlendSpace1D_sqd6o")
 states/walkrun/position = Vector2(569, 55)
 transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_7ddtp"), "idle", "walkrun", SubResource("AnimationNodeStateMachineTransition_os4be"), "walkrun", "idle", SubResource("AnimationNodeStateMachineTransition_kvd6t"), "walkrun", "jump", SubResource("AnimationNodeStateMachineTransition_4j7dy"), "squat", "walkrun", SubResource("AnimationNodeStateMachineTransition_4mlrb"), "squat", "idle", SubResource("AnimationNodeStateMachineTransition_q0ykw"), "idle", "jump", SubResource("AnimationNodeStateMachineTransition_33n2d"), "jump", "air", SubResource("AnimationNodeStateMachineTransition_7n175"), "air", "squat", SubResource("AnimationNodeStateMachineTransition_khn7c"), "idle", "air", SubResource("AnimationNodeStateMachineTransition_63vcv"), "walkrun", "air", SubResource("AnimationNodeStateMachineTransition_goasn"), "jump", "squat", SubResource("AnimationNodeStateMachineTransition_6118d"), "idle", "swing1", SubResource("AnimationNodeStateMachineTransition_qtg4n"), "swing1", "swing2", SubResource("AnimationNodeStateMachineTransition_dqil7"), "swing2", "swing3", SubResource("AnimationNodeStateMachineTransition_5bxig"), "swing1", "idle", SubResource("AnimationNodeStateMachineTransition_iyj5y"), "walkrun", "swing1", SubResource("AnimationNodeStateMachineTransition_wlfwc"), "swing1", "walkrun", SubResource("AnimationNodeStateMachineTransition_08jc3"), "swing2", "idle", SubResource("AnimationNodeStateMachineTransition_hr756"), "swing2", "walkrun", SubResource("AnimationNodeStateMachineTransition_axkop"), "swing3", "walkrun", SubResource("AnimationNodeStateMachineTransition_epdlo"), "swing3", "idle", SubResource("AnimationNodeStateMachineTransition_8jjq6")]
-graph_offset = Vector2(-80, -91)
+graph_offset = Vector2(97, 149)
 
 [node name="Mimi1_4" instance=ExtResource("1_ab43k")]
 script = ExtResource("2_wlfwc")
 
 [node name="Skeleton3D" parent="Armature" index="0"]
-bones/0/position = Vector3(0, -0.186865, 0.0111987)
-bones/1/rotation = Quaternion(-0.0199763, 1.19134e-07, -4.24693e-09, 0.9998)
+bones/0/position = Vector3(0, -0.17514, 0.0120487)
+bones/1/rotation = Quaternion(-0.023297, 1.19147e-07, -3.85122e-09, 0.999729)
 bones/2/rotation = Quaternion(0.056836, 7.03353e-15, 1.35508e-08, 0.998384)
 bones/3/rotation = Quaternion(-0.264672, -0.0446733, 0.0966977, 0.958438)
-bones/7/rotation = Quaternion(0.878771, 0.191969, -0.422438, 0.111603)
+bones/7/rotation = Quaternion(0.881152, 0.187305, -0.420943, 0.106278)
 bones/8/rotation = Quaternion(1.82302e-08, -1.74384e-07, -0.0081341, 0.999967)
 bones/9/rotation = Quaternion(-3.41464e-09, 3.79065e-07, 0.00278909, 0.999996)
 bones/10/rotation = Quaternion(0.0451254, 0.365335, 0.050862, 0.928389)
-bones/11/rotation = Quaternion(0.878771, -0.191969, 0.422438, 0.111603)
+bones/11/rotation = Quaternion(0.881152, -0.187305, 0.420943, 0.106279)
 bones/12/rotation = Quaternion(2.16765e-08, 1.79095e-07, 0.00813411, 0.999967)
 bones/13/rotation = Quaternion(-3.18918e-09, -3.99558e-07, -0.00278909, 0.999996)
 bones/14/rotation = Quaternion(0.0451254, -0.365335, -0.050862, 0.928389)
-bones/15/rotation = Quaternion(0.720584, -0.0714957, -0.686956, 0.0611474)
-bones/16/rotation = Quaternion(0.0147442, 0.000719181, -0.196815, 0.98033)
-bones/17/rotation = Quaternion(-0.0155297, -0.0166951, 0.797745, 0.602563)
-bones/18/rotation = Quaternion(-0.00183204, 2.40116e-11, 0.00343485, 0.999992)
-bones/19/rotation = Quaternion(0.720584, 0.0714957, 0.686956, 0.0611474)
-bones/20/rotation = Quaternion(0.0147442, -0.000718933, 0.196815, 0.98033)
-bones/21/rotation = Quaternion(-0.0155294, 0.0166947, -0.797745, 0.602564)
-bones/22/rotation = Quaternion(-0.00183174, -4.02687e-10, -0.00343441, 0.999992)
-bones/23/position = Vector3(-0.82582, -0.321765, 0.0747302)
+bones/15/rotation = Quaternion(0.722186, -0.0537891, -0.688339, 0.0417546)
+bones/16/rotation = Quaternion(0.0111274, 0.000725428, -0.148535, 0.988844)
+bones/17/rotation = Quaternion(-0.0153661, -0.016503, 0.784243, 0.620043)
+bones/18/rotation = Quaternion(-0.00242648, -1.87735e-09, 0.00323765, 0.999992)
+bones/19/rotation = Quaternion(0.722186, 0.0537891, 0.688339, 0.0417546)
+bones/20/rotation = Quaternion(0.0111274, -0.000725177, 0.148535, 0.988844)
+bones/21/rotation = Quaternion(-0.0153655, 0.0165022, -0.784243, 0.620044)
+bones/22/rotation = Quaternion(-0.00242578, -4.94834e-10, -0.0032368, 0.999992)
+bones/23/position = Vector3(-0.802623, -0.321764, 0.0747302)
 bones/24/position = Vector3(0.00450291, 0.401603, 0.357574)
 bones/24/rotation = Quaternion(0.999949, -3.65811e-08, 0.010137, -1.99216e-15)
-bones/25/position = Vector3(0.82582, -0.321764, 0.0747302)
+bones/25/position = Vector3(0.802622, -0.321764, 0.0747302)
 bones/26/position = Vector3(-0.00450324, 0.401603, 0.357574)
 bones/26/rotation = Quaternion(0.999949, -6.48341e-16, -0.0101367, 1.80287e-15)
 bones/27/position = Vector3(0.147408, -1.62037, -0.0901504)
@@ -160,17 +160,17 @@ bones/29/rotation = Quaternion(0, 0.707107, 0.707107, 0)
 bones/30/position = Vector3(-0.147408, -1.62037, -0.0901504)
 bones/31/position = Vector3(-0.794373, -0.490363, 0.0227968)
 bones/32/rotation = Quaternion(0, 0.707107, 0.707107, 0)
-bones/33/position = Vector3(2.21717, 1.1867, 0.0959769)
+bones/33/position = Vector3(2.21717, 1.18708, 0.0959769)
 bones/34/position = Vector3(2.47184, 1.21304, 0.0959769)
 
 [node name="Hair1" parent="Armature/Skeleton3D" index="0"]
-transform = Transform3D(5.8772e-08, 6.77139e-09, -0.248587, -0.00389163, 0.170264, 8.78812e-09, 0.248556, 0.00266582, 6.10861e-08, -0.00891562, 1.47218, 0.150514)
+transform = Transform3D(5.87703e-08, 6.5017e-09, -0.248587, -0.00224045, 0.170278, 8.80004e-09, 0.248576, 0.00153474, 6.10211e-08, -0.00891562, 1.48454, 0.14391)
 
 [node name="Hair2" parent="Armature/Skeleton3D" index="1"]
-transform = Transform3D(3.49676e-08, 6.62378e-09, -0.0621839, 0.024317, 0.305802, 3.57345e-09, 0.151381, -0.0491225, 1.54831e-08, 0.00888656, 1.26282, 0.156428)
+transform = Transform3D(3.49243e-08, 6.14112e-09, -0.0621839, 0.0253221, 0.305469, 3.57774e-09, 0.151216, -0.0511528, 1.54577e-08, 0.00888656, 1.27523, 0.151215)
 
 [node name="Hair3" parent="Armature/Skeleton3D" index="2"]
-transform = Transform3D(9.87444e-08, 5.32276e-08, -1.21312, 0.159683, 1.10161, 9.07724e-08, 0.902401, -0.194934, 1.58979e-07, 0.00888652, 1.24788, -0.0903772)
+transform = Transform3D(9.84629e-08, 5.14895e-08, -1.21312, 0.165674, 1.1003, 8.99053e-08, 0.901321, -0.202247, 1.58347e-07, 0.00888652, 1.25866, -0.0954862)
 
 [node name="Cube_ignore" parent="." index="1"]
 visible = false
