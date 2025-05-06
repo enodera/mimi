@@ -21,6 +21,10 @@ extends CharacterBody3D
 @export var attack_durations := [0.35, 0.4, 0.5]
 @export var recovery_durations := [0.25, 0.3, 0.35]
 
+@export_group("Health")
+@export var max_health = 100
+@export var current_health = 100
+
 # --------------------- 
 # ---- VARIABLES ------- 
 # --------------------- 
@@ -44,6 +48,7 @@ var combo_queued := false
 @onready var _camera: Camera3D = $CameraPivot/SpringArm3D/Camera3D
 @onready var _spring_arm: SpringArm3D = $CameraPivot/SpringArm3D
 @onready var _skin: MimiSkin = %Mimi
+@onready var health_ui := get_node("/root/Node3D/HealthUI")
 
 # --------------------- 
 # ---- READY ---------- 
@@ -60,6 +65,8 @@ func _ready() -> void:
 	_attack_recovery_timer.one_shot = true
 	_attack_recovery_timer.timeout.connect(_on_attack_recovery_timeout)
 	add_child(_attack_recovery_timer)
+	
+	health_ui.set_health(max_health, current_health)
 
 # --------------------- 
 # ---- INPUT ---------- 
@@ -78,6 +85,11 @@ func _input(event: InputEvent) -> void:
 			perform_attack()
 			
 		_skin.set_broom_visibilty(true)
+
+	if event.is_action_pressed("right_click"):
+		state = "hitstun"
+		_skin.set_move_state("hitstun")
+		health_ui.take_damage(20)
 
 	if Input.is_action_pressed("camera_zoomin"):
 		if _spring_arm.spring_length > min_zoom_distance:
@@ -339,3 +351,21 @@ func _process(_delta: float) -> void:
 			await %InventoryUI._on_close_button_pressed()
 			%InventoryUI.visible = false
 			Global.paused = false
+			
+
+
+func _on_hitbox_area_entered(area: Area3D) -> void:
+	if area.name == "EnemyAttackArea":
+		state = "hitstun"
+		_can_move = false
+		combo_step = 0
+		combo_queued = false
+
+		_skin.set_move_state("hitstun")
+		health_ui.take_damage(20)
+
+		var knockback_strength := 15.0
+		var knockback_direction := (global_transform.origin - area.global_transform.origin).normalized()
+		velocity.x = knockback_direction.x * knockback_strength
+		velocity.z = knockback_direction.z * knockback_strength
+		velocity.y = clamp(velocity.y + 10.0, 5.0, 20.0)

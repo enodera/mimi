@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://b4bv4j5e7yi0b"]
+
+[ext_resource type="Script" uid="uid://buw0suktl4ajf" path="res://Enemies/GenericTest/enemy.gd" id="1_rbfrn"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_gsgu7"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_33axu"]
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_rbfrn")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_gsgu7")
+
+[node name="Area3D" type="Area3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/Area3D"]
+shape = SubResource("CapsuleShape3D_33axu")

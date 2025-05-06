@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://b4bv4j5e7yi0b"]
+
+[ext_resource type="Script" uid="uid://buw0suktl4ajf" path="res://Enemies/GenericTest/enemy.gd" id="1_rbfrn"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_gsgu7"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_33axu"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_o8u7v"]
+
+[node name="CharacterBody3D" type="CharacterBody3D"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+script = ExtResource("1_rbfrn")
+knockback_strength = 14.0
+gravity = 40.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_gsgu7")
+
+[node name="Area3D" type="Area3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/Area3D"]
+shape = SubResource("CapsuleShape3D_33axu")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_o8u7v")

@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://df8rvo3adndis"]
+
+[ext_resource type="Script" uid="uid://ccpeiynnomu4b" path="res://healthui.gd" id="1_y7hmn"]
+[ext_resource type="Theme" uid="uid://vmsqngx3kiq2" path="res://dialogue.tres" id="2_dy385"]
+
+[node name="HealthUI" type="CanvasLayer"]
+script = ExtResource("1_y7hmn")
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+offset_left = 38.0
+offset_top = 31.0
+offset_right = 603.0
+offset_bottom = 81.0
+theme = ExtResource("2_dy385")

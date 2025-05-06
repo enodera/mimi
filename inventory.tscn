@@ -4,7 +4,7 @@
 [ext_resource type="Theme" uid="uid://wuvbsl284ws3" path="res://Themes/inventory.tres" id="2_5tt2m"]
 [ext_resource type="Theme" uid="uid://g7m5g0d7vfiw" path="res://Themes/internal.tres" id="3_mrqgh"]
 
-[node name="CanvasLayer" type="CanvasLayer"]
+[node name="DialogueUI" type="CanvasLayer"]
 script = ExtResource("1_0fbet")
 
 [node name="Panel" type="Panel" parent="."]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bh55rf6fyknq0"]
+[gd_scene load_steps=15 format=3 uid="uid://bh55rf6fyknq0"]
 
 [ext_resource type="Texture2D" uid="uid://drkhwpqw3v00a" path="res://PrototypeTextures/Green/texture_08.png" id="1_b5ayd"]
 [ext_resource type="PackedScene" uid="uid://pakdokc08g3p" path="res://inventory.tscn" id="1_iufkg"]
@@ -8,7 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://bau4t2jr7r0jy" path="res://notificationui.tscn" id="3_c264a"]
 [ext_resource type="PackedScene" uid="uid://df8rvo3adndis" path="res://healthui.tscn" id="4_6xh1p"]
 [ext_resource type="PackedScene" uid="uid://cncrp63v3at5e" path="res://npc.tscn" id="5_0f5h7"]
-[ext_resource type="PackedScene" uid="uid://b4bv4j5e7yi0b" path="res://Enemies/GenericTest/enemy.tscn" id="9_5rbs6"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_cguwc"]
 
@@ -87,6 +86,3 @@ shape = SubResource("ConcavePolygonShape3D_iufkg")
 
 [node name="NPC" parent="." instance=ExtResource("5_0f5h7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.5925, 0, 0)
-
-[node name="CharacterBody3D" parent="." instance=ExtResource("9_5rbs6")]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -7.23861, 4.47375, 0)

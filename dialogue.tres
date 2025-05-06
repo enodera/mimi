@@ -1,12 +1,29 @@
-[gd_resource type="Theme" load_steps=4 format=3 uid="uid://vmsqngx3kiq2"]
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://vmsqngx3kiq2"]
 
 [ext_resource type="FontFile" uid="uid://dwuutcq4tl2fm" path="res://Fonts/FOT-Seurat Pro B.otf" id="1_shovw"]
 [ext_resource type="StyleBox" uid="uid://ck5d6dxmgrf35" path="res://dialogueboxstyle.tres" id="2_14ixi"]
 
 [sub_resource type="SystemFont" id="SystemFont_51034"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_14ixi"]
+bg_color = Color(0.108901, 0.193817, 0.196606, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qxp0s"]
+bg_color = Color(0.457006, 0.793338, 0.458898, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
 [resource]
 Button/fonts/font = ExtResource("1_shovw")
 Label/fonts/font = ExtResource("1_shovw")
 MenuButton/fonts/font = SubResource("SystemFont_51034")
 Panel/styles/panel = ExtResource("2_14ixi")
+ProgressBar/colors/font_color = Color(0.95, 0.95, 0.95, 0)
+ProgressBar/styles/background = SubResource("StyleBoxFlat_14ixi")
+ProgressBar/styles/fill = SubResource("StyleBoxFlat_qxp0s")
