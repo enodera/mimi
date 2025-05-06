@@ -45,3 +45,5 @@ func set_broom_visibilty(state: bool) -> void:
 		
 func set_broom_particles(state: bool) -> void:
 	%AttackParticles.emitting = state
+	%Hitbox.disabled = not state
+	%Hitbox.visible = state  # Optional: only for debugging

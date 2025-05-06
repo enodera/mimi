@@ -97,16 +97,22 @@ func perform_attack() -> void:
 		return
 
 	state = "attack"
-	print("YEA")
 	_can_move = false
 	combo_step += 1
 	print("State changed to: attack (step ", combo_step, ")")
 
 	velocity = Vector3.ZERO
 
+	var raw_input := Input.get_vector("move_left", "move_right", "move_up", "move_down")
+	
 	_attack_lunge_direction = -_camera.global_basis.z
 	_attack_lunge_direction.y = 0
 	_attack_lunge_direction = _attack_lunge_direction.normalized()
+	
+	if raw_input.length() > 0.1:
+		_attack_lunge_strength = 30.0
+	else:
+		_attack_lunge_strength = 10.0
 
 	var target_angle = Vector3.BACK.signed_angle_to(_attack_lunge_direction, Vector3.UP)
 	_skin.global_rotation.y = target_angle
@@ -114,7 +120,6 @@ func perform_attack() -> void:
 	if _attack_tween and _attack_tween.is_running():
 		_attack_tween.kill()
 
-	_attack_lunge_strength = 20.0
 	_attack_tween = create_tween()
 	_attack_tween.tween_property(self, "_attack_lunge_strength", 0.0, 0.5)\
 		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
@@ -126,18 +131,17 @@ func perform_attack() -> void:
 			_skin.set_move_state("swing2")
 		3:
 			_skin.set_move_state("swing3")
-			
+
 	_skin.set_broom_position(combo_step)
 
 	var attack_duration: float = attack_durations[combo_step - 1]
 	_attack_timer.wait_time = attack_duration
-	print("RunningAttackTimer")
 	_attack_timer.start()
-	_can_move = true
+
 	var recovery_duration: float = recovery_durations[combo_step - 1]
 	_attack_recovery_timer.wait_time = attack_duration + recovery_duration
-	print("RunningRecoveryTimer")
 	_attack_recovery_timer.start()
+
 
 # --------------------- 
 # ---- UNHANDLED MOUSE INPUT - 
