@@ -24,7 +24,7 @@ var narratepos := 0.0
 
 # --- Signals ---
 signal dialogue_finished
-
+signal npc_set_branch(character_id: String, new_branch: String)
 
 # --- Initialization ---
 func _ready() -> void:
@@ -100,6 +100,7 @@ func handle_option_input(event):
 
 
 # --- Dialogue Flow ---
+
 func show_current_line():
 	options_container.visible = false
 	for child in options_container.get_children():
@@ -117,10 +118,18 @@ func show_current_line():
 			dialogue_text.text = ""
 			typing = true
 			type_line(line["text"])
+
+			# Process custom actions
+			if line.has("action"):
+				process_action(line)
+
+			if line.has("set_branch"):
+				set_npc_branch(line["set_branch"])
+
 			if line.has("options"):
 				await wait_for_typing()
 				show_options(line["options"])
-				
+
 	else:
 		end_dialogue()
 
@@ -171,6 +180,21 @@ func type_line(line: String) -> void:
 			break
 
 	typing = false
+
+func process_action(line: Dictionary):
+	match line["action"]:
+		"give_item":
+			if line.has("item"):
+				%InventoryUI.inevntory.add_item(line["item"])  # Assuming you have something like this
+		"start_quest":
+			if line.has("quest_id"):
+				QuestManager.start_quest(line["quest_id"])
+		# Add more actions as needed
+
+
+func set_npc_branch(new_branch: String):
+	var character = speaker_label.text.strip_edges().to_lower().replace(" ", "_")
+	emit_signal("npc_set_branch", character, new_branch)
 
 
 # --- Option Handling ---

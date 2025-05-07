@@ -10,5 +10,5 @@ script = ExtResource("1_y7hmn")
 offset_left = 38.0
 offset_top = 31.0
 offset_right = 603.0
-offset_bottom = 81.0
+offset_bottom = 66.0
 theme = ExtResource("2_dy385")

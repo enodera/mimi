@@ -5,7 +5,7 @@ extends CharacterBody3D
 
 var is_knocked_back: bool = false
 var knockback_velocity: Vector3 = Vector3.ZERO
-var knockback_timer: float = 0.05  # How long knockback lasts
+var knockback_timer: float = 0.1  # How long knockback lasts
 var knockback_elapsed: float = 0.0
 
 func _ready():

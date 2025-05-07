@@ -67,6 +67,9 @@ func _ready() -> void:
 	add_child(_attack_recovery_timer)
 	
 	health_ui.set_health(max_health, current_health)
+	
+	QuestManager.start_quest("find_lost_sword")
+	QuestManager.start_quest("rescue_villager")
 
 # --------------------- 
 # ---- INPUT ---------- 
@@ -178,7 +181,7 @@ func _physics_process(delta: float) -> void:
 	if Global.dialoguepaused:
 		_skin.set_move_state("idle")
 		state = "idle"
-		print("State changed to: idle (dialogue paused)")
+		_can_move = false
 		return
 
 	if _attack_timer.time_left > 0 and _can_move:

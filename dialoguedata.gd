@@ -17,7 +17,7 @@ var dialogue = {
 		],
 		"help_directions": [
 			"The village is just down the road to the east.",
-			"Safe travels!"
+			{"text": "Safe travels!", "set_branch": "no_help"}
 		],
 		"no_help": [
 			"Alright, take care!"

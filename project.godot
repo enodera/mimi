@@ -22,6 +22,7 @@ ItemDatabase="*res://itemdatabase.gd"
 Global="*res://global.gd"
 DialogueData="*res://dialoguedata.gd"
 NotificationUI="*res://notificationui.gd"
+QuestManager="*res://questmanager.gd"
 
 [global_group]
 

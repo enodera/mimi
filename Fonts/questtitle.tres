@@ -1,10 +1,9 @@
-[gd_resource type="Theme" load_steps=6 format=3 uid="uid://vmsqngx3kiq2"]
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://brosu755fj0n3"]
 
-[ext_resource type="FontFile" uid="uid://dwuutcq4tl2fm" path="res://Fonts/FOT-Seurat Pro B.otf" id="1_shovw"]
-[ext_resource type="StyleBox" uid="uid://ck5d6dxmgrf35" path="res://dialogueboxstyle.tres" id="2_14ixi"]
+[ext_resource type="FontFile" uid="uid://dwuutcq4tl2fm" path="res://Fonts/FOT-Seurat Pro B.otf" id="1_gncgw"]
+[ext_resource type="StyleBox" uid="uid://ck5d6dxmgrf35" path="res://dialogueboxstyle.tres" id="2_7rimw"]
 
 [sub_resource type="SystemFont" id="SystemFont_51034"]
-subpixel_positioning = 0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_14ixi"]
 bg_color = Color(0.108901, 0.193817, 0.196606, 1)
@@ -21,11 +20,12 @@ corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
 [resource]
-default_font = ExtResource("1_shovw")
-Button/fonts/font = ExtResource("1_shovw")
-Label/fonts/font = ExtResource("1_shovw")
+default_font = ExtResource("1_gncgw")
+default_font_size = 15
+Button/fonts/font = ExtResource("1_gncgw")
+Label/fonts/font = ExtResource("1_gncgw")
 MenuButton/fonts/font = SubResource("SystemFont_51034")
-Panel/styles/panel = ExtResource("2_14ixi")
+Panel/styles/panel = ExtResource("2_7rimw")
 ProgressBar/colors/font_color = Color(0.95, 0.95, 0.95, 0)
 ProgressBar/styles/background = SubResource("StyleBoxFlat_14ixi")
 ProgressBar/styles/fill = SubResource("StyleBoxFlat_qxp0s")
