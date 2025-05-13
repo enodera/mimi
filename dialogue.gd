@@ -126,6 +126,12 @@ func show_current_line():
 			if line.has("set_branch"):
 				set_npc_branch(line["set_branch"])
 
+			if line.has("set_quest"):
+				QuestManager.start_quest(line["set_quest"])
+
+			if line.has("complete_quest"):
+				QuestManager.complete_quest(line["complete_quest"])
+
 			if line.has("options"):
 				await wait_for_typing()
 				show_options(line["options"])

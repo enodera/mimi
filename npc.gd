@@ -9,7 +9,7 @@ var dialog_npc: String
 # Define the NPCs
 enum NPCType {
 	JOHN,
-	LUNA,
+	LIZ,
 	NARRATOR
 }
 
@@ -22,7 +22,7 @@ enum TextType {
 
 var npc_dialogue_keys = {
 	NPCType.JOHN: "npc_john",
-	NPCType.LUNA: "npc_luna",
+	NPCType.LIZ: "liz",
 	NPCType.NARRATOR: "narrator"
 }
 
@@ -44,6 +44,9 @@ func _ready():
 func _process(_delta):
 	if player_in_range and Input.is_action_just_pressed("interact") and not Global.paused and not Global.dialoguepaused:
 		show_dialog()
+		
+		var player_position = %Player.global_transform.origin
+		self.look_at(player_position, Vector3.UP)
 
 func _on_body_entered(body):
 	if body.is_in_group("player"):  # Or use group checking

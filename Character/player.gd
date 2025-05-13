@@ -171,84 +171,93 @@ func _unhandled_input(event: InputEvent) -> void:
 # --------------------- 
 func _physics_process(delta: float) -> void:
 	
-	if state != "attack" and state != "recovery":
-		_skin.set_broom_visibilty(false)
-	elif is_on_floor():
-		_skin.set_broom_visibilty(true)
-	else:
-		_skin.set_broom_visibilty(false)
+	print("State: ", state, " | _can_move: ", _can_move, " | Vel: ", velocity)
 	
 	if Global.dialoguepaused:
-		_skin.set_move_state("idle")
-		state = "idle"
-		_can_move = false
+		disable_movement()
+		return
+	
+	update_broom_visibility()
+	update_can_move()
+	update_broom_particles()
+	update_camera_rotation(delta)
+
+	if state == "attack" and not _can_move:
+		handle_attack_movement(delta)
 		return
 
-	if _attack_timer.time_left > 0 and _can_move:
-		_can_move = false
+	handle_movement_input(delta)
+	handle_jump_and_gravity(delta)
+	update_state_and_animation()
+	update_particles()
+	check_landing()
 
-		
-	if _attack_timer.time_left <= 0 and not _can_move:
-		_can_move = true
-	
-	if _attack_timer.time_left > 0.15:
-		_skin.set_broom_particles(true)
-	else:
-		_skin.set_broom_particles(false)
-	
-	# CAMERA ROTATION
-	_camera_pivot.rotation.x -= _camera_input_direction.y * delta
-	_camera_pivot.rotation.x = clamp(_camera_pivot.rotation.x, -PI/6.0, PI/3.0)
+	was_on_floor = is_on_floor()
+	move_and_slide()
+
+
+func disable_movement():
+	_skin.set_move_state("idle")
+	state = "idle"
+	_can_move = false
+
+
+func update_broom_visibility():
+	var visibility = state in ["attack", "recovery"] and is_on_floor()
+	_skin.set_broom_visibilty(visibility)
+
+
+func update_can_move():
+	_can_move = _attack_timer.time_left <= 0
+
+
+func update_broom_particles():
+	_skin.set_broom_particles(_attack_timer.time_left > 0.15)
+
+
+func update_camera_rotation(delta: float):
+	_camera_pivot.rotation.x = clamp(
+		_camera_pivot.rotation.x - _camera_input_direction.y * delta,
+		-PI/6.0, PI/3.0
+	)
 	_camera_pivot.rotation.y -= _camera_input_direction.x * delta
 	_camera_input_direction = Vector2.ZERO
 
-	# ATTACK MOVEMENT OVERRIDE
-	if state == "attack" and not _can_move:
-		if not is_on_floor():
-			velocity.y -= gravity * delta
-		else:
-			velocity.y = 0.0
 
-		velocity.x = _attack_lunge_direction.x * _attack_lunge_strength
-		velocity.z = _attack_lunge_direction.z * _attack_lunge_strength
-
-		move_and_slide()
-		return
-
-	# MOVEMENT INPUT
-	var current_move_speed = move_speed
-	if Input.is_action_pressed("sprint"):
-		current_move_speed = sprint_speed
-
-	var raw_input := Input.get_vector("move_left", "move_right", "move_up", "move_down")
-	var forward := _camera.global_basis.z
-	var right := _camera.global_basis.x
-	var move_direction := forward * raw_input.y + right * raw_input.x
-	move_direction.y = 0.0
-	move_direction = move_direction.normalized()
+func handle_attack_movement(delta: float):
+	velocity.y = 0.0 if is_on_floor() else velocity.y - gravity * delta
+	velocity.x = _attack_lunge_direction.x * _attack_lunge_strength
+	velocity.z = _attack_lunge_direction.z * _attack_lunge_strength
+	move_and_slide()
 
 
-	# NORMAL MOVEMENT WHEN NOT IN RECOVERY
-	if _attack_timer.time_left <= 0:
-		if state != "walkrun":
-			state = "recovery"
-		velocity = velocity.move_toward(move_direction * current_move_speed, acceleration * delta)
+func handle_movement_input(delta: float):
+	var speed = sprint_speed if Input.is_action_pressed("sprint") else move_speed
+	var input = Input.get_vector("move_left", "move_right", "move_up", "move_down")
+	var move_dir = (_camera.global_basis.z * input.y + _camera.global_basis.x * input.x).normalized()
+	move_dir.y = 0.0
+
+	if state not in ["hitstun", "attack"]:
+		velocity = velocity.move_toward(move_dir * speed, acceleration * delta)
+
+	if _can_move and state == "attack":
+		state = "recovery"
+		
 		if combo_step >= combo_max:
 			combo_step = 0
-		if velocity.x != 0 or velocity.z != 0:
-			if combo_step != 0:
-				combo_step = 0
-				print("byecombo")
-				
+		elif (velocity.x != 0 or velocity.z != 0) and combo_step != 0:
+			combo_step = 0
+			print("byecombo")
+
 	if _attack_recovery_timer.time_left <= 0:
 		combo_step = 0
 
-	# ROTATION
-	if move_direction.length() > 0.2:
-		var target_angle := Vector3.BACK.signed_angle_to(move_direction, Vector3.UP)
-		_skin.global_rotation.y = lerp_angle(_skin.rotation.y, target_angle, rotation_speed * delta)
+	if move_dir.length() > 0.2:
+		var angle = Vector3.BACK.signed_angle_to(move_dir, Vector3.UP)
+		_skin.global_rotation.y = lerp_angle(_skin.rotation.y, angle, rotation_speed * delta)
 
-	# GRAVITY & JUMP
+
+func handle_jump_and_gravity(delta: float):
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 		if velocity.y > 0 and state != "jump":
@@ -259,55 +268,55 @@ func _physics_process(delta: float) -> void:
 			_skin.set_move_state("air")
 	elif Input.is_action_just_pressed("jump"):
 		velocity.y = jump_strength
-		_skin.set_move_state("jump")
 		state = "jump"
+		_skin.set_move_state("jump")
 	else:
 		velocity.y = 0.0
 
-	# STATE & ANIMATION
-	var horizontal_speed := Vector2(velocity.x, velocity.z).length()
-	if is_on_floor():
-		if state == "air":
-			state = "squat"
-			_skin.set_move_state("squat")
-		elif state == "recovery":
-			if horizontal_speed > 0.1:
-				state = "walkrun"
-				_skin.set_move_state("walkrun")
-				_skin.set_run_speed(horizontal_speed - move_speed, sprint_speed - move_speed)
-				print("hi")
-			elif _attack_recovery_timer.time_left <= 0:
-				state = "idle"
-				_skin.set_move_state("idle")
-		elif horizontal_speed > 0.1:
+
+func update_state_and_animation():
+	var horizontal_speed = Vector2(velocity.x, velocity.z).length()
+
+	if not is_on_floor():
+		return
+
+	if state == "air":
+		state = "squat"
+		_skin.set_move_state("squat")
+	
+	elif state == "hitstun":
+		1 + 1 # placeholder para cuendo implemente el resto
+	
+	elif state not in ["hitstun", "attack"]:
+		if horizontal_speed > 0.1:
 			state = "walkrun"
 			_skin.set_move_state("walkrun")
 			_skin.set_run_speed(horizontal_speed - move_speed, sprint_speed - move_speed)
-		else:
+			combo_step = 0
+		elif _attack_recovery_timer.time_left <= 0:
 			state = "idle"
 			_skin.set_move_state("idle")
+			combo_step = 0
 
-	# PARTICLE EFFECTS
+
+func update_particles():
+	var walk = %WalkParticles
+	var run = %RunParticles
+	var is_running = Input.is_action_pressed("sprint")
+
 	if state == "walkrun":
-		%WalkParticles.emitting = true
-		%RunParticles.emitting = true
-		if current_move_speed <= move_speed:
-			%WalkParticles.amount_ratio = 1
-			%RunParticles.amount_ratio = 0
-		else:
-			%WalkParticles.amount_ratio = 0
-			%RunParticles.amount_ratio = 1
+		walk.emitting = true
+		run.emitting = true
+		walk.amount_ratio = 0 if is_running else 1
+		run.amount_ratio = 1 if is_running else 0
 	else:
-		%WalkParticles.emitting = false
-		%RunParticles.emitting = false
+		walk.emitting = false
+		run.emitting = false
 
+func check_landing():
 	if not was_on_floor and is_on_floor():
 		%LandParticles.restart()
-		
 
-	was_on_floor = is_on_floor()
-
-	move_and_slide()
 
 
 
@@ -335,8 +344,6 @@ func _on_attack_recovery_timeout() -> void:
 		perform_attack()
 	else:
 		_can_move = true
-		state = "idle"
-		_skin.set_move_state("idle")
 		combo_queued = false
 
 # --------------------- 

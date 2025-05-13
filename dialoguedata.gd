@@ -24,22 +24,25 @@ var dialogue = {
 		]
 	},
 	
-	"npc_luna": {
+	"liz": {
 		"intro": [
-			"Shh! Keep your voice down.",
+			"Hi, Mimi!",
 			{
-				"text": "Are you followed?",
+				"text": "How are you today?",
 				"options": [
-					{"text": "I don't think so.", "next": "relieved"},
-					{"text": "Yes.", "next": "panics"}
+					{"text": "I'm okay.", "next": "relieved"},
+					{"text": "Well...", "next": "panics"}
 				]
 			}
 		],
 		"relieved": [
-			"Good. We don't want any trouble."
+			{"text": "That's good! Let me know if you need anything.", "set_branch": "again"}
 		],
 		"panics": [
-			"Oh no. We need to hide, now!"
+			"Oh no... If you need any help with anything, let me know!"
+		],
+		"again": [
+			"Talking to me again? You're too kind!"
 		]
 	},
 	
