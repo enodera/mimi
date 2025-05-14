@@ -7,7 +7,7 @@ extends CharacterBody3D
 @export_range(0.0, 1.0) var mouse_sensitivity := 0.25
 @export var zoom_speed := 0.5
 @export var min_zoom_distance := 3.0
-@export var max_zoom_distance := 10.0
+@export var max_zoom_distance := 7.0
 
 @export_group("Movement")
 @export var move_speed := 8.0
@@ -146,6 +146,7 @@ func perform_attack() -> void:
 			_skin.set_move_state("swing2")
 		3:
 			_skin.set_move_state("swing3")
+			_skin.spin_around(attack_durations[2]/2)
 
 	_skin.set_broom_position(combo_step)
 
@@ -225,9 +226,14 @@ func update_camera_rotation(delta: float):
 
 
 func handle_attack_movement(delta: float):
+	var extraattackmove
+	if combo_step < 3:
+		extraattackmove = 1
+	else:
+		extraattackmove = 2
 	velocity.y = 0.0 if is_on_floor() else velocity.y - gravity * delta
-	velocity.x = _attack_lunge_direction.x * _attack_lunge_strength
-	velocity.z = _attack_lunge_direction.z * _attack_lunge_strength
+	velocity.x = _attack_lunge_direction.x * _attack_lunge_strength * extraattackmove
+	velocity.z = _attack_lunge_direction.z * _attack_lunge_strength * extraattackmove
 	move_and_slide()
 
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://b4bv4j5e7yi0b"]
+[gd_scene load_steps=7 format=3 uid="uid://b4bv4j5e7yi0b"]
 
 [ext_resource type="Script" uid="uid://buw0suktl4ajf" path="res://Enemies/GenericTest/enemy.gd" id="1_rbfrn"]
 
@@ -7,6 +7,13 @@
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_33axu"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_o8u7v"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_rbfrn"]
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gsgu7"]
+albedo_color = Color(0.992506, 0, 0.230966, 1)
+emission_enabled = true
 
 [node name="CharacterBody3D" type="CharacterBody3D"]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
@@ -24,3 +31,9 @@ shape = SubResource("CapsuleShape3D_33axu")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_o8u7v")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.47286, 0)
+layers = 2
+mesh = SubResource("SphereMesh_rbfrn")
+surface_material_override/0 = SubResource("StandardMaterial3D_gsgu7")

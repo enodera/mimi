@@ -62,7 +62,10 @@ func start_dialogue(dialogue_lines: Array, speaker_name: String = ""):
 		speaker_label.visible = false
 		$Panel/Panel.visible = false
 		speaker_label.global_position.y = narratepos
-
+	
+	%MinimapUI.visible = false
+	%HealthUI.visible = false
+	%QuestUI.visible = false
 	show_current_line()
 
 
@@ -161,6 +164,10 @@ func end_dialogue():
 	
 	visible = false
 	Global.dialoguepaused = false
+	
+	%MinimapUI.visible = true
+	%HealthUI.visible = true
+	%QuestUI.visible = true
 	
 	await get_tree().create_timer(0.000000000001).timeout
 	emit_signal("dialogue_finished")

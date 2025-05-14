@@ -46,3 +46,20 @@ func set_broom_visibilty(state: bool) -> void:
 func set_broom_particles(state: bool) -> void:
 	%AttackParticles.emitting = state
 	%Hitbox.disabled = not state
+
+func spin_around(duration: float) -> void:
+	if duration <= 0:
+		push_warning("Duration must be positive.")
+		return
+
+	var original_rotation = rotation_degrees.y
+	var target_rotation = original_rotation - 360.0
+
+	# Kill any existing tweens if needed (not necessary unless you're stacking)
+	var tween = create_tween()
+	tween.tween_property(self, "rotation_degrees:y", target_rotation, duration)\
+		.set_trans(Tween.TRANS_LINEAR)\
+		.set_ease(Tween.EASE_IN_OUT)
+
+	# Optional: Reset back to original rotation cleanly (in case rotation overflows)
+	tween.tween_callback(func(): rotation_degrees.y = original_rotation)

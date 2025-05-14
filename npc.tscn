@@ -1,8 +1,16 @@
-[gd_scene load_steps=6 format=3 uid="uid://cncrp63v3at5e"]
+[gd_scene load_steps=8 format=3 uid="uid://cncrp63v3at5e"]
 
 [ext_resource type="Script" uid="uid://024swtnp6bei" path="res://npc.gd" id="1_ideak"]
 [ext_resource type="PackedScene" uid="uid://cqpcme6tyvhom" path="res://MimiModels/Liz1.0/liz.tscn" id="2_kh24r"]
 [ext_resource type="FontFile" uid="uid://dwuutcq4tl2fm" path="res://Fonts/FOT-Seurat Pro B.otf" id="2_xxcha"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_kh24r"]
+radius = 0.75
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ul7y6"]
+albedo_color = Color(5.0056e-06, 0.590054, 0.748647, 1)
+emission_enabled = true
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ideak"]
 radius = 3.83755
@@ -16,6 +24,12 @@ height = 4.0
 script = ExtResource("1_ideak")
 selected_npc = 1
 dialog_text = "intro"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.47286, 0)
+layers = 2
+mesh = SubResource("SphereMesh_kh24r")
+surface_material_override/0 = SubResource("StandardMaterial3D_ul7y6")
 
 [node name="Liz" parent="." instance=ExtResource("2_kh24r")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
