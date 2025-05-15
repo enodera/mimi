@@ -50,8 +50,10 @@ func _process(_delta):
 
 func _on_body_entered(body):
 	if body.is_in_group("player"):  # Or use group checking
+		print(body, body.is_on_floor())
 		player_in_range = true
 		$Label3D.visible = true  # Optional
+		
 
 func _on_body_exited(body):
 	if body.is_in_group("player"):

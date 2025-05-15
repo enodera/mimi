@@ -34,9 +34,10 @@ var was_on_floor := false
 var _can_move := true
 var _attack_timer: Timer
 var _attack_recovery_timer: Timer
+var _air_attack_timer: Timer
 var _attack_tween: Tween
 var _attack_lunge_direction := Vector3.ZERO
-var _attack_lunge_strength := 0.0  # <-- Re-declared variable
+var _attack_lunge_strength := 0.0
 var combo_step := 0
 var combo_max := 3
 var combo_queued := false
@@ -48,7 +49,7 @@ var combo_queued := false
 @onready var _camera: Camera3D = $CameraPivot/SpringArm3D/Camera3D
 @onready var _spring_arm: SpringArm3D = $CameraPivot/SpringArm3D
 @onready var _skin: MimiSkin = %Mimi
-@onready var health_ui := get_node("/root/Node3D/HealthUI")
+@onready var health_ui = %HealthUI
 
 # --------------------- 
 # ---- READY ---------- 
@@ -66,6 +67,11 @@ func _ready() -> void:
 	_attack_recovery_timer.timeout.connect(_on_attack_recovery_timeout)
 	add_child(_attack_recovery_timer)
 	
+	_air_attack_timer = Timer.new()
+	_air_attack_timer.one_shot = true
+	_air_attack_timer.timeout.connect(_on_air_attack_timeout)
+	add_child(_air_attack_timer)
+	
 	health_ui.set_health(max_health, current_health)
 	
 	QuestManager.start_quest("find_lost_sword")
@@ -81,25 +87,27 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
-	if event.is_action_pressed("left_click") and not Global.paused:
-		if state == "attack" and combo_step < combo_max:
-			combo_queued = true
-		else:
-			perform_attack()
-			
-		_skin.set_broom_visibilty(true)
+	if event.is_action_pressed("left_click") and not Global.paused and not Global.dialoguepaused:
+		if is_on_floor():
+			if state == "attack" and combo_step < combo_max:
+				combo_queued = true
+			else:
+				perform_attack()
+		elif state == "jump" and 35 >= velocity.y and velocity.y >= -15:
+			perform_air_attack()
 
 	if event.is_action_pressed("right_click"):
 		state = "hitstun"
 		_skin.set_move_state("hitstun")
 		health_ui.take_damage(20)
-
-	if Input.is_action_pressed("camera_zoomin"):
-		if _spring_arm.spring_length > min_zoom_distance:
-			_spring_arm.spring_length -= zoom_speed
-	if Input.is_action_pressed("camera_zoomout"):
-		if _spring_arm.spring_length < max_zoom_distance:
-			_spring_arm.spring_length += zoom_speed
+	
+	if not Global.paused:
+		if Input.is_action_pressed("camera_zoomin"):
+			if _spring_arm.spring_length > min_zoom_distance:
+				_spring_arm.spring_length -= zoom_speed
+		if Input.is_action_pressed("camera_zoomout"):
+			if _spring_arm.spring_length < max_zoom_distance:
+				_spring_arm.spring_length += zoom_speed
 
 
 
@@ -158,6 +166,13 @@ func perform_attack() -> void:
 	_attack_recovery_timer.wait_time = attack_duration + recovery_duration
 	_attack_recovery_timer.start()
 
+func perform_air_attack() -> void:
+	set_state("airattack")
+	velocity.y = 40
+	_skin.spin_around(attack_durations[2]/3)
+	_skin.set_airbroom_position()
+	_air_attack_timer.wait_time = attack_durations[2]/1.5
+	_air_attack_timer.start()
 
 # --------------------- 
 # ---- UNHANDLED MOUSE INPUT - 
@@ -172,7 +187,7 @@ func _unhandled_input(event: InputEvent) -> void:
 # --------------------- 
 func _physics_process(delta: float) -> void:
 	
-	print("State: ", state, " | _can_move: ", _can_move, " | Vel: ", velocity)
+	# print("State: ", state, " | _can_move: ", _can_move, " | Vel: ", velocity)
 	
 	if Global.dialoguepaused:
 		disable_movement()
@@ -180,7 +195,10 @@ func _physics_process(delta: float) -> void:
 	
 	update_broom_visibility()
 	update_can_move()
-	update_broom_particles()
+	if is_on_floor():
+		update_broom_particles()
+	else:
+		update_air_broom_particles()
 	update_camera_rotation(delta)
 
 	if state == "attack" and not _can_move:
@@ -198,13 +216,12 @@ func _physics_process(delta: float) -> void:
 
 
 func disable_movement():
-	_skin.set_move_state("idle")
-	state = "idle"
+	set_state("idle")
 	_can_move = false
 
 
 func update_broom_visibility():
-	var visibility = state in ["attack", "recovery"] and is_on_floor()
+	var visibility = state in ["attack", "recovery", "airattack"]
 	_skin.set_broom_visibilty(visibility)
 
 
@@ -214,6 +231,9 @@ func update_can_move():
 
 func update_broom_particles():
 	_skin.set_broom_particles(_attack_timer.time_left > 0.15)
+
+func update_air_broom_particles():
+	_skin.set_broom_particles(_air_attack_timer.time_left > 0.15)
 
 
 func update_camera_rotation(delta: float):
@@ -266,16 +286,13 @@ func handle_movement_input(delta: float):
 func handle_jump_and_gravity(delta: float):
 	if not is_on_floor():
 		velocity.y -= gravity * delta
-		if velocity.y > 0 and state != "jump":
-			state = "jump"
-			_skin.set_move_state("jump")
-		elif velocity.y < -15 and state != "air":
-			state = "air"
-			_skin.set_move_state("air")
+		if velocity.y > 0 and state not in ["jump", "airattack"]:
+			set_state("jump")
+		elif velocity.y < -15 and state not in ["air", "airattack"]:
+			set_state("air")
 	elif Input.is_action_just_pressed("jump"):
 		velocity.y = jump_strength
-		state = "jump"
-		_skin.set_move_state("jump")
+		set_state("jump")
 	else:
 		velocity.y = 0.0
 
@@ -286,23 +303,46 @@ func update_state_and_animation():
 	if not is_on_floor():
 		return
 
-	if state == "air":
-		state = "squat"
-		_skin.set_move_state("squat")
+	if state == "air" or state == "airattack":
+		set_state("squat")
 	
 	elif state == "hitstun":
 		1 + 1 # placeholder para cuendo implemente el resto
 	
 	elif state not in ["hitstun", "attack"]:
 		if horizontal_speed > 0.1:
-			state = "walkrun"
-			_skin.set_move_state("walkrun")
+			set_state("walkrun")
 			_skin.set_run_speed(horizontal_speed - move_speed, sprint_speed - move_speed)
 			combo_step = 0
 		elif _attack_recovery_timer.time_left <= 0:
-			state = "idle"
-			_skin.set_move_state("idle")
+			set_state("idle")
 			combo_step = 0
+			
+
+func set_state(new_state: String) -> void:
+	if state == new_state:
+		return
+	state = new_state
+	print(state)
+	match new_state:
+		"idle":
+			_skin.set_move_state("idle")
+		"walkrun":
+			_skin.set_move_state("walkrun")
+		"jump":
+			_skin.set_move_state("jump")
+		"air":
+			_skin.set_move_state("air")
+		"squat":
+			_skin.set_move_state("squat")
+		"attack":
+			_skin.set_move_state("swing1") # o lo que toque
+		"hitstun":
+			_skin.set_move_state("hitstun")
+		"recovery":
+			pass # no animación específica
+		"airattack":
+			_skin.set_move_state("airattack")
 
 
 func update_particles():
@@ -340,6 +380,10 @@ func _on_attack_timeout() -> void:
 		var recovery_duration: float = recovery_durations[combo_step - 1]
 		_attack_recovery_timer.wait_time = recovery_duration
 		_attack_recovery_timer.start()
+
+func _on_air_attack_timeout() -> void:
+	if not is_on_floor():
+		set_state("air")
 
 # --------------------- 
 # ---- RECOVERY TIMEOUT --- 

@@ -39,6 +39,12 @@ func set_broom_position(combo_step: int) -> void:
 			%broom.rotation = Vector3(0, 0, 0)
 		_:
 			push_warning("Invalid combo_step: %s" % combo_step)
+			
+func set_airbroom_position() -> void:
+	%BoneAttachment.bone_name = "uparm.l"
+	%broom.position = Vector3(0,1,0)
+	%broom.rotation = Vector3(0, 0, 0)
+	
 
 func set_broom_visibilty(state: bool) -> void:
 	%broom.visible = state
@@ -46,7 +52,9 @@ func set_broom_visibilty(state: bool) -> void:
 func set_broom_particles(state: bool) -> void:
 	%AttackParticles.emitting = state
 	%Hitbox.disabled = not state
-
+	%WalkParticles.emitting = false
+	%RunParticles.emitting = false
+	
 func spin_around(duration: float) -> void:
 	if duration <= 0:
 		push_warning("Duration must be positive.")

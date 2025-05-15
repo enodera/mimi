@@ -9,11 +9,14 @@ extends CanvasLayer
 # --- Inventory State ---
 var justupdated = true  # Flag to track whether the hover text was updated
 var inventory: Inventory  # Reference to the inventory data object
+var projscale = ProjectSettings.get_setting("display/window/stretch/scale")
 
 # --- Initialization ---
 func _ready():
 	# Initialize the inventory object (this can be replaced with actual inventory logic)
 	inventory = Inventory.new()
+	if projscale != 1:
+		$Panel.set_pivot_offset($Panel.size * (1 / projscale))
 	$Panel.scale = Vector2(0, 0)
 	
 	# Add some test items to the inventory (can be replaced with actual item-adding logic)
@@ -41,13 +44,17 @@ func update_ui():
 		var display_text = item_data["name"] + " x" + str(item["quantity"])
 		var item_description = item_data["description"]
 		
+		var viewport_size = get_viewport().size
+		print(viewport_size)
+		
+		
 		var node
 		var container = MarginContainer.new()  # For offset and padding
-		container.add_theme_constant_override("margin_left", 30)
-		container.add_theme_constant_override("margin_right", 40)
-		container.add_theme_constant_override("margin_top", 2)     # Space above
-		container.add_theme_constant_override("margin_bottom", 2)  # Space below
-
+		container.add_theme_constant_override("margin_left", 30 * 1/projscale)
+		container.add_theme_constant_override("margin_right", 40 * 1/projscale)
+		container.add_theme_constant_override("margin_top", 2 * 1/projscale)     # Space above
+		container.add_theme_constant_override("margin_bottom", 2 * 1/projscale)  # Space below
+		print(projscale)
 
 		if item_data["type"] == "usable":
 			node = Button.new()
@@ -59,8 +66,8 @@ func update_ui():
 			node.autowrap_mode = TextServer.AUTOWRAP_WORD
 			node.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 			node.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-
-		node.custom_minimum_size = Vector2(300, 20)  # Wider and taller
+		
+		node.custom_minimum_size = Vector2(300* 1/projscale, 20* 1/projscale)  # Wider and taller
 		node.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 
 		container.add_child(node)

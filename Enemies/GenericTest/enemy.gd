@@ -2,6 +2,7 @@ extends CharacterBody3D
 
 @export var knockback_strength: float = 10.0
 @export var gravity: float = 9.8
+@export var health: float = 10.0
 
 var is_knocked_back: bool = false
 var knockback_velocity: Vector3 = Vector3.ZERO
@@ -16,6 +17,10 @@ func _on_area_entered(area: Area3D) -> void:
 		print("Enemy hit by broom!")
 		var direction = (global_transform.origin - area.global_transform.origin).normalized()
 		apply_knockback(direction)
+		health -= 1.0
+		print(health)
+	if health <= 0:
+		die()
 
 func apply_knockback(direction: Vector3) -> void:
 	is_knocked_back = true
@@ -47,3 +52,13 @@ func _physics_process(delta: float) -> void:
 			velocity.z = 0
 
 	move_and_slide()
+
+func die():
+	var exploding_timer := Timer.new()
+	exploding_timer.one_shot = true
+	exploding_timer.wait_time = 0.5
+	add_child(exploding_timer)  # Add the timer to the scene so it works
+	exploding_timer.start()
+	await exploding_timer.timeout  # Wait for the timeout signal
+	queue_free()
+	

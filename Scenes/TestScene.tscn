@@ -62,64 +62,75 @@ directional_shadow_split_1 = 0.25
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_201fe")
 
-[node name="InventoryUI" parent="." instance=ExtResource("1_iufkg")]
-unique_name_in_owner = true
-visible = false
-
-[node name="DialogueUI" parent="." instance=ExtResource("2_qsjrb")]
-unique_name_in_owner = true
-visible = false
-
-[node name="NotificationUI" parent="." instance=ExtResource("3_c264a")]
-
-[node name="HealthUI" parent="." instance=ExtResource("4_6xh1p")]
-unique_name_in_owner = true
-
-[node name="QuestUI" parent="." instance=ExtResource("5_201fe")]
-unique_name_in_owner = true
-
-[node name="MinimapUI" type="CanvasLayer" parent="."]
-unique_name_in_owner = true
-
-[node name="Panel" type="Panel" parent="MinimapUI"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -521.0
-offset_top = 81.0
-offset_right = -311.0
-offset_bottom = 291.0
+[node name="ControlUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 576.0
+offset_top = 324.0
+offset_right = -576.0
+offset_bottom = -324.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
+
+[node name="InventoryUI" parent="ControlUI" instance=ExtResource("1_iufkg")]
+unique_name_in_owner = true
+visible = false
+
+[node name="DialogueUI" parent="ControlUI" instance=ExtResource("2_qsjrb")]
+unique_name_in_owner = true
+visible = false
+
+[node name="NotificationUI" parent="ControlUI" instance=ExtResource("3_c264a")]
+
+[node name="HealthUI" parent="ControlUI" instance=ExtResource("4_6xh1p")]
+unique_name_in_owner = true
+
+[node name="QuestUI" parent="ControlUI" instance=ExtResource("5_201fe")]
+unique_name_in_owner = true
+
+[node name="MinimapUI" type="CanvasLayer" parent="ControlUI"]
+unique_name_in_owner = true
+
+[node name="Panel" type="Panel" parent="ControlUI/MinimapUI"]
+anchors_preset = -1
+anchor_left = 0.021
+anchor_top = 0.654
+anchor_right = 0.203
+anchor_bottom = 0.978
+offset_left = -0.192001
+offset_top = 0.207977
+offset_right = 0.143982
+offset_bottom = 0.255981
+grow_vertical = 0
 theme = ExtResource("10_hctok")
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="MinimapUI"]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="ControlUI/MinimapUI"]
 z_index = 1
 material = SubResource("ShaderMaterial_lp1f3")
 use_parent_material = true
 clip_contents = true
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -516.0
-offset_top = 86.0
-offset_right = -316.0
-offset_bottom = 286.0
-grow_horizontal = 2
-grow_vertical = 2
+anchors_preset = -1
+anchor_left = 0.025
+anchor_top = 0.664
+anchor_right = 0.199
+anchor_bottom = 0.972
+offset_left = 0.199999
+offset_top = -0.272034
+offset_right = -0.248016
+offset_bottom = 0.143982
+grow_vertical = 0
 stretch = true
 
-[node name="SubViewport" type="SubViewport" parent="MinimapUI/SubViewportContainer"]
+[node name="SubViewport" type="SubViewport" parent="ControlUI/MinimapUI/SubViewportContainer"]
 transparent_bg = true
 handle_input_locally = false
-size = Vector2i(200, 200)
+size = Vector2i(199, 200)
 render_target_update_mode = 4
 
-[node name="Minimap" type="Camera3D" parent="MinimapUI/SubViewportContainer/SubViewport"]
+[node name="Minimap" type="Camera3D" parent="ControlUI/MinimapUI/SubViewportContainer/SubViewport"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 35, 0)
 keep_aspect = 0
 projection = 1

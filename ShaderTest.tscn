@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://hx6egfh1wakm"]
+
+[ext_resource type="Shader" uid="uid://dju3kfrun410h" path="res://ShaderB.gdshader" id="1_856pg"]
+[ext_resource type="PackedScene" uid="uid://bh55rf6fyknq0" path="res://Scenes/TestScene.tscn" id="2_4jur2"]
+[ext_resource type="Texture2D" uid="uid://b0ub3tqjyw46f" path="res://shaders/psxdither.png" id="2_856pg"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sbbp0"]
+shader = ExtResource("1_856pg")
+shader_parameter/dither_tex = ExtResource("2_856pg")
+shader_parameter/col_depth = 4.4
+shader_parameter/dither_banding = true
+
+[node name="CanvasLayer" type="CanvasLayer"]
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+material = SubResource("ShaderMaterial_sbbp0")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(1152, 648)
+render_target_update_mode = 4
+
+[node name="Node3D" parent="SubViewportContainer/SubViewport" instance=ExtResource("2_4jur2")]

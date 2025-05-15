@@ -21,6 +21,7 @@ var dotspeed := 0.30
 # --- Speaker Positioning ---
 var talkingpos := 0.0
 var narratepos := 0.0
+var projscale = ProjectSettings.get_setting("display/window/stretch/scale")
 
 # --- Signals ---
 signal dialogue_finished
@@ -30,11 +31,12 @@ signal npc_set_branch(character_id: String, new_branch: String)
 func _ready() -> void:
 	talkingpos = speaker_label.global_position.y
 	narratepos = speaker_label.global_position.y + 20
+	
 
 
 # --- Starting Dialogue ---
 func start_from_global(character_id: String, branch: String):
-	$Panel.scale = Vector2(1, 1)  # Reset before anything else
+	$Panel.scale = Vector2(1/projscale, 1/projscale)  # Reset before anything else
 
 	if DialogueData.dialogue.has(character_id) and DialogueData.dialogue[character_id].has(branch):
 		var dialogue_lines = DialogueData.dialogue[character_id][branch]
@@ -42,7 +44,7 @@ func start_from_global(character_id: String, branch: String):
 		
 		$Panel.scale = Vector2(0, 0)
 		var tween := create_tween()
-		tween.tween_property($Panel, "scale", Vector2(1, 1), 0.3).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+		tween.tween_property($Panel, "scale", Vector2(1/projscale, 1/projscale), 0.3).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 
 
 
@@ -179,7 +181,8 @@ func type_line(line: String) -> void:
 	dialogue_text.text = ""
 	for i in line.length():
 		dialogue_text.text += line[i]
-
+		if i % 2 == 0:
+			$VoiceSound.play()
 		match line[i]:
 			",":
 				await get_tree().create_timer(commaspeed).timeout
