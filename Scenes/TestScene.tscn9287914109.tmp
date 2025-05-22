@@ -200,11 +200,27 @@ skeleton = NodePath("../../StaticBody3D2/MeshInstance3D2")
 
 [node name="CharacterBody3D3" parent="." node_paths=PackedStringArray("patrol_bounds_area") instance=ExtResource("9_5rbs6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.1297, 55.498, 11.2427)
+knockback_strength = null
+gravity = null
+health = null
+patrol_speed = null
+chase_speed = null
+patrol_wait_time = null
 patrol_bounds_area = NodePath("../PatrolArea")
+melee_range = null
+vision_range = null
 
 [node name="CharacterBody3D2" parent="." node_paths=PackedStringArray("patrol_bounds_area") instance=ExtResource("9_5rbs6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.8041, 1, -43.999)
+knockback_strength = null
+gravity = null
+health = null
+patrol_speed = null
+chase_speed = null
+patrol_wait_time = null
 patrol_bounds_area = NodePath("../PatrolArea")
+melee_range = null
+vision_range = null
 
 [node name="PatrolArea" parent="." instance=ExtResource("15_lp1f3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.5814, -0.471951, -43.7685)

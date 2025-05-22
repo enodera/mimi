@@ -1,0 +1,206 @@
+[gd_scene load_steps=27 format=3 uid="uid://bh55rf6fyknq0"]
+
+[ext_resource type="Texture2D" uid="uid://drkhwpqw3v00a" path="res://PrototypeTextures/Green/texture_08.png" id="1_b5ayd"]
+[ext_resource type="PackedScene" uid="uid://pakdokc08g3p" path="res://inventory.tscn" id="1_iufkg"]
+[ext_resource type="Texture2D" uid="uid://blkwxes3c4ap8" path="res://istockphoto-1138179296-612x612_waifu2x_art_noise1_scale.png" id="1_xjl2p"]
+[ext_resource type="PackedScene" uid="uid://btukobjpqjuii" path="res://Character/Player.tscn" id="2_5lt6y"]
+[ext_resource type="PackedScene" uid="uid://bbcqhkacujydt" path="res://dialogueui.tscn" id="2_qsjrb"]
+[ext_resource type="PackedScene" uid="uid://b5qtuwtqahipp" path="res://MimiImportedTest.tscn" id="3_8k7wh"]
+[ext_resource type="PackedScene" uid="uid://bau4t2jr7r0jy" path="res://notificationui.tscn" id="3_c264a"]
+[ext_resource type="PackedScene" uid="uid://df8rvo3adndis" path="res://healthui.tscn" id="4_6xh1p"]
+[ext_resource type="PackedScene" uid="uid://cncrp63v3at5e" path="res://npc.tscn" id="5_0f5h7"]
+[ext_resource type="PackedScene" uid="uid://v52nrqjnq2a6" path="res://questui.tscn" id="5_201fe"]
+[ext_resource type="PackedScene" uid="uid://b4bv4j5e7yi0b" path="res://Enemies/GenericTest/enemy.tscn" id="9_5rbs6"]
+[ext_resource type="Script" uid="uid://boii7oeolcmck" path="res://Scenes/minimapfollow.gd" id="9_t2vuu"]
+[ext_resource type="Theme" uid="uid://dmjqddcrtim6" path="res://minimap.tres" id="10_hctok"]
+[ext_resource type="Shader" uid="uid://p30er620t4m1" path="res://Scenes/MinimapShader.gdshader" id="10_t2vuu"]
+[ext_resource type="PackedScene" uid="uid://cjh6dthlar0bv" path="res://PatrolArea.tscn" id="15_lp1f3"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_ytmxh"]
+panorama = ExtResource("1_xjl2p")
+
+[sub_resource type="Sky" id="Sky_hctok"]
+sky_material = SubResource("PanoramaSkyMaterial_ytmxh")
+
+[sub_resource type="Environment" id="Environment_201fe"]
+background_mode = 2
+sky = SubResource("Sky_hctok")
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+reflected_light_source = 1
+fog_density = 0.0465
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lp1f3"]
+shader = ExtResource("10_t2vuu")
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_lp1f3"]
+vertices = PackedVector3Array(0.266047, 0.543597, -6.70703, 1.76605, -0.456403, -6.70703, 1.51605, -0.456403, -24.457, -18.734, 15.0436, -6.20703, 0.266047, 0.543597, -6.20703, -17.2724, 14.0436, -6.24549, -17.2724, 14.0436, -6.20703, -18.734, 15.0436, -24.457, -17.2875, 14.0436, -24.457, -14.5025, 11.5436, -8.23061, -14.4889, 11.5436, -23.2101, 7.76605, -5.2064, -6.70703, 8.01605, -5.2064, -4.95703, 17.266, -12.4564, -5.20703, 17.266, -12.4564, -24.457, 0.266047, 0.543597, 2.29297, 2.26605, -0.206403, 2.29297, 2.26605, -0.206403, -5.70703, 0.266047, 0.543597, -5.70703, 1.26605, 0.543597, 2.29297, 1.26605, 0.543597, -5.70703, -18.734, 15.0436, 2.79297, -17.2724, 14.0436, 2.75451, -17.2724, 14.0436, -6.16856, -14.4936, 11.5436, -0.7134, -14.4889, 11.5436, -5.21005, 0.266047, 0.543597, 2.79297, -17.2724, 14.0436, 2.79297, 7.26605, -3.9564, 2.29297, 7.26605, -3.9564, -5.70703, 8.01605, -5.2064, 1.54297, 17.266, -12.4564, 1.79297, 9.49105, -6.7064, -3.73203, 7.76605, -5.2064, 3.29297, 1.76605, -0.456403, 3.29297, 1.51605, -0.456403, 21.043, 17.266, -12.4564, 21.043, 0.266047, 0.543597, 3.29297, -17.2724, 14.0436, 2.83144, -18.734, 15.0436, 21.043, -17.2875, 14.0436, 21.043, -14.5033, 11.5436, 11.3003, -14.4889, 11.5436, 3.78995, -14.5026, 11.5436, 18.8095)
+polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(3, 5, 6), PackedInt32Array(6, 5, 4), PackedInt32Array(4, 5, 0), PackedInt32Array(7, 9, 3), PackedInt32Array(3, 9, 5), PackedInt32Array(5, 9, 0), PackedInt32Array(0, 10, 2), PackedInt32Array(2, 10, 8), PackedInt32Array(8, 10, 7), PackedInt32Array(7, 10, 9), PackedInt32Array(9, 10, 0), PackedInt32Array(11, 13, 12), PackedInt32Array(11, 1, 2), PackedInt32Array(13, 11, 14), PackedInt32Array(14, 11, 2), PackedInt32Array(18, 20, 15), PackedInt32Array(15, 20, 19), PackedInt32Array(19, 20, 17), PackedInt32Array(19, 17, 16), PackedInt32Array(23, 24, 3), PackedInt32Array(3, 24, 21), PackedInt32Array(21, 24, 22), PackedInt32Array(22, 24, 15), PackedInt32Array(15, 24, 18), PackedInt32Array(18, 25, 23), PackedInt32Array(23, 25, 24), PackedInt32Array(24, 25, 18), PackedInt32Array(21, 22, 27), PackedInt32Array(27, 22, 26), PackedInt32Array(26, 22, 15), PackedInt32Array(3, 6, 23), PackedInt32Array(23, 6, 4), PackedInt32Array(23, 4, 18), PackedInt32Array(17, 29, 16), PackedInt32Array(16, 29, 28), PackedInt32Array(31, 32, 13), PackedInt32Array(13, 32, 12), PackedInt32Array(12, 32, 30), PackedInt32Array(30, 32, 31), PackedInt32Array(33, 30, 31), PackedInt32Array(35, 34, 33), PackedInt32Array(31, 36, 33), PackedInt32Array(33, 36, 35), PackedInt32Array(37, 34, 35), PackedInt32Array(21, 27, 38), PackedInt32Array(38, 27, 26), PackedInt32Array(38, 26, 37), PackedInt32Array(40, 43, 35), PackedInt32Array(35, 41, 37), PackedInt32Array(37, 42, 38), PackedInt32Array(38, 41, 21), PackedInt32Array(21, 41, 39), PackedInt32Array(39, 43, 40), PackedInt32Array(43, 41, 35), PackedInt32Array(41, 42, 37), PackedInt32Array(42, 41, 38), PackedInt32Array(41, 43, 39)]
+border_size = 0.1
+agent_height = 0.5
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_5lt6y"]
+data = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0, -1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_cguwc"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wicfy"]
+albedo_texture = ExtResource("1_b5ayd")
+uv1_scale = Vector3(5, 5, 5)
+texture_filter = 0
+
+[sub_resource type="BoxMesh" id="BoxMesh_8k7wh"]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_iufkg"]
+data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_8k7wh"]
+data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 19.5414, 0)
+light_energy = 0.25
+shadow_enabled = true
+directional_shadow_mode = 1
+directional_shadow_split_1 = 0.25
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_201fe")
+
+[node name="ControlUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 576.0
+offset_top = 324.0
+offset_right = -576.0
+offset_bottom = -324.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="InventoryUI" parent="ControlUI" instance=ExtResource("1_iufkg")]
+unique_name_in_owner = true
+visible = false
+
+[node name="DialogueUI" parent="ControlUI" instance=ExtResource("2_qsjrb")]
+unique_name_in_owner = true
+visible = false
+
+[node name="NotificationUI" parent="ControlUI" instance=ExtResource("3_c264a")]
+
+[node name="HealthUI" parent="ControlUI" instance=ExtResource("4_6xh1p")]
+unique_name_in_owner = true
+
+[node name="QuestUI" parent="ControlUI" instance=ExtResource("5_201fe")]
+unique_name_in_owner = true
+
+[node name="MinimapUI" type="CanvasLayer" parent="ControlUI"]
+unique_name_in_owner = true
+
+[node name="Panel" type="Panel" parent="ControlUI/MinimapUI"]
+anchors_preset = -1
+anchor_left = 0.021
+anchor_top = 0.654
+anchor_right = 0.203
+anchor_bottom = 0.978
+offset_left = -0.192001
+offset_top = 0.207977
+offset_right = 0.143982
+offset_bottom = 0.255981
+grow_vertical = 0
+theme = ExtResource("10_hctok")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="ControlUI/MinimapUI"]
+z_index = 1
+material = SubResource("ShaderMaterial_lp1f3")
+use_parent_material = true
+clip_contents = true
+anchors_preset = -1
+anchor_left = 0.025
+anchor_top = 0.664
+anchor_right = 0.199
+anchor_bottom = 0.972
+offset_left = 0.199999
+offset_top = -0.272034
+offset_right = -0.248016
+offset_bottom = 0.143982
+grow_vertical = 0
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="ControlUI/MinimapUI/SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(199, 200)
+render_target_update_mode = 4
+
+[node name="Minimap" type="Camera3D" parent="ControlUI/MinimapUI/SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 35, 0)
+keep_aspect = 0
+projection = 1
+size = 50.0
+script = ExtResource("9_t2vuu")
+
+[node name="Player" parent="." instance=ExtResource("2_5lt6y")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.000657201, 0)
+min_zoom_distance = 2.5
+max_zoom_distance = 7.5
+
+[node name="Mimi" parent="." instance=ExtResource("3_8k7wh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.29261, 0, 0.964306)
+visible = false
+
+[node name="NPC" parent="." instance=ExtResource("5_0f5h7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.5925, 0, 0)
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+transform = Transform3D(6.86233, -5.22485, 0, 5.22485, 6.86233, 0, 0, 0, 8.625, 9.77588, -1.66995, 15.2544)
+navigation_mesh = SubResource("NavigationMesh_lp1f3")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D"]
+transform = Transform3D(18.4494, 14.0471, 0, -14.0471, 18.4494, 0, 0, 0, 23.1884, -0.784508, 0.84066, -1.76863)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_5lt6y")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/StaticBody3D"]
+cast_shadow = 0
+mesh = SubResource("PlaneMesh_cguwc")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_wicfy")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="NavigationRegion3D"]
+transform = Transform3D(1, -2.98023e-08, 0, 2.98023e-08, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="NavigationRegion3D/StaticBody3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("BoxMesh_8k7wh")
+skeleton = NodePath("../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/StaticBody3D2"]
+shape = SubResource("ConcavePolygonShape3D_iufkg")
+
+[node name="StaticBody3D3" type="StaticBody3D" parent="NavigationRegion3D"]
+transform = Transform3D(6.86233, 5.22485, 0, -5.22485, 6.86233, 0, 0, 0, 8.625, 1.56975, -5.55376, -1.76863)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/StaticBody3D3"]
+shape = SubResource("ConcavePolygonShape3D_8k7wh")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="NavigationRegion3D/StaticBody3D3"]
+mesh = SubResource("BoxMesh_8k7wh")
+skeleton = NodePath("../../StaticBody3D2/MeshInstance3D2")
+
+[node name="CharacterBody3D2" parent="." node_paths=PackedStringArray("patrol_bounds_area") instance=ExtResource("9_5rbs6")]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, -21.7158, 3.91499, -43.9991)
+patrol_bounds_area = NodePath("../PatrolArea")
+
+[node name="CharacterBody3D" parent="." node_paths=PackedStringArray("patrol_bounds_area") instance=ExtResource("9_5rbs6")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -10.1403, 2.96637, -58.0911)
+patrol_bounds_area = NodePath("../PatrolArea")
+
+[node name="PatrolArea" parent="." instance=ExtResource("15_lp1f3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.5814, -0.471951, -43.7685)

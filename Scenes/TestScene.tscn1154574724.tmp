@@ -1,0 +1,193 @@
+[gd_scene load_steps=26 format=3 uid="uid://bh55rf6fyknq0"]
+
+[ext_resource type="Texture2D" uid="uid://drkhwpqw3v00a" path="res://PrototypeTextures/Green/texture_08.png" id="1_b5ayd"]
+[ext_resource type="PackedScene" uid="uid://pakdokc08g3p" path="res://inventory.tscn" id="1_iufkg"]
+[ext_resource type="Texture2D" uid="uid://blkwxes3c4ap8" path="res://istockphoto-1138179296-612x612_waifu2x_art_noise1_scale.png" id="1_xjl2p"]
+[ext_resource type="PackedScene" uid="uid://btukobjpqjuii" path="res://Character/Player.tscn" id="2_5lt6y"]
+[ext_resource type="PackedScene" uid="uid://bbcqhkacujydt" path="res://dialogueui.tscn" id="2_qsjrb"]
+[ext_resource type="PackedScene" uid="uid://b5qtuwtqahipp" path="res://MimiImportedTest.tscn" id="3_8k7wh"]
+[ext_resource type="PackedScene" uid="uid://bau4t2jr7r0jy" path="res://notificationui.tscn" id="3_c264a"]
+[ext_resource type="PackedScene" uid="uid://df8rvo3adndis" path="res://healthui.tscn" id="4_6xh1p"]
+[ext_resource type="PackedScene" uid="uid://cncrp63v3at5e" path="res://npc.tscn" id="5_0f5h7"]
+[ext_resource type="PackedScene" uid="uid://v52nrqjnq2a6" path="res://questui.tscn" id="5_201fe"]
+[ext_resource type="PackedScene" uid="uid://b4bv4j5e7yi0b" path="res://Enemies/GenericTest/enemy.tscn" id="9_5rbs6"]
+[ext_resource type="Script" uid="uid://boii7oeolcmck" path="res://Scenes/minimapfollow.gd" id="9_t2vuu"]
+[ext_resource type="Theme" uid="uid://dmjqddcrtim6" path="res://minimap.tres" id="10_hctok"]
+[ext_resource type="Shader" uid="uid://p30er620t4m1" path="res://Scenes/MinimapShader.gdshader" id="10_t2vuu"]
+[ext_resource type="PackedScene" uid="uid://cjh6dthlar0bv" path="res://PatrolArea.tscn" id="15_lp1f3"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_ytmxh"]
+panorama = ExtResource("1_xjl2p")
+
+[sub_resource type="Sky" id="Sky_hctok"]
+sky_material = SubResource("PanoramaSkyMaterial_ytmxh")
+
+[sub_resource type="Environment" id="Environment_201fe"]
+background_mode = 2
+sky = SubResource("Sky_hctok")
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+reflected_light_source = 1
+fog_density = 0.0465
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lp1f3"]
+shader = ExtResource("10_t2vuu")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_cguwc"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wicfy"]
+albedo_texture = ExtResource("1_b5ayd")
+uv1_scale = Vector3(5, 5, 5)
+texture_filter = 0
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_5lt6y"]
+data = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0, -1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_8k7wh"]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_8k7wh"]
+data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_iufkg"]
+data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 19.5414, 0)
+light_energy = 0.25
+shadow_enabled = true
+directional_shadow_mode = 1
+directional_shadow_split_1 = 0.25
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_201fe")
+
+[node name="ControlUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 576.0
+offset_top = 324.0
+offset_right = -576.0
+offset_bottom = -324.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="InventoryUI" parent="ControlUI" instance=ExtResource("1_iufkg")]
+unique_name_in_owner = true
+visible = false
+
+[node name="DialogueUI" parent="ControlUI" instance=ExtResource("2_qsjrb")]
+unique_name_in_owner = true
+visible = false
+
+[node name="NotificationUI" parent="ControlUI" instance=ExtResource("3_c264a")]
+
+[node name="HealthUI" parent="ControlUI" instance=ExtResource("4_6xh1p")]
+unique_name_in_owner = true
+
+[node name="QuestUI" parent="ControlUI" instance=ExtResource("5_201fe")]
+unique_name_in_owner = true
+
+[node name="MinimapUI" type="CanvasLayer" parent="ControlUI"]
+unique_name_in_owner = true
+
+[node name="Panel" type="Panel" parent="ControlUI/MinimapUI"]
+anchors_preset = -1
+anchor_left = 0.021
+anchor_top = 0.654
+anchor_right = 0.203
+anchor_bottom = 0.978
+offset_left = -0.192001
+offset_top = 0.207977
+offset_right = 0.143982
+offset_bottom = 0.255981
+grow_vertical = 0
+theme = ExtResource("10_hctok")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="ControlUI/MinimapUI"]
+z_index = 1
+material = SubResource("ShaderMaterial_lp1f3")
+use_parent_material = true
+clip_contents = true
+anchors_preset = -1
+anchor_left = 0.025
+anchor_top = 0.664
+anchor_right = 0.199
+anchor_bottom = 0.972
+offset_left = 0.199999
+offset_top = -0.272034
+offset_right = -0.248016
+offset_bottom = 0.143982
+grow_vertical = 0
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="ControlUI/MinimapUI/SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(199, 200)
+render_target_update_mode = 4
+
+[node name="Minimap" type="Camera3D" parent="ControlUI/MinimapUI/SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 35, 0)
+keep_aspect = 0
+projection = 1
+size = 50.0
+script = ExtResource("9_t2vuu")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(200, 0, 0, 0, 200, 0, 0, 0, 200, 0, 0, 0)
+cast_shadow = 0
+mesh = SubResource("PlaneMesh_cguwc")
+surface_material_override/0 = SubResource("StandardMaterial3D_wicfy")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_5lt6y")
+
+[node name="Player" parent="." instance=ExtResource("2_5lt6y")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.000657201, 0)
+min_zoom_distance = 2.5
+max_zoom_distance = 7.5
+
+[node name="Mimi" parent="." instance=ExtResource("3_8k7wh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.29261, 0, 0.964306)
+visible = false
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(74.3906, 0, 0, 0, 74.3906, 0, 0, 0, 74.3906, 49.5656, -31.58, 0)
+mesh = SubResource("BoxMesh_8k7wh")
+skeleton = NodePath("../MeshInstance3D2")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D3"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D3/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_8k7wh")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(6.86233, -5.22485, 0, 5.22485, 6.86233, 0, 0, 0, 8.625, 9.77588, -1.66995, 15.2544)
+mesh = SubResource("BoxMesh_8k7wh")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D2/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_iufkg")
+
+[node name="NPC" parent="." instance=ExtResource("5_0f5h7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.5925, 0, 0)
+
+[node name="CharacterBody3D2" parent="." node_paths=PackedStringArray("patrol_bounds_area") instance=ExtResource("9_5rbs6")]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, -21.7158, 13.4213, -43.9991)
+patrol_bounds_area = NodePath("../PatrolArea")
+
+[node name="CharacterBody3D" parent="." node_paths=PackedStringArray("patrol_bounds_area") instance=ExtResource("9_5rbs6")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -7.23861, 4.47375, -43.9991)
+patrol_bounds_area = NodePath("../PatrolArea")
+
+[node name="PatrolArea" parent="." instance=ExtResource("15_lp1f3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -51.681, 0, -66.5795)
