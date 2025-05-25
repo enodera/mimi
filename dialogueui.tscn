@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bbcqhkacujydt"]
+[gd_scene load_steps=10 format=3 uid="uid://bbcqhkacujydt"]
 
 [ext_resource type="Script" uid="uid://dl5cs3pti02fj" path="res://dialogue.gd" id="1_ypjfj"]
 [ext_resource type="Theme" uid="uid://vmsqngx3kiq2" path="res://dialogue.tres" id="2_es2ql"]
@@ -6,6 +6,10 @@
 [ext_resource type="StyleBox" uid="uid://bw7ax33ldndms" path="res://speakerboxstyle.tres" id="3_ksakb"]
 [ext_resource type="Theme" uid="uid://wuvbsl284ws3" path="res://Themes/inventory.tres" id="5_ksakb"]
 [ext_resource type="AudioStream" uid="uid://bn6hmtt3gmbum" path="res://Randomizer.tres" id="6_oj686"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_oj686"]
+line_spacing = 10.0
+font_size = 20
 
 [sub_resource type="SystemFont" id="SystemFont_51034"]
 subpixel_positioning = 0
@@ -44,11 +48,12 @@ anchor_bottom = 1.0
 offset_left = -283.0
 offset_top = -158.0
 offset_right = 283.0
-offset_bottom = -31.0
+offset_bottom = -22.0
 grow_horizontal = 2
 grow_vertical = 0
-theme_override_font_sizes/font_size = 20
 text = "Text"
+label_settings = SubResource("LabelSettings_oj686")
+autowrap_mode = 2
 
 [node name="Panel" type="Panel" parent="Panel"]
 layout_mode = 1

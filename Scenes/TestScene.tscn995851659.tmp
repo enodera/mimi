@@ -203,6 +203,7 @@ patrol_bounds_area = NodePath("../PatrolArea")
 
 [node name="CharacterBody3D2" parent="." node_paths=PackedStringArray("patrol_bounds_area") instance=ExtResource("9_5rbs6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.8041, 1, -43.999)
+gravity = 50.0
 patrol_speed = 10.0
 patrol_bounds_area = NodePath("../PatrolArea")
 

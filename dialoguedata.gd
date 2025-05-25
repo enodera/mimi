@@ -31,7 +31,8 @@ var dialogue = {
 				"text": "How are you today?",
 				"options": [
 					{"text": "I'm okay.", "next": "relieved"},
-					{"text": "Well...", "next": "panics"}
+					{"text": "Well...", "next": "panics"},
+					{"text": "DIE...", "next": "ah"}
 				]
 			}
 		],
@@ -39,7 +40,10 @@ var dialogue = {
 			{"text": "That's good! Let me know if you need anything.", "set_branch": "again"}
 		],
 		"panics": [
-			"Oh no... If you need any help with anything, let me know!"
+			"Oh no...\nIf you need any help with anything, let me know!"
+		],
+		"ah": [
+			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
 		],
 		"again": [
 			"Talking to me again? You're too kind!"

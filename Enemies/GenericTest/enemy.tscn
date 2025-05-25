@@ -1,6 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://b4bv4j5e7yi0b"]
+[gd_scene load_steps=11 format=3 uid="uid://b4bv4j5e7yi0b"]
 
 [ext_resource type="Script" uid="uid://703parghqcy2" path="res://enemybehaviour.gd" id="1_rbfrn"]
+[ext_resource type="PackedScene" uid="uid://bgt644kidj35f" path="res://Enemies/Models/frog.glb" id="2_gsgu7"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_rbfrn"]
 radius = 1.0
@@ -13,10 +14,13 @@ albedo_color = Color(0.992506, 0, 0.230966, 1)
 emission_enabled = true
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_gsgu7"]
+height = 4.0
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_33axu"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_o8u7v"]
+radius = 1.76762
+height = 3.82699
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_rbfrn"]
 radius = 8.49902
@@ -40,6 +44,8 @@ mesh = SubResource("SphereMesh_rbfrn")
 surface_material_override/0 = SubResource("StandardMaterial3D_gsgu7")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+visible = false
 mesh = SubResource("CapsuleMesh_gsgu7")
 
 [node name="Area3D" type="Area3D" parent="MeshInstance3D"]
@@ -48,6 +54,7 @@ mesh = SubResource("CapsuleMesh_gsgu7")
 shape = SubResource("CapsuleShape3D_33axu")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.91481, 0)
 shape = SubResource("CapsuleShape3D_o8u7v")
 
 [node name="VisibilityRange" type="Area3D" parent="."]
@@ -78,3 +85,7 @@ max_neighbors = 1
 debug_enabled = true
 debug_use_custom = true
 debug_path_custom_color = Color(0, 0.593282, 0.731677, 1)
+
+[node name="frog" parent="." instance=ExtResource("2_gsgu7")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
