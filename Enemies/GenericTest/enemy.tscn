@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://bgt644kidj35f" path="res://Enemies/Models/frog.glb" id="2_gsgu7"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_rbfrn"]
-radius = 1.0
+radius = 2.0
 height = 0.5
 radial_segments = 8
 rings = 8

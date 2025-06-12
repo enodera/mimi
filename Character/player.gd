@@ -1,8 +1,9 @@
 extends CharacterBody3D
 
-# --------------------- 
-# --- CONFIG EXPORTS -- 
-# --------------------- 
+# ----------------------
+# --- CONFIG EXPORTS ---
+# ----------------------
+
 @export_group("Camera")
 @export_range(0.0, 1.0) var mouse_sensitivity := 0.25
 @export var zoom_speed := 0.5
@@ -25,9 +26,9 @@ extends CharacterBody3D
 @export var max_health = 100
 @export var current_health = 100
 
-# --------------------- 
-# ---- VARIABLES ------- 
-# --------------------- 
+# -------------------
+# ---- VARIABLES ----
+# -------------------
 var state := "idle"
 var _camera_input_direction := Vector2.ZERO
 var was_on_floor := false
@@ -42,18 +43,22 @@ var combo_step := 0
 var combo_max := 3
 var combo_queued := false
 
-# --------------------- 
-# --- NODE REFERENCES -- 
-# --------------------- 
+
+# -----------------------
+# --- NODE REFERENCES ---
+# -----------------------
+
 @onready var _camera_pivot : Node3D = $CameraPivot
 @onready var _camera: Camera3D = $CameraPivot/SpringArm3D/Camera3D
 @onready var _spring_arm: SpringArm3D = $CameraPivot/SpringArm3D
 @onready var _skin: MimiSkin = %Mimi
 @onready var health_ui = %HealthUI
 
-# --------------------- 
-# ---- READY ---------- 
-# --------------------- 
+
+# ---------------
+# ---- READY ----
+# ---------------
+
 func _ready() -> void:
 	was_on_floor = true
 
@@ -77,9 +82,11 @@ func _ready() -> void:
 	QuestManager.start_quest("find_lost_sword")
 	QuestManager.start_quest("rescue_villager")
 
-# --------------------- 
-# ---- INPUT ---------- 
-# --------------------- 
+
+# ---------------
+# ---- INPUT ----
+# ---------------
+
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("left_click") and not Global.paused:
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -110,11 +117,10 @@ func _input(event: InputEvent) -> void:
 				_spring_arm.spring_length += zoom_speed
 
 
+# ---------------- 
+# ---- ATTACK ----
+# ----------------
 
-
-# --------------------- 
-# ---- ATTACK ---------- 
-# --------------------- 
 func perform_attack() -> void:
 	if combo_step >= combo_max:
 		return
@@ -174,17 +180,21 @@ func perform_air_attack() -> void:
 	_air_attack_timer.wait_time = attack_durations[2]/1.5
 	_air_attack_timer.start()
 
-# --------------------- 
-# ---- UNHANDLED MOUSE INPUT - 
-# --------------------- 
+
+# -------------------------------
+# ---- UNHANDLED MOUSE INPUT ----
+# -------------------------------
+
 func _unhandled_input(event: InputEvent) -> void:
 	if not Global.paused:
 		if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 			_camera_input_direction = event.relative * mouse_sensitivity
 
-# --------------------- 
-# ---- PHYSICS -------- 
-# --------------------- 
+
+# -----------------
+# ---- PHYSICS ----
+# -----------------
+
 func _physics_process(delta: float) -> void:
 	
 	# print("State: ", state, " | _can_move: ", _can_move, " | Vel: ", velocity)
@@ -366,9 +376,10 @@ func check_landing():
 
 
 
-# --------------------- 
-# ---- ATTACK TIMEOUT --- 
-# --------------------- 
+# ------------------------
+# ---- ATTACK TIMEOUT ----
+# ------------------------
+
 func _on_attack_timeout() -> void:
 	_attack_lunge_strength = 0.0
 	velocity = Vector3.ZERO
@@ -385,9 +396,11 @@ func _on_air_attack_timeout() -> void:
 	if not is_on_floor():
 		set_state("air")
 
-# --------------------- 
-# ---- RECOVERY TIMEOUT --- 
-# --------------------- 
+
+# --------------------------
+# ---- RECOVERY TIMEOUT ----
+# --------------------------
+
 func _on_attack_recovery_timeout() -> void:
 	if combo_queued and combo_step < combo_max:
 		combo_queued = false
@@ -396,9 +409,11 @@ func _on_attack_recovery_timeout() -> void:
 		_can_move = true
 		combo_queued = false
 
-# --------------------- 
-# ---- UI / PROCESS --- 
-# --------------------- 
+
+# ----------------------
+# ---- UI / PROCESS ----
+# ----------------------
+
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("inventory"):
 		if not Global.paused and not Global.dialoguepaused:
@@ -412,7 +427,6 @@ func _process(_delta: float) -> void:
 			%InventoryUI.visible = false
 			Global.paused = false
 			
-
 
 func _on_hitbox_area_entered(area: Area3D) -> void:
 	if area.name == "EnemyAttackArea":
