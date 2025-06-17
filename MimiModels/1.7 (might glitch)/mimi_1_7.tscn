@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://d5cxfutiyp6n" path="res://Particles/PNG (Transparent)/magic_05.png" id="4_8qqa5"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_q8om7"]
-height = 10.8403
+height = 11.864
 radius = 1.18213
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bmlvo"]
@@ -199,30 +199,30 @@ graph_offset = Vector2(98, 33.4856)
 script = ExtResource("2_ucfyq")
 
 [node name="Skeleton3D" parent="Armature" index="0"]
-bones/0/position = Vector3(0, -0.16324, 0.0129114)
-bones/1/rotation = Quaternion(-0.0274175, 1.19162e-07, -3.36008e-09, 0.999624)
+bones/0/position = Vector3(0, -0.181157, 0.0116125)
+bones/1/rotation = Quaternion(-0.0212207, 1.19139e-07, -4.09865e-09, 0.999775)
 bones/2/rotation = Quaternion(0.056836, 7.03353e-15, 1.35508e-08, 0.998384)
 bones/3/rotation = Quaternion(-0.264672, -0.0446733, 0.0966977, 0.958438)
-bones/7/rotation = Quaternion(0.883709, 0.182022, -0.41935, 0.100362)
+bones/7/rotation = Quaternion(0.879824, 0.189934, -0.421776, 0.109269)
 bones/8/rotation = Quaternion(1.82302e-08, -1.74384e-07, -0.0081341, 0.999967)
 bones/9/rotation = Quaternion(-3.41464e-09, 3.79065e-07, 0.00278909, 0.999996)
 bones/10/rotation = Quaternion(0.0451254, 0.365335, 0.050862, 0.928389)
-bones/11/rotation = Quaternion(0.883708, -0.182022, 0.419351, 0.100361)
+bones/11/rotation = Quaternion(0.879824, -0.189934, 0.421776, 0.109268)
 bones/12/rotation = Quaternion(2.16765e-08, 1.79095e-07, 0.00813411, 0.999967)
 bones/13/rotation = Quaternion(-3.18918e-09, -3.99558e-07, -0.00278909, 0.999996)
 bones/14/rotation = Quaternion(0.0451254, -0.365335, -0.050862, 0.928389)
-bones/15/rotation = Quaternion(0.72379, -0.0252817, -0.689478, 0.0104248)
-bones/16/rotation = Quaternion(0.0054041, 0.000731689, -0.0721373, 0.99738)
-bones/17/rotation = Quaternion(-0.0153298, -0.0164613, 0.763329, 0.645618)
-bones/18/rotation = Quaternion(-0.00264292, 7.5093e-10, 0.00059546, 0.999996)
-bones/19/rotation = Quaternion(0.72379, 0.0252817, 0.689478, 0.0104248)
-bones/20/rotation = Quaternion(0.00540411, -0.000731436, 0.0721373, 0.99738)
-bones/21/rotation = Quaternion(-0.0153279, 0.0164592, -0.763329, 0.645619)
-bones/22/rotation = Quaternion(-0.00264825, -2.96615e-09, -0.000596428, 0.999996)
-bones/23/position = Vector3(-0.778648, -0.321765, 0.0747302)
+bones/15/rotation = Quaternion(0.721356, -0.0635981, -0.687637, 0.0525048)
+bones/16/rotation = Quaternion(0.0130837, 0.000722272, -0.174649, 0.984544)
+bones/17/rotation = Quaternion(-0.0154821, -0.016639, 0.791575, 0.61065)
+bones/18/rotation = Quaternion(-0.00168166, 1.07528e-09, 0.00347777, 0.999993)
+bones/19/rotation = Quaternion(0.721356, 0.063598, 0.687637, 0.0525049)
+bones/20/rotation = Quaternion(0.0130837, -0.000722023, 0.174649, 0.984544)
+bones/21/rotation = Quaternion(-0.0154819, 0.0166388, -0.791575, 0.61065)
+bones/22/rotation = Quaternion(-0.00168158, -1.52918e-10, -0.0034776, 0.999993)
+bones/23/position = Vector3(-0.814679, -0.321764, 0.0747302)
 bones/24/position = Vector3(0.00450291, 0.401603, 0.357574)
 bones/24/rotation = Quaternion(0.999949, -3.65811e-08, 0.010137, -1.99216e-15)
-bones/25/position = Vector3(0.778648, -0.321764, 0.0747302)
+bones/25/position = Vector3(0.814679, -0.321764, 0.0747302)
 bones/26/position = Vector3(-0.00450324, 0.401603, 0.357574)
 bones/26/rotation = Quaternion(0.999949, -6.48341e-16, -0.0101367, 1.80287e-15)
 bones/27/position = Vector3(0.147408, -1.62037, -0.0901504)
@@ -231,21 +231,21 @@ bones/29/rotation = Quaternion(0, 0.707107, 0.707107, 0)
 bones/30/position = Vector3(-0.147408, -1.62037, -0.0901504)
 bones/31/position = Vector3(-0.794373, -0.490363, 0.0227968)
 bones/32/rotation = Quaternion(0, 0.707107, 0.707107, 0)
-bones/33/position = Vector3(2.21717, 1.18736, 0.0959769)
+bones/33/position = Vector3(2.21717, 1.14471, 0.0959769)
 bones/34/position = Vector3(2.47184, 1.21304, 0.0959769)
 
 [node name="Hair1" parent="Armature/Skeleton3D" index="0"]
-transform = Transform3D(-3.01369e-08, 9.9732e-09, -0.248586, -0.000191197, 0.170285, 1.49412e-08, 0.248586, 0.000130972, -2.79237e-08, -0.0089156, 1.49717, 0.135517)
+transform = Transform3D(-3.01297e-08, 1.04765e-08, -0.248586, -0.0032729, 0.17027, 1.60208e-08, 0.248565, 0.00224198, -2.77195e-08, -0.0089156, 1.47813, 0.148135)
 
 [node name="Hair2" parent="Armature/Skeleton3D" index="1"]
-transform = Transform3D(1.6591e-08, 1.47734e-08, -0.0621839, 0.0265678, 0.305037, 3.68597e-09, 0.151002, -0.0536692, 4.85302e-10, 0.00888653, 1.28793, 0.144546)
+transform = Transform3D(1.66742e-08, 1.56733e-08, -0.0621839, 0.0246938, 0.305679, 3.86342e-09, 0.15132, -0.0498835, 5.35175e-10, 0.00888653, 1.26879, 0.154571)
 
 [node name="Hair3" parent="Armature/Skeleton3D" index="2"]
-transform = Transform3D(9.81004e-08, 4.93357e-08, -1.21312, 0.173098, 1.09859, 8.88235e-08, 0.899925, -0.211311, 1.57571e-07, 0.00888656, 1.26932, -0.102009)
+transform = Transform3D(9.86401e-08, 5.2576e-08, -1.21312, 0.161928, 1.10113, 9.0448e-08, 0.902001, -0.197676, 1.58742e-07, 0.00888656, 1.25324, -0.092197)
 
 [node name="BoneAttachment" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="4"]
 unique_name_in_owner = true
-transform = Transform3D(0.94772, 0.287537, -0.138378, 0.28872, -0.95734, -0.0118882, -0.135893, -0.028686, -0.990308, 0.673545, -0.25694, 0.0643413)
+transform = Transform3D(0.940237, 0.308856, -0.143397, 0.310201, -0.950576, -0.0134493, -0.140464, -0.0318364, -0.989573, 0.697483, -0.263871, 0.0640859)
 bone_name = "hand.l"
 bone_idx = 10
 
@@ -258,7 +258,7 @@ visible = false
 
 [node name="Hitbox" type="CollisionShape3D" parent="Armature/Skeleton3D/BoneAttachment/broom/Area3D" index="0"]
 unique_name_in_owner = true
-transform = Transform3D(0.999997, -0.0011142, -0.00144474, 0.00111465, 0.999998, 0.00063625, 0.00144131, -0.000637829, 0.999999, 0.00727487, 3.19053, 0.0103395)
+transform = Transform3D(0.999997, -0.00111423, -0.00144465, 0.00111489, 0.999999, 0.000635386, 0.0014412, -0.0006378, 0.999998, 0.0518649, 3.70013, 0.0348599)
 shape = SubResource("CylinderShape3D_q8om7")
 
 [node name="AttackParticles" type="GPUParticles3D" parent="Armature/Skeleton3D/BoneAttachment/broom" index="2"]

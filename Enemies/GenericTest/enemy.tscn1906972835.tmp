@@ -87,4 +87,3 @@ debug_use_custom = true
 debug_path_custom_color = Color(0, 0.593282, 0.731677, 1)
 
 [node name="frog" parent="." instance=ExtResource("2_gsgu7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)

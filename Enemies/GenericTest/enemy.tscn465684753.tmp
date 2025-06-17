@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://b4bv4j5e7yi0b"]
 
 [ext_resource type="Script" uid="uid://703parghqcy2" path="res://enemybehaviour.gd" id="1_rbfrn"]
-[ext_resource type="PackedScene" uid="uid://dpe0v3b8g4i0t" path="res://MimiModels/frog/frog.tscn" id="2_gsgu7"]
+[ext_resource type="PackedScene" uid="uid://bgt644kidj35f" path="res://Enemies/Models/frog.glb" id="2_gsgu7"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_rbfrn"]
 radius = 2.0
@@ -23,13 +23,13 @@ radius = 1.76762
 height = 3.82699
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_rbfrn"]
-radius = 14.8228
+radius = 8.49902
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_gsgu7"]
-radius = 4.25146
+radius = 2.25293
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_33axu"]
-radius = 8.15771
+radius = 5.96094
 
 [node name="Enemy" type="CharacterBody3D"]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
@@ -87,4 +87,5 @@ debug_use_custom = true
 debug_path_custom_color = Color(0, 0.593282, 0.731677, 1)
 
 [node name="frog" parent="." instance=ExtResource("2_gsgu7")]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)

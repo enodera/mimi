@@ -2,15 +2,23 @@ extends CharacterBody3D
 
 @onready var navigation_agent_3d: NavigationAgent3D = $NavigationAgent3D
 
-enum State { PATROL, ATTACK, DAMAGE }
+enum State { PATROL, ATTACK, MELEE, DAMAGE }
 enum Class { FROG }
 
+enum MeleePhase { BUFFER, ATTACKING, RECOVERY }
+var melee_phase: MeleePhase = MeleePhase.BUFFER
+var melee_timer: float = 0.5
+
 @onready var class_models = {
-	Class.FROG: %frog
+	Class.FROG: $frog
+}
+
+@onready var class_controller = {
+	Class.FROG: $frog/AnimationTree
 }
 
 @export_group("Physics")
-@export var knockback_strength: float = 75.0
+@export var knockback_strength: float = 25.0
 @export var gravity: float = 125.0
 
 @export_group("Stats")
@@ -24,12 +32,20 @@ enum Class { FROG }
 @export var melee_range: float = 3.0
 @export var vision_range: float = 10.0
 
+@export var hitstun_rotation_speed: float = 20.0
+
 @export var max_wait: float = 1.0
 @export var min_wait: float = 2.0
-@export var player: Node3D
+
+@export var idle_chance: float = 0.3
+@export var knockback_duration: float = 0.25
+
 
 @export_group("Enemy type")
 @export var selectedtype: Class = Class.FROG
+
+@onready var player = %Player
+@onready var health_ui = %HealthUI
 
 var state: State = State.PATROL
 var mesh: Node3D
@@ -41,36 +57,51 @@ var is_knocked_back: bool = false
 var knockback_velocity: Vector3 = Vector3.ZERO
 var knockback_elapsed: float = 0.0
 var playeraggroable = true
+var playerattackable = true
+
+var _animation_tree: AnimationTree  # Reference to the AnimationTree
+var _state_machine: AnimationNodeStateMachinePlayback
 
 func _ready() -> void:
 	$MeshInstance3D/Area3D.area_entered.connect(_on_area_entered)
 	$VisibilityRange.body_entered.connect(_on_vision_body_entered)
 	$VisibilityRange.body_exited.connect(_on_vision_body_exited)
+	$MeleeAttackRange.body_entered.connect(_on_melee_body_entered)
+	$MeleeAttackRange.body_exited.connect(_on_melee_body_exited)
 	var player = %Player
+	var health_ui = %HealthUI
 	mesh = class_models[selectedtype]
+	
+	_animation_tree = class_controller[selectedtype]
+	_state_machine = _animation_tree.get("parameters/playback")
 	_pick_new_target()
 
 var target_velocity: Vector3 = Vector3.ZERO
 
 func _physics_process(delta: float) -> void:
-
 	match state:
-
 		State.PATROL:
 			if waiting:
 				wait_timer -= delta
+				_state_machine.travel("idle")
 				if wait_timer <= 0:
 					waiting = false
 					_pick_new_target()
 			else:
 				if navigation_agent_3d.is_navigation_finished():
-					waiting = true
-					wait_timer = randf_range(min_wait, max_wait)
-					target_velocity = Vector3.ZERO
+					if randf() < idle_chance:
+						# Randomly idle
+						waiting = true
+						wait_timer = randf_range(min_wait, max_wait)
+						target_velocity = Vector3.ZERO
+					else:
+						# Immediately pick a new patrol destination
+						_pick_new_target()
 				else:
 					var destination = navigation_agent_3d.get_next_path_position()
 					var direction = (destination - global_position).normalized()
 					target_velocity = direction * patrol_speed
+					_state_machine.travel("walk")
 					
 			if not is_on_floor():
 				velocity.y -= gravity * delta
@@ -81,28 +112,86 @@ func _physics_process(delta: float) -> void:
 			if player:
 				var direction = (player.global_position - global_position).normalized()
 				target_velocity = direction * chase_speed
+				_state_machine.travel("walk")
 			if not is_on_floor():
 				velocity.y -= gravity * delta
 			else:
 				velocity.y = 0
 
+		State.MELEE:
+			target_velocity = Vector3.ZERO
+			
+			if not is_on_floor():
+				velocity.y -= gravity * delta
+			else:
+				velocity.y = 0
+			
+			match melee_phase:
+				MeleePhase.BUFFER:
+					_state_machine.travel("idle")
+					melee_timer -= delta
+					if melee_timer <= 0.0:
+						melee_phase = MeleePhase.ATTACKING
+						melee_timer = 0.7  # duration of the attack animation
+						_state_machine.travel("attack")
+						# Deal damage once, e.g., instantly or use an animation event system if you have one
+						health_ui.take_damage(20)
+
+				MeleePhase.ATTACKING:
+					melee_timer -= delta
+					if melee_timer <= 0.0:
+						melee_phase = MeleePhase.RECOVERY
+						melee_timer = 0.5  # recovery time before checking again
+
+				MeleePhase.RECOVERY:
+					melee_timer -= delta
+					_state_machine.travel("idle")  # Play idle during recovery
+					if melee_timer <= 0.0:
+						if player and global_position.distance_to(player.global_position) <= melee_range:
+							melee_phase = MeleePhase.BUFFER
+							melee_timer = 1.0
+						else:
+							if playeraggroable:
+								if playerattackable:
+									state = State.MELEE
+								else:
+									state = State.ATTACK
+							else:
+								state = State.PATROL
+			
 		State.DAMAGE:
 			if is_knocked_back:
 				knockback_elapsed += delta
 				velocity.x = knockback_velocity.x
 				velocity.z = knockback_velocity.z
-			
-			if not is_on_floor():
-				velocity.y -= gravity * delta
+				
+				var knockback_axis = knockback_velocity.cross(Vector3.UP).normalized()
+				mesh.rotate(knockback_axis, deg_to_rad(-hitstun_rotation_speed))
+
+				if knockback_elapsed >= knockback_duration:
+					is_knocked_back = false
+
 			else:
-				if playeraggroable == true:
-					state = State.ATTACK
+				# Stop rotation and reset if needed
+				if playeraggroable:
+					if playerattackable:
+						state = State.MELEE
+					else:
+						state = State.ATTACK
 				else:
 					state = State.PATROL
-				print(state)
 
+			if not is_on_floor():
+				velocity.y -= gravity * delta
+
+	
+	if is_on_floor():
+		mesh.rotation_degrees.x = 0
+		mesh.rotation_degrees.z = 0
+		
 	# Smoothly interpolate velocity towards target_velocity
-	velocity = velocity.lerp(target_velocity, 0.25)
+	if state != State.DAMAGE:
+		velocity = velocity.lerp(target_velocity, 0.25)
 
 	if state == State.ATTACK and player:
 		var look_dir = (player.global_position - global_position).normalized()
@@ -151,18 +240,47 @@ func _on_vision_body_entered(body):
 func _on_vision_body_exited(body):
 	if body.is_in_group("player"):
 		player = null
-		state = State.PATROL
+		if state == State.ATTACK:
+			state = State.PATROL
 		playeraggroable = false
+		playerattackable = false
 		print("ENEMY: Player left vision.")
 		
+
+func _on_melee_body_entered(body):
+	if body.is_in_group("player"):
+		player = body
+		state = State.MELEE
+		melee_phase = MeleePhase.BUFFER
+		melee_timer = 1.0
+		playeraggroable = true
+		playerattackable = true
+		print("ENEMY: Meleeing player! Switching to MELEE.")
+
+
+func _on_melee_body_exited(body):
+	if body.is_in_group("player"):
+		playerattackable = false
+		print("ENEMY: Player left melee.")
 
 func apply_knockback(direction: Vector3) -> void:
 	is_knocked_back = true
 	state = State.DAMAGE
+	melee_phase = MeleePhase.BUFFER
+	melee_timer = 1.0
+
+	if _state_machine:
+		_state_machine.travel("idle")
+
 	knockback_elapsed = 0.0
 	direction.y = 0
+	direction = direction.normalized()
+
 	knockback_velocity = direction * knockback_strength
-	knockback_velocity.y = knockback_strength * 0.5
-	velocity.y = knockback_velocity.y
-	
-	print("ENEMY: Knocked back!")
+
+	if is_on_floor():
+		knockback_velocity.y = knockback_strength * 0.5
+	else:
+		knockback_velocity.y = 0  # prevent excess air lift
+
+	velocity = knockback_velocity
