@@ -2,17 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dvjvxn0ml83l2"
-path.s3tc="res://.godot/imported/symbol_02.png-9002a68ca67b5db0942a2856b1298064.s3tc.ctex"
+uid="uid://dxgk3kqpkmhme"
+path.s3tc="res://.godot/imported/grasschunk12_e41c024f2bd940ebbdffb11c6bb79485_RGB_Forest_texture_01.png-3ee93e505970afd473b4e9e07786016d.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
+generator_parameters={
+"md5": "f4b75f8009911053baef152360eb87da"
+}
 
 [deps]
 
-source_file="res://Particles/PNG (Transparent)/symbol_02.png"
-dest_files=["res://.godot/imported/symbol_02.png-9002a68ca67b5db0942a2856b1298064.s3tc.ctex"]
+source_file="res://MimiModels/world/grasschunk12_e41c024f2bd940ebbdffb11c6bb79485_RGB_Forest_texture_01.png"
+dest_files=["res://.godot/imported/grasschunk12_e41c024f2bd940ebbdffb11c6bb79485_RGB_Forest_texture_01.png-3ee93e505970afd473b4e9e07786016d.s3tc.ctex"]
 
 [params]
 

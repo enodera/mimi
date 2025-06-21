@@ -10,11 +10,11 @@ var melee_phase: MeleePhase = MeleePhase.BUFFER
 var melee_timer: float = 0.5
 
 @onready var class_models = {
-	Class.FROG: $frog
+	Class.FROG: $enemy/frog
 }
 
 @onready var class_controller = {
-	Class.FROG: $frog/AnimationTree
+	Class.FROG: $enemy/frog/AnimationTree
 }
 
 @export_group("Physics")
@@ -188,6 +188,8 @@ func _physics_process(delta: float) -> void:
 	if is_on_floor():
 		mesh.rotation_degrees.x = 0
 		mesh.rotation_degrees.z = 0
+		if health <= 0:
+			die()
 		
 	# Smoothly interpolate velocity towards target_velocity
 	if state != State.DAMAGE:
@@ -226,8 +228,10 @@ func _on_area_entered(area: Area3D) -> void:
 	if area.is_in_group("playerattack"):
 		var direction = (global_transform.origin - area.global_transform.origin).normalized()
 		print(direction)
-		apply_knockback(direction)
 		health -= 1.0
+		apply_knockback(direction)
+		$enemy/AttackParticles.restart()
+		$enemy/AttackParticles.emitting = true
 		print("ENEMY: Took damage! Health now: ", health)
 
 func _on_vision_body_entered(body):
@@ -271,12 +275,16 @@ func apply_knockback(direction: Vector3) -> void:
 
 	if _state_machine:
 		_state_machine.travel("idle")
-
+		
+	
 	knockback_elapsed = 0.0
 	direction.y = 0
 	direction = direction.normalized()
-
-	knockback_velocity = direction * knockback_strength
+	
+	if health <= 0:
+		knockback_velocity = direction * knockback_strength * 3
+	else:
+		knockback_velocity = direction * knockback_strength 
 
 	if is_on_floor():
 		knockback_velocity.y = knockback_strength * 0.5
@@ -284,3 +292,28 @@ func apply_knockback(direction: Vector3) -> void:
 		knockback_velocity.y = 0  # prevent excess air lift
 
 	velocity = knockback_velocity
+
+func die():
+	print("ENEMY: Dying...")
+	
+	var exploding_timer := Timer.new()
+	exploding_timer.one_shot = true
+	exploding_timer.wait_time = 0.25
+	add_child(exploding_timer)
+	exploding_timer.start()
+	await exploding_timer.timeout
+	
+	if mesh:
+		mesh.visible = false
+		
+	if $CollisionShape3D != null:
+		$CollisionShape3D.queue_free()
+	
+	$enemy/DeathParticles1.emitting = true
+	$enemy/DeathParticles2.emitting = true
+	exploding_timer.wait_time = 2
+	
+	exploding_timer.start()
+	await exploding_timer.timeout
+	
+	queue_free()

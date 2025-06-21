@@ -1,0 +1,122 @@
+[gd_scene load_steps=15 format=3 uid="uid://b6xhciv77htqc"]
+
+[ext_resource type="Texture2D" uid="uid://blkwxes3c4ap8" path="res://istockphoto-1138179296-612x612_waifu2x_art_noise1_scale.png" id="1_8ervs"]
+[ext_resource type="PackedScene" uid="uid://pakdokc08g3p" path="res://inventory.tscn" id="2_1y0xo"]
+[ext_resource type="PackedScene" uid="uid://bbcqhkacujydt" path="res://dialogueui.tscn" id="3_k1f3g"]
+[ext_resource type="PackedScene" uid="uid://bau4t2jr7r0jy" path="res://notificationui.tscn" id="4_nytiv"]
+[ext_resource type="PackedScene" uid="uid://df8rvo3adndis" path="res://healthui.tscn" id="5_kjlm2"]
+[ext_resource type="PackedScene" uid="uid://v52nrqjnq2a6" path="res://questui.tscn" id="6_ad6l7"]
+[ext_resource type="Theme" uid="uid://dmjqddcrtim6" path="res://minimap.tres" id="7_cj5nf"]
+[ext_resource type="Shader" uid="uid://p30er620t4m1" path="res://Scenes/MinimapShader.gdshader" id="8_l23qb"]
+[ext_resource type="Script" uid="uid://boii7oeolcmck" path="res://Scenes/minimapfollow.gd" id="9_aibdv"]
+[ext_resource type="PackedScene" uid="uid://btukobjpqjuii" path="res://Character/Player.tscn" id="10_uq18n"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_44qto"]
+panorama = ExtResource("1_8ervs")
+
+[sub_resource type="Sky" id="Sky_hkouh"]
+sky_material = SubResource("PanoramaSkyMaterial_44qto")
+
+[sub_resource type="Environment" id="Environment_q2og1"]
+background_mode = 2
+sky = SubResource("Sky_hkouh")
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+reflected_light_source = 1
+fog_density = 0.0465
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_l4q3l"]
+shader = ExtResource("8_l23qb")
+
+[node name="Node3D" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 19.5414, 0)
+light_energy = 0.25
+shadow_enabled = true
+directional_shadow_mode = 1
+directional_shadow_split_1 = 0.25
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_q2og1")
+
+[node name="ControlUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 576.0
+offset_top = 324.0
+offset_right = -576.0
+offset_bottom = -324.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="InventoryUI" parent="ControlUI" instance=ExtResource("2_1y0xo")]
+unique_name_in_owner = true
+visible = false
+
+[node name="DialogueUI" parent="ControlUI" instance=ExtResource("3_k1f3g")]
+unique_name_in_owner = true
+visible = false
+
+[node name="NotificationUI" parent="ControlUI" instance=ExtResource("4_nytiv")]
+
+[node name="HealthUI" parent="ControlUI" instance=ExtResource("5_kjlm2")]
+unique_name_in_owner = true
+
+[node name="QuestUI" parent="ControlUI" instance=ExtResource("6_ad6l7")]
+unique_name_in_owner = true
+
+[node name="MinimapUI" type="CanvasLayer" parent="ControlUI"]
+unique_name_in_owner = true
+
+[node name="Panel" type="Panel" parent="ControlUI/MinimapUI"]
+anchors_preset = -1
+anchor_left = 0.021
+anchor_top = 0.654
+anchor_right = 0.203
+anchor_bottom = 0.978
+offset_left = -0.192001
+offset_top = 0.207977
+offset_right = 0.143982
+offset_bottom = 0.255981
+grow_vertical = 0
+theme = ExtResource("7_cj5nf")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="ControlUI/MinimapUI"]
+z_index = 1
+material = SubResource("ShaderMaterial_l4q3l")
+use_parent_material = true
+clip_contents = true
+anchors_preset = -1
+anchor_left = 0.025
+anchor_top = 0.664
+anchor_right = 0.199
+anchor_bottom = 0.972
+offset_left = 0.199999
+offset_top = -0.272034
+offset_right = -0.248016
+offset_bottom = 0.143982
+grow_vertical = 0
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="ControlUI/MinimapUI/SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(199, 200)
+render_target_update_mode = 4
+
+[node name="Minimap" type="Camera3D" parent="ControlUI/MinimapUI/SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 35, 0)
+keep_aspect = 0
+projection = 1
+size = 50.0
+script = ExtResource("9_aibdv")
+
+[node name="Player" parent="." instance=ExtResource("10_uq18n")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.66509, 0)
+min_zoom_distance = 2.5
+max_zoom_distance = 7.5

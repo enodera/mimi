@@ -134,8 +134,20 @@ size = Vector2(10, 10)
 [node name="Enemy" type="CharacterBody3D"]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 script = ExtResource("1_rbfrn")
+knockback_strength = null
+gravity = null
+health = null
+patrol_speed = null
+chase_speed = null
+patrol_wait_time = null
+melee_range = null
+vision_range = null
+hitstun_rotation_speed = null
 max_wait = 0.2
 min_wait = 0.5
+idle_chance = null
+knockback_duration = null
+selectedtype = null
 
 [node name="MinimapSign" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.47286, 0)
@@ -222,7 +234,6 @@ draw_pass_2 = null
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -1.67781, -0.148295)
 emitting = false
 amount = 10
-one_shot = true
 explosiveness = 1.0
 fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_5rcum")
