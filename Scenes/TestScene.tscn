@@ -249,3 +249,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.5814, -0.471951, -43.7685
 
 [node name="OverworldItem2" parent="." instance=ExtResource("18_fi7j4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -37.0268, 8.26628, 43.1678)
+item_id = "lemon"

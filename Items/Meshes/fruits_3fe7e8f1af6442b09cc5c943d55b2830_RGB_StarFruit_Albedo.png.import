@@ -1,0 +1,38 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://d1vsoqytpilrj"
+path.s3tc="res://.godot/imported/fruits_3fe7e8f1af6442b09cc5c943d55b2830_RGB_StarFruit_Albedo.png-8e1bf85ae79a9a5e582b0324f4a5a011.s3tc.ctex"
+metadata={
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
+}
+generator_parameters={
+"md5": "a02056ac57b4c92a9c9c367235dd5ef4"
+}
+
+[deps]
+
+source_file="res://Items/Meshes/fruits_3fe7e8f1af6442b09cc5c943d55b2830_RGB_StarFruit_Albedo.png"
+dest_files=["res://.godot/imported/fruits_3fe7e8f1af6442b09cc5c943d55b2830_RGB_StarFruit_Albedo.png-8e1bf85ae79a9a5e582b0324f4a5a011.s3tc.ctex"]
+
+[params]
+
+compress/mode=2
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/hdr_compression=1
+compress/normal_map=0
+compress/channel_pack=0
+mipmaps/generate=true
+mipmaps/limit=-1
+roughness/mode=0
+roughness/src_normal=""
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/normal_map_invert_y=false
+process/hdr_as_srgb=false
+process/hdr_clamp_exposure=false
+process/size_limit=0
+detect_3d/compress_to=0

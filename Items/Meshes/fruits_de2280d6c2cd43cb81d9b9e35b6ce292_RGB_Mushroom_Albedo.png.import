@@ -1,0 +1,38 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://cfovdr3ugx7c3"
+path.s3tc="res://.godot/imported/fruits_de2280d6c2cd43cb81d9b9e35b6ce292_RGB_Mushroom_Albedo.png-5c5e871b2c17a68c95ebc952912fdabf.s3tc.ctex"
+metadata={
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
+}
+generator_parameters={
+"md5": "40f0dc139ccce95906a80ff81ccee790"
+}
+
+[deps]
+
+source_file="res://Items/Meshes/fruits_de2280d6c2cd43cb81d9b9e35b6ce292_RGB_Mushroom_Albedo.png"
+dest_files=["res://.godot/imported/fruits_de2280d6c2cd43cb81d9b9e35b6ce292_RGB_Mushroom_Albedo.png-5c5e871b2c17a68c95ebc952912fdabf.s3tc.ctex"]
+
+[params]
+
+compress/mode=2
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/hdr_compression=1
+compress/normal_map=0
+compress/channel_pack=0
+mipmaps/generate=true
+mipmaps/limit=-1
+roughness/mode=0
+roughness/src_normal=""
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/normal_map_invert_y=false
+process/hdr_as_srgb=false
+process/hdr_clamp_exposure=false
+process/size_limit=0
+detect_3d/compress_to=0

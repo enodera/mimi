@@ -1,0 +1,38 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://1aa5mt5ncdp3"
+path.s3tc="res://.godot/imported/fruits_f1089bcfa2734fa19406866979b70132_RGB_Coconut_Albedo.png-0af72945999d402dd467a4cea4fb2491.s3tc.ctex"
+metadata={
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
+}
+generator_parameters={
+"md5": "96d7ff3570edc877756bb7e4b8ca35a4"
+}
+
+[deps]
+
+source_file="res://Items/Meshes/fruits_f1089bcfa2734fa19406866979b70132_RGB_Coconut_Albedo.png"
+dest_files=["res://.godot/imported/fruits_f1089bcfa2734fa19406866979b70132_RGB_Coconut_Albedo.png-0af72945999d402dd467a4cea4fb2491.s3tc.ctex"]
+
+[params]
+
+compress/mode=2
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/hdr_compression=1
+compress/normal_map=0
+compress/channel_pack=0
+mipmaps/generate=true
+mipmaps/limit=-1
+roughness/mode=0
+roughness/src_normal=""
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/normal_map_invert_y=false
+process/hdr_as_srgb=false
+process/hdr_clamp_exposure=false
+process/size_limit=0
+detect_3d/compress_to=0

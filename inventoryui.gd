@@ -20,21 +20,20 @@ var current_preview_instance: Node3D = null
 # --- Initialization ---
 func _ready():
 	inventory = Global.inventory_ref
-	
+
 	if projscale != 1:
 		$Panel.set_pivot_offset($Panel.size * (1 / projscale))
 	$Panel.scale = Vector2(0, 0)
 
-	inventory.add_item("health_potion", 5)
-	inventory.add_item("food", 3)
-	inventory.add_item("health_potion", 2)
-	inventory.add_item("flour", 4)
-	inventory.add_item("flour", 4)
-	
+	# Add one of every item in the database
+	for item_id in ItemDatabase.items.keys():
+		inventory.add_item(item_id, 1)
+
 	show_item("none")
-	
+
 	update_ui()
 	close_button.pressed.connect(self._on_close_button_pressed)
+
 
 # --- UI Update ---
 func update_ui():
@@ -90,6 +89,7 @@ func show_inventory():
 func _on_item_hovered(item_id: String, item_description: String):
 	%ItemDescription.text = item_description
 	show_item(item_id)
+	print(item_id)
 	show_model_preview(item_id)
 	print("Hi!")
 	modelpreview.visible = true
