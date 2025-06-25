@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bnlt2i0c737ne"
+path="res://.godot/imported/from now on test.wav-76ea5ef7cd807843b259ee6e583b14aa.sample"
+
+[deps]
+
+source_file="res://Voices/VoiceA/from now on test.wav"
+dest_files=["res://.godot/imported/from now on test.wav-76ea5ef7cd807843b259ee6e583b14aa.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

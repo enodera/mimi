@@ -5,8 +5,10 @@
 [ext_resource type="FontFile" uid="uid://dwuutcq4tl2fm" path="res://Fonts/FOT-Seurat Pro B.otf" id="2_xxcha"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_kh24r"]
-radius = 0.75
+radius = 1.5
 height = 0.5
+radial_segments = 10
+rings = 10
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ul7y6"]
 albedo_color = Color(5.0056e-06, 0.590054, 0.748647, 1)

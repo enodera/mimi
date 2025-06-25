@@ -1,0 +1,23 @@
+[gd_resource type="ParticleProcessMaterial" load_steps=3 format=3 uid="uid://bcon13yakvxwu"]
+
+[sub_resource type="Curve" id="Curve_gsgu7"]
+_limits = [0.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 2), 0.0, -1.25933, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_xgvmy"]
+curve = SubResource("Curve_gsgu7")
+
+[resource]
+lifetime_randomness = 0.5
+particle_flag_align_y = true
+emission_shape_scale = Vector3(0.5, 0.5, 0.5)
+spread = 180.0
+initial_velocity_min = 4.0
+initial_velocity_max = 10.0
+radial_velocity_min = -2.23517e-05
+radial_velocity_max = 7.49998
+gravity = Vector3(0, 0, 0)
+scale_min = 0.5
+scale_max = 1.5
+scale_curve = SubResource("CurveTexture_xgvmy")

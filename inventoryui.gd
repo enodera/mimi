@@ -1,5 +1,3 @@
-# inventoryui.gd
-
 extends CanvasLayer
 
 # --- UI Node References ---
@@ -11,30 +9,34 @@ var justupdated = true  # Flag to track whether the hover text was updated
 var inventory: Inventory  # Reference to the inventory data object
 var projscale = ProjectSettings.get_setting("display/window/stretch/scale")
 
+# --- For the model preview! ---
+@onready var model_preview_container = $Panel/Panel/SubViewportContainer
+@onready var model_viewport = model_preview_container.get_viewport()
+@onready var preview_root = model_viewport.get_node("PreviewRoot")  # Node3D inside SubViewport
+@onready var modelpreview = $Panel/Panel/SubViewportContainer/SubViewport/ModelPreview3D
+
+var current_preview_instance: Node3D = null
+
 # --- Initialization ---
 func _ready():
-	# Initialize the inventory object (this can be replaced with actual inventory logic)
-	inventory = Inventory.new()
+	inventory = Global.inventory_ref
+	
 	if projscale != 1:
 		$Panel.set_pivot_offset($Panel.size * (1 / projscale))
 	$Panel.scale = Vector2(0, 0)
+
+	inventory.add_item("health_potion", 5)
+	inventory.add_item("food", 3)
+	inventory.add_item("health_potion", 2)
+	inventory.add_item("flour", 4)
+	inventory.add_item("flour", 4)
 	
-	# Add some test items to the inventory (can be replaced with actual item-adding logic)
-	inventory.add_item("health_potion", 5)  # Add 5 health potions
-	inventory.add_item("food", 3)  # Add 3 food items
-	inventory.add_item("health_potion", 2)  # Add 2 more health potions to demonstrate quantity increase
-	inventory.add_item("flour", 4)  # Add 4 flour items
-	inventory.add_item("flour", 4)  # Add 4 flour itemsw
+	show_item("none")
 	
-	# Update the UI to reflect the current inventory
 	update_ui()
-	
-	# Connect the close button's press signal to the function to close the inventory
 	close_button.pressed.connect(self._on_close_button_pressed)
 
-
 # --- UI Update ---
-# This function updates the UI based on the current items in the inventory
 func update_ui():
 	for child in item_list.get_children():
 		child.queue_free()
@@ -43,96 +45,124 @@ func update_ui():
 		var item_data = ItemDatabase.items[item["id"]]
 		var display_text = item_data["name"] + " x" + str(item["quantity"])
 		var item_description = item_data["description"]
-		
-		var viewport_size = get_viewport().size
-		print(viewport_size)
-		
-		
-		var node
-		var container = MarginContainer.new()  # For offset and padding
-		container.add_theme_constant_override("margin_left", 30 * 1/projscale)
-		container.add_theme_constant_override("margin_right", 40 * 1/projscale)
-		container.add_theme_constant_override("margin_top", 2 * 1/projscale)     # Space above
-		container.add_theme_constant_override("margin_bottom", 2 * 1/projscale)  # Space below
-		print(projscale)
+
+		var container = MarginContainer.new()
+		container.add_theme_constant_override("margin_left", 30 * 1 / projscale)
+		container.add_theme_constant_override("margin_right", 40 * 1 / projscale)
+		container.add_theme_constant_override("margin_top", 2 * 1 / projscale)
+		container.add_theme_constant_override("margin_bottom", 2 * 1 / projscale)
+
+		var node = Button.new()
+		node.text = display_text
+		node.custom_minimum_size = Vector2(300 * 1 / projscale, 20 * 1 / projscale)
+		node.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 
 		if item_data["type"] == "usable":
-			node = Button.new()
-			node.text = display_text
 			node.pressed.connect(_on_item_pressed.bind(item))
 		else:
-			node = Label.new()
-			node.text = display_text
-			node.autowrap_mode = TextServer.AUTOWRAP_WORD
-			node.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-			node.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		
-		node.custom_minimum_size = Vector2(300* 1/projscale, 20* 1/projscale)  # Wider and taller
-		node.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			node.disabled = true
+			node.focus_mode = Control.FOCUS_NONE
 
 		container.add_child(node)
 		item_list.add_child(container)
 
-		node.mouse_entered.connect(_on_item_hovered.bind(item_description))
+		# Fix: pass both item_id and description
+		node.mouse_entered.connect(_on_item_hovered.bind(item["id"], item_description))
 		node.mouse_exited.connect(_on_item_hover_exited)
+		node.focus_mode = Control.FOCUS_NONE
 
+
+# --- Show Inventory ---
 func show_inventory():
+	update_ui()
 	visible = true
 	Global.paused = true
-	$Panel.scale = Vector2(0, 0)  # Start small
+	$Panel.scale = Vector2(0, 0)
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	Engine.time_scale = 0.0001
 	await get_tree().process_frame
-	
+
 	var tween := create_tween()
 	tween.tween_property($Panel, "scale", Vector2(1, 1), 0.00002).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 	await get_tree().create_timer(0.00002).timeout
-	
-	print("hi")
-	
 
 # --- Hover Effect ---
-# This function is called when the mouse hovers over an item button (shows item description)
-func _on_item_hovered(item_description: String):
-	# Display the item's description in the designated UI area
+func _on_item_hovered(item_id: String, item_description: String):
 	%ItemDescription.text = item_description
-	print(item_description + " It works!")  # Debugging print statement to confirm hover
-	justupdated = false  # Set justupdated to false to indicate hover is active
+	show_item(item_id)
+	show_model_preview(item_id)
+	print("Hi!")
+	modelpreview.visible = true
 
-# This function is called when the mouse exits an item button (hides item description)
 func _on_item_hover_exited():
-	# Hide the item's description when the mouse leaves the button
-	await get_tree().create_timer(0.00000001).timeout  # Small delay to avoid instant disappearance
 	if not justupdated:
-		%ItemDescription.text = ""  # Clear the description text
-		print("Bye!")  # Debugging print statement to confirm exit
-
+		%ItemDescription.text = ""
+		show_item("none")
+		print("Bye!")
+		modelpreview.visible = false
+	
+	justupdated = false
 
 # --- Close Inventory ---
-# This function is triggered when the close button is pressed to hide the inventory UI
 func _on_close_button_pressed():
-	
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	$Panel.scale = Vector2(1, 1)
 	var tween := create_tween()
 	tween.tween_property($Panel, "scale", Vector2(0, 0), 0.00002).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 	await get_tree().create_timer(0.00002).timeout
-	
-	visible = false  # Hide the inventory UI
+
+	visible = false
 	Engine.time_scale = 1
 	Global.paused = false
 	print("bye")
 
 # --- Item Interaction ---
-# This function handles the action when an item button is pressed (e.g., using or consuming an item)
 func _on_item_pressed(item):
-	print("Used item: ", item["id"])  # Debugging print statement for item usage
-	# If the item has more than 1 quantity, decrease the quantity by 1
+	print("Used item: ", item["id"])
 	if item["quantity"] > 1:
-		item["quantity"] = item["quantity"] - 1
+		item["quantity"] -= 1
 	else:
-		# If quantity is 1, remove the item from the inventory
 		inventory.remove_item(item["id"])
-		%ItemDescription.text = ""  # Clear the item description text after use
-	justupdated = true  # Set justupdated to true after item usage to reflect changes in UI
-	update_ui()  # Update the UI to reflect the new inventory state
+		%ItemDescription.text = ""
+		show_item("none")
+	justupdated = true
+	update_ui()
+
+# --- Model Preview ---
+func show_model_preview(item_id: String):
+	if current_preview_instance:
+		current_preview_instance.queue_free()
+		current_preview_instance = null
+
+	var item_data = ItemDatabase.items.get(item_id, null)
+	if item_data and item_data.has("model_scene"):
+		print("Showing preview for item_id:", item_id, " | Scene path:", item_data["model_scene"])  # Debug info
+
+		var scene = load(item_data["model_scene"])
+		if scene:
+			current_preview_instance = scene.instantiate()
+			preview_root.add_child(current_preview_instance)
+			current_preview_instance.global_position = Vector3.ZERO
+			current_preview_instance.look_at(Vector3(0, 0, -1), Vector3.UP)
+
+			var cam = current_preview_instance.get_node_or_null("Camera3D")
+			if cam:
+				cam.current = true
+
+
+func show_item(item_id: String):
+	var item_container = modelpreview.get_node_or_null("Item")
+	if not item_container:
+		print("Error: 'Item' node not found under ModelPreview3D.")
+		return
+
+	# Hide all item previews first
+	for child in item_container.get_children():
+		child.visible = false
+
+	# Show only the selected item
+	var item_node = item_container.get_node_or_null(item_id)
+	if item_node:
+		item_node.visible = true
+	else:
+		print("Item mesh not found for id:", item_id)

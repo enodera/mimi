@@ -4,3 +4,4 @@ extends Node
 
 var paused := false
 var dialoguepaused := false
+var inventory_ref := Inventory.new()

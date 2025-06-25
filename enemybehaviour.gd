@@ -47,6 +47,11 @@ var melee_timer: float = 0.5
 @onready var player = %Player
 @onready var health_ui = %HealthUI
 
+@export_group("Loot")
+@export var loot_item_id: String = "default_item"
+@export var loot_min_amount: int = 1
+@export var loot_max_amount: int = 3
+
 var state: State = State.PATROL
 var mesh: Node3D
 
@@ -58,6 +63,8 @@ var knockback_velocity: Vector3 = Vector3.ZERO
 var knockback_elapsed: float = 0.0
 var playeraggroable = true
 var playerattackable = true
+
+var drop_item = true
 
 var _animation_tree: AnimationTree  # Reference to the AnimationTree
 var _state_machine: AnimationNodeStateMachinePlayback
@@ -188,8 +195,7 @@ func _physics_process(delta: float) -> void:
 	if is_on_floor():
 		mesh.rotation_degrees.x = 0
 		mesh.rotation_degrees.z = 0
-		if health <= 0:
-			die()
+
 		
 	# Smoothly interpolate velocity towards target_velocity
 	if state != State.DAMAGE:
@@ -233,6 +239,8 @@ func _on_area_entered(area: Area3D) -> void:
 		$enemy/AttackParticles.restart()
 		$enemy/AttackParticles.emitting = true
 		print("ENEMY: Took damage! Health now: ", health)
+		if health <= 0:
+			die()
 
 func _on_vision_body_entered(body):
 	if body.is_in_group("player"):
@@ -282,12 +290,16 @@ func apply_knockback(direction: Vector3) -> void:
 	direction = direction.normalized()
 	
 	if health <= 0:
-		knockback_velocity = direction * knockback_strength * 3
+		knockback_velocity = direction * knockback_strength * 2.5
 	else:
 		knockback_velocity = direction * knockback_strength 
 
 	if is_on_floor():
-		knockback_velocity.y = knockback_strength * 0.5
+			if health <= 0:
+				knockback_velocity.y  = knockback_strength * 1.5
+			else:
+				knockback_velocity.y = knockback_strength * 0.5
+				
 	else:
 		knockback_velocity.y = 0  # prevent excess air lift
 
@@ -295,6 +307,14 @@ func apply_knockback(direction: Vector3) -> void:
 
 func die():
 	print("ENEMY: Dying...")
+
+	# Give loot before removing enemy
+	if loot_item_id != "default_item" and drop_item:
+		var loot_amount = randi() % (loot_max_amount - loot_min_amount + 1) + loot_min_amount
+		Global.inventory_ref.add_item(loot_item_id, loot_amount)
+		drop_item
+	
+	$enemy/DeathParticles1.emitting = true
 	
 	var exploding_timer := Timer.new()
 	exploding_timer.one_shot = true
@@ -308,12 +328,16 @@ func die():
 		
 	if $CollisionShape3D != null:
 		$CollisionShape3D.queue_free()
+
+	mesh.rotation_degrees.x = 0
+	mesh.rotation_degrees.z = 0
 	
-	$enemy/DeathParticles1.emitting = true
+	$enemy/DeathParticles1.emitting = false
 	$enemy/DeathParticles2.emitting = true
+	$enemy/DeathParticles3.emitting = true
+
 	exploding_timer.wait_time = 2
-	
 	exploding_timer.start()
 	await exploding_timer.timeout
-	
+
 	queue_free()

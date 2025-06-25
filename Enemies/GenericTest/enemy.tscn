@@ -1,8 +1,10 @@
-[gd_scene load_steps=29 format=3 uid="uid://b4bv4j5e7yi0b"]
+[gd_scene load_steps=36 format=3 uid="uid://b4bv4j5e7yi0b"]
 
 [ext_resource type="Script" uid="uid://703parghqcy2" path="res://enemybehaviour.gd" id="1_rbfrn"]
 [ext_resource type="PackedScene" uid="uid://dpe0v3b8g4i0t" path="res://MimiModels/frog/frog.tscn" id="2_gsgu7"]
-[ext_resource type="Texture2D" uid="uid://ct8qy4weofylp" path="res://Particles/PNG (Transparent)/circle_03.png" id="3_33axu"]
+[ext_resource type="Material" uid="uid://bcon13yakvxwu" path="res://attackparticles.tres" id="3_5rcum"]
+[ext_resource type="Texture2D" uid="uid://ck1li6b7jki2c" path="res://Enemies/GenericTest/spark.png" id="3_ajfth"]
+[ext_resource type="QuadMesh" uid="uid://cr48mhkgbw1vr" path="res://Enemies/GenericTest/circleeffect.tres" id="4_5rcum"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_rbfrn"]
 radius = 2.0
@@ -32,25 +34,6 @@ radius = 4.25146
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_33axu"]
 radius = 8.15771
 
-[sub_resource type="Curve" id="Curve_gsgu7"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.372396, 0.914733), -0.82508, -0.82508, 0, 0, Vector2(0.921875, 0), -0.873824, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="CurveTexture" id="CurveTexture_33axu"]
-curve = SubResource("Curve_gsgu7")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ajfth"]
-lifetime_randomness = 0.5
-particle_flag_align_y = true
-spread = 180.0
-initial_velocity_min = 4.0
-initial_velocity_max = 14.0
-radial_velocity_min = -2.23517e-05
-radial_velocity_max = 9.99998
-scale_min = 0.5
-scale_max = 1.5
-scale_curve = SubResource("CurveTexture_33axu")
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_33axu"]
 albedo_color = Color(0.901961, 0.301961, 0, 1)
 emission_enabled = true
@@ -59,7 +42,7 @@ emission_energy_multiplier = 2.0
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_ajfth"]
 material = SubResource("StandardMaterial3D_33axu")
-top_radius = 0.1
+top_radius = 0.05
 bottom_radius = 0.0
 radial_segments = 16
 
@@ -71,65 +54,122 @@ emission_energy_multiplier = 2.0
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_36d6g"]
 material = SubResource("StandardMaterial3D_l6hcf")
-top_radius = 0.1
+top_radius = 0.05
 bottom_radius = 0.0
-height = 2.76
+height = 1.5
 radial_segments = 16
 cap_bottom = false
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5rcum"]
-albedo_color = Color(0.901961, 0.301961, 0, 1)
+[sub_resource type="Curve" id="Curve_ajfth"]
+_data = [Vector2(0, 0), 0.0, 1.52688, 0, 0, Vector2(0.984375, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_5rcum"]
+curve = SubResource("Curve_ajfth")
+
+[sub_resource type="Gradient" id="Gradient_ajfth"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_36d6g"]
+gradient = SubResource("Gradient_ajfth")
+
+[sub_resource type="Curve" id="Curve_l6hcf"]
+_data = [Vector2(0, 0), 0.0, 3.88025, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_j5php"]
+curve = SubResource("Curve_l6hcf")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_36d6g"]
+particle_flag_rotate_y = true
+angle_min = -360.0
+angle_max = 360.0
+angle_curve = SubResource("CurveTexture_5rcum")
+direction = Vector3(0, 1, 0)
+spread = 180.0
+initial_velocity_min = 1.0
+initial_velocity_max = 2.0
+radial_velocity_min = -2.23517e-05
+radial_velocity_max = 9.99998
+gravity = Vector3(0, 0, 0)
+color = Color(1, 0, 0, 1)
+color_ramp = SubResource("GradientTexture1D_36d6g")
+hue_variation_min = -1.0
+hue_variation_max = 1.0
+hue_variation_curve = SubResource("CurveTexture_j5php")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7w4ni"]
+transparency = 1
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("3_ajfth")
 emission_enabled = true
-emission = Color(0.9, 0.3, 0, 1)
-emission_energy_multiplier = 2.0
+emission = Color(0.533037, 0.533037, 0.533037, 1)
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_l6hcf"]
-material = SubResource("StandardMaterial3D_5rcum")
-top_radius = 0.1
-bottom_radius = 0.0
-radial_segments = 16
+[sub_resource type="QuadMesh" id="QuadMesh_5rcum"]
+material = SubResource("StandardMaterial3D_7w4ni")
 
-[sub_resource type="CurveTexture" id="CurveTexture_ajfth"]
+[sub_resource type="CurveTexture" id="CurveTexture_2kna6"]
 
 [sub_resource type="Curve" id="Curve_e7avo"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.539063, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_job5r"]
+[sub_resource type="CurveTexture" id="CurveTexture_uvlc3"]
 curve = SubResource("Curve_e7avo")
 
 [sub_resource type="Curve" id="Curve_job5r"]
 _data = [Vector2(0, 0.724521), 0.0, -5.95322, 0, 0, Vector2(0.106771, 0.836024), 1.5112, 1.5112, 0, 0, Vector2(0.976563, 0), -1.11403, -1.11403, 0, 0, Vector2(0.976563, 0), 0.0, 0.0, 0, 0]
 point_count = 4
 
-[sub_resource type="CurveTexture" id="CurveTexture_wn8am"]
+[sub_resource type="CurveTexture" id="CurveTexture_63e3d"]
 curve = SubResource("Curve_job5r")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_5rcum"]
 emission_shape = 1
-emission_sphere_radius = 1.0
+emission_sphere_radius = 4.0
 direction = Vector3(0, 0.1, 0)
 spread = 0.0
 initial_velocity_max = 3.0
 radial_velocity_min = -2.23517e-05
 radial_velocity_max = 20.0
-radial_velocity_curve = SubResource("CurveTexture_job5r")
+radial_velocity_curve = SubResource("CurveTexture_uvlc3")
 gravity = Vector3(0, 10, 0)
 scale_min = 0.0
-scale_curve = SubResource("CurveTexture_wn8am")
-alpha_curve = SubResource("CurveTexture_ajfth")
+scale_curve = SubResource("CurveTexture_63e3d")
+alpha_curve = SubResource("CurveTexture_2kna6")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_36d6g"]
-transparency = 1
-blend_mode = 1
-albedo_texture = ExtResource("3_33axu")
-emission = Color(1, 1, 1, 1)
-billboard_mode = 1
-billboard_keep_scale = true
+[sub_resource type="Curve" id="Curve_gsgu7"]
+_limits = [0.0, 4.0, 0.0, 1.0]
+_data = [Vector2(0, 4), 0.0, -0.610585, 0, 0, Vector2(1, 0.113522), -4.66147, 0.0, 0, 0]
+point_count = 2
 
-[sub_resource type="QuadMesh" id="QuadMesh_j5php"]
-material = SubResource("StandardMaterial3D_36d6g")
-size = Vector2(10, 10)
+[sub_resource type="CurveTexture" id="CurveTexture_sli65"]
+curve = SubResource("Curve_gsgu7")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_l6hcf"]
+lifetime_randomness = 0.3
+particle_flag_rotate_y = true
+angle_min = -360.0
+angle_max = 360.0
+angle_curve = SubResource("CurveTexture_5rcum")
+direction = Vector3(0, 0, 0)
+spread = 180.0
+initial_velocity_min = 15.0
+initial_velocity_max = 20.0
+radial_velocity_min = -2.23517e-05
+radial_velocity_max = -2.23517e-05
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_sli65")
+color = Color(1, 0, 0, 1)
+color_ramp = SubResource("GradientTexture1D_36d6g")
+hue_variation_min = -1.0
+hue_variation_max = 1.0
+hue_variation_curve = SubResource("CurveTexture_j5php")
 
 [node name="Enemy" type="CharacterBody3D"]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
@@ -193,37 +233,41 @@ transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 1.4, 0)
 [node name="AttackParticles" type="GPUParticles3D" parent="enemy"]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 emitting = false
-amount = 12
-lifetime = 0.5
 one_shot = true
-speed_scale = 1.25
+speed_scale = 3.0
 explosiveness = 1.0
 fixed_fps = 60
-process_material = SubResource("ParticleProcessMaterial_ajfth")
+process_material = ExtResource("3_5rcum")
 draw_passes = 2
 draw_pass_1 = SubResource("CylinderMesh_ajfth")
 draw_pass_2 = SubResource("CylinderMesh_36d6g")
 
 [node name="DeathParticles1" type="GPUParticles3D" parent="enemy"]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 1.81282, 0)
 emitting = false
-amount = 12
-lifetime = 0.5
-one_shot = true
-speed_scale = 1.5
-explosiveness = 1.0
+amount = 20
 fixed_fps = 60
-process_material = SubResource("ParticleProcessMaterial_ajfth")
-draw_passes = 2
-draw_pass_1 = SubResource("CylinderMesh_l6hcf")
-draw_pass_2 = null
+process_material = SubResource("ParticleProcessMaterial_36d6g")
+draw_pass_1 = SubResource("QuadMesh_5rcum")
 
 [node name="DeathParticles2" type="GPUParticles3D" parent="enemy"]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -1.67781, -0.148295)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0.883667, 0)
 emitting = false
 amount = 10
 one_shot = true
 explosiveness = 1.0
 fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_5rcum")
-draw_pass_1 = SubResource("QuadMesh_j5php")
+draw_pass_1 = ExtResource("4_5rcum")
+
+[node name="DeathParticles3" type="GPUParticles3D" parent="enemy"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 3.83778, 0)
+emitting = false
+amount = 30
+one_shot = true
+explosiveness = 0.9
+randomness = 0.25
+fixed_fps = 60
+trail_lifetime = 2.5
+process_material = SubResource("ParticleProcessMaterial_l6hcf")
+draw_pass_1 = SubResource("QuadMesh_5rcum")

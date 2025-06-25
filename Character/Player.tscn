@@ -97,6 +97,6 @@ shape = SubResource("SphereShape3D_lgt04")
 spring_length = 8.0
 
 [node name="Camera3D" type="Camera3D" parent="CameraPivot/SpringArm3D"]
-cull_mask = 1048573
+cull_mask = 1048569
 
 [node name="AudioListener3D" type="AudioListener3D" parent="."]

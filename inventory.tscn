@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://pakdokc08g3p"]
+[gd_scene load_steps=5 format=3 uid="uid://pakdokc08g3p"]
 
 [ext_resource type="Script" uid="uid://b2bar1lwesm8j" path="res://inventoryui.gd" id="1_0fbet"]
 [ext_resource type="Theme" uid="uid://wuvbsl284ws3" path="res://Themes/inventory.tres" id="2_5tt2m"]
 [ext_resource type="Theme" uid="uid://g7m5g0d7vfiw" path="res://Themes/internal.tres" id="3_mrqgh"]
+[ext_resource type="PackedScene" uid="uid://51ra61upblee" path="res://ModelPreview3D.tscn" id="4_mrqgh"]
 
 [node name="DialogueUI" type="CanvasLayer"]
 script = ExtResource("1_0fbet")
@@ -99,3 +100,18 @@ offset_bottom = -0.0440063
 grow_horizontal = 2
 grow_vertical = 2
 text = "Placeholder text."
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Panel/Panel"]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 11.0
+offset_right = 178.0
+offset_bottom = 137.0
+
+[node name="SubViewport" type="SubViewport" parent="Panel/Panel/SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(169, 126)
+render_target_update_mode = 4
+
+[node name="ModelPreview3D" parent="Panel/Panel/SubViewportContainer/SubViewport" instance=ExtResource("4_mrqgh")]
