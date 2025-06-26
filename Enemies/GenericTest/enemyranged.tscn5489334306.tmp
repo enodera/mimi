@@ -1,13 +1,13 @@
-[gd_scene load_steps=36 format=3 uid="uid://b4bv4j5e7yi0b"]
+[gd_scene load_steps=37 format=3 uid="uid://bqe5hsuvprjns"]
 
-[ext_resource type="Script" uid="uid://fphwwj1sbpqo" path="res://frogbehaviour.gd" id="1_5rcum"]
-[ext_resource type="PackedScene" uid="uid://dpe0v3b8g4i0t" path="res://MimiModels/frog/frog.tscn" id="2_gsgu7"]
-[ext_resource type="Material" uid="uid://bcon13yakvxwu" path="res://attackparticles.tres" id="3_5rcum"]
-[ext_resource type="Texture2D" uid="uid://ck1li6b7jki2c" path="res://Enemies/GenericTest/spark.png" id="3_ajfth"]
-[ext_resource type="QuadMesh" uid="uid://cr48mhkgbw1vr" path="res://Enemies/GenericTest/circleeffect.tres" id="4_5rcum"]
+[ext_resource type="Script" uid="uid://bncfavxct77il" path="res://Enemies/GenericTest/magebehaviour.gd" id="1_gg36u"]
+[ext_resource type="Material" uid="uid://bcon13yakvxwu" path="res://attackparticles.tres" id="3_hci6a"]
+[ext_resource type="Texture2D" uid="uid://ck1li6b7jki2c" path="res://Enemies/GenericTest/spark.png" id="4_5rwsa"]
+[ext_resource type="QuadMesh" uid="uid://cr48mhkgbw1vr" path="res://Enemies/GenericTest/circleeffect.tres" id="5_0cs84"]
+[ext_resource type="PackedScene" uid="uid://0npg7e1cmhi7" path="res://Enemies/GenericTest/mage_1.tscn" id="6_gg36u"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_rbfrn"]
-radius = 2.5
+radius = 2.0
 height = 0.5
 radial_segments = 8
 rings = 8
@@ -21,17 +21,20 @@ height = 4.0
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_33axu"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_o8u7v"]
-radius = 1.76762
-height = 3.82699
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gg36u"]
+radius = 0.896748
+height = 1.7935
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_rbfrn"]
+height = 4.45947
 radius = 14.8228
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_gsgu7"]
+height = 3.68115
 radius = 4.25146
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_33axu"]
+height = 3.93213
 radius = 8.15771
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5rcum"]
@@ -101,7 +104,7 @@ hue_variation_curve = SubResource("CurveTexture_j5php")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7w4ni"]
 transparency = 1
 vertex_color_use_as_albedo = true
-albedo_texture = ExtResource("3_ajfth")
+albedo_texture = ExtResource("4_5rwsa")
 emission_enabled = true
 emission = Color(0.533037, 0.533037, 0.533037, 1)
 billboard_mode = 3
@@ -171,9 +174,12 @@ hue_variation_min = -1.0
 hue_variation_max = 1.0
 hue_variation_curve = SubResource("CurveTexture_j5php")
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_hci6a"]
+size = Vector3(9.89323, 2.93738, 1)
+
 [node name="Enemy" type="CharacterBody3D"]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
-script = ExtResource("1_5rcum")
+script = ExtResource("1_gg36u")
 
 [node name="MinimapSign" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.47286, 0)
@@ -192,33 +198,28 @@ mesh = SubResource("CapsuleMesh_gsgu7")
 shape = SubResource("CapsuleShape3D_33axu")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.91481, 0)
-shape = SubResource("CapsuleShape3D_o8u7v")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4186, 0)
+shape = SubResource("CapsuleShape3D_gg36u")
 
 [node name="VisibilityRange" type="Area3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="VisibilityRange"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.22974, 0)
 shape = SubResource("CylinderShape3D_rbfrn")
 
 [node name="MeleeAttackRange" type="Area3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeleeAttackRange"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.840576, 0)
 shape = SubResource("CylinderShape3D_gsgu7")
 debug_color = Color(0.7, 0, 0, 0.419608)
 
 [node name="RangedAttackRange" type="Area3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RangedAttackRange"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.966064, 0)
 shape = SubResource("CylinderShape3D_33axu")
 debug_color = Color(0.616654, 0.356855, 1, 0.42)
-
-[node name="AttackHitbox" type="Area3D" parent="." groups=["damager"]]
-monitoring = false
-monitorable = false
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="AttackHitbox" groups=["damager"]]
-shape = SubResource("CylinderShape3D_gsgu7")
-debug_color = Color(0.7, 0, 0, 0.419608)
 
 [node name="PatrolTimer" type="Timer" parent="."]
 one_shot = true
@@ -233,9 +234,6 @@ debug_path_custom_color = Color(0, 0.593282, 0.731677, 1)
 [node name="enemy" type="Node3D" parent="."]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 
-[node name="frog" parent="enemy" instance=ExtResource("2_gsgu7")]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 1.4, 0)
-
 [node name="AttackParticles" type="GPUParticles3D" parent="enemy"]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 emitting = false
@@ -243,7 +241,7 @@ one_shot = true
 speed_scale = 3.0
 explosiveness = 1.0
 fixed_fps = 60
-process_material = ExtResource("3_5rcum")
+process_material = ExtResource("3_hci6a")
 draw_passes = 2
 draw_pass_1 = SubResource("CylinderMesh_ajfth")
 draw_pass_2 = SubResource("CylinderMesh_36d6g")
@@ -264,7 +262,7 @@ one_shot = true
 explosiveness = 1.0
 fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_5rcum")
-draw_pass_1 = ExtResource("4_5rcum")
+draw_pass_1 = ExtResource("5_0cs84")
 
 [node name="DeathParticles3" type="GPUParticles3D" parent="enemy"]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 3.83778, 0)
@@ -277,3 +275,16 @@ fixed_fps = 60
 trail_lifetime = 2.5
 process_material = SubResource("ParticleProcessMaterial_l6hcf")
 draw_pass_1 = SubResource("QuadMesh_5rcum")
+
+[node name="mage" parent="enemy" instance=ExtResource("6_gg36u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.8058, 0)
+
+[node name="AttackHitbox" type="Area3D" parent="enemy" groups=["damager"]]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="enemy/AttackHitbox" groups=["damager"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.44661, 0.387146, 0)
+shape = SubResource("BoxShape3D_hci6a")
+debug_color = Color(0.7, 0, 0, 0.419608)

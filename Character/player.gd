@@ -43,6 +43,7 @@ var combo_step := 0
 var combo_max := 3
 var combo_queued := false
 
+var is_knockback_active := false
 
 # -----------------------
 # --- NODE REFERENCES ---
@@ -294,18 +295,23 @@ func handle_movement_input(delta: float):
 
 
 func handle_jump_and_gravity(delta: float):
+	# Prevent gravity state changes while in hitstun
+	if state == "hitstun":
+		velocity.y -= gravity * delta
+		return
+
 	if not is_on_floor():
 		velocity.y -= gravity * delta
-		if velocity.y > 0 and state not in ["jump", "airattack"]:
+		if velocity.y > 0 and state not in ["jump", "airattack", "hitstun"]:
 			set_state("jump")
-		elif velocity.y < -15 and state not in ["air", "airattack"]:
+		elif velocity.y < -15 and state not in ["air", "airattack", "hitstun"]:
 			set_state("air")
 	elif Input.is_action_just_pressed("jump"):
 		velocity.y = jump_strength
 		set_state("jump")
-	else:
+	elif not is_knockback_active:
 		velocity.y = 0.0
-
+		
 
 func update_state_and_animation():
 	var horizontal_speed = Vector2(velocity.x, velocity.z).length()
@@ -373,6 +379,13 @@ func check_landing():
 	if not was_on_floor and is_on_floor():
 		%LandParticles.restart()
 
+		# Exit hitstun when landing
+		if state == "hitstun":
+			set_state("idle")
+			_can_move = true
+			is_knockback_active = false
+
+
 
 
 
@@ -428,18 +441,24 @@ func _process(_delta: float) -> void:
 			Global.paused = false
 			
 
-func _on_hitbox_area_entered(area: Area3D) -> void:
-	if area.name == "EnemyAttackArea":
-		state = "hitstun"
-		_can_move = false
-		combo_step = 0
-		combo_queued = false
+func take_damage(amount: int, knockback_dir: Vector3, knockback_strength: float, upward_force: float) -> void:
+	print("Player took damage: ", amount)
+	
+	$AttackedParticles.restart()
+	$AttackedParticles.emitting = true
+	
+	set_state("hitstun")
+	_can_move = false
+	combo_step = 0
+	combo_queued = false
+	is_knockback_active = true
 
-		_skin.set_move_state("hitstun")
-		health_ui.take_damage(20)
+	_skin.set_move_state("hitstun")
+	health_ui.take_damage(amount)
 
-		var knockback_strength := 15.0
-		var knockback_direction := (global_transform.origin - area.global_transform.origin).normalized()
-		velocity.x = knockback_direction.x * knockback_strength
-		velocity.z = knockback_direction.z * knockback_strength
-		velocity.y = clamp(velocity.y + 10.0, 5.0, 20.0)
+	# Normalize direction to prevent scaling errors
+	var direction = knockback_dir.normalized()
+
+	velocity.x = direction.x * knockback_strength
+	velocity.z = direction.z * knockback_strength
+	velocity.y = upward_force

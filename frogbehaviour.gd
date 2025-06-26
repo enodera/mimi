@@ -1,3 +1,5 @@
+# frogbehaviour.gd
+
 extends CharacterBody3D
 
 @onready var navigation_agent_3d: NavigationAgent3D = $NavigationAgent3D
@@ -23,6 +25,7 @@ var melee_timer: float = 0.5
 
 @export_group("Stats")
 @export var health: float = 10.0
+@export var damagedealt: int = 10
 
 @export_group("Movement")
 @export var patrol_speed: float = 40.0
@@ -65,6 +68,7 @@ var playeraggroable = true
 var playerattackable = true
 
 var drop_item = true
+var attack_hitbox_active: bool = false  # Track hitbox state
 
 var _animation_tree: AnimationTree  # Reference to the AnimationTree
 var _state_machine: AnimationNodeStateMachinePlayback
@@ -75,6 +79,10 @@ func _ready() -> void:
 	$VisibilityRange.body_exited.connect(_on_vision_body_exited)
 	$MeleeAttackRange.body_entered.connect(_on_melee_body_entered)
 	$MeleeAttackRange.body_exited.connect(_on_melee_body_exited)
+	$AttackHitbox.body_entered.connect(_on_hitbox_body_entered)
+	
+	set_attack_hitbox_active(false)
+	
 	var player = %Player
 	var health_ui = %HealthUI
 	mesh = class_models[selectedtype]
@@ -142,10 +150,11 @@ func _physics_process(delta: float) -> void:
 						melee_timer = 0.7  # duration of the attack animation
 						_state_machine.travel("attack")
 						# Deal damage once, e.g., instantly or use an animation event system if you have one
-						health_ui.take_damage(20)
+						# health_ui.take_damage(20)
 
 				MeleePhase.ATTACKING:
 					melee_timer -= delta
+
 					if melee_timer <= 0.0:
 						melee_phase = MeleePhase.RECOVERY
 						melee_timer = 0.5  # recovery time before checking again
@@ -220,6 +229,13 @@ func _physics_process(delta: float) -> void:
 			mesh.rotation.y = lerp_angle(mesh.rotation.y, target_angle - deg_to_rad(90), delta * 5.0)
 			
 	move_and_slide()
+	
+	var desired_hitbox_state = (state == State.MELEE and melee_phase == MeleePhase.ATTACKING)
+	# Only update hitbox if its state changed
+	
+	if attack_hitbox_active != desired_hitbox_state:
+		set_attack_hitbox_active(desired_hitbox_state)
+		attack_hitbox_active = desired_hitbox_state
 
 func _pick_new_target() -> void:
 	var center = patrol_bounds_area.global_position
@@ -341,3 +357,16 @@ func die():
 	await exploding_timer.timeout
 
 	queue_free()
+
+func set_attack_hitbox_active(active: bool) -> void:
+	$AttackHitbox.monitoring = active
+	$AttackHitbox.monitorable = active
+
+func _on_hitbox_body_entered(body):
+	print(body)
+	if body.is_in_group("player"):
+		if body.has_method("take_damage"):
+			var direction = (body.global_transform.origin - global_transform.origin).normalized()
+			var knockback_strength = 18.0
+			var upward_force = 30.0
+			body.take_damage(damagedealt, direction, knockback_strength, upward_force)

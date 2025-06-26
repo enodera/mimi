@@ -7,7 +7,7 @@
 [ext_resource type="QuadMesh" uid="uid://cr48mhkgbw1vr" path="res://Enemies/GenericTest/circleeffect.tres" id="4_5rcum"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_rbfrn"]
-radius = 2.5
+radius = 2.0
 height = 0.5
 radial_segments = 8
 rings = 8

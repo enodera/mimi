@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://btukobjpqjuii"]
+[gd_scene load_steps=18 format=3 uid="uid://btukobjpqjuii"]
 
 [ext_resource type="Script" uid="uid://dokcww0rbalf1" path="res://Character/player.gd" id="1_lgt04"]
 [ext_resource type="PackedScene" uid="uid://blabqcdjyg1c5" path="res://Models/mimi.tscn" id="2_schp4"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://p0d1xjpivq3i" path="res://MimiModels/1.4/mimi_1_4.tscn" id="4_ly6k5"]
 [ext_resource type="PackedScene" uid="uid://clm8txt8vucnj" path="res://MimiModels/1.7 (might glitch)/mimi_1_7.tscn" id="5_5ydrh"]
 [ext_resource type="Material" uid="uid://byd7qixpxbdey" path="res://Land.tres" id="5_ly6k5"]
+[ext_resource type="Material" uid="uid://bcon13yakvxwu" path="res://attackparticles.tres" id="8_gvj7u"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5ydrh"]
 emission_enabled = true
@@ -26,6 +27,32 @@ radius = 0.303584
 height = 2.94938
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_lgt04"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_33axu"]
+albedo_color = Color(0.901961, 0.301961, 0, 1)
+emission_enabled = true
+emission = Color(0.9, 0.3, 0, 1)
+emission_energy_multiplier = 2.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_7llnk"]
+material = SubResource("StandardMaterial3D_33axu")
+top_radius = 0.05
+bottom_radius = 0.0
+radial_segments = 16
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l6hcf"]
+albedo_color = Color(0.98, 0, 0, 1)
+emission_enabled = true
+emission = Color(0.980392, 0.705882, 0, 1)
+emission_energy_multiplier = 2.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_o1y46"]
+material = SubResource("StandardMaterial3D_l6hcf")
+top_radius = 0.05
+bottom_radius = 0.0
+height = 1.5
+radial_segments = 16
+cap_bottom = false
 
 [node name="Player" type="CharacterBody3D" groups=["player"]]
 floor_snap_length = 0.3
@@ -100,3 +127,15 @@ spring_length = 8.0
 cull_mask = 1048569
 
 [node name="AudioListener3D" type="AudioListener3D" parent="."]
+
+[node name="AttackedParticles" type="GPUParticles3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 1.96014, 0)
+emitting = false
+one_shot = true
+speed_scale = 3.0
+explosiveness = 1.0
+fixed_fps = 60
+process_material = ExtResource("8_gvj7u")
+draw_passes = 2
+draw_pass_1 = SubResource("CylinderMesh_7llnk")
+draw_pass_2 = SubResource("CylinderMesh_o1y46")
