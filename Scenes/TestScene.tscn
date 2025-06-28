@@ -275,3 +275,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.5814, -0.471951, -43.7685
 [node name="OverworldItem2" parent="." instance=ExtResource("18_fi7j4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -37.0268, 8.26628, 43.1678)
 item_id = "lemon"
+
+[node name="Enemy2" parent="." node_paths=PackedStringArray("patrol_bounds_area") instance=ExtResource("19_4v62a")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -118.711, 1.92404, -56.8033)
+patrol_bounds_area = NodePath("../PatrolArea2")
+selectedtype = 1

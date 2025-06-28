@@ -80,8 +80,7 @@ func _ready() -> void:
 	
 	health_ui.set_health(max_health, current_health)
 	
-	QuestManager.start_quest("find_lost_sword")
-	QuestManager.start_quest("rescue_villager")
+	QuestManager.start_quest("defeat_frogs")
 
 
 # ---------------

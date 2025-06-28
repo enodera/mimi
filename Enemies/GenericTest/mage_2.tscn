@@ -1,14 +1,14 @@
-[gd_scene load_steps=34 format=3 uid="uid://0npg7e1cmhi7"]
+[gd_scene load_steps=38 format=3 uid="uid://dgmj5knh2pa0s"]
 
-[ext_resource type="PackedScene" uid="uid://co43wkwhjr487" path="res://MimiModels/mage/mage1.glb" id="1_6fmnh"]
-[ext_resource type="Texture2D" uid="uid://ck1li6b7jki2c" path="res://Enemies/GenericTest/spark.png" id="2_5haub"]
-[ext_resource type="Texture2D" uid="uid://c4xu5p8hq6rsi" path="res://Enemies/Models/mage1_magepalette.png" id="2_mcsra"]
+[ext_resource type="PackedScene" uid="uid://co43wkwhjr487" path="res://MimiModels/mage/mage1.glb" id="1_7gco5"]
+[ext_resource type="Texture2D" uid="uid://ck1li6b7jki2c" path="res://Enemies/GenericTest/spark.png" id="3_rvvsk"]
+[ext_resource type="Texture2D" uid="uid://dpi7pg605g7gi" path="res://Enemies/Models/mage2_magepalette.png" id="4_snwyj"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5oqo1"]
-albedo_texture = ExtResource("2_mcsra")
+albedo_texture = ExtResource("4_snwyj")
 emission_enabled = true
-emission = Color(0.794479, 0, 0.329658, 1)
-emission_texture = ExtResource("2_mcsra")
+emission = Color(0, 0.444, 0.72, 1)
+emission_texture = ExtResource("4_snwyj")
 
 [sub_resource type="Curve" id="Curve_mcsra"]
 _data = [Vector2(0, 0), 0.0, 1.52688, 0, 0, Vector2(0.984375, 1), 0.0, 0.0, 0, 0]
@@ -51,7 +51,7 @@ hue_variation_curve = SubResource("CurveTexture_j5php")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7w4ni"]
 transparency = 1
 vertex_color_use_as_albedo = true
-albedo_texture = ExtResource("2_5haub")
+albedo_texture = ExtResource("3_rvvsk")
 emission_enabled = true
 emission = Color(0.533037, 0.533037, 0.533037, 1)
 billboard_mode = 3
@@ -62,6 +62,29 @@ particles_anim_loop = false
 
 [sub_resource type="QuadMesh" id="QuadMesh_4nya2"]
 material = SubResource("StandardMaterial3D_7w4ni")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7gco5"]
+albedo_texture = ExtResource("4_snwyj")
+emission_enabled = true
+emission_texture = ExtResource("4_snwyj")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_snwyj"]
+albedo_color = Color(0, 0, 0, 1)
+albedo_texture = ExtResource("4_snwyj")
+emission_enabled = true
+emission = Color(0.927272, 0.587028, 0.488766, 1)
+emission_operator = 1
+emission_texture = ExtResource("4_snwyj")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rvvsk"]
+albedo_texture = ExtResource("4_snwyj")
+emission_enabled = true
+emission_texture = ExtResource("4_snwyj")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ef12i"]
+albedo_texture = ExtResource("4_snwyj")
+emission_enabled = true
+emission_texture = ExtResource("4_snwyj")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6fmnh"]
 albedo_color = Color(0, 0, 0, 1)
@@ -135,29 +158,29 @@ states/walk/node = SubResource("AnimationNodeAnimation_5oqo1")
 states/walk/position = Vector2(589, 137)
 transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_ojyi1"), "idle", "attack", SubResource("AnimationNodeStateMachineTransition_331ri"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_4nya2"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_s26ai"), "attack", "idle", SubResource("AnimationNodeStateMachineTransition_6fmnh"), "idle", "damagestatic", SubResource("AnimationNodeStateMachineTransition_5haub"), "damagestatic", "idle", SubResource("AnimationNodeStateMachineTransition_mcsra"), "walk", "damagestatic", SubResource("AnimationNodeStateMachineTransition_5oqo1"), "damagestatic", "walk", SubResource("AnimationNodeStateMachineTransition_73p7e"), "idle", "disappear", SubResource("AnimationNodeStateMachineTransition_j3tme"), "disappear", "idle", SubResource("AnimationNodeStateMachineTransition_7v1cb"), "attack", "damagestatic", SubResource("AnimationNodeStateMachineTransition_ee3nb"), "disappear", "damagestatic", SubResource("AnimationNodeStateMachineTransition_ylxhl")]
 
-[node name="mage1" instance=ExtResource("1_6fmnh")]
+[node name="mage1" instance=ExtResource("1_7gco5")]
 
 [node name="Skeleton3D" parent="Armature" index="0"]
-bones/0/position = Vector3(0, -0.816345, 0)
+bones/0/position = Vector3(0, -0.698176, 0)
 bones/1/rotation = Quaternion(-0.70172, 0.0871174, 0.70172, 0.0871178)
-bones/2/rotation = Quaternion(0.228542, 0.604986, -0.368727, 0.667683)
+bones/2/rotation = Quaternion(0.242628, 0.588483, -0.392623, 0.663827)
 bones/5/position = Vector3(-0.639994, 0.425029, -0.0901327)
-bones/5/rotation = Quaternion(-0.390045, 0.668615, 0.232064, 0.589037)
+bones/5/rotation = Quaternion(-0.399107, 0.663998, 0.243667, 0.583478)
 bones/6/rotation = Quaternion(-0.0508888, 1.63701e-07, 3.26069e-08, 0.998704)
-bones/12/position = Vector3(0, 1.59711, 0)
-bones/13/rotation = Quaternion(-0.000585139, 0.0268626, -0.035774, 0.998999)
+bones/12/position = Vector3(0, 1.57918, 0)
+bones/13/rotation = Quaternion(-0.000179915, 0.00825957, -0.0109996, 0.999905)
 
 [node name="hand_r" parent="Armature/Skeleton3D" index="0"]
-transform = Transform3D(-0.540445, -0.0148463, 0.00614769, 0.0159273, -0.467548, 0.271081, -0.00212742, 0.271141, 0.467777, -0.0251427, -0.380625, -1.92937)
+transform = Transform3D(-0.540662, -0.00462152, 0.00174891, 0.00491576, -0.48357, 0.241817, -0.000502921, 0.241822, 0.48359, -0.00733011, -0.181376, -1.99009)
 
 [node name="hand_l" parent="Armature/Skeleton3D" index="1"]
-transform = Transform3D(-0.535405, 0.00226243, 0.0753382, -0.0370078, -0.4787, -0.248627, 0.0656607, -0.251355, 0.47418, 0.00127444, -0.326138, 1.97111)
+transform = Transform3D(-0.535419, 0.000695858, 0.0752667, -0.0334154, -0.48666, -0.233205, 0.0674458, -0.235585, 0.481963, 0.000357531, -0.163968, 2.00212)
 
 [node name="Cylinder" parent="Armature/Skeleton3D" index="2"]
-transform = Transform3D(0.438207, 0.898874, -0.000431836, -0.898811, 0.43817, -0.0120877, -0.0106758, 0.00568522, 0.999927, 0.855351, -0.0554526, 1.86378)
+transform = Transform3D(0.435831, 0.900029, 0.000764102, -0.899845, 0.435724, 0.0205838, 0.0181934, -0.0096586, 0.999788, 0.85501, 0.100789, 1.88502)
 
 [node name="Roundcube_001" parent="Armature/Skeleton3D" index="3"]
-transform = Transform3D(0.239479, 0.491231, -0.000235997, -0.491197, 0.239458, -0.00660588, -0.00583428, 0.00310695, 0.546456, 2.16324, 0.5821, 1.87205)
+transform = Transform3D(0.23818, 0.491863, 0.000417579, -0.491762, 0.238121, 0.011249, 0.0099426, -0.00527839, 0.54638, 2.16458, 0.734781, 1.87097)
 
 [node name="Roundcube_001" parent="Armature/Skeleton3D/Roundcube_001" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_5oqo1")
@@ -170,28 +193,40 @@ process_material = SubResource("ParticleProcessMaterial_331ri")
 draw_pass_1 = SubResource("QuadMesh_4nya2")
 
 [node name="body" parent="Armature/Skeleton3D" index="4"]
-transform = Transform3D(0.993525, 0.113615, 1.36115e-08, -0.113615, 0.993525, 1.18941e-08, 2.43973e-07, -2.86584e-08, 1, -2.04891e-08, 1.01364, -6.35654e-08)
+transform = Transform3D(0.993525, 0.113615, 1.36115e-08, -0.113615, 0.993525, 1.18941e-08, 2.43973e-07, -2.86584e-08, 1, -2.04891e-08, 1.13181, -6.35654e-08)
+
+[node name="body" parent="Armature/Skeleton3D/body" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_7gco5")
 
 [node name="ringg" parent="Armature/Skeleton3D" index="5"]
-transform = Transform3D(0.0262049, 0.0144726, -0.0286468, 0.0163779, -0.0498419, 0.00327591, -0.0229602, -0.019035, -0.0303581, -0.103467, 0.466998, -3.37411e-07)
+transform = Transform3D(0.0262049, 0.0144726, -0.0286468, 0.0163779, -0.0498419, 0.00327591, -0.0229602, -0.019035, -0.0303581, -0.103467, 0.585167, -3.37411e-07)
+
+[node name="ringg" parent="Armature/Skeleton3D/ringg" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_snwyj")
 
 [node name="Cone" parent="Armature/Skeleton3D" index="6"]
-transform = Transform3D(0.491914, 0.0614151, 0.0265285, -0.035317, 0.857414, -0.00037182, -0.0264872, -0.00265715, 0.493178, 0.0620591, 2.43147, -0.00268499)
+transform = Transform3D(0.493704, 0.0189065, 0.00815984, -0.0108656, 0.859407, 8.79635e-05, -0.00815593, -0.000465491, 0.493823, 0.0191047, 2.53372, -0.000470349)
+
+[node name="Cone" parent="Armature/Skeleton3D/Cone" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_rvvsk")
 
 [node name="hat" parent="Armature/Skeleton3D" index="7"]
-transform = Transform3D(1.78751, 0.00578696, 0.0963417, 0.112549, -0.0922342, -0.00135031, -0.0960673, -0.000380824, 1.79104, -0.00705032, 1.46663, 0.000305046)
+transform = Transform3D(1.78207, 0.0103607, 0.0296335, 0.201104, -0.0918336, 0.000319457, -0.0294825, -0.00015484, 1.79338, -0.00217043, 1.56664, 5.34481e-05)
+
+[node name="hat" parent="Armature/Skeleton3D/hat" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_ef12i")
 
 [node name="face" parent="Armature/Skeleton3D" index="8"]
-transform = Transform3D(0.693439, 2.02563e-08, -2.77507e-09, -2.02563e-08, 0.693439, 1.16416e-09, 2.77507e-09, -1.16416e-09, 0.693439, 3.46445e-08, 1.10549, -3.60888e-09)
+transform = Transform3D(0.693439, 2.02563e-08, -2.77507e-09, -2.02563e-08, 0.693439, 1.16416e-09, 2.77507e-09, -1.16416e-09, 0.693439, 3.46445e-08, 1.20573, -3.60888e-09)
 
 [node name="face" parent="Armature/Skeleton3D/face" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_6fmnh")
 
 [node name="eyes" parent="Armature/Skeleton3D" index="9"]
-transform = Transform3D(-0.202475, 0.0805309, -0.476975, -0.0166264, -0.517927, -0.0803872, -0.48344, -0.0159156, 0.202532, 0.577212, 1.18009, -0.333426)
+transform = Transform3D(-0.202475, 0.0805309, -0.476975, -0.0166264, -0.517927, -0.0803872, -0.48344, -0.0159156, 0.202532, 0.577212, 1.28033, -0.333426)
 
 [node name="Roundcube_002" parent="Armature/Skeleton3D" index="10"]
-transform = Transform3D(0.470494, 0.201618, 0.113899, 0.102603, 0.0497206, -0.511847, -0.207594, 0.481524, 0.00516134, 0.577212, 1.18009, -0.313645)
+transform = Transform3D(0.470494, 0.201618, 0.113899, 0.102603, 0.0497206, -0.511847, -0.207594, 0.481524, 0.00516134, 0.577212, 1.28033, -0.313645)
 
 [node name="AnimationTree" type="AnimationTree" parent="." index="2"]
 tree_root = SubResource("AnimationNodeStateMachine_73p7e")

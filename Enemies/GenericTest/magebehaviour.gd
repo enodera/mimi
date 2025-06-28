@@ -3,18 +3,27 @@ extends CharacterBody3D
 @onready var navigation_agent_3d: NavigationAgent3D = $NavigationAgent3D
 
 enum State { PATROL, ATTACK, MELEE, DAMAGE, DISAPPEAR }
-enum Class { MAGE }
+enum Class { MAGE1, MAGE2 }
 
 enum MeleePhase { BUFFER, ATTACKING, RECOVERY }
 var melee_phase: MeleePhase = MeleePhase.BUFFER
 var melee_timer: float = 0.3
 
 @onready var class_models = {
-	Class.MAGE: $enemy/mage
+	Class.MAGE1: $enemy/mage1,
+	Class.MAGE2: $enemy/mage2
 }
 
 @onready var class_controller = {
-	Class.MAGE: $enemy/mage/AnimationTree
+	Class.MAGE1: $enemy/mage1/AnimationTree,
+	Class.MAGE2: $enemy/mage2/AnimationTree
+}
+
+var multiplebullets : bool = false
+
+@onready var decidebullets = {
+	Class.MAGE1: false,
+	Class.MAGE2: true
 }
 
 @export_group("Physics")
@@ -43,7 +52,7 @@ var melee_timer: float = 0.3
 @export var knockback_duration: float = 0.25
 
 @export_group("Enemy type")
-@export var selectedtype: Class = Class.MAGE
+@export var selectedtype: Class = Class.MAGE1
 
 @onready var player = %Player
 @onready var health_ui = %HealthUI
@@ -86,8 +95,13 @@ func _ready() -> void:
 	$enemy/AttackHitbox.body_entered.connect(_on_hitbox_body_entered)
 	
 	set_attack_hitbox_active(false)
-
+	$enemy/mage1.visible = false
+	$enemy/mage2.visible = false
+	
+	multiplebullets = decidebullets[selectedtype]
+	
 	mesh = class_models[selectedtype]
+	mesh.visible = true
 	_animation_tree = class_controller[selectedtype]
 	_state_machine = _animation_tree.get("parameters/playback")
 	_pick_new_target()
@@ -144,7 +158,7 @@ func _physics_process(delta: float) -> void:
 					_state_machine.travel("idle")
 					melee_timer -= delta
 					if melee_timer <= 0.0:
-						melee_timer = 0.3
+						melee_timer = 0.25
 						melee_phase = MeleePhase.ATTACKING
 						_state_machine.travel("attack")
 						if not dying:
@@ -153,7 +167,7 @@ func _physics_process(delta: float) -> void:
 				MeleePhase.ATTACKING:
 					melee_timer -= delta
 					if melee_timer <= 0.0:
-						melee_timer = 0.2
+						melee_timer = 0.55
 						melee_phase = MeleePhase.RECOVERY
 
 				MeleePhase.RECOVERY:
@@ -324,6 +338,7 @@ func apply_knockback(direction: Vector3) -> void:
 func die():
 	
 	dying = true
+	QuestManager.on_enemy_defeated("mage")
 	
 	if loot_item_id != "default_item" and drop_item:
 		var loot_amount = randi() % (loot_max_amount - loot_min_amount + 1) + loot_min_amount
@@ -413,21 +428,35 @@ func _teleport_nearby() -> void:
 			navigation_agent_3d.set_target_position(global_position)
 
 func shoot_projectile():
-	var projectile = projectile_scene.instantiate()
-	projectile.player = player
-	
 	var vertical_offset = Vector3.UP * 2.5
 	var smalladjust = Vector3.UP
-	print(smalladjust)
-
 	var spawn_position = global_position + vertical_offset
-	var shoot_direction = (player.global_position - global_position - smalladjust).normalized()
-	
-	projectile.smalladjust = smalladjust
-	
-	get_tree().current_scene.add_child(projectile)
-	
-	projectile.global_position = spawn_position
-	projectile.direction = shoot_direction
+	var base_direction = (player.global_position - global_position - smalladjust).normalized()
+
+	if multiplebullets:
+		# Define angles for fan spread in radians
+		var fan_angle = 3.25  # Adjust this for wider or narrower spread
+
+		# Directions for the three bullets
+		var directions = [
+			base_direction.rotated(Vector3.UP, -fan_angle),  # Left
+			base_direction.rotated(Vector3.UP, fan_angle)   # Right
+		]
+
+		for dir in directions:
+			var projectile = projectile_scene.instantiate()
+			projectile.player = player
+			projectile.smalladjust = smalladjust
+			get_tree().current_scene.add_child(projectile)
+			projectile.global_position = spawn_position
+			projectile.direction = dir
+	else:
+		var projectile = projectile_scene.instantiate()
+		projectile.player = player
+		projectile.smalladjust = smalladjust
+		get_tree().current_scene.add_child(projectile)
+		projectile.global_position = spawn_position
+		projectile.direction = base_direction
+
 
 	

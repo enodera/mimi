@@ -20,10 +20,13 @@ var quest_data := {
 		"description": "A villager is trapped in the goblin cave.",
 		"reward": "Potion of Strength"
 	},
-	"defeat_cave_troll": {
-		"title": "Defeat the Cave Troll",
-		"description": "A troll has taken residence near the mines.",
-		"reward": "Troll Fang"
+	"defeat_frogs": {
+		"title": "Frogs!",
+		"description": "Frogs have taken over! Defeat 3 of them to restore peace.",
+		"reward": "lemon",
+		"type": "kill",
+		"target_enemy": "frog",
+		"target_count": 3
 	}
 }
 
@@ -73,3 +76,15 @@ func get_quest_info(quest_id: String) -> Dictionary:
 
 func reset_quests():
 	quests.clear()
+
+func on_enemy_defeated(enemy_type: String) -> void:
+	for quest_id in quests.keys():
+		if quests[quest_id] == QuestState.IN_PROGRESS:
+			var data = quest_data.get(quest_id, {})
+			if data.get("type") == "kill" and data.get("target_enemy") == enemy_type:
+				if not data.has("progress"):
+					data["progress"] = 0
+				data["progress"] += 1
+				print("Progress for", quest_id, ":", data["progress"], "/", data.get("target_count", 0))
+				if data["progress"] >= data.get("target_count", 0):
+					complete_quest(quest_id)

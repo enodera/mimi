@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://bqe5hsuvprjns"]
+[gd_scene load_steps=44 format=3 uid="uid://bqe5hsuvprjns"]
 
 [ext_resource type="Script" uid="uid://bncfavxct77il" path="res://Enemies/GenericTest/magebehaviour.gd" id="1_gg36u"]
 [ext_resource type="PackedScene" uid="uid://bfanf6xq0q2eq" path="res://projectile.tscn" id="2_gg36u"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://ck1li6b7jki2c" path="res://Enemies/GenericTest/spark.png" id="4_5rwsa"]
 [ext_resource type="QuadMesh" uid="uid://cr48mhkgbw1vr" path="res://Enemies/GenericTest/circleeffect.tres" id="5_0cs84"]
 [ext_resource type="PackedScene" uid="uid://0npg7e1cmhi7" path="res://Enemies/GenericTest/mage_1.tscn" id="6_gg36u"]
+[ext_resource type="PackedScene" uid="uid://dgmj5knh2pa0s" path="res://Enemies/GenericTest/mage_2.tscn" id="7_hci6a"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_rbfrn"]
 radius = 1.5
@@ -287,8 +288,12 @@ trail_lifetime = 2.5
 process_material = SubResource("ParticleProcessMaterial_l6hcf")
 draw_pass_1 = SubResource("QuadMesh_5rcum")
 
-[node name="mage" parent="enemy" instance=ExtResource("6_gg36u")]
+[node name="mage1" parent="enemy" instance=ExtResource("6_gg36u")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.8058, 0)
+visible = false
+
+[node name="mage2" parent="enemy" instance=ExtResource("7_hci6a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.806, 0)
 
 [node name="AttackHitbox" type="Area3D" parent="enemy" groups=["damager"]]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)

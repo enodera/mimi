@@ -1,10 +1,10 @@
 extends Node3D
 
-@export var speed: float = 20.0
-@export var lifetime: float = 2.0
+@export var speed: float = 22.5
+@export var lifetime: float = 1.0
 @export var damage: int = 5
 @export var knockback_force: float = 10.0
-@export var homing_strength: float = 2.0  # How fast to turn toward the player
+@export var homing_strength: float = 4.5 # How fast to turn toward the player
 
 var direction: Vector3 = Vector3.FORWARD
 var exploded: bool = false
@@ -21,7 +21,7 @@ func _physics_process(delta: float) -> void:
 	
 	if player and player.is_inside_tree():
 		var target_dir = (player.global_position - global_position)
-		target_dir.y += 1  # Add upward offset here (adjust 0.5 to your liking)
+		target_dir.y += 2  # Add upward offset here (adjust 0.5 to your liking)
 		target_dir = target_dir.normalized()
 		# Slerp (spherical linear interpolation) smooths the direction change
 		direction = direction.slerp(target_dir, homing_strength * delta).normalized()

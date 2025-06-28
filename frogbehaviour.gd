@@ -321,7 +321,8 @@ func apply_knockback(direction: Vector3) -> void:
 
 func die():
 	print("ENEMY: Dying...")
-
+	QuestManager.on_enemy_defeated("frog")
+	
 	# Give loot before removing enemy
 	if loot_item_id != "default_item" and drop_item:
 		var loot_amount = randi() % (loot_max_amount - loot_min_amount + 1) + loot_min_amount
