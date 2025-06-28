@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://b4bv4j5e7yi0b"]
+[gd_scene load_steps=42 format=3 uid="uid://b4bv4j5e7yi0b"]
 
 [ext_resource type="Script" uid="uid://fphwwj1sbpqo" path="res://frogbehaviour.gd" id="1_5rcum"]
 [ext_resource type="PackedScene" uid="uid://dpe0v3b8g4i0t" path="res://MimiModels/frog/frog.tscn" id="2_gsgu7"]
@@ -64,27 +64,27 @@ cap_bottom = false
 _data = [Vector2(0, 0), 0.0, 1.52688, 0, 0, Vector2(0.984375, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_5rcum"]
+[sub_resource type="CurveTexture" id="CurveTexture_l6hcf"]
 curve = SubResource("Curve_ajfth")
 
 [sub_resource type="Gradient" id="Gradient_ajfth"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_36d6g"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_j5php"]
 gradient = SubResource("Gradient_ajfth")
 
 [sub_resource type="Curve" id="Curve_l6hcf"]
 _data = [Vector2(0, 0), 0.0, 3.88025, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_j5php"]
+[sub_resource type="CurveTexture" id="CurveTexture_7w4ni"]
 curve = SubResource("Curve_l6hcf")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_36d6g"]
 particle_flag_rotate_y = true
 angle_min = -360.0
 angle_max = 360.0
-angle_curve = SubResource("CurveTexture_5rcum")
+angle_curve = SubResource("CurveTexture_l6hcf")
 direction = Vector3(0, 1, 0)
 spread = 180.0
 initial_velocity_min = 1.0
@@ -93,12 +93,12 @@ radial_velocity_min = -2.23517e-05
 radial_velocity_max = 9.99998
 gravity = Vector3(0, 0, 0)
 color = Color(1, 0, 0, 1)
-color_ramp = SubResource("GradientTexture1D_36d6g")
+color_ramp = SubResource("GradientTexture1D_j5php")
 hue_variation_min = -1.0
 hue_variation_max = 1.0
-hue_variation_curve = SubResource("CurveTexture_j5php")
+hue_variation_curve = SubResource("CurveTexture_7w4ni")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7w4ni"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2kna6"]
 transparency = 1
 vertex_color_use_as_albedo = true
 albedo_texture = ExtResource("3_ajfth")
@@ -111,7 +111,7 @@ particles_anim_v_frames = 1
 particles_anim_loop = false
 
 [sub_resource type="QuadMesh" id="QuadMesh_5rcum"]
-material = SubResource("StandardMaterial3D_7w4ni")
+material = SubResource("StandardMaterial3D_2kna6")
 
 [sub_resource type="CurveTexture" id="CurveTexture_2kna6"]
 
@@ -142,6 +142,27 @@ gravity = Vector3(0, 10, 0)
 scale_min = 0.0
 scale_curve = SubResource("CurveTexture_63e3d")
 alpha_curve = SubResource("CurveTexture_2kna6")
+
+[sub_resource type="Curve" id="Curve_dgwo2"]
+_data = [Vector2(0, 0), 0.0, 1.52688, 0, 0, Vector2(0.984375, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_5rcum"]
+curve = SubResource("Curve_dgwo2")
+
+[sub_resource type="Gradient" id="Gradient_sxmqc"]
+offsets = PackedFloat32Array(0, 0.449367)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_36d6g"]
+gradient = SubResource("Gradient_sxmqc")
+
+[sub_resource type="Curve" id="Curve_2xblw"]
+_data = [Vector2(0, 0), 0.0, 3.88025, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_j5php"]
+curve = SubResource("Curve_2xblw")
 
 [sub_resource type="Curve" id="Curve_gsgu7"]
 _limits = [0.0, 4.0, 0.0, 1.0]

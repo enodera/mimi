@@ -1,0 +1,126 @@
+[gd_scene load_steps=20 format=3 uid="uid://bfanf6xq0q2eq"]
+
+[ext_resource type="Script" uid="uid://b4todkt5i7tvo" path="res://mageprojectile.gd" id="1_a85iw"]
+[ext_resource type="Texture2D" uid="uid://ck1li6b7jki2c" path="res://Enemies/GenericTest/spark.png" id="2_qxf0c"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_akgne"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_a85iw"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qxf0c"]
+metallic = 1.0
+emission_enabled = true
+emission = Color(0.98, 0.2352, 0.508293, 1)
+emission_energy_multiplier = 0.5
+
+[sub_resource type="Curve" id="Curve_dgwo2"]
+_data = [Vector2(0, 0), 0.0, 1.52688, 0, 0, Vector2(0.984375, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_5rcum"]
+curve = SubResource("Curve_dgwo2")
+
+[sub_resource type="Gradient" id="Gradient_sxmqc"]
+offsets = PackedFloat32Array(0, 0.449367)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_36d6g"]
+gradient = SubResource("Gradient_sxmqc")
+
+[sub_resource type="Curve" id="Curve_2xblw"]
+_data = [Vector2(0, 0), 0.0, 3.88025, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_j5php"]
+curve = SubResource("Curve_2xblw")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qxf0c"]
+particle_flag_rotate_y = true
+angle_min = -360.0
+angle_max = 360.0
+angle_curve = SubResource("CurveTexture_5rcum")
+direction = Vector3(0, 0.5, 0)
+spread = 180.0
+initial_velocity_max = 0.5
+radial_velocity_min = -2.23517e-05
+radial_velocity_max = 0.0999776
+gravity = Vector3(0, 0, 0)
+color = Color(1, 0, 0, 1)
+color_ramp = SubResource("GradientTexture1D_36d6g")
+hue_variation_min = 1.0
+hue_variation_max = 1.0
+hue_variation_curve = SubResource("CurveTexture_j5php")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7w4ni"]
+transparency = 1
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("2_qxf0c")
+emission_enabled = true
+emission = Color(0.533037, 0.533037, 0.533037, 1)
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_dgwo2"]
+material = SubResource("StandardMaterial3D_7w4ni")
+
+[sub_resource type="Gradient" id="Gradient_qxf0c"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_dgwo2"]
+gradient = SubResource("Gradient_qxf0c")
+
+[sub_resource type="Curve" id="Curve_gsgu7"]
+_limits = [0.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 2), 0.0, -1.25933, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_xgvmy"]
+curve = SubResource("Curve_gsgu7")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_dgwo2"]
+lifetime_randomness = 0.5
+particle_flag_align_y = true
+emission_shape_scale = Vector3(0.5, 0.5, 0.5)
+spread = 180.0
+initial_velocity_min = 4.0
+initial_velocity_max = 10.0
+radial_velocity_min = -2.23517e-05
+radial_velocity_max = 2.49998
+gravity = Vector3(0, 0, 0)
+scale_min = 0.5
+scale_max = 1.5
+scale_curve = SubResource("CurveTexture_xgvmy")
+color_ramp = SubResource("GradientTexture1D_dgwo2")
+
+[node name="Projectile" type="Node3D"]
+script = ExtResource("1_a85iw")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_akgne")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("SphereMesh_a85iw")
+surface_material_override/0 = SubResource("StandardMaterial3D_qxf0c")
+
+[node name="ShineParticles" type="GPUParticles3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+amount = 200
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_qxf0c")
+draw_pass_1 = SubResource("QuadMesh_dgwo2")
+
+[node name="DeathParticles" type="GPUParticles3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+emitting = false
+amount = 20
+one_shot = true
+explosiveness = 0.75
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_dgwo2")
+draw_pass_1 = SubResource("QuadMesh_dgwo2")

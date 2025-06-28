@@ -1,7 +1,14 @@
-[gd_scene load_steps=30 format=3 uid="uid://0npg7e1cmhi7"]
+[gd_scene load_steps=34 format=3 uid="uid://0npg7e1cmhi7"]
 
 [ext_resource type="PackedScene" uid="uid://co43wkwhjr487" path="res://MimiModels/mage/mage1.glb" id="1_6fmnh"]
 [ext_resource type="Texture2D" uid="uid://ck1li6b7jki2c" path="res://Enemies/GenericTest/spark.png" id="2_5haub"]
+[ext_resource type="Texture2D" uid="uid://c4xu5p8hq6rsi" path="res://Enemies/Models/mage1_magepalette.png" id="2_mcsra"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5oqo1"]
+albedo_texture = ExtResource("2_mcsra")
+emission_enabled = true
+emission = Color(0.794479, 0, 0.329658, 1)
+emission_texture = ExtResource("2_mcsra")
 
 [sub_resource type="Curve" id="Curve_mcsra"]
 _data = [Vector2(0, 0), 0.0, 1.52688, 0, 0, Vector2(0.984375, 1), 0.0, 0.0, 0, 0]
@@ -90,61 +97,70 @@ xfade_time = 0.25
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6fmnh"]
 xfade_time = 0.25
-switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5haub"]
 xfade_time = 0.05
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_mcsra"]
-xfade_time = 0.1
+xfade_time = 0.05
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5oqo1"]
+xfade_time = 0.05
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_73p7e"]
-xfade_time = 0.25
+xfade_time = 0.05
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_j3tme"]
 xfade_time = 0.25
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_7v1cb"]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ee3nb"]
+xfade_time = 0.05
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ylxhl"]
+xfade_time = 0.05
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_73p7e"]
 states/Start/position = Vector2(199, 100)
 states/attack/node = SubResource("AnimationNodeAnimation_6fmnh")
 states/attack/position = Vector2(504, 194)
 states/damagestatic/node = SubResource("AnimationNodeAnimation_5haub")
-states/damagestatic/position = Vector2(562, 52)
+states/damagestatic/position = Vector2(563, 52)
 states/disappear/node = SubResource("AnimationNodeAnimation_ojyi1")
 states/disappear/position = Vector2(691, 139)
 states/idle/node = SubResource("AnimationNodeAnimation_mcsra")
 states/idle/position = Vector2(340, 86)
 states/walk/node = SubResource("AnimationNodeAnimation_5oqo1")
 states/walk/position = Vector2(589, 137)
-transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_ojyi1"), "idle", "attack", SubResource("AnimationNodeStateMachineTransition_331ri"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_4nya2"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_s26ai"), "attack", "idle", SubResource("AnimationNodeStateMachineTransition_6fmnh"), "idle", "damagestatic", SubResource("AnimationNodeStateMachineTransition_5haub"), "damagestatic", "idle", SubResource("AnimationNodeStateMachineTransition_mcsra"), "walk", "damagestatic", SubResource("AnimationNodeStateMachineTransition_5oqo1"), "damagestatic", "walk", SubResource("AnimationNodeStateMachineTransition_73p7e"), "idle", "disappear", SubResource("AnimationNodeStateMachineTransition_j3tme"), "disappear", "idle", SubResource("AnimationNodeStateMachineTransition_7v1cb")]
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_ojyi1"), "idle", "attack", SubResource("AnimationNodeStateMachineTransition_331ri"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_4nya2"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_s26ai"), "attack", "idle", SubResource("AnimationNodeStateMachineTransition_6fmnh"), "idle", "damagestatic", SubResource("AnimationNodeStateMachineTransition_5haub"), "damagestatic", "idle", SubResource("AnimationNodeStateMachineTransition_mcsra"), "walk", "damagestatic", SubResource("AnimationNodeStateMachineTransition_5oqo1"), "damagestatic", "walk", SubResource("AnimationNodeStateMachineTransition_73p7e"), "idle", "disappear", SubResource("AnimationNodeStateMachineTransition_j3tme"), "disappear", "idle", SubResource("AnimationNodeStateMachineTransition_7v1cb"), "attack", "damagestatic", SubResource("AnimationNodeStateMachineTransition_ee3nb"), "disappear", "damagestatic", SubResource("AnimationNodeStateMachineTransition_ylxhl")]
 
 [node name="mage1" instance=ExtResource("1_6fmnh")]
 
 [node name="Skeleton3D" parent="Armature" index="0"]
-bones/0/position = Vector3(0, -0.685491, 0)
+bones/0/position = Vector3(0, -0.690922, 0)
 bones/1/rotation = Quaternion(-0.70172, 0.0871174, 0.70172, 0.0871178)
-bones/2/rotation = Quaternion(0.244124, 0.586675, -0.395163, 0.663372)
+bones/2/rotation = Quaternion(0.243484, 0.58745, -0.394076, 0.663568)
 bones/5/position = Vector3(-0.639994, 0.425029, -0.0901327)
-bones/5/rotation = Quaternion(-0.400073, 0.663492, 0.244909, 0.582872)
+bones/5/rotation = Quaternion(-0.399659, 0.663709, 0.244377, 0.583132)
 bones/6/rotation = Quaternion(-0.0508888, 1.63701e-07, 3.26069e-08, 0.998704)
-bones/12/position = Vector3(0, 1.61246, 0)
-bones/13/rotation = Quaternion(-0.000136415, 0.00626258, -0.00834011, 0.999946)
+bones/12/position = Vector3(0, 1.58179, 0)
+bones/13/rotation = Quaternion(-0.00015504, 0.0071176, -0.00947877, 0.99993)
 
 [node name="hand_r" parent="Armature/Skeleton3D" index="0"]
-transform = Transform3D(-0.540671, -0.00350854, 0.00131459, 0.00372854, -0.485168, 0.238616, -0.000368858, 0.238618, 0.485179, -0.00552531, -0.159752, -1.99631)
+transform = Transform3D(-0.540667, -0.00398545, 0.00149961, 0.00423697, -0.484487, 0.239988, -0.000425319, 0.239991, 0.484501, -0.0062954, -0.169015, -1.99365)
 
 [node name="hand_l" parent="Armature/Skeleton3D" index="1"]
-transform = Transform3D(-0.53542, 0.000527676, 0.075262, -0.0330263, -0.487483, -0.231535, 0.0676302, -0.233877, 0.482768, 0.000268095, -0.146501, 2.00536)
+transform = Transform3D(-0.53542, 0.000599615, 0.0752639, -0.0331929, -0.487132, -0.23225, 0.0675514, -0.234608, 0.482424, 0.00030604, -0.153981, 2.00397)
 
 [node name="Cylinder" parent="Armature/Skeleton3D" index="2"]
-transform = Transform3D(0.435577, 0.900151, 0.0008974, -0.8999, 0.435431, 0.0240896, 0.0212937, -0.0113003, 0.99971, 0.854981, 0.1176, 1.88723)
+transform = Transform3D(0.435686, 0.900099, 0.000840202, -0.899878, 0.435557, 0.0225884, 0.0199662, -0.0105975, 0.999745, 0.854993, 0.110401, 1.88629)
 
 [node name="Roundcube_001" parent="Armature/Skeleton3D" index="3"]
-transform = Transform3D(0.238041, 0.491929, 0.000490426, -0.491792, 0.237962, 0.0131649, 0.0116369, -0.00617557, 0.546337, 2.16473, 0.751167, 1.87079)
+transform = Transform3D(0.238101, 0.491901, 0.000459167, -0.49178, 0.23803, 0.0123445, 0.0109114, -0.00579147, 0.546357, 2.16467, 0.744151, 1.87087)
+
+[node name="Roundcube_001" parent="Armature/Skeleton3D/Roundcube_001" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_5oqo1")
 
 [node name="WandParticles" type="GPUParticles3D" parent="Armature/Skeleton3D/Roundcube_001/Roundcube_001" index="0"]
 transform = Transform3D(2, 2.98023e-08, 5.96046e-08, 0, 2, -1.19209e-07, 0, -1.78814e-07, 2, 0.270404, -0.541619, 0.0801208)
@@ -154,28 +170,28 @@ process_material = SubResource("ParticleProcessMaterial_331ri")
 draw_pass_1 = SubResource("QuadMesh_4nya2")
 
 [node name="body" parent="Armature/Skeleton3D" index="4"]
-transform = Transform3D(0.993525, 0.113615, 1.36115e-08, -0.113615, 0.993525, 1.18941e-08, 2.43973e-07, -2.86584e-08, 1, -2.04891e-08, 1.14449, -6.35654e-08)
+transform = Transform3D(0.993525, 0.113615, 1.36115e-08, -0.113615, 0.993525, 1.18941e-08, 2.43973e-07, -2.86584e-08, 1, -2.04891e-08, 1.13906, -6.35654e-08)
 
 [node name="ringg" parent="Armature/Skeleton3D" index="5"]
-transform = Transform3D(0.0262049, 0.0144726, -0.0286468, 0.0163779, -0.0498419, 0.00327591, -0.0229602, -0.019035, -0.0303581, -0.103467, 0.597852, -3.37411e-07)
+transform = Transform3D(0.0262049, 0.0144726, -0.0286468, 0.0163779, -0.0498419, 0.00327591, -0.0229602, -0.019035, -0.0303581, -0.103467, 0.592421, -3.37411e-07)
 
 [node name="Cone" parent="Armature/Skeleton3D" index="6"]
-transform = Transform3D(0.493783, 0.0143363, 0.00618684, -0.00823861, 0.859495, 8.31534e-05, -0.0061846, -0.000324321, 0.493852, 0.0144867, 2.57978, -0.000327699)
+transform = Transform3D(0.493752, 0.0162932, 0.00703158, -0.0093634, 0.85946, 8.6498e-05, -0.00702868, -0.000382529, 0.493841, 0.016464, 2.54363, -0.000386517)
 
 [node name="hat" parent="Armature/Skeleton3D" index="7"]
-transform = Transform3D(1.78108, 0.0108496, 0.0224683, 0.210583, -0.0917772, 0.000301988, -0.0223484, -0.000120467, 1.79349, -0.00164579, 1.6126, 3.72421e-05)
+transform = Transform3D(1.78152, 0.0106403, 0.0255361, 0.206525, -0.0918017, 0.000314134, -0.0254024, -0.000135423, 1.79345, -0.00187043, 1.5765, 4.39243e-05)
 
 [node name="face" parent="Armature/Skeleton3D" index="8"]
-transform = Transform3D(0.693439, 2.02563e-08, -2.77507e-09, -2.02563e-08, 0.693439, 1.16416e-09, 2.77507e-09, -1.16416e-09, 0.693439, 3.46445e-08, 1.25169, -3.60888e-09)
+transform = Transform3D(0.693439, 2.02563e-08, -2.77507e-09, -2.02563e-08, 0.693439, 1.16416e-09, 2.77507e-09, -1.16416e-09, 0.693439, 3.46445e-08, 1.21559, -3.60888e-09)
 
 [node name="face" parent="Armature/Skeleton3D/face" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_6fmnh")
 
 [node name="eyes" parent="Armature/Skeleton3D" index="9"]
-transform = Transform3D(-0.202475, 0.0805309, -0.476975, -0.0166264, -0.517927, -0.0803872, -0.48344, -0.0159156, 0.202532, 0.577212, 1.3263, -0.333426)
+transform = Transform3D(-0.202475, 0.0805309, -0.476975, -0.0166264, -0.517927, -0.0803872, -0.48344, -0.0159156, 0.202532, 0.577212, 1.29019, -0.333426)
 
 [node name="Roundcube_002" parent="Armature/Skeleton3D" index="10"]
-transform = Transform3D(0.470494, 0.201618, 0.113899, 0.102603, 0.0497206, -0.511847, -0.207594, 0.481524, 0.00516134, 0.577212, 1.3263, -0.313645)
+transform = Transform3D(0.470494, 0.201618, 0.113899, 0.102603, 0.0497206, -0.511847, -0.207594, 0.481524, 0.00516134, 0.577212, 1.29019, -0.313645)
 
 [node name="AnimationTree" type="AnimationTree" parent="." index="2"]
 tree_root = SubResource("AnimationNodeStateMachine_73p7e")

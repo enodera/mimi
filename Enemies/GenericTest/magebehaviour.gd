@@ -53,6 +53,9 @@ var melee_timer: float = 0.3
 @export var loot_min_amount: int = 1
 @export var loot_max_amount: int = 3
 
+@export_group("Projectile")
+@export var projectile_scene: PackedScene = null
+
 var just_disappeared = false
 
 var state: State = State.PATROL
@@ -72,6 +75,7 @@ var attack_hitbox_active: bool = false
 
 var _animation_tree: AnimationTree
 var _state_machine: AnimationNodeStateMachinePlayback
+var dying = false
 
 func _ready() -> void:
 	$MeshInstance3D/Area3D.area_entered.connect(_on_area_entered)
@@ -140,32 +144,40 @@ func _physics_process(delta: float) -> void:
 					_state_machine.travel("idle")
 					melee_timer -= delta
 					if melee_timer <= 0.0:
+						melee_timer = 0.3
 						melee_phase = MeleePhase.ATTACKING
-						melee_timer = 0.5
 						_state_machine.travel("attack")
+						if not dying:
+							shoot_projectile()
 
 				MeleePhase.ATTACKING:
 					melee_timer -= delta
 					if melee_timer <= 0.0:
+						melee_timer = 0.2
 						melee_phase = MeleePhase.RECOVERY
-						melee_timer = 0.3
 
 				MeleePhase.RECOVERY:
 					melee_timer -= delta
 					_state_machine.travel("idle")
 					if melee_timer <= 0.0:
 						_state_machine.travel("disappear")
-						state = State.DISAPPEAR
 						disappear_timer = 0.4
 						melee_timer = 0.3
+						state = State.DISAPPEAR
 
 		State.DAMAGE:
 			if is_knocked_back:
 				knockback_elapsed += delta
 				velocity.x = knockback_velocity.x
 				velocity.z = knockback_velocity.z
-				var knockback_axis = knockback_velocity.cross(Vector3.UP).normalized()
-				mesh.rotate(knockback_axis, deg_to_rad(-hitstun_rotation_speed))
+				
+				if player:
+					var look_dir = (player.global_position - mesh.global_position)
+					look_dir.y = 0  # ignore vertical difference for rotation
+					if look_dir.length() > 0.1:
+						look_dir = look_dir.normalized()
+						var target_angle = atan2(look_dir.x, look_dir.z)
+						mesh.rotation.y = lerp_angle(mesh.rotation.y, target_angle - deg_to_rad(90), delta * 5.0)
 
 				if knockback_elapsed >= knockback_duration:
 					is_knocked_back = false
@@ -173,7 +185,10 @@ func _physics_process(delta: float) -> void:
 				if playeraggroable:
 					if playerattackable:
 						melee_phase = MeleePhase.RECOVERY
-						state = State.MELEE
+						if not dying:
+							state = State.MELEE
+						else:
+							state = State.DAMAGE
 					else:
 						state = State.ATTACK
 				else:
@@ -192,11 +207,16 @@ func _physics_process(delta: float) -> void:
 					_teleport_nearby()
 					just_disappeared = true
 					set_player_detection_areas(not just_disappeared)
+					print("STATE PLAY: JUST DISSAPEARED")
 
 				else:
+					print("STATE PLAY: NOT JUST DISSAPEARED")
 					just_disappeared = false
 					set_player_detection_areas(not just_disappeared)
-					state = State.ATTACK if playeraggroable and playerattackable else State.PATROL
+					melee_timer = 0.5
+					melee_phase = MeleePhase.BUFFER
+					state = State.MELEE if playeraggroable and playerattackable else State.PATROL
+					
 	if is_on_floor():
 		mesh.rotation_degrees.x = 0
 		mesh.rotation_degrees.z = 0
@@ -225,7 +245,8 @@ func _physics_process(delta: float) -> void:
 	var desired_hitbox_state = (state == State.MELEE and melee_phase == MeleePhase.ATTACKING)
 	if attack_hitbox_active != desired_hitbox_state:
 		set_attack_hitbox_active(desired_hitbox_state)
-		attack_hitbox_active = desired_hitbox_state
+	
+	attack_hitbox_active = desired_hitbox_state
 	
 	$enemy/AttackHitbox.rotation = mesh.rotation
 
@@ -265,9 +286,10 @@ func _on_vision_body_exited(body):
 func _on_melee_body_entered(body):
 	if body.is_in_group("player") and state != State.DISAPPEAR:
 		player = body
-		state = State.MELEE
+		if not dying:
+			state = State.MELEE
+		melee_timer = 0.5
 		melee_phase = MeleePhase.BUFFER
-		melee_timer = 0.3
 		playeraggroable = true
 		playerattackable = true
 
@@ -278,8 +300,9 @@ func _on_melee_body_exited(body):
 func apply_knockback(direction: Vector3) -> void:
 	is_knocked_back = true
 	state = State.DAMAGE
-	melee_phase = MeleePhase.BUFFER
 	melee_timer = 1.0
+	melee_phase = MeleePhase.BUFFER
+	
 	_state_machine.travel("damagestatic")
 
 	knockback_elapsed = 0.0
@@ -299,6 +322,9 @@ func apply_knockback(direction: Vector3) -> void:
 	velocity = knockback_velocity
 
 func die():
+	
+	dying = true
+	
 	if loot_item_id != "default_item" and drop_item:
 		var loot_amount = randi() % (loot_max_amount - loot_min_amount + 1) + loot_min_amount
 		Global.inventory_ref.add_item(loot_item_id, loot_amount)
@@ -311,11 +337,15 @@ func die():
 	exploding_timer.start()
 	await exploding_timer.timeout
 	
-	if mesh:
+	if mesh.visible:
 		mesh.visible = false
+	
+	if $MinimapSign.visible:
+		$MinimapSign.visible = false
+	
 	if $CollisionShape3D:
 		$CollisionShape3D.queue_free()
-
+	
 	$enemy/DeathParticles1.emitting = false
 	$enemy/DeathParticles2.emitting = true
 	$enemy/DeathParticles3.emitting = true
@@ -332,10 +362,10 @@ func set_attack_hitbox_active(active: bool) -> void:
 	
 
 func set_player_detection_areas(active: bool) -> void:
-	$VisibilityRange.monitoring = active
-	$VisibilityRange.monitorable = active
 	$MeleeAttackRange.monitoring = active
 	$MeleeAttackRange.monitorable = active
+	$VisibilityRange.monitoring = active
+	$VisibilityRange.monitorable = active
 
 
 func _on_hitbox_body_entered(body):
@@ -381,3 +411,23 @@ func _teleport_nearby() -> void:
 		else:
 			global_position = patrol_bounds_area.global_position
 			navigation_agent_3d.set_target_position(global_position)
+
+func shoot_projectile():
+	var projectile = projectile_scene.instantiate()
+	projectile.player = player
+	
+	var vertical_offset = Vector3.UP * 2.5
+	var smalladjust = Vector3.UP
+	print(smalladjust)
+
+	var spawn_position = global_position + vertical_offset
+	var shoot_direction = (player.global_position - global_position - smalladjust).normalized()
+	
+	projectile.smalladjust = smalladjust
+	
+	get_tree().current_scene.add_child(projectile)
+	
+	projectile.global_position = spawn_position
+	projectile.direction = shoot_direction
+
+	

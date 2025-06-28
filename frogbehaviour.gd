@@ -310,7 +310,7 @@ func apply_knockback(direction: Vector3) -> void:
 
 	if is_on_floor():
 			if health <= 0:
-				knockback_velocity.y  = knockback_strength * 1.5
+				knockback_velocity.y = knockback_strength * 1.5
 			else:
 				knockback_velocity.y = knockback_strength * 0.5
 				
@@ -339,6 +339,10 @@ func die():
 	
 	if mesh:
 		mesh.visible = false
+		
+	if $MinimapSign.visible:
+		$MinimapSign.visible = false
+	
 		
 	if $CollisionShape3D != null:
 		$CollisionShape3D.queue_free()

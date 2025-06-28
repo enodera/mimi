@@ -262,7 +262,7 @@ patrol_bounds_area = NodePath("../PatrolArea")
 loot_item_id = "flour"
 
 [node name="Enemy" parent="." node_paths=PackedStringArray("patrol_bounds_area") instance=ExtResource("19_4v62a")]
-transform = Transform3D(1.99785, 0.092609, 0, -0.092609, 1.99785, 0, 0, 0, 2, -4.36787, 1.92402, -51.5969)
+transform = Transform3D(1.99785, 0.092609, 0, -0.092609, 1.99785, 0, 0, 0, 2, -4.36787, 22.7834, -51.5969)
 patrol_bounds_area = NodePath("../PatrolArea2")
 loot_item_id = "lemon"
 
