@@ -322,9 +322,6 @@ func update_state_and_animation():
 	if state == "air" or state == "airattack":
 		set_state("squat")
 	
-	elif state == "hitstun":
-		1 + 1 # placeholder para cuendo implemente el resto
-	
 	elif state not in ["hitstun", "attack"]:
 		if horizontal_speed > 0.1:
 			set_state("walkrun")
@@ -438,6 +435,18 @@ func _process(_delta: float) -> void:
 			print("Inventory unpaused")
 			await %InventoryUI._on_close_button_pressed()
 			%InventoryUI.visible = false
+			Global.paused = false
+			
+	if Input.is_action_just_pressed("interact"):
+		if not Global.paused and not Global.dialoguepaused:
+			print("Inventory paused")
+			%CookingUI.visible = true
+			Global.paused = true
+			%CookingUI.show_inventory()
+		else:
+			print("Inventory unpaused")
+			await %CookingUI._on_close_button_pressed()
+			%CookingUI.visible = false
 			Global.paused = false
 			
 

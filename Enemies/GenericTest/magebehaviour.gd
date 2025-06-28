@@ -366,9 +366,9 @@ func _teleport_nearby() -> void:
 				# Fallback for unsupported shapes:
 				aabb = AABB(Vector3.ZERO, Vector3(10,10,10)) # arbitrary size
 			
-			var global_transform = collision_shape.global_transform
-			var min_global = global_transform * aabb.position
-			var max_global = global_transform * (aabb.position + aabb.size)
+			var mage_position = collision_shape.global_transform
+			var min_global = mage_position * aabb.position
+			var max_global = mage_position * (aabb.position + aabb.size)
 			
 			var random_pos = Vector3(
 				randf_range(min_global.x, max_global.x),

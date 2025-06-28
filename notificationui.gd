@@ -17,8 +17,8 @@ func process_queue():
 	is_showing = true
 	while notification_queue.size() > 0:
 		# Wait if we already have 3 notifications visible
-		while notifications.size() >= 3:
-			print("Max notifications active (3). Waiting...")
+		while notifications.size() >= 5:
+			print("Max notifications active (5). Waiting...")
 			await get_tree().create_timer(2.5).timeout
 			notifications = []
 

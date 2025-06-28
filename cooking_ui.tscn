@@ -1,12 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://pakdokc08g3p"]
+[gd_scene load_steps=5 format=3 uid="uid://yddpgwccicir"]
 
-[ext_resource type="Script" uid="uid://b2bar1lwesm8j" path="res://inventoryui.gd" id="1_0fbet"]
-[ext_resource type="Theme" uid="uid://wuvbsl284ws3" path="res://Themes/inventory.tres" id="2_5tt2m"]
-[ext_resource type="Theme" uid="uid://g7m5g0d7vfiw" path="res://Themes/internal.tres" id="3_mrqgh"]
-[ext_resource type="PackedScene" uid="uid://51ra61upblee" path="res://ModelPreview3D.tscn" id="4_mrqgh"]
+[ext_resource type="Script" uid="uid://p16nn0xvchls" path="res://cookingui.gd" id="1_vnhsg"]
+[ext_resource type="Theme" uid="uid://det0qn7kh5ncx" path="res://Themes/cooking.tres" id="2_brg0g"]
+[ext_resource type="Theme" uid="uid://g7m5g0d7vfiw" path="res://Themes/internal.tres" id="2_vnhsg"]
+[ext_resource type="PackedScene" uid="uid://51ra61upblee" path="res://ModelPreview3D.tscn" id="3_brg0g"]
 
-[node name="InventoryUI" type="CanvasLayer"]
-script = ExtResource("1_0fbet")
+[node name="CookingUI" type="CanvasLayer"]
+script = ExtResource("1_vnhsg")
 
 [node name="Panel" type="Panel" parent="."]
 anchors_preset = -1
@@ -19,7 +19,7 @@ offset_top = -0.188004
 offset_right = 0.311951
 offset_bottom = 0.187958
 pivot_offset = Vector2(339, 174.5)
-theme = ExtResource("2_5tt2m")
+theme = ExtResource("2_brg0g")
 
 [node name="Label" type="Label" parent="Panel"]
 layout_mode = 1
@@ -35,7 +35,7 @@ offset_bottom = -0.169003
 theme_override_colors/font_outline_color = Color(0.0784314, 0.117647, 0.188235, 1)
 theme_override_constants/outline_size = 8
 theme_override_font_sizes/font_size = 26
-text = "Inventory"
+text = "Cooking"
 vertical_alignment = 1
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Panel"]
@@ -83,23 +83,22 @@ offset_top = 0.105995
 offset_right = 0.0059967
 offset_bottom = 0.129974
 pivot_offset = Vector2(0, 0.5)
-theme = ExtResource("3_mrqgh")
+theme = ExtResource("2_vnhsg")
 
 [node name="ItemDescription" type="Label" parent="Panel/Panel"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.016
-anchor_top = 1.122
-anchor_right = 1.0
-anchor_bottom = 1.703
+anchor_top = 1.088
+anchor_right = 3.299
+anchor_bottom = 1.358
 offset_left = 0.0079999
-offset_top = -0.056015
-offset_right = -1.0
-offset_bottom = -0.0440063
+offset_top = -0.0239563
+offset_right = 0.0869751
+offset_bottom = 1.01605
 grow_horizontal = 2
 grow_vertical = 2
-autowrap_mode = 2
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="Panel/Panel"]
 layout_mode = 0
@@ -114,4 +113,4 @@ handle_input_locally = false
 size = Vector2i(169, 126)
 render_target_update_mode = 4
 
-[node name="ModelPreview3D" parent="Panel/Panel/SubViewportContainer/SubViewport" instance=ExtResource("4_mrqgh")]
+[node name="ModelPreview3D" parent="Panel/Panel/SubViewportContainer/SubViewport" instance=ExtResource("3_brg0g")]

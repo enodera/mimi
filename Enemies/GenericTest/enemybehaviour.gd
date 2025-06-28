@@ -44,7 +44,7 @@ var melee_timer: float = 0.5
 @export var knockback_duration: float = 0.25
 
 
-@export_group("Enemy type")
+@export_group("Enemy type")	
 @export var selectedtype: Class = Class.FROG
 
 @onready var player = %Player

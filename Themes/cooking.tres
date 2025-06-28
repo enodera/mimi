@@ -1,0 +1,10 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://det0qn7kh5ncx"]
+
+[ext_resource type="FontFile" uid="uid://dwuutcq4tl2fm" path="res://Fonts/FOT-Seurat Pro B.otf" id="1_gcpqs"]
+[ext_resource type="StyleBox" uid="uid://oomg83mc86ei" path="res://Themes/cookingstylebox.tres" id="2_c6rxr"]
+
+[resource]
+Button/fonts/font = ExtResource("1_gcpqs")
+Label/fonts/font = ExtResource("1_gcpqs")
+MenuButton/fonts/font = ExtResource("1_gcpqs")
+Panel/styles/panel = ExtResource("2_c6rxr")

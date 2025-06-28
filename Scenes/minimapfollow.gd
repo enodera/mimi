@@ -7,6 +7,6 @@ func _ready():
 	# Optional: any initialization code
 	pass
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	# Follow the player from above
 	position = Vector3(target.position.x, follow_scan_radius, target.position.z)

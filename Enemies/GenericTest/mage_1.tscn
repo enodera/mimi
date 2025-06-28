@@ -125,26 +125,26 @@ transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition
 [node name="mage1" instance=ExtResource("1_6fmnh")]
 
 [node name="Skeleton3D" parent="Armature" index="0"]
-bones/0/position = Vector3(0, -0.837354, 0)
+bones/0/position = Vector3(0, -0.685491, 0)
 bones/1/rotation = Quaternion(-0.70172, 0.0871174, 0.70172, 0.0871178)
-bones/2/rotation = Quaternion(0.226012, 0.607853, -0.364437, 0.668295)
+bones/2/rotation = Quaternion(0.244124, 0.586675, -0.395163, 0.663372)
 bones/5/position = Vector3(-0.639994, 0.425029, -0.0901327)
-bones/5/rotation = Quaternion(-0.388423, 0.669418, 0.229994, 0.590009)
+bones/5/rotation = Quaternion(-0.400073, 0.663492, 0.244909, 0.582872)
 bones/6/rotation = Quaternion(-0.0508888, 1.63701e-07, 3.26069e-08, 0.998704)
-bones/12/position = Vector3(0, 1.54393, 0)
-bones/13/rotation = Quaternion(-0.000657132, 0.0301677, -0.0401755, 0.998737)
+bones/12/position = Vector3(0, 1.61246, 0)
+bones/13/rotation = Quaternion(-0.000136415, 0.00626258, -0.00834011, 0.999946)
 
 [node name="hand_r" parent="Armature/Skeleton3D" index="0"]
-transform = Transform3D(-0.540383, -0.0166343, 0.00699511, 0.017873, -0.46449, 0.276169, -0.00248713, 0.276245, 0.464779, -0.0284933, -0.41561, -1.91806)
+transform = Transform3D(-0.540671, -0.00350854, 0.00131459, 0.00372854, -0.485168, 0.238616, -0.000368858, 0.238618, 0.485179, -0.00552531, -0.159752, -1.99631)
 
 [node name="hand_l" parent="Armature/Skeleton3D" index="1"]
-transform = Transform3D(-0.535401, 0.0025405, 0.0753562, -0.0376402, -0.477231, -0.251342, 0.0653313, -0.254131, 0.472743, 0.00145353, -0.354864, 1.96545)
+transform = Transform3D(-0.53542, 0.000527676, 0.075262, -0.0330263, -0.487483, -0.231535, 0.0676302, -0.233877, 0.482768, 0.000268095, -0.146501, 2.00536)
 
 [node name="Cylinder" parent="Armature/Skeleton3D" index="2"]
-transform = Transform3D(0.438633, 0.898667, -0.000635207, -0.898528, 0.438552, -0.0178967, -0.015804, 0.00842075, 0.99984, 0.855425, -0.0831582, 1.85987)
+transform = Transform3D(0.435577, 0.900151, 0.0008974, -0.8999, 0.435431, 0.0240896, 0.0212937, -0.0113003, 0.99971, 0.854981, 0.1176, 1.88723)
 
 [node name="Roundcube_001" parent="Armature/Skeleton3D" index="3"]
-transform = Transform3D(0.239711, 0.491118, -0.000347138, -0.491042, 0.239667, -0.00978048, -0.00863681, 0.00460191, 0.546409, 2.16301, 0.55495, 1.87213)
+transform = Transform3D(0.238041, 0.491929, 0.000490426, -0.491792, 0.237962, 0.0131649, 0.0116369, -0.00617557, 0.546337, 2.16473, 0.751167, 1.87079)
 
 [node name="WandParticles" type="GPUParticles3D" parent="Armature/Skeleton3D/Roundcube_001/Roundcube_001" index="0"]
 transform = Transform3D(2, 2.98023e-08, 5.96046e-08, 0, 2, -1.19209e-07, 0, -1.78814e-07, 2, 0.270404, -0.541619, 0.0801208)
@@ -154,28 +154,28 @@ process_material = SubResource("ParticleProcessMaterial_331ri")
 draw_pass_1 = SubResource("QuadMesh_4nya2")
 
 [node name="body" parent="Armature/Skeleton3D" index="4"]
-transform = Transform3D(0.993525, 0.113615, 1.36115e-08, -0.113615, 0.993525, 1.18941e-08, 2.43973e-07, -2.86584e-08, 1, -2.04891e-08, 0.992629, -6.35654e-08)
+transform = Transform3D(0.993525, 0.113615, 1.36115e-08, -0.113615, 0.993525, 1.18941e-08, 2.43973e-07, -2.86584e-08, 1, -2.04891e-08, 1.14449, -6.35654e-08)
 
 [node name="ringg" parent="Armature/Skeleton3D" index="5"]
-transform = Transform3D(0.0262049, 0.0144726, -0.0286468, 0.0163779, -0.0498419, 0.00327591, -0.0229602, -0.019035, -0.0303581, -0.103467, 0.445988, -3.37411e-07)
+transform = Transform3D(0.0262049, 0.0144726, -0.0286468, 0.0163779, -0.0498419, 0.00327591, -0.0229602, -0.019035, -0.0303581, -0.103467, 0.597852, -3.37411e-07)
 
 [node name="Cone" parent="Armature/Skeleton3D" index="6"]
-transform = Transform3D(0.491397, 0.0689496, 0.0297875, -0.0396541, 0.856839, -0.000548898, -0.0297354, -0.00321207, 0.492991, 0.0696726, 2.35669, -0.00324572)
+transform = Transform3D(0.493783, 0.0143363, 0.00618684, -0.00823861, 0.859495, 8.31534e-05, -0.0061846, -0.000324321, 0.493852, 0.0144867, 2.57978, -0.000327699)
 
 [node name="hat" parent="Armature/Skeleton3D" index="7"]
-transform = Transform3D(1.78776, 0.0049713, 0.108177, 0.0967797, -0.0922816, -0.00199339, -0.107912, -0.000403122, 1.79036, -0.00791526, 1.39251, 0.000368749)
+transform = Transform3D(1.78108, 0.0108496, 0.0224683, 0.210583, -0.0917772, 0.000301988, -0.0223484, -0.000120467, 1.79349, -0.00164579, 1.6126, 3.72421e-05)
 
 [node name="face" parent="Armature/Skeleton3D" index="8"]
-transform = Transform3D(0.693439, 2.02563e-08, -2.77507e-09, -2.02563e-08, 0.693439, 1.16416e-09, 2.77507e-09, -1.16416e-09, 0.693439, 3.46445e-08, 1.0313, -3.60888e-09)
+transform = Transform3D(0.693439, 2.02563e-08, -2.77507e-09, -2.02563e-08, 0.693439, 1.16416e-09, 2.77507e-09, -1.16416e-09, 0.693439, 3.46445e-08, 1.25169, -3.60888e-09)
 
 [node name="face" parent="Armature/Skeleton3D/face" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_6fmnh")
 
 [node name="eyes" parent="Armature/Skeleton3D" index="9"]
-transform = Transform3D(-0.202475, 0.0805309, -0.476975, -0.0166264, -0.517927, -0.0803872, -0.48344, -0.0159156, 0.202532, 0.577212, 1.1059, -0.333426)
+transform = Transform3D(-0.202475, 0.0805309, -0.476975, -0.0166264, -0.517927, -0.0803872, -0.48344, -0.0159156, 0.202532, 0.577212, 1.3263, -0.333426)
 
 [node name="Roundcube_002" parent="Armature/Skeleton3D" index="10"]
-transform = Transform3D(0.470494, 0.201618, 0.113899, 0.102603, 0.0497206, -0.511847, -0.207594, 0.481524, 0.00516134, 0.577212, 1.1059, -0.313645)
+transform = Transform3D(0.470494, 0.201618, 0.113899, 0.102603, 0.0497206, -0.511847, -0.207594, 0.481524, 0.00516134, 0.577212, 1.3263, -0.313645)
 
 [node name="AnimationTree" type="AnimationTree" parent="." index="2"]
 tree_root = SubResource("AnimationNodeStateMachine_73p7e")

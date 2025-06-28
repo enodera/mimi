@@ -19,15 +19,12 @@ var current_preview_instance: Node3D = null
 # --- Initialization ---
 func _ready():
 	inventory = Global.inventory_ref
-
+	
 	if projscale != 1:
 		$Panel.set_pivot_offset($Panel.size * (1 / projscale))
 	$Panel.scale = Vector2(0, 0)
-
-	# Add one of every item in the database
-	for item_id in ItemDatabase.items.keys():
-		inventory.add_item(item_id, 1)
-
+	
+	inventory.add_recipe("muffin")
 	show_item("none")
 
 	update_ui()
@@ -39,10 +36,10 @@ func update_ui():
 	for child in item_list.get_children():
 		child.queue_free()
 
-	for item in inventory.get_items():
-		var item_data = ItemDatabase.items[item["id"]]
-		var display_text = item_data["name"] + " x" + str(item["quantity"])
-		var item_description = item_data["description"]
+	for recipe in inventory.get_recipes():
+		var recipe_data = ItemDatabase.recipes[recipe["id"]]
+		var display_text = recipe_data["name"]
+		var item_description = recipe_data["description"]
 
 		var container = MarginContainer.new()
 		container.add_theme_constant_override("margin_left", 30 * 1 / projscale)
@@ -55,8 +52,8 @@ func update_ui():
 		node.custom_minimum_size = Vector2(300 * 1 / projscale, 20 * 1 / projscale)
 		node.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 
-		if item_data["type"] == "consumable":
-			node.pressed.connect(_on_item_pressed.bind(item))
+		if has_all_ingredients(recipe_data["ingredients"]):
+			node.pressed.connect(_on_item_pressed.bind(recipe))
 		else:
 			node.disabled = true
 			node.focus_mode = Control.FOCUS_NONE
@@ -65,7 +62,7 @@ func update_ui():
 		item_list.add_child(container)
 
 		# Fix: pass both item_id and description
-		node.mouse_entered.connect(_on_item_hovered.bind(item["id"], item_description))
+		node.mouse_entered.connect(_on_item_hovered.bind(recipe["id"], item_description))
 		node.mouse_exited.connect(_on_item_hover_exited)
 		node.focus_mode = Control.FOCUS_NONE
 
@@ -86,7 +83,19 @@ func show_inventory():
 
 # --- Hover Effect ---
 func _on_item_hovered(item_id: String, item_description: String):
-	%ItemDescription.text = item_description
+	# Get the recipe data for this item (if exists)
+	var recipe_data = ItemDatabase.recipes.get(item_id, null)
+	var ingredients_text = ""
+	if recipe_data and recipe_data.has("ingredients"):
+		var ingredient_names := []
+		for ingr_id in recipe_data["ingredients"]:
+			var ingr_name = ItemDatabase.items.get(ingr_id, {}).get("name", "")
+			if ingr_name != "":
+				ingredient_names.append(ingr_name.to_lower())
+		ingredients_text = ", ".join(ingredient_names)
+	
+	%ItemDescription.text = "%s\nNeeds: %s" % [item_description, ingredients_text]
+	
 	show_item(item_id)
 	print(item_id)
 	show_model_preview(item_id)
@@ -117,13 +126,12 @@ func _on_close_button_pressed():
 
 # --- Item Interaction ---
 func _on_item_pressed(item):
-	print("Used item: ", item["id"])
-	if item["quantity"] > 1:
-		item["quantity"] -= 1
-	else:
-		inventory.remove_item(item["id"])
-		%ItemDescription.text = ""
-		show_item("none")
+	print("Crafted item: ", item["id"])
+	inventory.add_item(item["id"])
+	for ingredient_id in ItemDatabase.recipes[item["id"]]["ingredients"]:
+		inventory.remove_item(ingredient_id, 1)  # remove 1 unit per ingredient; adjust if needed
+	%ItemDescription.text = ""
+	show_item("none")
 	justupdated = true
 	update_ui()
 
@@ -164,3 +172,17 @@ func show_item(item_id: String):
 		item_node.visible = true
 	else:
 		print("Item mesh not found for id:", item_id)
+
+
+func has_all_ingredients(recipe_ingredients):
+	var inventory_items = inventory.get_items()
+	for ingredient_id in recipe_ingredients:
+		var found = false
+		for item_dict in inventory_items:
+			if item_dict["id"] == ingredient_id and item_dict["quantity"] >= 1:
+				found = true
+				break
+		if not found:
+			print("Missing ingredient in list:", ingredient_id)
+			return false
+	return true

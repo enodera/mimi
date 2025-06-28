@@ -281,5 +281,130 @@ var items = {
 	}
 }
 
+var recipes = {
+	"fruit_salad": {
+		"name": "Fruit Salad",
+		"description": "A refreshing mix of seasonal fruits.",
+		"type": "consumable",
+		"use_effect": "heal",
+		"heal_amount": 10,
+		"value": 15,
+		"ingredients": ["apple", "banana", "grape", "kiwi", "strawberry"]
+	},
+
+	"smoothie": {
+		"name": "Fruit Smoothie",
+		"description": "Blended fruits with milk and ice.",
+		"type": "consumable",
+		"use_effect": "heal",
+		"heal_amount": 12,
+		"value": 18,
+		"ingredients": ["milk", "banana", "blueberry", "ice", "sugar"]
+	},
+
+	"cake": {
+		"name": "Simple Cake",
+		"description": "Soft and fluffy baked goodness.",
+		"type": "consumable",
+		"use_effect": "heal",
+		"value": 25,
+		"ingredients": ["flour", "egg", "butter", "milk", "sugar"]
+	},
+
+	"cookies": {
+		"name": "Nut Cookies",
+		"description": "Crunchy cookies with nuts.",
+		"type": "consumable",
+		"use_effect": "heal",
+		"heal_amount": 8,
+		"value": 12,
+		"ingredients": ["flour", "butter", "sugar", "egg", "peanut"]
+	},
+
+	"pumpkin_pie": {
+		"name": "Pumpkin Pie",
+		"description": "A seasonal dessert favorite.",
+		"type": "consumable",
+		"use_effect": "heal",
+		"heal_amount": 18,
+		"value": 22,
+		"ingredients": ["pumpkin", "flour", "egg", "butter", "sugar"]
+	},
+
+	"fruit_pie": {
+		"name": "Fruit Pie",
+		"description": "Filled with sweet fruit and baked to perfection.",
+		"type": "consumable",
+		"use_effect": "heal",
+		"heal_amount": 16,
+		"value": 20,
+		"ingredients": ["apple", "flour", "egg", "butter", "sugar"]
+	},
+
+	"ice_cream": {
+		"name": "Ice Cream",
+		"description": "A frozen treat for hot days.",
+		"type": "consumable",
+		"use_effect": "heal",
+		"heal_amount": 14,
+		"value": 20,
+		"ingredients": ["milk", "sugar", "egg", "ice"]
+	},
+
+	"candied_fruit": {
+		"name": "Candied Fruit",
+		"description": "Fruits glazed in sugar.",
+		"type": "consumable",
+		"use_effect": "heal",
+		"heal_amount": 6,
+		"value": 10,
+		"ingredients": ["sugar", "lemon", "orange"]
+	},
+
+	"lemon_bar": {
+		"name": "Lemon Bar",
+		"description": "Tart and sweet pastry.",
+		"type": "consumable",
+		"use_effect": "heal",
+		"heal_amount": 13,
+		"value": 16,
+		"ingredients": ["lemon", "flour", "butter", "egg", "sugar"]
+	},
+
+	"muffin": {
+		"name": "Berry Muffin",
+		"description": "Soft muffin filled with berries.",
+		"type": "consumable",
+		"use_effect": "heal",
+		"heal_amount": 14,
+		"value": 17,
+		"ingredients": ["flour", "egg", "butter", "sugar", "blueberry"]
+	},
+
+	"coconut_ball": {
+		"name": "Coconut Ball",
+		"description": "A sweet and chewy coconut dessert.",
+		"type": "consumable",
+		"use_effect": "heal",
+		"heal_amount": 11,
+		"value": 15,
+		"ingredients": ["coconut", "sugar", "milk"]
+	}
+}
+
+func _ready():
+	# Add recipes as items to the items dictionary
+	for recipe_id in recipes.keys():
+		var recipe = recipes[recipe_id]
+		items[recipe_id] = {
+			"name": recipe["name"],
+			"description": recipe["description"],
+			"type": recipe["type"],
+			"use_effect": recipe.get("use_effect", "none"),
+			"heal_amount": recipe.get("heal_amount", 0),
+			"value": recipe["value"],
+			"ingredients": recipe["ingredients"]
+		}
+
 func get_item(id: String) -> Dictionary:
 	return items.get(id, {})

@@ -83,8 +83,6 @@ func _ready() -> void:
 	
 	set_attack_hitbox_active(false)
 	
-	var player = %Player
-	var health_ui = %HealthUI
 	mesh = class_models[selectedtype]
 	
 	_animation_tree = class_controller[selectedtype]
@@ -328,7 +326,7 @@ func die():
 	if loot_item_id != "default_item" and drop_item:
 		var loot_amount = randi() % (loot_max_amount - loot_min_amount + 1) + loot_min_amount
 		Global.inventory_ref.add_item(loot_item_id, loot_amount)
-		drop_item
+		drop_item = false
 	
 	$enemy/DeathParticles1.emitting = true
 	
@@ -367,6 +365,5 @@ func _on_hitbox_body_entered(body):
 	if body.is_in_group("player"):
 		if body.has_method("take_damage"):
 			var direction = (body.global_transform.origin - global_transform.origin).normalized()
-			var knockback_strength = 18.0
 			var upward_force = 30.0
 			body.take_damage(damagedealt, direction, knockback_strength, upward_force)
