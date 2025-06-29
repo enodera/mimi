@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=4 uid="uid://c3fdkpdxnncyy"]
 
-[ext_resource type="Material" uid="uid://b7y1rqlje5l3l" path="res://Ground/Grass/chunktexture.tres" id="1_prrjy"]
+[ext_resource type="Material" uid="uid://bhn5pfpuhb7l3" path="res://Ground/Grass/SnowMaterial.tres" id="1_prrjy"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_sxe0w"]
 _surfaces = [{

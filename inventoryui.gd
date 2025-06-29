@@ -26,7 +26,7 @@ func _ready():
 
 	# Add one of every item in the database
 	for item_id in ItemDatabase.items.keys():
-		inventory.add_item(item_id, 1)
+		inventory.add_item(item_id, 10)
 
 	show_item("none")
 

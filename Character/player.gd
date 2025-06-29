@@ -15,7 +15,7 @@ extends CharacterBody3D
 @export var sprint_speed := 22.0
 @export var acceleration := 100.0
 @export var rotation_speed := 12.0
-@export var jump_strength := 75.0
+@export var jump_strength := 55.0
 @export var gravity := 225.0
 
 @export_group("Attack Timings")
@@ -79,8 +79,6 @@ func _ready() -> void:
 	add_child(_air_attack_timer)
 	
 	health_ui.set_health(max_health, current_health)
-	
-	QuestManager.start_quest("defeat_frogs")
 
 
 # ---------------
@@ -174,7 +172,7 @@ func perform_attack() -> void:
 
 func perform_air_attack() -> void:
 	set_state("airattack")
-	velocity.y = 40
+	velocity.y = 60
 	_skin.spin_around(attack_durations[2]/3)
 	_skin.set_airbroom_position()
 	_air_attack_timer.wait_time = attack_durations[2]/1.5
@@ -404,6 +402,8 @@ func _on_attack_timeout() -> void:
 func _on_air_attack_timeout() -> void:
 	if not is_on_floor():
 		set_state("air")
+	else:
+		set_state("squat")
 
 
 # --------------------------
@@ -436,17 +436,17 @@ func _process(_delta: float) -> void:
 			%InventoryUI.visible = false
 			Global.paused = false
 			
-	if Input.is_action_just_pressed("interact"):
-		if not Global.paused and not Global.dialoguepaused:
-			print("Inventory paused")
-			%CookingUI.visible = true
-			Global.paused = true
-			%CookingUI.show_inventory()
-		else:
-			print("Inventory unpaused")
-			await %CookingUI._on_close_button_pressed()
-			%CookingUI.visible = false
-			Global.paused = false
+	#if Input.is_action_just_pressed("interact"):
+		#if not Global.paused and not Global.dialoguepaused:
+			#print("Inventory paused")
+			#%CookingUI.visible = true
+			#Global.paused = true
+			#%CookingUI.show_inventory()
+		#else:
+			#print("Inventory unpaused")
+			#await %CookingUI._on_close_button_pressed()
+			#%CookingUI.visible = false
+			#Global.paused = false
 			
 
 func take_damage(amount: int, knockback_dir: Vector3, knockback_strength: float, upward_force: float) -> void:

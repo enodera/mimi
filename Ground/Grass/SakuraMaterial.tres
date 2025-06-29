@@ -1,0 +1,7 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://dfvetl8efkcwc"]
+
+[ext_resource type="Texture2D" uid="uid://iekcg3qqoe4w" path="res://Ground/Grass/sakuratexture.png" id="1_6mt6m"]
+
+[resource]
+albedo_texture = ExtResource("1_6mt6m")
+emission_energy_multiplier = 0.25

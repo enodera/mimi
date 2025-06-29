@@ -1,0 +1,38 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://gk105a0i2eet"
+path.s3tc="res://.godot/imported/fruits_b4ef17d7c1f94e61b5ae8ddb93ee29e4_N_Radish_Normal.png-1c0fadefea1bd93d4499ba463f30a78e.s3tc.ctex"
+metadata={
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
+}
+generator_parameters={
+"md5": "44f28a1f810780734747e4df7330e471"
+}
+
+[deps]
+
+source_file="res://Items/Meshes/fruits_b4ef17d7c1f94e61b5ae8ddb93ee29e4_N_Radish_Normal.png"
+dest_files=["res://.godot/imported/fruits_b4ef17d7c1f94e61b5ae8ddb93ee29e4_N_Radish_Normal.png-1c0fadefea1bd93d4499ba463f30a78e.s3tc.ctex"]
+
+[params]
+
+compress/mode=2
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/hdr_compression=1
+compress/normal_map=1
+compress/channel_pack=0
+mipmaps/generate=true
+mipmaps/limit=-1
+roughness/mode=1
+roughness/src_normal="res://Items/Meshes/fruits_b4ef17d7c1f94e61b5ae8ddb93ee29e4_N_Radish_Normal.png"
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/normal_map_invert_y=false
+process/hdr_as_srgb=false
+process/hdr_clamp_exposure=false
+process/size_limit=0
+detect_3d/compress_to=0

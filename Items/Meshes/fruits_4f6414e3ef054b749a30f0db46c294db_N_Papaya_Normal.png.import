@@ -1,0 +1,38 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://wynuvm55k5sf"
+path.s3tc="res://.godot/imported/fruits_4f6414e3ef054b749a30f0db46c294db_N_Papaya_Normal.png-7390cefb229fe2f5bac0a5af67ab1d36.s3tc.ctex"
+metadata={
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
+}
+generator_parameters={
+"md5": "6d0482052301483d97c1bc30b3534344"
+}
+
+[deps]
+
+source_file="res://Items/Meshes/fruits_4f6414e3ef054b749a30f0db46c294db_N_Papaya_Normal.png"
+dest_files=["res://.godot/imported/fruits_4f6414e3ef054b749a30f0db46c294db_N_Papaya_Normal.png-7390cefb229fe2f5bac0a5af67ab1d36.s3tc.ctex"]
+
+[params]
+
+compress/mode=2
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/hdr_compression=1
+compress/normal_map=1
+compress/channel_pack=0
+mipmaps/generate=true
+mipmaps/limit=-1
+roughness/mode=1
+roughness/src_normal="res://Items/Meshes/fruits_4f6414e3ef054b749a30f0db46c294db_N_Papaya_Normal.png"
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/normal_map_invert_y=false
+process/hdr_as_srgb=false
+process/hdr_clamp_exposure=false
+process/size_limit=0
+detect_3d/compress_to=0

@@ -32,6 +32,10 @@ func _ready() -> void:
 	talkingpos = speaker_label.global_position.y
 	narratepos = speaker_label.global_position.y + 20
 	
+	options_container.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	options_container.size_flags_horizontal = Control.SIZE_FILL
+	options_container.custom_minimum_size = Vector2(200, 0)  # adjust width as needed
+	
 
 
 # --- Starting Dialogue ---
@@ -133,6 +137,19 @@ func show_current_line():
 
 			if line.has("set_quest"):
 				QuestManager.start_quest(line["set_quest"])
+				
+			if line.has("check_quest"):
+				var next_branch = QuestManager.on_item_delivered(line["check_quest"])
+				var character = speaker_label.text.strip_edges().to_lower().replace(" ", "_")
+
+				print("Character:", character)
+				print("Next branch:", next_branch)
+
+				if DialogueData.dialogue.has(character) and DialogueData.dialogue[character].has(next_branch):
+					start_dialogue(DialogueData.dialogue[character][next_branch], character.capitalize())
+				else:
+					print("Missing dialogue branch: ", next_branch)
+					end_dialogue()
 
 			if line.has("complete_quest"):
 				QuestManager.complete_quest(line["complete_quest"])

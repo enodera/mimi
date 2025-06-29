@@ -1,0 +1,38 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://cwfmj2j14c7b"
+path.s3tc="res://.godot/imported/fruits_4405dda9474a4da19cb5ff7a26d2b70f_N_Banana_Normal.png-38eeb0f5f234dc32e8b4d759837783c8.s3tc.ctex"
+metadata={
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
+}
+generator_parameters={
+"md5": "1aaeb9db1b202e3005c2af3b4a46f8fb"
+}
+
+[deps]
+
+source_file="res://Items/Meshes/fruits_4405dda9474a4da19cb5ff7a26d2b70f_N_Banana_Normal.png"
+dest_files=["res://.godot/imported/fruits_4405dda9474a4da19cb5ff7a26d2b70f_N_Banana_Normal.png-38eeb0f5f234dc32e8b4d759837783c8.s3tc.ctex"]
+
+[params]
+
+compress/mode=2
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/hdr_compression=1
+compress/normal_map=1
+compress/channel_pack=0
+mipmaps/generate=true
+mipmaps/limit=-1
+roughness/mode=1
+roughness/src_normal="res://Items/Meshes/fruits_4405dda9474a4da19cb5ff7a26d2b70f_N_Banana_Normal.png"
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/normal_map_invert_y=false
+process/hdr_as_srgb=false
+process/hdr_clamp_exposure=false
+process/size_limit=0
+detect_3d/compress_to=0

@@ -32,7 +32,7 @@ var dialogue = {
 				"options": [
 					{"text": "I'm okay.", "next": "relieved"},
 					{"text": "Well...", "next": "panics"},
-					{"text": "DIE...", "next": "ah"}
+					{"text": "Lemons for Liz (Quest)", "next": "lemons_for_liz"}
 				]
 			}
 		],
@@ -42,11 +42,28 @@ var dialogue = {
 		"panics": [
 			"Oh no...\nIf you need any help with anything, let me know!"
 		],
-		"ah": [
-			"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+		"lemons_for_liz": [
+			{"text": "", "check_quest": "lemons_for_liz"}
+		],
+		"lemons_for_liz_start": [
+			"Oh, I need to ask a favour! Could you give me 3 lemons?",
+			"Truth is, I need them for my lesson...",
+			"Thank you so much!"
+		],
+		"lemons_for_liz_done": [
+			"Thank you for the lemons! You're a lifesaver."
+		],
+		"lemons_for_liz_fail": [
+			"Hmm... looks like you don't have any lemons yet."
 		],
 		"again": [
 			"Talking to me again? You're too kind!"
+		],
+		"already_done_quest" : [
+			"Um... You already did this quest... Sorry..."
+		],
+		"error" : [
+			"Error!"
 		]
 	},
 	

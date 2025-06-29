@@ -25,6 +25,7 @@ func add_item(item_id: String, amount: int = 1):
 		if i["id"] == item_id:
 			i["quantity"] += amount
 			print("Item found, new quantity:", i["quantity"])
+			QuestManager.on_item_obtained(item_id, amount)
 			return
 
 	# Find insertion index to keep list sorted, with consumables first
@@ -53,8 +54,8 @@ func add_item(item_id: String, amount: int = 1):
 
 	print("Inserting new item at index:", insert_index)
 	items.insert(insert_index, {"id": item_id, "quantity": amount})
-
-
+	
+	QuestManager.on_item_obtained(item_id, amount)
 
 func add_recipe(recipe_id: String):
 	# Check if recipe already exists to avoid duplicates
@@ -65,7 +66,6 @@ func add_recipe(recipe_id: String):
 	recipes.append({"id": recipe_id})
 	var recipename = ItemDatabase.recipes[recipe_id]["name"]
 	NotificationUI.show_notification("New recipe unlocked: %s!" % recipename, 2.0)
-	
 
 # Removes an item from the inventory (if the quantity reaches 0)
 func remove_item(item_id: String, amount: int = 1):
@@ -75,7 +75,6 @@ func remove_item(item_id: String, amount: int = 1):
 			if i["quantity"] <= 0:
 				items.erase(i)
 			return
-	
 
 # Retrieves all items from the inventory
 func get_items() -> Array:

@@ -345,7 +345,7 @@ func die():
 		$MinimapSign.visible = false
 	
 		
-	if $CollisionShape3D != null:
+	if $CollisionShape3D:
 		$CollisionShape3D.queue_free()
 
 	mesh.rotation_degrees.x = 0
