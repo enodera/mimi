@@ -44,6 +44,9 @@ signal quest_completed(quest_id)
 func get_quest_list() -> Array:
 	return quest_data.keys()  # Returns an array of quest IDs in the order they were defined
 
+func get_active_quest_list() -> Array:
+	return quests.keys()  # Returns an array of quest IDs in the order they were defined
+
 # Function to get a quest's index in the list
 func get_quest_index(quest_id: String) -> int:
 	var quest_list = get_quest_list()

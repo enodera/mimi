@@ -195,6 +195,13 @@ visible = false
 
 [node name="NPC" parent="." instance=ExtResource("5_0f5h7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.5925, 0, 0)
+selected_npc = 1
+hair_color = 3
+show_hairfringeemoleft = false
+show_hairfringeemoright = true
+show_hairfringemiddle = false
+show_hairfringepart = true
+show_hairsideshort = true
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 transform = Transform3D(6.86233, -5.22485, 0, 5.22485, 6.86233, 0, 0, 0, 8.625, 9.79288, -1.74596, 15.248)

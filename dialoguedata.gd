@@ -1,28 +1,6 @@
-# dialoguedata.gd (dictionary singleton)
-
 extends Node
 
 var dialogue = {
-	
-	"npc_john": {
-		"greeting": [
-			"Hey there, traveler.",
-			{
-				"text": "Do you need directions?",
-				"options": [
-					{"text": "Yes, please.", "next": "help_directions"},
-					{"text": "No thanks.", "next": "no_help"}
-				]
-			}
-		],
-		"help_directions": [
-			"The village is just down the road to the east.",
-			{"text": "Safe travels!", "set_branch": "no_help"}
-		],
-		"no_help": [
-			"Alright, take care!"
-		]
-	},
 	
 	"liz": {
 		"intro": [
@@ -66,24 +44,406 @@ var dialogue = {
 			"Error!"
 		]
 	},
-	
-	"narrator": {
+
+	"npc_1": {
 		"intro": [
-			"Shh! Keep your voice down.",
+			"hey there!",
 			{
-				"text": "Are you followed?",
+				"text": "how's it going?",
 				"options": [
-					{"text": "I don't think so.", "next": "relieved"},
-					{"text": "Yes.", "next": "panics"}
+					{"text": "pretty good!", "next": "friendly"},
+					{"text": "not so great...", "next": "worried"},
+					{"text": "any quests?", "next": "quest_offer"}
 				]
 			}
 		],
-		"relieved": [
-			"Good. We don't want any trouble."
+		"friendly": [
+			{"text": "glad to hear that! let me know if you want to chat.", "set_branch": "again"}
 		],
-		"panics": [
-			"Oh no. We need to hide, now!"
+		"worried": [
+			"oh no, hope things get better soon. if you want help, just ask."
+		],
+		"quest_offer": [
+			{"text": "", "check_quest": "npc1_quest"}
+		],
+		"npc1_quest_start": [
+			"actually, i do have something you could help with!",
+			"can you collect 5 berries for me?",
+			"they're for a recipe i'm trying out. thanks a bunch!"
+		],
+		"npc1_quest_done": [
+			"thanks for bringing the berries! you're the best."
+		],
+		"npc1_quest_fail": [
+			"looks like you don't have the berries yet. keep looking!"
+		],
+		"again": [
+			"back so soon? you're quite friendly!"
+		],
+		"already_done_quest": [
+			"you already helped me with this, thanks again!"
+		],
+		"error": [
+			"something went wrong... try again later."
+		]
+	},
+
+	"npc_2": {
+		"intro": [
+			"hello there!",
+			{
+				"text": "what brings you here?",
+				"options": [
+					{"text": "just exploring.", "next": "casual"},
+					{"text": "looking for work.", "next": "job"},
+					{"text": "got any tasks?", "next": "quest_offer"}
+				]
+			}
+		],
+		"casual": [
+			{"text": "nice to have you around! enjoy your time here.", "set_branch": "again"}
+		],
+		"job": [
+			"i might have a job for you soon. stay ready!"
+		],
+		"quest_offer": [
+			{"text": "", "check_quest": "npc2_quest"}
+		],
+		"npc2_quest_start": [
+			"i need help gathering 4 herbs for a potion.",
+			"could you find them for me?",
+			"thank you!"
+		],
+		"npc2_quest_done": [
+			"perfect, these herbs will do nicely!"
+		],
+		"npc2_quest_fail": [
+			"haven't found the herbs yet? keep searching!"
+		],
+		"again": [
+			"you sure like to talk, don't you?"
+		],
+		"already_done_quest": [
+			"you've already completed this one."
+		],
+		"error": [
+			"error occurred. please try again."
+		]
+	},
+
+	"npc_3": {
+		"intro": [
+			"hi friend!",
+			{
+				"text": "need something?",
+				"options": [
+					{"text": "just saying hi.", "next": "friendly"},
+					{"text": "looking for a quest.", "next": "quest_offer"}
+				]
+			}
+		],
+		"friendly": [
+			{"text": "nice to hear from you! take care.", "set_branch": "again"}
+		],
+		"quest_offer": [
+			{"text": "", "check_quest": "npc3_quest"}
+		],
+		"npc3_quest_start": [
+			"can you fetch me 2 jars of honey?",
+			"i'm baking something special.",
+			"thanks for helping!"
+		],
+		"npc3_quest_done": [
+			"awesome, the honey is just what i needed!"
+		],
+		"npc3_quest_fail": [
+			"you still need to get those jars of honey."
+		],
+		"again": [
+			"good to see you again!"
+		],
+		"already_done_quest": [
+			"you've already done this quest."
+		],
+		"error": [
+			"oops, something went wrong."
+		]
+	},
+
+	"npc_4": {
+		"intro": [
+			"greetings!",
+			{
+				"text": "what's on your mind?",
+				"options": [
+					{"text": "just passing by.", "next": "casual"},
+					{"text": "interested in a quest?", "next": "quest_offer"}
+				]
+			}
+		],
+		"casual": [
+			{"text": "have a good day!", "set_branch": "again"}
+		],
+		"quest_offer": [
+			{"text": "", "check_quest": "npc4_quest"}
+		],
+		"npc4_quest_start": [
+			"i need some firewood, could you bring 6 pieces?",
+			"it's for the village bonfire.",
+			"thanks a lot!"
+		],
+		"npc4_quest_done": [
+			"perfect! the bonfire will be great."
+		],
+		"npc4_quest_fail": [
+			"no firewood yet? keep an eye out."
+		],
+		"again": [
+			"talk to me anytime!"
+		],
+		"already_done_quest": [
+			"you already helped with this one."
+		],
+		"error": [
+			"an error happened. sorry!"
+		]
+	},
+
+	"npc_5": {
+		"intro": [
+			"hey there!",
+			{
+				"text": "how can i assist?",
+				"options": [
+					{"text": "looking for info.", "next": "info"},
+					{"text": "want a quest.", "next": "quest_offer"}
+				]
+			}
+		],
+		"info": [
+			"i might know something useful for you."
+		],
+		"quest_offer": [
+			{"text": "", "check_quest": "npc5_quest"}
+		],
+		"npc5_quest_start": [
+			"could you find 3 feathers for me?",
+			"i need them for a craft project.",
+			"thank you!"
+		],
+		"npc5_quest_done": [
+			"great, these feathers will do!"
+		],
+		"npc5_quest_fail": [
+			"still no feathers? keep trying!"
+		],
+		"again": [
+			"here to chat again?"
+		],
+		"already_done_quest": [
+			"quest already completed."
+		],
+		"error": [
+			"error encountered."
+		]
+	},
+
+	"npc_6": {
+		"intro": [
+			"hello!",
+			{
+				"text": "what brings you here?",
+				"options": [
+					{"text": "just checking in.", "next": "casual"},
+					{"text": "do you have tasks?", "next": "quest_offer"}
+				]
+			}
+		],
+		"casual": [
+			{"text": "good to see you!", "set_branch": "again"}
+		],
+		"quest_offer": [
+			{"text": "", "check_quest": "npc6_quest"}
+		],
+		"npc6_quest_start": [
+			"can you bring me 7 stones?",
+			"i need them for construction.",
+			"thanks for helping out!"
+		],
+		"npc6_quest_done": [
+			"thanks for the stones!"
+		],
+		"npc6_quest_fail": [
+			"not enough stones yet, keep looking."
+		],
+		"again": [
+			"talk anytime!"
+		],
+		"already_done_quest": [
+			"you already completed this task."
+		],
+		"error": [
+			"something's wrong, please retry."
+		]
+	},
+
+	"npc_7": {
+		"intro": [
+			"hi!",
+			{
+				"text": "can i help you?",
+				"options": [
+					{"text": "looking for quests.", "next": "quest_offer"},
+					{"text": "just chatting.", "next": "friendly"}
+				]
+			}
+		],
+		"friendly": [
+			{"text": "nice chatting with you!", "set_branch": "again"}
+		],
+		"quest_offer": [
+			{"text": "", "check_quest": "npc7_quest"}
+		],
+		"npc7_quest_start": [
+			"i need 4 bundles of cloth.",
+			"can you get them for me?",
+			"thanks a lot!"
+		],
+		"npc7_quest_done": [
+			"perfect, just what i needed!"
+		],
+		"npc7_quest_fail": [
+			"haven't got the cloth yet? keep trying!"
+		],
+		"again": [
+			"welcome back!"
+		],
+		"already_done_quest": [
+			"you've already finished this quest."
+		],
+		"error": [
+			"error occurred, please try again."
+		]
+	},
+
+	"npc_8": {
+		"intro": [
+			"hello!",
+			{
+				"text": "need any help?",
+				"options": [
+					{"text": "yes, please.", "next": "help"},
+					{"text": "not right now.", "next": "casual"}
+				]
+			}
+		],
+		"help": [
+			"what do you need?"
+		],
+		"casual": [
+			"okay, let me know if you need anything!"
+		],
+		"quest_offer": [
+			{"text": "", "check_quest": "npc8_quest"}
+		],
+		"npc8_quest_start": [
+			"could you find 5 bottles of water?",
+			"they're important for the trip.",
+			"thank you!"
+		],
+		"npc8_quest_done": [
+			"great, thanks for the water!"
+		],
+		"npc8_quest_fail": [
+			"still waiting on those bottles."
+		],
+		"again": [
+			"good to see you again!"
+		],
+		"already_done_quest": [
+			"this quest is already done."
+		],
+		"error": [
+			"something went wrong."
+		]
+	},
+
+	"npc_9": {
+		"intro": [
+			"hey!",
+			{
+				"text": "looking for anything?",
+				"options": [
+					{"text": "just browsing.", "next": "casual"},
+					{"text": "any quests?", "next": "quest_offer"}
+				]
+			}
+		],
+		"casual": [
+			"feel free to look around."
+		],
+		"quest_offer": [
+			{"text": "", "check_quest": "npc9_quest"}
+		],
+		"npc9_quest_start": [
+			"i need 3 pieces of fabric.",
+			"can you help me get them?",
+			"thanks!"
+		],
+		"npc9_quest_done": [
+			"thanks for the fabric!"
+		],
+		"npc9_quest_fail": [
+			"no fabric yet? keep searching."
+		],
+		"again": [
+			"nice to see you again!"
+		],
+		"already_done_quest": [
+			"you already finished this one."
+		],
+		"error": [
+			"error happened, try later."
+		]
+	},
+
+	"npc_10": {
+		"intro": [
+			"hi there!",
+			{
+				"text": "need any assistance?",
+				"options": [
+					{"text": "yes, what can you offer?", "next": "quest_offer"},
+					{"text": "just stopping by.", "next": "casual"}
+				]
+			}
+		],
+		"casual": [
+			"thanks for visiting!"
+		],
+		"quest_offer": [
+			{"text": "", "check_quest": "npc10_quest"}
+		],
+		"npc10_quest_start": [
+			"can you find me 2 bundles of rope?",
+			"i need them for fixing the bridge.",
+			"thank you!"
+		],
+		"npc10_quest_done": [
+			"perfect, this will help a lot."
+		],
+		"npc10_quest_fail": [
+			"still waiting on the rope."
+		],
+		"again": [
+			"good to see you again!"
+		],
+		"already_done_quest": [
+			"you already did this quest."
+		],
+		"error": [
+			"something went wrong."
 		]
 	}
-	
+
 }

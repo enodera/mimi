@@ -1,0 +1,12 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://btudh12xx0tas"]
+
+[ext_resource type="Texture2D" uid="uid://et18gok6rcj2" path="res://MimiModels/NPC1.0/NPCmaker_npcoutfit.png" id="1_mm0ri"]
+
+[resource]
+cull_mode = 2
+albedo_color = Color(0, 0, 0, 1)
+albedo_texture = ExtResource("1_mm0ri")
+metallic_specular = 0.0
+emission_enabled = true
+emission = Color(0.593763, 0.103549, 0.283334, 1)
+emission_texture = ExtResource("1_mm0ri")

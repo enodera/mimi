@@ -45,6 +45,8 @@ var combo_queued := false
 
 var is_knockback_active := false
 
+var good_def := false
+
 # -----------------------
 # --- NODE REFERENCES ---
 # -----------------------
@@ -86,33 +88,43 @@ func _ready() -> void:
 # ---------------
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("left_click") and not Global.paused:
+	if Global.paused:
+		return
+	
+	if event.is_action_pressed("left_click"):
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-
+		
+		if not Global.dialoguepaused:
+			if is_on_floor():
+				if state == "attack" and combo_step < combo_max:
+					combo_queued = true
+				else:
+					perform_attack()
+			elif state == "jump" and 35 >= velocity.y and velocity.y >= -15:
+				perform_air_attack()
+	
 	if event.is_action_pressed("ui_cancel"):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-
-	if event.is_action_pressed("left_click") and not Global.paused and not Global.dialoguepaused:
-		if is_on_floor():
-			if state == "attack" and combo_step < combo_max:
-				combo_queued = true
-			else:
-				perform_attack()
-		elif state == "jump" and 35 >= velocity.y and velocity.y >= -15:
-			perform_air_attack()
-
-	if event.is_action_pressed("right_click"):
-		state = "hitstun"
-		_skin.set_move_state("hitstun")
-		health_ui.take_damage(20)
 	
-	if not Global.paused:
-		if Input.is_action_pressed("camera_zoomin"):
-			if _spring_arm.spring_length > min_zoom_distance:
-				_spring_arm.spring_length -= zoom_speed
-		if Input.is_action_pressed("camera_zoomout"):
-			if _spring_arm.spring_length < max_zoom_distance:
-				_spring_arm.spring_length += zoom_speed
+	# Right click pressed -> enter defend state
+	if event.is_action_pressed("right_click") and not Global.dialoguepaused and is_on_floor():
+		if state in ["idle", "walkrun", "recovery"]:
+			set_state("defend")
+	
+	# Right click released -> exit defend state (go back to idle or previous state)
+	if event.is_action_released("right_click"):
+		# Only reset defend if currently defending, to avoid unwanted state changes
+		if state == "defend":
+			set_state("idle")
+			
+	
+	if Input.is_action_pressed("camera_zoomin"):
+		if _spring_arm.spring_length > min_zoom_distance:
+			_spring_arm.spring_length -= zoom_speed
+	if Input.is_action_pressed("camera_zoomout"):
+		if _spring_arm.spring_length < max_zoom_distance:
+			_spring_arm.spring_length += zoom_speed
+
 
 
 # ---------------- 
@@ -123,10 +135,10 @@ func perform_attack() -> void:
 	if combo_step >= combo_max:
 		return
 
-	state = "attack"
+	set_state("attack")
 	_can_move = false
 	combo_step += 1
-	print("State changed to: attack (step ", combo_step, ")")
+	print("State changed to attack (step ", combo_step, ")")
 
 	velocity = Vector3.ZERO
 
@@ -159,7 +171,7 @@ func perform_attack() -> void:
 		3:
 			_skin.set_move_state("swing3")
 			_skin.spin_around(attack_durations[2]/2)
-
+	
 	_skin.set_broom_position(combo_step)
 
 	var attack_duration: float = attack_durations[combo_step - 1]
@@ -209,10 +221,11 @@ func _physics_process(delta: float) -> void:
 		update_air_broom_particles()
 	update_camera_rotation(delta)
 
-	if state == "attack" and not _can_move:
-		handle_attack_movement(delta)
+	if not _can_move:
+		if state == "attack":
+			handle_attack_movement(delta)
 		return
-
+	
 	handle_movement_input(delta)
 	handle_jump_and_gravity(delta)
 	update_state_and_animation()
@@ -224,8 +237,8 @@ func _physics_process(delta: float) -> void:
 
 
 func disable_movement():
-	set_state("idle")
 	_can_move = false
+	set_state("idle")
 
 
 func update_broom_visibility():
@@ -234,7 +247,7 @@ func update_broom_visibility():
 
 
 func update_can_move():
-	_can_move = _attack_timer.time_left <= 0
+	_can_move = _attack_timer.time_left <= 0 and state != "defend"
 
 
 func update_broom_particles():
@@ -259,10 +272,11 @@ func handle_attack_movement(delta: float):
 		extraattackmove = 1
 	else:
 		extraattackmove = 2
-	velocity.y = 0.0 if is_on_floor() else velocity.y - gravity * delta
-	velocity.x = _attack_lunge_direction.x * _attack_lunge_strength * extraattackmove
-	velocity.z = _attack_lunge_direction.z * _attack_lunge_strength * extraattackmove
-	move_and_slide()
+	if not is_knockback_active:
+		velocity.y = 0.0 if is_on_floor() else velocity.y - gravity * delta
+		velocity.x = _attack_lunge_direction.x * _attack_lunge_strength * extraattackmove
+		velocity.z = _attack_lunge_direction.z * _attack_lunge_strength * extraattackmove
+		move_and_slide()
 
 
 func handle_movement_input(delta: float):
@@ -271,7 +285,7 @@ func handle_movement_input(delta: float):
 	var move_dir = (_camera.global_basis.z * input.y + _camera.global_basis.x * input.x).normalized()
 	move_dir.y = 0.0
 
-	if state not in ["hitstun", "attack"]:
+	if state not in ["hitstun", "attack", "defend"]:
 		velocity = velocity.move_toward(move_dir * speed, acceleration * delta)
 
 	if _can_move and state == "attack":
@@ -325,15 +339,18 @@ func update_state_and_animation():
 			_skin.set_run_speed(horizontal_speed - move_speed, sprint_speed - move_speed)
 			combo_step = 0
 		elif _attack_recovery_timer.time_left <= 0:
-			set_state("idle")
-			combo_step = 0
-			
+			if state != "defend":
+				set_state("idle")
+				combo_step = 0
+			else:
+				set_state("defend")
+				combo_step = 0
 
 func set_state(new_state: String) -> void:
 	if state == new_state:
 		return
 	state = new_state
-	print(state)
+	print("State change triggered: ", state)
 	match new_state:
 		"idle":
 			_skin.set_move_state("idle")
@@ -346,13 +363,19 @@ func set_state(new_state: String) -> void:
 		"squat":
 			_skin.set_move_state("squat")
 		"attack":
-			_skin.set_move_state("swing1") # o lo que toque
+			pass # no animación específica
 		"hitstun":
-			_skin.set_move_state("hitstun")
+			if good_def:
+				_skin.set_move_state("good_def")
+			else:
+				_skin.set_move_state("hitstun")
+			
 		"recovery":
 			pass # no animación específica
 		"airattack":
 			_skin.set_move_state("airattack")
+		"defend":
+			_skin.set_move_state("defend")
 
 
 func update_particles():
@@ -378,8 +401,6 @@ func check_landing():
 			set_state("idle")
 			_can_move = true
 			is_knockback_active = false
-
-
 
 
 
@@ -450,23 +471,31 @@ func _process(_delta: float) -> void:
 			
 
 func take_damage(amount: int, knockback_dir: Vector3, knockback_strength: float, upward_force: float) -> void:
-	print("Player took damage: ", amount)
+	print("Player took damage: ", amount, " in state ", state)
 	
 	$AttackedParticles.restart()
 	$AttackedParticles.emitting = true
 	
-	set_state("hitstun")
 	_can_move = false
 	combo_step = 0
 	combo_queued = false
 	is_knockback_active = true
-
-	_skin.set_move_state("hitstun")
-	health_ui.take_damage(amount)
-
-	# Normalize direction to prevent scaling errors
+	
+	if _attack_timer.is_stopped() == false:
+		_attack_timer.stop()
+	if _attack_recovery_timer.is_stopped() == false:
+		_attack_recovery_timer.stop()
+	
 	var direction = knockback_dir.normalized()
-
+	
+	if state != "defend":
+		health_ui.take_damage(amount)
+		good_def = false
+	else:
+		good_def = true
+	
+	set_state("hitstun")
+	
 	velocity.x = direction.x * knockback_strength
 	velocity.z = direction.z * knockback_strength
 	velocity.y = upward_force

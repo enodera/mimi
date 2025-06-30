@@ -172,6 +172,7 @@ func next_line():
 		typing = false
 		return
 	current_index += 1
+	print("This is the quest manager: ", QuestManager.get_active_quest_list())
 	show_current_line()
 
 

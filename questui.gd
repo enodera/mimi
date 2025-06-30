@@ -58,6 +58,5 @@ func _on_quest_started(quest_id: String) -> void:
 func _on_quest_completed(quest_id: String) -> void:
 	if active_quests.has(quest_id):
 		var container = active_quests[quest_id]
-		if container.get_child_count() > 0:
-			var title_label = container.get_child(0)
-			title_label.text += " (Completed)"
+		container.queue_free()  # Remove the container from the scene
+		active_quests.erase(quest_id)  # Remove reference from the dictionary
