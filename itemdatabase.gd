@@ -307,6 +307,7 @@ var recipes = {
 		"description": "Soft and fluffy baked goodness.",
 		"type": "consumable",
 		"use_effect": "heal",
+		"heal_amount": 14,
 		"value": 25,
 		"ingredients": ["flour", "egg", "butter", "milk", "sugar"]
 	},

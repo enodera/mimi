@@ -1,0 +1,7 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://b0tejma582nok"]
+
+[ext_resource type="Shader" uid="uid://dtruia8qnmacg" path="res://Scenes/TransitionShader.gdshader" id="1_ern1u"]
+
+[resource]
+shader = ExtResource("1_ern1u")
+shader_parameter/circle_size = 0.6

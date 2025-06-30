@@ -1,0 +1,80 @@
+[gd_scene load_steps=4 format=3 uid="uid://da1pua6ast68x"]
+
+[ext_resource type="Script" uid="uid://b5i46qgn2sd8r" path="res://Scenes/title_screen.gd" id="1_vmg2h"]
+[ext_resource type="Theme" uid="uid://brxy2r70hypxg" path="res://titlescreentheme.tres" id="2_8l4an"]
+[ext_resource type="Material" uid="uid://b0tejma582nok" path="res://Scenes/TransitionShader.tres" id="2_n15yj"]
+
+[node name="TitleScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_vmg2h")
+
+[node name="ScreenTransition" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="ScreenTransition"]
+material = ExtResource("2_n15yj")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -250.0
+offset_bottom = 254.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(576, 576)
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="StartButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.411
+anchor_top = 0.461
+anchor_right = 0.588
+anchor_bottom = 0.57
+offset_left = 0.527985
+offset_top = 0.271973
+offset_right = 0.0480347
+offset_bottom = 0.230957
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_8l4an")
+theme_override_font_sizes/font_size = 25
+text = "Start"
+
+[node name="OptionsButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.411
+anchor_top = 0.616
+anchor_right = 0.588
+anchor_bottom = 0.725
+offset_left = 0.527985
+offset_top = -0.16803
+offset_right = 0.0480347
+offset_bottom = -0.209015
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_8l4an")
+theme_override_font_sizes/font_size = 25
+text = "Options"
+
+[node name="CloseButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.411
+anchor_top = 0.77
+anchor_right = 0.588
+anchor_bottom = 0.879
+offset_left = 0.527985
+offset_top = 0.039978
+offset_right = 0.0480347
+offset_bottom = -0.0010376
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_8l4an")
+theme_override_font_sizes/font_size = 25
+text = "Close"

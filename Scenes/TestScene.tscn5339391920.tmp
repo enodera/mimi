@@ -186,8 +186,18 @@ script = ExtResource("9_t2vuu")
 [node name="Player" parent="." instance=ExtResource("2_5lt6y")]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.000657201, 0)
+mouse_sensitivity = 0.25
+zoom_speed = 0.5
 min_zoom_distance = 2.5
 max_zoom_distance = 7.5
+move_speed = 8.0
+sprint_speed = 22.0
+acceleration = 100.0
+rotation_speed = 12.0
+jump_strength = 55.0
+gravity = 225.0
+max_health = 100
+current_health = 100
 
 [node name="Mimi" parent="." instance=ExtResource("3_8k7wh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.29261, 0, 0.964306)

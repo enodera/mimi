@@ -19,6 +19,10 @@ func take_damage(amount: int) -> void:
 	if current_health <= 0:
 		die()
 
+func heal_damage(amount: int) -> void:
+	current_health = clamp(current_health + amount, 0, max_health)
+	update_health_bar()
+
 func update_health_bar() -> void:
 	if health_bar:
 		health_bar.value = float(current_health) / float(max_health) * 100.0

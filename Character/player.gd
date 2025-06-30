@@ -56,6 +56,7 @@ var good_def := false
 @onready var _spring_arm: SpringArm3D = $CameraPivot/SpringArm3D
 @onready var _skin: MimiSkin = %Mimi
 @onready var health_ui = %HealthUI
+@onready var shader_material: ShaderMaterial = $ScreenTransition/ColorRect.material
 
 
 # ---------------
@@ -80,7 +81,10 @@ func _ready() -> void:
 	_air_attack_timer.timeout.connect(_on_air_attack_timeout)
 	add_child(_air_attack_timer)
 	
-	health_ui.set_health(max_health, current_health)
+	if health_ui:
+		health_ui.set_health(max_health, current_health)
+	
+	run_transition_show()
 
 
 # ---------------
@@ -499,3 +503,19 @@ func take_damage(amount: int, knockback_dir: Vector3, knockback_strength: float,
 	velocity.x = direction.x * knockback_strength
 	velocity.z = direction.z * knockback_strength
 	velocity.y = upward_force
+
+func run_transition_hide() -> void:
+	var circle_size = 1.0
+	while circle_size > 0.0:
+		circle_size -= 0.005
+		shader_material.set_shader_parameter("circle_size", circle_size)
+		# Wait for the next frame (~60fps)
+		await get_tree().process_frame
+
+func run_transition_show() -> void:
+	var circle_size = 0.0
+	while circle_size < 1.0:
+		circle_size += 0.005
+		shader_material.set_shader_parameter("circle_size", circle_size)
+		# Wait for the next frame (~60fps)
+		await get_tree().process_frame

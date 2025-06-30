@@ -13,6 +13,7 @@ var projscale = ProjectSettings.get_setting("display/window/stretch/scale")
 @onready var model_preview_container = $Panel/Panel/SubViewportContainer
 @onready var model_viewport = model_preview_container.get_viewport()
 @onready var modelpreview = $Panel/Panel/SubViewportContainer/SubViewport/ModelPreview3D
+@onready var health_ui = %HealthUI
 
 var current_preview_instance: Node3D = null
 
@@ -118,14 +119,21 @@ func _on_close_button_pressed():
 # --- Item Interaction ---
 func _on_item_pressed(item):
 	print("Used item: ", item["id"])
+	var item_data = ItemDatabase.get_item(item["id"])
+
 	if item["quantity"] > 1:
 		item["quantity"] -= 1
 	else:
 		inventory.remove_item(item["id"])
 		%ItemDescription.text = ""
 		show_item("none")
+
+	if item_data["use_effect"] == "heal":
+		health_ui.heal_damage(item_data.get("heal_amount", 0))
+
 	justupdated = true
 	update_ui()
+
 
 # --- Model Preview ---
 func show_model_preview(item_id: String):

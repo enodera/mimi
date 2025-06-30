@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://btukobjpqjuii"]
+[gd_scene load_steps=19 format=3 uid="uid://btukobjpqjuii"]
 
 [ext_resource type="Script" uid="uid://dokcww0rbalf1" path="res://Character/player.gd" id="1_lgt04"]
 [ext_resource type="PackedScene" uid="uid://blabqcdjyg1c5" path="res://Models/mimi.tscn" id="2_schp4"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://clm8txt8vucnj" path="res://MimiModels/1.7 (might glitch)/mimi_1_7.tscn" id="5_5ydrh"]
 [ext_resource type="Material" uid="uid://byd7qixpxbdey" path="res://Land.tres" id="5_ly6k5"]
 [ext_resource type="Material" uid="uid://bcon13yakvxwu" path="res://attackparticles.tres" id="8_gvj7u"]
+[ext_resource type="Material" uid="uid://b0tejma582nok" path="res://Scenes/TransitionShader.tres" id="9_7llnk"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5ydrh"]
 emission_enabled = true
@@ -139,3 +140,18 @@ process_material = ExtResource("8_gvj7u")
 draw_passes = 2
 draw_pass_1 = SubResource("CylinderMesh_7llnk")
 draw_pass_2 = SubResource("CylinderMesh_o1y46")
+
+[node name="ScreenTransition" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="ScreenTransition"]
+material = ExtResource("9_7llnk")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -250.0
+offset_bottom = 254.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(576, 576)
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
