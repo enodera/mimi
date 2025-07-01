@@ -3,54 +3,54 @@
 [ext_resource type="FontFile" uid="uid://dwuutcq4tl2fm" path="res://Fonts/FOT-Seurat Pro B.otf" id="1_ndmua"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mtxku"]
-bg_color = Color(0.57879, 0.166642, 0.321935, 1)
-border_width_left = 3
-border_width_right = 3
+bg_color = Color(0.937885, 0.538319, 0.656641, 1)
+border_width_left = 1
+border_width_right = 1
 border_width_bottom = 4
-border_color = Color(0.423834, 0.107126, 0.227551, 1)
+border_color = Color(0.851724, 0.321011, 0.507437, 1)
 corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eifol"]
-bg_color = Color(0.423529, 0.105882, 0.227451, 1)
+bg_color = Color(0.85098, 0.321569, 0.505882, 1)
 corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j6w57"]
-bg_color = Color(0.423529, 0.105882, 0.227451, 1)
+bg_color = Color(0.85098, 0.321569, 0.505882, 1)
 corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bfrbo"]
-bg_color = Color(0.57879, 0.166642, 0.321935, 1)
+bg_color = Color(0.937255, 0.537255, 0.654902, 1)
 border_width_left = 3
 border_width_right = 3
 border_width_bottom = 4
-border_color = Color(0.423834, 0.107126, 0.227551, 1)
+border_color = Color(0.85098, 0.321569, 0.505882, 1)
 corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ndmua"]
-bg_color = Color(0.57879, 0.166642, 0.321935, 1)
-border_width_left = 3
-border_width_right = 3
+bg_color = Color(0.937885, 0.538319, 0.656641, 1)
+border_width_left = 1
+border_width_right = 1
 border_width_bottom = 4
-border_color = Color(0.423834, 0.107126, 0.227551, 1)
+border_color = Color(0.851724, 0.321011, 0.507437, 1)
 corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_akn7b"]
-bg_color = Color(0.423529, 0.105882, 0.227451, 1)
+bg_color = Color(0.85098, 0.321569, 0.505882, 1)
 corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
@@ -64,6 +64,8 @@ corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 
 [resource]
+Button/colors/font_outline_color = Color(0.85098, 0.321569, 0.505882, 1)
+Button/constants/outline_size = 10
 Button/fonts/font = ExtResource("1_ndmua")
 Button/styles/disabled = SubResource("StyleBoxFlat_mtxku")
 Button/styles/focus = SubResource("StyleBoxFlat_eifol")
