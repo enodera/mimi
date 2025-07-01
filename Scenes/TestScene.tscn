@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://bh55rf6fyknq0"]
+[gd_scene load_steps=36 format=3 uid="uid://bh55rf6fyknq0"]
 
 [ext_resource type="Texture2D" uid="uid://drkhwpqw3v00a" path="res://PrototypeTextures/Green/texture_08.png" id="1_b5ayd"]
 [ext_resource type="PackedScene" uid="uid://pakdokc08g3p" path="res://inventory.tscn" id="1_iufkg"]
@@ -21,6 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://0c5ljs67yis8" path="res://Ground/Grass/grass_chunk_3.tscn" id="17_dwn5r"]
 [ext_resource type="PackedScene" uid="uid://cr5yvrgeq8haf" path="res://Items/overworld_item.tscn" id="18_fi7j4"]
 [ext_resource type="PackedScene" uid="uid://bqe5hsuvprjns" path="res://Enemies/GenericTest/enemyranged.tscn" id="19_4v62a"]
+[ext_resource type="PackedScene" uid="uid://dj8o0wwy0rg82" path="res://Items/pickupable_item.tscn" id="22_1vcy8"]
 
 [sub_resource type="Gradient" id="Gradient_p30di"]
 offsets = PackedFloat32Array(0, 0.0052356, 0.217277, 0.445026, 1)
@@ -295,3 +296,6 @@ quantity = 5
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -118.711, 1.92404, -56.8033)
 patrol_bounds_area = NodePath("../PatrolArea2")
 selectedtype = 1
+
+[node name="PickupableItem" parent="." instance=ExtResource("22_1vcy8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.0698, 2.74453, -26.6595)

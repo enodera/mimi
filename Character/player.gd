@@ -92,7 +92,7 @@ func _ready() -> void:
 # ---------------
 
 func _input(event: InputEvent) -> void:
-	if Global.paused:
+	if Global.inventorypaused or Global.cookingpaused:
 		return
 	
 	if event.is_action_pressed("left_click"):
@@ -200,7 +200,7 @@ func perform_air_attack() -> void:
 # -------------------------------
 
 func _unhandled_input(event: InputEvent) -> void:
-	if not Global.paused:
+	if not Global.inventorypaused or not not Global.cookingpaused:
 		if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 			_camera_input_direction = event.relative * mouse_sensitivity
 
@@ -450,29 +450,31 @@ func _on_attack_recovery_timeout() -> void:
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("inventory"):
-		if not Global.paused and not Global.dialoguepaused:
-			print("Inventory paused")
-			%InventoryUI.visible = true
-			Global.paused = true
-			%InventoryUI.show_inventory()
-		else:
-			print("Inventory unpaused")
-			await %InventoryUI._on_close_button_pressed()
-			%InventoryUI.visible = false
-			Global.paused = false
+		if not Global.cookingpaused and not Global.dialoguepaused:
+			if not Global.inventorypaused:
+				print("Inventory paused")
+				%InventoryUI.visible = true
+				Global.inventorypaused = true
+				%InventoryUI.show_inventory()
+			else:
+				print("Inventory unpaused")
+				await %InventoryUI._on_close_button_pressed()
+				%InventoryUI.visible = false
+				Global.inventorypaused = false
 			
-	#if Input.is_action_just_pressed("interact"):
-		#if not Global.paused and not Global.dialoguepaused:
-			#print("Inventory paused")
-			#%CookingUI.visible = true
-			#Global.paused = true
-			#%CookingUI.show_inventory()
-		#else:
-			#print("Inventory unpaused")
-			#await %CookingUI._on_close_button_pressed()
-			#%CookingUI.visible = false
-			#Global.paused = false
-			
+	if Input.is_action_just_pressed("cooking"):
+		if not Global.inventorypaused and not Global.dialoguepaused:
+			if not Global.cookingpaused:
+				print("Inventory paused")
+				%CookingUI.visible = true
+				Global.cookingpaused = true
+				%CookingUI.show_inventory()
+			else:
+				print("Inventory unpaused")
+				await %CookingUI._on_close_button_pressed()
+				%CookingUI.visible = false
+				Global.cookingpaused = false
+
 
 func take_damage(amount: int, knockback_dir: Vector3, knockback_strength: float, upward_force: float) -> void:
 	print("Player took damage: ", amount, " in state ", state)

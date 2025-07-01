@@ -108,7 +108,7 @@ func _ready():
 	update_outfit_material()
 
 func _process(_delta):
-	if player_in_range and Input.is_action_just_pressed("interact") and not Global.paused and not Global.dialoguepaused:
+	if player_in_range and Input.is_action_just_pressed("interact") and not Global.inventorypaused and not Global.cookingpaused and not Global.dialoguepaused:
 		show_dialog()
 		
 		var player_position = %Player.global_transform.origin

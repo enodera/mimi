@@ -71,7 +71,7 @@ func update_ui():
 func show_inventory():
 	update_ui()
 	visible = true
-	Global.paused = true
+	Global.cookingpaused = true
 	$Panel.scale = Vector2(0, 0)
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	Engine.time_scale = 0.0001
@@ -121,7 +121,7 @@ func _on_close_button_pressed():
 
 	visible = false
 	Engine.time_scale = 1
-	Global.paused = false
+	Global.cookingpaused = false
 	print("bye")
 
 # --- Item Interaction ---

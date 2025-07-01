@@ -232,30 +232,30 @@ graph_offset = Vector2(162, -56.5144)
 script = ExtResource("2_ucfyq")
 
 [node name="Skeleton3D" parent="Armature" index="0"]
-bones/0/position = Vector3(0, -0.170629, 0.0123757)
-bones/1/rotation = Quaternion(-0.0248697, 1.19153e-07, -3.66377e-09, 0.999691)
+bones/0/position = Vector3(0, -0.184955, 0.0113372)
+bones/1/rotation = Quaternion(-0.0198826, 1.19133e-07, -4.2581e-09, 0.999802)
 bones/2/rotation = Quaternion(0.056836, 7.03353e-15, 1.35508e-08, 0.998384)
 bones/3/rotation = Quaternion(-0.264672, -0.0446733, 0.0966977, 0.958438)
-bones/7/rotation = Quaternion(0.882137, 0.185304, -0.420328, 0.104024)
+bones/7/rotation = Quaternion(0.87896, 0.191609, -0.422319, 0.111188)
 bones/8/rotation = Quaternion(1.82302e-08, -1.74384e-07, -0.0081341, 0.999967)
 bones/9/rotation = Quaternion(-3.41464e-09, 3.79065e-07, 0.00278909, 0.999996)
 bones/10/rotation = Quaternion(0.0451254, 0.365335, 0.050862, 0.928389)
-bones/11/rotation = Quaternion(0.882137, -0.185304, 0.420328, 0.104024)
+bones/11/rotation = Quaternion(0.878959, -0.191609, 0.42232, 0.111188)
 bones/12/rotation = Quaternion(2.16765e-08, 1.79095e-07, 0.00813411, 0.999967)
 bones/13/rotation = Quaternion(-3.18918e-09, -3.99558e-07, -0.00278909, 0.999996)
 bones/14/rotation = Quaternion(0.0451254, -0.365335, -0.050862, 0.928389)
-bones/15/rotation = Quaternion(0.722801, -0.0451219, -0.688828, 0.0322424)
-bones/16/rotation = Quaternion(0.00939254, 0.000727788, -0.125377, 0.992064)
-bones/17/rotation = Quaternion(-0.0152839, -0.0164067, 0.777828, 0.628077)
-bones/18/rotation = Quaternion(-0.00253904, 2.22566e-09, 0.00304596, 0.999992)
-bones/19/rotation = Quaternion(0.722801, 0.0451219, 0.688828, 0.0322424)
-bones/20/rotation = Quaternion(0.00939255, -0.000727536, 0.125377, 0.992064)
-bones/21/rotation = Quaternion(-0.0152834, 0.0164061, -0.777828, 0.628077)
-bones/22/rotation = Quaternion(-0.00253942, 1.06763e-09, -0.00304641, 0.999992)
-bones/23/position = Vector3(-0.793568, -0.321764, 0.0747302)
+bones/15/rotation = Quaternion(0.720823, -0.0691452, -0.687169, 0.0585764)
+bones/16/rotation = Quaternion(0.0141861, 0.000720262, -0.189365, 0.981804)
+bones/17/rotation = Quaternion(-0.0155019, -0.0166624, 0.795642, 0.605339)
+bones/18/rotation = Quaternion(-0.00167246, 5.34457e-10, 0.00348779, 0.999993)
+bones/19/rotation = Quaternion(0.720823, 0.0691452, 0.687169, 0.0585764)
+bones/20/rotation = Quaternion(0.0141862, -0.000720013, 0.189365, 0.981804)
+bones/21/rotation = Quaternion(-0.0155016, 0.016662, -0.795642, 0.60534)
+bones/22/rotation = Quaternion(-0.00167227, -3.77949e-10, -0.00348747, 0.999993)
+bones/23/position = Vector3(-0.822368, -0.321765, 0.0747302)
 bones/24/position = Vector3(0.00450291, 0.401603, 0.357574)
 bones/24/rotation = Quaternion(0.999949, -3.65811e-08, 0.010137, -1.99216e-15)
-bones/25/position = Vector3(0.793568, -0.321764, 0.0747302)
+bones/25/position = Vector3(0.822368, -0.321764, 0.0747302)
 bones/26/position = Vector3(-0.00450324, 0.401603, 0.357574)
 bones/26/rotation = Quaternion(0.999949, -6.48341e-16, -0.0101367, 1.80287e-15)
 bones/27/position = Vector3(0.147408, -1.62037, -0.0901504)
@@ -264,30 +264,30 @@ bones/29/rotation = Quaternion(0, 0.707107, 0.707107, 0)
 bones/30/position = Vector3(-0.147408, -1.62037, -0.0901504)
 bones/31/position = Vector3(-0.794373, -0.490363, 0.0227968)
 bones/32/rotation = Quaternion(0, 0.707107, 0.707107, 0)
-bones/33/position = Vector3(2.21717, 1.21511, 0.0959769)
+bones/33/position = Vector3(2.21717, 1.1848, 0.0959769)
 bones/34/position = Vector3(2.47184, 1.21304, 0.0959769)
 
 [node name="Hair1" parent="Armature/Skeleton3D" index="0"]
-transform = Transform3D(-3.01329e-08, 1.01801e-08, -0.248586, -0.00145831, 0.170282, 1.53854e-08, 0.248582, 0.000998959, -2.78413e-08, -0.0089156, 1.48934, 0.140705)
+transform = Transform3D(-3.01294e-08, 1.05852e-08, -0.248586, -0.00393821, 0.170263, 1.62535e-08, 0.248555, 0.00269772, -2.76736e-08, -0.0089156, 1.47407, 0.150863)
 
 [node name="Hair1" parent="Armature/Skeleton3D/Hair1" index="0"]
 surface_material_override/0 = ExtResource("3_q80da")
 
 [node name="Hair2" parent="Armature/Skeleton3D" index="1"]
-transform = Transform3D(1.66259e-08, 1.51432e-08, -0.0621839, 0.0257977, 0.305307, 3.759e-09, 0.151136, -0.0521137, 5.05539e-10, 0.00888653, 1.28006, 0.148668)
+transform = Transform3D(1.66915e-08, 1.58679e-08, -0.0621839, 0.0242886, 0.305812, 3.90165e-09, 0.151385, -0.0490652, 5.46231e-10, 0.00888653, 1.26471, 0.156738)
 
 [node name="Hair2" parent="Armature/Skeleton3D/Hair2" index="0"]
 surface_material_override/0 = ExtResource("3_q80da")
 
 [node name="Hair3" parent="Armature/Skeleton3D" index="2"]
-transform = Transform3D(9.83263e-08, 5.0667e-08, -1.21312, 0.168509, 1.09965, 8.94932e-08, 0.900795, -0.205708, 1.5805e-07, 0.00888656, 1.2627, -0.0979793)
+transform = Transform3D(9.87523e-08, 5.32767e-08, -1.21312, 0.159514, 1.10165, 9.07968e-08, 0.902431, -0.194727, 1.58997e-07, 0.00888656, 1.24982, -0.0900705)
 
 [node name="Hair3" parent="Armature/Skeleton3D/Hair3" index="0"]
 surface_material_override/0 = ExtResource("3_q80da")
 
 [node name="BoneAttachment" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="4"]
 unique_name_in_owner = true
-transform = Transform3D(0.944696, 0.296359, -0.140429, 0.297611, -0.954606, -0.0124848, -0.137754, -0.0299988, -0.990012, 0.68346, -0.259852, 0.0642178)
+transform = Transform3D(0.938567, 0.31339, -0.144492, 0.314767, -0.949068, -0.0138298, -0.141467, -0.0325011, -0.989409, 0.702565, -0.265259, 0.0640508)
 bone_name = "hand.l"
 bone_idx = 10
 

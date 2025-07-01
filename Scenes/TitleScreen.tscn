@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://da1pua6ast68x"]
+[gd_scene load_steps=5 format=3 uid="uid://da1pua6ast68x"]
 
 [ext_resource type="Script" uid="uid://b5i46qgn2sd8r" path="res://Scenes/title_screen.gd" id="1_vmg2h"]
 [ext_resource type="Theme" uid="uid://brxy2r70hypxg" path="res://titlescreentheme.tres" id="2_8l4an"]
 [ext_resource type="Material" uid="uid://b0tejma582nok" path="res://Scenes/TransitionShader.tres" id="2_n15yj"]
+[ext_resource type="Texture2D" uid="uid://ctv3m3bi4ah2m" path="res://Particles/PNG (Transparent)/gamelogo.png" id="4_n15yj"]
 
 [node name="TitleScreen" type="Control"]
 layout_mode = 3
@@ -31,14 +32,14 @@ color = Color(0, 0, 0, 1)
 [node name="StartButton" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.411
-anchor_top = 0.461
-anchor_right = 0.588
-anchor_bottom = 0.57
-offset_left = 0.527985
-offset_top = 0.271973
-offset_right = 0.0480347
-offset_bottom = 0.230957
+anchor_left = 0.747
+anchor_top = 0.265
+anchor_right = 0.923
+anchor_bottom = 0.374
+offset_left = -0.544067
+offset_top = 0.279984
+offset_right = 0.128052
+offset_bottom = 0.238968
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("2_8l4an")
@@ -48,14 +49,14 @@ text = "Start"
 [node name="OptionsButton" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.411
-anchor_top = 0.616
-anchor_right = 0.588
-anchor_bottom = 0.725
-offset_left = 0.527985
-offset_top = -0.16803
-offset_right = 0.0480347
-offset_bottom = -0.209015
+anchor_left = 0.747
+anchor_top = 0.42
+anchor_right = 0.923
+anchor_bottom = 0.529
+offset_left = -0.544067
+offset_top = -0.160004
+offset_right = 0.128052
+offset_bottom = -0.200989
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("2_8l4an")
@@ -65,16 +66,20 @@ text = "Options"
 [node name="CloseButton" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.411
-anchor_top = 0.77
-anchor_right = 0.588
-anchor_bottom = 0.879
-offset_left = 0.527985
-offset_top = 0.039978
-offset_right = 0.0480347
-offset_bottom = -0.0010376
+anchor_left = 0.747
+anchor_top = 0.574
+anchor_right = 0.923
+anchor_bottom = 0.683
+offset_left = -0.544067
+offset_top = 0.0480042
+offset_right = 0.128052
+offset_bottom = 0.00695801
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("2_8l4an")
 theme_override_font_sizes/font_size = 25
 text = "Close"
+
+[node name="Gamelogo" type="Sprite2D" parent="."]
+position = Vector2(399, 272)
+texture = ExtResource("4_n15yj")

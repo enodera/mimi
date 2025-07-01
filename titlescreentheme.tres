@@ -1,9 +1,56 @@
-[gd_resource type="Theme" load_steps=4 format=3 uid="uid://brxy2r70hypxg"]
+[gd_resource type="Theme" load_steps=9 format=3 uid="uid://brxy2r70hypxg"]
 
 [ext_resource type="FontFile" uid="uid://dwuutcq4tl2fm" path="res://Fonts/FOT-Seurat Pro B.otf" id="1_ndmua"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mtxku"]
+bg_color = Color(0.57879, 0.166642, 0.321935, 1)
+border_width_left = 3
+border_width_right = 3
+border_width_bottom = 4
+border_color = Color(0.423834, 0.107126, 0.227551, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eifol"]
+bg_color = Color(0.423529, 0.105882, 0.227451, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j6w57"]
+bg_color = Color(0.423529, 0.105882, 0.227451, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bfrbo"]
+bg_color = Color(0.57879, 0.166642, 0.321935, 1)
+border_width_left = 3
+border_width_right = 3
+border_width_bottom = 4
+border_color = Color(0.423834, 0.107126, 0.227551, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ndmua"]
-bg_color = Color(0.251515, 0.232395, 0.61201, 1)
+bg_color = Color(0.57879, 0.166642, 0.321935, 1)
+border_width_left = 3
+border_width_right = 3
+border_width_bottom = 4
+border_color = Color(0.423834, 0.107126, 0.227551, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_akn7b"]
+bg_color = Color(0.423529, 0.105882, 0.227451, 1)
 corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
@@ -18,7 +65,12 @@ corner_radius_bottom_left = 20
 
 [resource]
 Button/fonts/font = ExtResource("1_ndmua")
+Button/styles/disabled = SubResource("StyleBoxFlat_mtxku")
+Button/styles/focus = SubResource("StyleBoxFlat_eifol")
+Button/styles/hover = SubResource("StyleBoxFlat_j6w57")
+Button/styles/hover_pressed = SubResource("StyleBoxFlat_bfrbo")
 Button/styles/normal = SubResource("StyleBoxFlat_ndmua")
+Button/styles/pressed = SubResource("StyleBoxFlat_akn7b")
 Label/fonts/font = ExtResource("1_ndmua")
 MenuButton/fonts/font = ExtResource("1_ndmua")
 Panel/styles/panel = SubResource("StyleBoxFlat_ju0yn")
