@@ -27,18 +27,18 @@
 offsets = PackedFloat32Array(0, 0.0052356, 0.217277, 0.445026, 1)
 colors = PackedColorArray(0, 0, 0, 1, 0.110389, 0.110389, 0.110389, 1, 0.327225, 0.327225, 0.327225, 1, 0.408422, 0.408422, 0.408422, 1, 1, 1, 1, 1)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_8c81w"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_1vcy8"]
 gradient = SubResource("Gradient_p30di")
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_ytmxh"]
 panorama = ExtResource("1_xjl2p")
 
-[sub_resource type="Sky" id="Sky_hctok"]
+[sub_resource type="Sky" id="Sky_65o0v"]
 sky_material = SubResource("PanoramaSkyMaterial_ytmxh")
 
 [sub_resource type="Environment" id="Environment_201fe"]
 background_mode = 2
-sky = SubResource("Sky_hctok")
+sky = SubResource("Sky_65o0v")
 ambient_light_source = 2
 ambient_light_color = Color(1, 1, 1, 1)
 ambient_light_energy = 0.5
@@ -58,7 +58,7 @@ sdfgi_max_distance = 51.2
 fog_density = 0.0465
 adjustment_enabled = true
 adjustment_saturation = 0.9
-adjustment_color_correction = SubResource("GradientTexture1D_8c81w")
+adjustment_color_correction = SubResource("GradientTexture1D_1vcy8")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lp1f3"]
 shader = ExtResource("10_t2vuu")

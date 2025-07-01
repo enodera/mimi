@@ -188,7 +188,7 @@ func perform_attack() -> void:
 
 func perform_air_attack() -> void:
 	set_state("airattack")
-	velocity.y = 60
+	velocity.y = 50
 	_skin.spin_around(attack_durations[2]/3)
 	_skin.set_airbroom_position()
 	_air_attack_timer.wait_time = attack_durations[2]/1.5

@@ -154,4 +154,4 @@ grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(576, 576)
 mouse_filter = 2
-color = Color(0.211765, 0.0862745, 0.137255, 1)
+color = Color(0.21, 0.0861, 0.13566, 1)

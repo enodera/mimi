@@ -25,7 +25,7 @@ grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(576, 576)
 mouse_filter = 2
-color = Color(1, 0.811771, 0.860018, 1)
+color = Color(1, 0.911713, 0.85144, 1)
 
 [node name="ScreenTransition" type="CanvasLayer" parent="."]
 

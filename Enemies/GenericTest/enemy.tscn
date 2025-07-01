@@ -192,7 +192,7 @@ hue_variation_min = -1.0
 hue_variation_max = 1.0
 hue_variation_curve = SubResource("CurveTexture_j5php")
 
-[node name="Enemy" type="CharacterBody3D"]
+[node name="FrogEnemy" type="CharacterBody3D"]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 script = ExtResource("1_5rcum")
 

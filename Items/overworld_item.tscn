@@ -47,7 +47,7 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_theas")
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_peh8g"]
-height = 0.32019
+height = 0.80365
 radius = 6.05957
 
 [sub_resource type="Curve" id="Curve_e55g2"]
@@ -118,7 +118,7 @@ skeleton = NodePath("")
 [node name="Area3D" type="Area3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.177184, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.418914, 0)
 shape = SubResource("CylinderShape3D_peh8g")
 
 [node name="Label3D" type="Label3D" parent="."]
