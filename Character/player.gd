@@ -15,7 +15,7 @@ extends CharacterBody3D
 @export var sprint_speed := 22.0
 @export var acceleration := 100.0
 @export var rotation_speed := 12.0
-@export var jump_strength := 55.0
+@export var jump_strength := 65.0
 @export var gravity := 225.0
 
 @export_group("Attack Timings")

@@ -37,7 +37,7 @@ shape = SubResource("ConcavePolygonShape3D_dcmoc")
 script = ExtResource("3_qmoj4")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="EnemyDamager"]
-transform = Transform3D(2000, 0, 0, 0, 2000, 0, 0, 0, 2000, 0, 3.70126, 0)
+transform = Transform3D(2000, 0, 0, 0, 2000, 0, 0, 0, 2000, 0, 2.53605, 0)
 shape = SubResource("ConcavePolygonShape3D_dcmoc")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]

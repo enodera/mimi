@@ -1,8 +1,9 @@
-[gd_scene load_steps=33 format=4 uid="uid://6gcu07ce0tq7"]
+[gd_scene load_steps=35 format=4 uid="uid://6gcu07ce0tq7"]
 
 [ext_resource type="Script" uid="uid://chi3o8iwqed4l" path="res://picktree.gd" id="1_1wauy"]
 [ext_resource type="Texture2D" uid="uid://dvncitn4jbjps" path="res://Ground/Trees/tree_e41c024f2bd940ebbdffb11c6bb79485_RGB_Forest_texture_01.png" id="2_1wauy"]
 [ext_resource type="Material" uid="uid://b8s2364t5irjy" path="res://Ground/Trees/tree.tres" id="3_8a7k6"]
+[ext_resource type="Texture2D" uid="uid://iekcg3qqoe4w" path="res://Ground/Grass/sakuratexture.png" id="4_xu32x"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_8a7k6"]
 resource_name = "tree_Tree_01_Forest_mat_01_0_001"
@@ -266,6 +267,12 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_3jm0q")
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ei5ub"]
+albedo_texture = ExtResource("4_xu32x")
+emission_enabled = true
+emission_energy_multiplier = 0.25
+emission_texture = ExtResource("4_xu32x")
+
 [sub_resource type="ArrayMesh" id="ArrayMesh_crnda"]
 _surfaces = [{
 "aabb": AABB(-13.929, -0.516186, -9.52849, 23.5722, 34.0082, 19.0568),
@@ -485,82 +492,69 @@ skeleton = NodePath("")
 surface_material_override/0 = ExtResource("3_8a7k6")
 
 [node name="Tree2" type="MeshInstance3D" parent="StaticBody3D"]
-visible = false
 mesh = SubResource("ArrayMesh_xu32x")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("3_8a7k6")
 
 [node name="Tree3" type="MeshInstance3D" parent="StaticBody3D"]
-visible = false
 mesh = SubResource("ArrayMesh_ei5ub")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("3_8a7k6")
 
 [node name="Tree4" type="MeshInstance3D" parent="StaticBody3D"]
-visible = false
 mesh = SubResource("ArrayMesh_eq4jb")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("3_8a7k6")
 
 [node name="Tree5" type="MeshInstance3D" parent="StaticBody3D"]
-visible = false
 mesh = SubResource("ArrayMesh_k87wh")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("3_8a7k6")
 
 [node name="Tree6" type="MeshInstance3D" parent="StaticBody3D"]
-visible = false
 mesh = SubResource("ArrayMesh_eqo3c")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("3_8a7k6")
 
 [node name="Tree7" type="MeshInstance3D" parent="StaticBody3D"]
-visible = false
 mesh = SubResource("ArrayMesh_y5xa4")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("3_8a7k6")
 
 [node name="Tree8" type="MeshInstance3D" parent="StaticBody3D"]
-visible = false
 mesh = SubResource("ArrayMesh_dsib2")
 skeleton = NodePath("")
-surface_material_override/0 = ExtResource("3_8a7k6")
+surface_material_override/0 = SubResource("StandardMaterial3D_ei5ub")
 
 [node name="Tree9" type="MeshInstance3D" parent="StaticBody3D"]
-visible = false
 mesh = SubResource("ArrayMesh_35g45")
 skeleton = NodePath("")
-surface_material_override/0 = ExtResource("3_8a7k6")
+surface_material_override/0 = SubResource("StandardMaterial3D_ei5ub")
 
 [node name="Tree10" type="MeshInstance3D" parent="StaticBody3D"]
-visible = false
 mesh = SubResource("ArrayMesh_skpp2")
 skeleton = NodePath("")
-surface_material_override/0 = ExtResource("3_8a7k6")
+surface_material_override/0 = SubResource("StandardMaterial3D_ei5ub")
 
 [node name="Tree11" type="MeshInstance3D" parent="StaticBody3D"]
-visible = false
 mesh = SubResource("ArrayMesh_emil6")
 skeleton = NodePath("")
-surface_material_override/0 = ExtResource("3_8a7k6")
+surface_material_override/0 = SubResource("StandardMaterial3D_ei5ub")
 
 [node name="Tree12" type="MeshInstance3D" parent="StaticBody3D"]
-visible = false
 mesh = SubResource("ArrayMesh_g8ntc")
 skeleton = NodePath("")
-surface_material_override/0 = ExtResource("3_8a7k6")
+surface_material_override/0 = SubResource("StandardMaterial3D_ei5ub")
 
 [node name="Tree13" type="MeshInstance3D" parent="StaticBody3D"]
-visible = false
 mesh = SubResource("ArrayMesh_tm8ny")
 skeleton = NodePath("")
-surface_material_override/0 = ExtResource("3_8a7k6")
+surface_material_override/0 = SubResource("StandardMaterial3D_ei5ub")
 
 [node name="Tree14" type="MeshInstance3D" parent="StaticBody3D"]
-visible = false
 mesh = SubResource("ArrayMesh_aywi1")
 skeleton = NodePath("")
-surface_material_override/0 = ExtResource("3_8a7k6")
+surface_material_override/0 = SubResource("StandardMaterial3D_ei5ub")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 transform = Transform3D(0.996019, 0, -0.0891377, 0, 1, 0, 0.0891377, 0, 0.996019, -0.536266, 13.2115, -0.375383)
