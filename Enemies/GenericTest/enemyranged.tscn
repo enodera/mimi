@@ -198,6 +198,7 @@ size = Vector3(1.21682, 2.07956, 2.21466)
 [node name="MageEnemy" type="CharacterBody3D" groups=["enemy"]]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 script = ExtResource("1_gg36u")
+patrol_speed = 20.0
 projectile_scene = ExtResource("2_gg36u")
 
 [node name="MinimapSign" type="MeshInstance3D" parent="."]

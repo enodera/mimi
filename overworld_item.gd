@@ -1,6 +1,15 @@
 extends Node3D
 
-@export var item_id: String = "health_potion"
+@export_enum(
+	"almond", "apple", "banana", "blueberry", "carrot", "coconut", "grape",
+	"kiwi", "lemon", "lime", "litchi", "mango", "mangosteen", "melon", "orange",
+	"papaya", "peach", "peanut", "pear", "pineapple", "pumpkin", "raspberry",
+	"starfruit", "strawberry", "watermelon", "sugar", "butter", "egg", "ice",
+	"milk", "flour", "fruit_salad", "smoothie", "cake", "cookies", "pumpkin_pie",
+	"fruit_pie", "ice_cream", "candied_fruit", "lemon_bar", "muffin", "coconut_ball"
+)
+
+var item_id: String = "apple"
 @export var quantity: int = 1
 @export var respawn_time: float = 10.0  # In seconds
 @export var pickupable: bool = true  # Toggle if the item can be picked up

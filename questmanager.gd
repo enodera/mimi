@@ -19,6 +19,15 @@ var quest_data := {
 		"item_count": 3,
 		"recipient": "liz"
 	},
+	"elric_gathering": {
+		"title": "Mango mania!",
+		"description": "Elric wants you to try gathering mangos.\nThey're in the ground near the trees, try to get three!",
+		"reward": "100 Gold",
+		"type": "delivery",
+		"item": "mango",
+		"item_count": 3,
+		"recipient": "elric"
+	},
 	"collect_lemons": {
 		"title": "Get some lemons!",
 		"description": "Get 5 lemons to start cooking!",
@@ -123,6 +132,7 @@ func on_item_delivered(quest_id: String) -> String:
 		print("on_item_delivered: Quest exists.")
 
 		if quests[quest_id] == QuestState.NOT_STARTED:
+			#THIS DOESNT WORK, refer to else
 			print("on_item_delivered: Quest not started. Starting quest now.")
 			start_quest(quest_id)
 			completed = "start"
@@ -196,6 +206,11 @@ func on_item_delivered(quest_id: String) -> String:
 			next_line = "already_done_quest"
 			
 	else:
+		print("Quest check: ", quests, quests.keys())
+		for q in quests.keys():
+			if quests[q] == QuestState.IN_PROGRESS:
+				print("on_item_delivered: Quest already started. Can't start.")
+				return "quest_already"
 		print("on_item_delivered: Quest not started. Starting quest now.")
 		start_quest(quest_id)
 		completed = "start"

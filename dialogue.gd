@@ -150,7 +150,7 @@ func show_current_line():
 				else:
 					print("Missing dialogue branch: ", next_branch)
 					end_dialogue()
-
+			
 			if line.has("complete_quest"):
 				QuestManager.complete_quest(line["complete_quest"])
 

@@ -15,7 +15,8 @@ var dialogue = {
 			}
 		],
 		"relieved": [
-			{"text": "That's good! Let me know if you need anything.", "set_branch": "again"}
+			"That's good! Let me know if you need anything."
+			# {"text": "That's good! Let me know if you need anything.", "set_branch": "again"}
 		],
 		"panics": [
 			"Oh no...\nIf you need any help with anything, let me know!"
@@ -40,51 +41,54 @@ var dialogue = {
 		"already_done_quest" : [
 			"Um... You already did this quest... Sorry..."
 		],
+		"quest_already" : [
+			"You're already doing a quest! Finish it up and then get back to me, okay?"
+		],
 		"error" : [
 			"Error!"
 		]
 	},
 
-	"npc_1": {
+	"elric": {
 		"intro": [
-			"hey there!",
+			"Ah, greetings Mimi! I'm just taking in the fresh air over here.",
 			{
-				"text": "how's it going?",
+				"text": "What brings you out here?",
 				"options": [
-					{"text": "pretty good!", "next": "friendly"},
-					{"text": "not so great...", "next": "worried"},
-					{"text": "any quests?", "next": "quest_offer"}
+					{"text": "Just enjoying nature.", "next": "friendly"},
+					{"text": "Bored...", "next": "quest_offer"}
 				]
 			}
 		],
 		"friendly": [
-			{"text": "glad to hear that! let me know if you want to chat.", "set_branch": "again"}
-		],
-		"worried": [
-			"oh no, hope things get better soon. if you want help, just ask."
+			"A likeminded individual, I see! Well, I hope you enjoy yourself as much as I am."
 		],
 		"quest_offer": [
-			{"text": "", "check_quest": "npc1_quest"}
+			{"text": "", "check_quest": "elric_gathering"}
 		],
-		"npc1_quest_start": [
-			"actually, i do have something you could help with!",
-			"can you collect 5 berries for me?",
-			"they're for a recipe i'm trying out. thanks a bunch!"
+		"elric_gathering_start": [
+			"I see you're free...",
+			"How about you try collecting some mangos then?",
+			"In this place, mangos grow on the ground... They're over here, near the trees! But you won't know which are mangos until you pluck them...",
+			"Try collecting 3 of them!"
 		],
-		"npc1_quest_done": [
-			"thanks for bringing the berries! you're the best."
+		"elric_gathering_done": [
+			"Ah, perfect! These will help so many people. You're a true friend."
 		],
-		"npc1_quest_fail": [
-			"looks like you don't have the berries yet. keep looking!"
+		"elric_gathering_fail": [
+			"Still missing the berries. They’re out there—don’t give up!"
 		],
 		"again": [
-			"back so soon? you're quite friendly!"
+			"Back again? I’m always happy to share forest stories!"
 		],
 		"already_done_quest": [
-			"you already helped me with this, thanks again!"
+			"You've already helped me with that—thank you again!"
+		],
+		"quest_already": [
+			"Looks like you're already on a quest. Finish that first, and then let's chat!"
 		],
 		"error": [
-			"something went wrong... try again later."
+			"Hmm... something's not right. Try again later, will you?"
 		]
 	},
 
