@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://btukobjpqjuii"]
+[gd_scene load_steps=38 format=3 uid="uid://btukobjpqjuii"]
 
 [ext_resource type="Script" uid="uid://dokcww0rbalf1" path="res://Character/player.gd" id="1_lgt04"]
 [ext_resource type="PackedScene" uid="uid://blabqcdjyg1c5" path="res://Models/mimi.tscn" id="2_schp4"]
@@ -9,6 +9,8 @@
 [ext_resource type="Material" uid="uid://byd7qixpxbdey" path="res://Land.tres" id="5_ly6k5"]
 [ext_resource type="Material" uid="uid://bcon13yakvxwu" path="res://attackparticles.tres" id="8_gvj7u"]
 [ext_resource type="Material" uid="uid://b0tejma582nok" path="res://Scenes/TransitionShader.tres" id="9_7llnk"]
+[ext_resource type="QuadMesh" uid="uid://cr48mhkgbw1vr" path="res://Enemies/GenericTest/circleeffect.tres" id="10_qolio"]
+[ext_resource type="Texture2D" uid="uid://ck1li6b7jki2c" path="res://Enemies/GenericTest/spark.png" id="11_y83ax"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5ydrh"]
 emission_enabled = true
@@ -54,6 +56,97 @@ bottom_radius = 0.0
 height = 1.5
 radial_segments = 16
 cap_bottom = false
+
+[sub_resource type="CurveTexture" id="CurveTexture_2kna6"]
+
+[sub_resource type="Curve" id="Curve_d703b"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.539063, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_uvlc3"]
+curve = SubResource("Curve_d703b")
+
+[sub_resource type="Curve" id="Curve_28ti7"]
+_data = [Vector2(0, 0.320318), 0.0, -5.95322, 0, 0, Vector2(0.152249, 0.443472), 1.5112, 1.5112, 0, 0, Vector2(0.976563, 0), -1.11403, -1.11403, 0, 0, Vector2(0.976563, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_63e3d"]
+curve = SubResource("Curve_28ti7")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_y83ax"]
+emission_shape = 1
+emission_sphere_radius = 4.0
+direction = Vector3(0, 0.1, 0)
+spread = 0.0
+initial_velocity_max = 3.0
+radial_velocity_min = -2.23517e-05
+radial_velocity_max = 20.0
+radial_velocity_curve = SubResource("CurveTexture_uvlc3")
+gravity = Vector3(0, 10, 0)
+scale_min = 0.0
+scale_curve = SubResource("CurveTexture_63e3d")
+alpha_curve = SubResource("CurveTexture_2kna6")
+
+[sub_resource type="Curve" id="Curve_p4yhq"]
+_data = [Vector2(0, 0), 0.0, 1.52688, 0, 0, Vector2(0.984375, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_5rcum"]
+curve = SubResource("Curve_p4yhq")
+
+[sub_resource type="Gradient" id="Gradient_iir43"]
+offsets = PackedFloat32Array(0, 0.449367)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_36d6g"]
+gradient = SubResource("Gradient_iir43")
+
+[sub_resource type="Curve" id="Curve_rk8it"]
+_data = [Vector2(0, 0), 0.0, 3.88025, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_j5php"]
+curve = SubResource("Curve_rk8it")
+
+[sub_resource type="Curve" id="Curve_i15ld"]
+_limits = [0.0, 4.0, 0.0, 1.0]
+_data = [Vector2(0, 1.60623), 0.0, -0.610585, 0, 0, Vector2(0.702422, 0), -0.161524, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_sli65"]
+curve = SubResource("Curve_i15ld")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qolio"]
+particle_flag_rotate_y = true
+angle_min = -360.0
+angle_max = 360.0
+angle_curve = SubResource("CurveTexture_5rcum")
+direction = Vector3(0, 0, 0)
+spread = 180.0
+initial_velocity_min = 7.5
+initial_velocity_max = 7.5
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_sli65")
+color = Color(1, 0, 0, 1)
+color_ramp = SubResource("GradientTexture1D_36d6g")
+hue_variation_min = -1.0
+hue_variation_max = 1.0
+hue_variation_curve = SubResource("CurveTexture_j5php")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2kna6"]
+transparency = 1
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("11_y83ax")
+emission_enabled = true
+emission = Color(0.533037, 0.533037, 0.533037, 1)
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_b72x0"]
+material = SubResource("StandardMaterial3D_2kna6")
 
 [node name="Player" type="CharacterBody3D" groups=["player"]]
 floor_snap_length = 0.3
@@ -155,3 +248,24 @@ grow_vertical = 2
 pivot_offset = Vector2(576, 576)
 mouse_filter = 2
 color = Color(0.21, 0.0861, 0.13566, 1)
+
+[node name="DeathParticles2" type="GPUParticles3D" parent="."]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 1.85657, 0)
+emitting = false
+amount = 10
+one_shot = true
+explosiveness = 1.0
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_y83ax")
+draw_pass_1 = ExtResource("10_qolio")
+
+[node name="DeathParticles3" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8109, 0)
+visible = false
+amount = 30
+explosiveness = 0.9
+randomness = 0.25
+fixed_fps = 60
+trail_lifetime = 2.5
+process_material = SubResource("ParticleProcessMaterial_qolio")
+draw_pass_1 = SubResource("QuadMesh_b72x0")

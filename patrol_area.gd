@@ -18,6 +18,7 @@ var enemy_scene: PackedScene
 	"milk", "flour", "fruit_salad", "smoothie", "cake", "cookies", "pumpkin_pie",
 	"fruit_pie", "ice_cream", "candied_fruit", "lemon_bar", "muffin", "coconut_ball"
 )
+
 var loot_item_id: String = "apple"
 
 enum Class { MAGE1, MAGE2 }
@@ -57,9 +58,10 @@ func _on_spawn_timer_timeout():
 	enemy.position = enemy.position + offset
 
 	# Assign properties
+	print ("The loot item is ", loot_item_id)
+	
 	if enemy.has_meta("patrol_bounds_area"):
 		enemy.patrol_bounds_area = self
-
 	if enemy.has_meta("loot_item_id"):
 		enemy.loot_item_id = loot_item_id
 	if enemy.has_meta("loot_min_amount"):

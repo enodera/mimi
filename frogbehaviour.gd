@@ -28,7 +28,7 @@ var melee_timer: float = 0.5
 @export var damagedealt: int = 10
 
 @export_group("Movement")
-@export var patrol_speed: float = 40.0
+@export var patrol_speed: float = 20.0
 @export var chase_speed: float = 6.0
 @export var patrol_wait_time: float = 1.5
 @export var patrol_bounds_area: Area3D
@@ -50,11 +50,6 @@ var melee_timer: float = 0.5
 var player
 var health_ui
 
-@export_group("Loot")
-@export var loot_item_id: String = "default_item"
-@export var loot_min_amount: int = 1
-@export var loot_max_amount: int = 3
-
 var state: State = State.PATROL
 var mesh: Node3D
 
@@ -67,6 +62,10 @@ var knockback_elapsed: float = 0.0
 var playeraggroable = true
 var playerattackable = true
 
+var loot_item_id: String
+var loot_min_amount: int
+var loot_max_amount: int
+
 var drop_item = true
 var attack_hitbox_active: bool = false  # Track hitbox state
 
@@ -78,6 +77,12 @@ func _ready() -> void:
 		player = get_tree().get_first_node_in_group("player") # Fallback
 	if !health_ui:
 		health_ui = get_tree().get_first_node_in_group("health_ui") # Fallback
+	if !loot_item_id:
+		loot_item_id = get_parent().loot_item_id
+	if !loot_min_amount:
+		loot_min_amount = get_parent().loot_min_amount
+	if !loot_max_amount:
+		loot_max_amount = get_parent().loot_max_amount
 		
 	if patrol_bounds_area == null and get_parent() is Area3D:
 		patrol_bounds_area = get_parent() as Area3D
@@ -154,7 +159,7 @@ func _physics_process(delta: float) -> void:
 					melee_timer -= delta
 					if melee_timer <= 0.0:
 						melee_phase = MeleePhase.ATTACKING
-						melee_timer = 0.7  # duration of the attack animation
+						melee_timer = 0.5  # duration of the attack animation
 						_state_machine.travel("attack")
 						# Deal damage once, e.g., instantly or use an animation event system if you have one
 						# health_ui.take_damage(20)

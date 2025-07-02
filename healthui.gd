@@ -1,9 +1,10 @@
 extends CanvasLayer
 
-@onready var health_bar: ProgressBar = $HealthBar  # or correct path
-
+@onready var health_bar: ProgressBar = $HealthBar
+@onready var player: CharacterBody3D = %Player
 var max_health: int = 100
 var current_health: int = 100
+var player_dead: bool = false
 
 func _ready() -> void:
 	update_health_bar()
@@ -28,4 +29,13 @@ func update_health_bar() -> void:
 		health_bar.value = float(current_health) / float(max_health) * 100.0
 
 func die() -> void:
-	print("Player has died.")
+	if player and not player_dead:
+		if player.was_on_floor or player.is_on_water:
+			player_dead = true
+			player.get_node("DeathParticles2").emitting = true
+			player.get_node("DeathParticles3").emitting = true
+			player.get_node("Mimi").visible = false
+			player._can_move = false
+			await player.run_transition_hide()
+			get_tree().change_scene_to_file("res://Scenes/TitleScreen.tscn")
+		print("Player has died.")

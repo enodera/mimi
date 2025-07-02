@@ -6,6 +6,8 @@ func _ready():
 	$StartButton.pressed.connect(_on_start_button_pressed)
 	$OptionsButton.pressed.connect(_on_options_button_pressed)
 	$CloseButton.pressed.connect(_on_close_button_pressed)
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	run_transition_show()
 
 func _on_start_button_pressed() -> void:
 	# Disable buttons during transition

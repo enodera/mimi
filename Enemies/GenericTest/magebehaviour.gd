@@ -55,11 +55,6 @@ var multiplebullets : bool = false
 @export var idle_chance: float = 0.3
 @export var knockback_duration: float = 0.25
 
-@export_group("Loot")
-@export var loot_item_id: String = "milk"
-@export var loot_min_amount: int = 1
-@export var loot_max_amount: int = 3
-
 @export_group("Projectile")
 @export var projectile_scene: PackedScene = null
 
@@ -77,6 +72,10 @@ var knockback_elapsed: float = 0.0
 var playeraggroable = true
 var playerattackable = true
 
+var loot_item_id: String
+var loot_min_amount: int
+var loot_max_amount: int
+
 var drop_item = true
 var attack_hitbox_active: bool = false
 
@@ -91,6 +90,12 @@ func _ready() -> void:
 		health_ui = get_tree().get_first_node_in_group("health_ui")
 	if !selectedtype:
 		selectedtype = get_parent().selectedtype
+	if !loot_item_id:
+		loot_item_id = get_parent().loot_item_id
+	if !loot_min_amount:
+		loot_min_amount = get_parent().loot_min_amount
+	if !loot_max_amount:
+		loot_max_amount = get_parent().loot_max_amount
 	
 	if patrol_bounds_area == null and get_parent() is Area3D:
 		patrol_bounds_area = get_parent() as Area3D

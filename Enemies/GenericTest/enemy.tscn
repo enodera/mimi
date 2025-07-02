@@ -98,7 +98,7 @@ hue_variation_min = -1.0
 hue_variation_max = 1.0
 hue_variation_curve = SubResource("CurveTexture_7w4ni")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2kna6"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_36d6g"]
 transparency = 1
 vertex_color_use_as_albedo = true
 albedo_texture = ExtResource("3_ajfth")
@@ -111,22 +111,22 @@ particles_anim_v_frames = 1
 particles_anim_loop = false
 
 [sub_resource type="QuadMesh" id="QuadMesh_5rcum"]
-material = SubResource("StandardMaterial3D_2kna6")
+material = SubResource("StandardMaterial3D_36d6g")
 
-[sub_resource type="CurveTexture" id="CurveTexture_2kna6"]
+[sub_resource type="CurveTexture" id="CurveTexture_j5php"]
 
 [sub_resource type="Curve" id="Curve_e7avo"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.539063, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_uvlc3"]
+[sub_resource type="CurveTexture" id="CurveTexture_sli65"]
 curve = SubResource("Curve_e7avo")
 
 [sub_resource type="Curve" id="Curve_job5r"]
 _data = [Vector2(0, 0.724521), 0.0, -5.95322, 0, 0, Vector2(0.106771, 0.836024), 1.5112, 1.5112, 0, 0, Vector2(0.976563, 0), -1.11403, -1.11403, 0, 0, Vector2(0.976563, 0), 0.0, 0.0, 0, 0]
 point_count = 4
 
-[sub_resource type="CurveTexture" id="CurveTexture_63e3d"]
+[sub_resource type="CurveTexture" id="CurveTexture_2kna6"]
 curve = SubResource("Curve_job5r")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_5rcum"]
@@ -137,31 +137,31 @@ spread = 0.0
 initial_velocity_max = 3.0
 radial_velocity_min = -2.23517e-05
 radial_velocity_max = 20.0
-radial_velocity_curve = SubResource("CurveTexture_uvlc3")
+radial_velocity_curve = SubResource("CurveTexture_sli65")
 gravity = Vector3(0, 10, 0)
 scale_min = 0.0
-scale_curve = SubResource("CurveTexture_63e3d")
-alpha_curve = SubResource("CurveTexture_2kna6")
+scale_curve = SubResource("CurveTexture_2kna6")
+alpha_curve = SubResource("CurveTexture_j5php")
 
 [sub_resource type="Curve" id="Curve_dgwo2"]
 _data = [Vector2(0, 0), 0.0, 1.52688, 0, 0, Vector2(0.984375, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_5rcum"]
+[sub_resource type="CurveTexture" id="CurveTexture_uvlc3"]
 curve = SubResource("Curve_dgwo2")
 
 [sub_resource type="Gradient" id="Gradient_sxmqc"]
 offsets = PackedFloat32Array(0, 0.449367)
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_36d6g"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_63e3d"]
 gradient = SubResource("Gradient_sxmqc")
 
 [sub_resource type="Curve" id="Curve_2xblw"]
 _data = [Vector2(0, 0), 0.0, 3.88025, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_j5php"]
+[sub_resource type="CurveTexture" id="CurveTexture_o6yyl"]
 curve = SubResource("Curve_2xblw")
 
 [sub_resource type="Curve" id="Curve_gsgu7"]
@@ -169,7 +169,7 @@ _limits = [0.0, 4.0, 0.0, 1.0]
 _data = [Vector2(0, 4), 0.0, -0.610585, 0, 0, Vector2(1, 0.113522), -4.66147, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_sli65"]
+[sub_resource type="CurveTexture" id="CurveTexture_03n28"]
 curve = SubResource("Curve_gsgu7")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_l6hcf"]
@@ -177,7 +177,7 @@ lifetime_randomness = 0.3
 particle_flag_rotate_y = true
 angle_min = -360.0
 angle_max = 360.0
-angle_curve = SubResource("CurveTexture_5rcum")
+angle_curve = SubResource("CurveTexture_uvlc3")
 direction = Vector3(0, 0, 0)
 spread = 180.0
 initial_velocity_min = 15.0
@@ -185,12 +185,12 @@ initial_velocity_max = 20.0
 radial_velocity_min = -2.23517e-05
 radial_velocity_max = -2.23517e-05
 gravity = Vector3(0, 0, 0)
-scale_curve = SubResource("CurveTexture_sli65")
+scale_curve = SubResource("CurveTexture_03n28")
 color = Color(1, 0, 0, 1)
-color_ramp = SubResource("GradientTexture1D_36d6g")
+color_ramp = SubResource("GradientTexture1D_63e3d")
 hue_variation_min = -1.0
 hue_variation_max = 1.0
-hue_variation_curve = SubResource("CurveTexture_j5php")
+hue_variation_curve = SubResource("CurveTexture_o6yyl")
 
 [node name="FrogEnemy" type="CharacterBody3D" groups=["enemy"]]
 script = ExtResource("1_5rcum")

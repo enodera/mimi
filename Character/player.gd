@@ -46,7 +46,7 @@ var combo_queued := false
 var is_knockback_active := false
 
 var good_def := false
-
+var is_on_water := false
 # -----------------------
 # --- NODE REFERENCES ---
 # -----------------------
@@ -65,6 +65,8 @@ var good_def := false
 
 func _ready() -> void:
 	was_on_floor = true
+	_can_move = true
+	is_on_water = false
 
 	_attack_timer = Timer.new()
 	_attack_timer.one_shot = true
@@ -84,6 +86,7 @@ func _ready() -> void:
 	if health_ui:
 		health_ui.set_health(max_health, current_health)
 	
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	run_transition_show()
 
 
@@ -449,31 +452,32 @@ func _on_attack_recovery_timeout() -> void:
 # ----------------------
 
 func _process(_delta: float) -> void:
-	if Input.is_action_just_pressed("inventory"):
-		if not Global.cookingpaused and not Global.dialoguepaused:
-			if not Global.inventorypaused:
-				print("Inventory paused")
-				%InventoryUI.visible = true
-				Global.inventorypaused = true
-				%InventoryUI.show_inventory()
-			else:
-				print("Inventory unpaused")
-				await %InventoryUI._on_close_button_pressed()
-				%InventoryUI.visible = false
-				Global.inventorypaused = false
-			
-	if Input.is_action_just_pressed("cooking"):
-		if not Global.inventorypaused and not Global.dialoguepaused:
-			if not Global.cookingpaused:
-				print("Inventory paused")
-				%CookingUI.visible = true
-				Global.cookingpaused = true
-				%CookingUI.show_inventory()
-			else:
-				print("Inventory unpaused")
-				await %CookingUI._on_close_button_pressed()
-				%CookingUI.visible = false
-				Global.cookingpaused = false
+	if not is_knockback_active:
+		if Input.is_action_just_pressed("inventory"):
+			if not Global.cookingpaused and not Global.dialoguepaused:
+				if not Global.inventorypaused:
+					print("Inventory paused")
+					%InventoryUI.visible = true
+					Global.inventorypaused = true
+					%InventoryUI.show_inventory()
+				else:
+					print("Inventory unpaused")
+					await %InventoryUI._on_close_button_pressed()
+					%InventoryUI.visible = false
+					Global.inventorypaused = false
+				
+		if Input.is_action_just_pressed("cooking"):
+			if not Global.inventorypaused and not Global.dialoguepaused:
+				if not Global.cookingpaused:
+					print("Cooking paused")
+					%CookingUI.visible = true
+					Global.cookingpaused = true
+					%CookingUI.show_inventory()
+				else:
+					print("Cooking unpaused")
+					await %CookingUI._on_close_button_pressed()
+					%CookingUI.visible = false
+					Global.cookingpaused = false
 
 
 func take_damage(amount: int, knockback_dir: Vector3, knockback_strength: float, upward_force: float) -> void:
@@ -502,9 +506,10 @@ func take_damage(amount: int, knockback_dir: Vector3, knockback_strength: float,
 	
 	set_state("hitstun")
 	
-	velocity.x = direction.x * knockback_strength
-	velocity.z = direction.z * knockback_strength
-	velocity.y = upward_force
+	if health_ui.player_dead == false:
+		velocity.x = direction.x * knockback_strength
+		velocity.z = direction.z * knockback_strength
+		velocity.y = upward_force
 
 func run_transition_hide() -> void:
 	var circle_size = 1.0
@@ -521,3 +526,11 @@ func run_transition_show() -> void:
 		shader_material.set_shader_parameter("circle_size", circle_size)
 		# Wait for the next frame (~60fps)
 		await get_tree().process_frame
+		
+func die() -> void:
+	is_on_water = true
+	_can_move = false
+	combo_step = 0
+	combo_queued = false
+	is_knockback_active = true
+	health_ui.take_damage(max_health)

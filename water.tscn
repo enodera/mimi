@@ -1,0 +1,47 @@
+[gd_scene load_steps=7 format=3 uid="uid://x7w38ugs00g1"]
+
+[ext_resource type="Shader" uid="uid://cylxvny4omuf6" path="res://water.gdshader" id="1_qi1wl"]
+[ext_resource type="Script" uid="uid://ccs50nwp323v0" path="res://waterplayer.gd" id="2_dcmoc"]
+[ext_resource type="Script" uid="uid://clh5a5rlaqhfw" path="res://waterenemy.gd" id="3_qmoj4"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_7wcun"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dcmoc"]
+render_priority = 0
+shader = ExtResource("1_qi1wl")
+shader_parameter/WATER_COL = Color(0, 0.594505, 0.895656, 1)
+shader_parameter/WATER2_COL = Color(0.206751, 0.680283, 1, 1)
+shader_parameter/FOAM_COL = Color(0.1455, 0.737418, 1, 1)
+shader_parameter/distortion_speed = 2.0
+shader_parameter/tile = Vector2(300, 300)
+shader_parameter/wave_speed = 1.5
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_dcmoc"]
+data = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0, -1)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(2000, 0, 0, 0, 2000, 0, 0, 0, 2000, 0, 0, 0)
+mesh = SubResource("PlaneMesh_7wcun")
+surface_material_override/0 = SubResource("ShaderMaterial_dcmoc")
+
+[node name="PlayerDamager" type="Area3D" parent="."]
+script = ExtResource("2_dcmoc")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerDamager"]
+transform = Transform3D(2000, 0, 0, 0, 2000, 0, 0, 0, 2000, 0, -0.599088, 0)
+shape = SubResource("ConcavePolygonShape3D_dcmoc")
+
+[node name="EnemyDamager" type="Area3D" parent="."]
+script = ExtResource("3_qmoj4")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="EnemyDamager"]
+transform = Transform3D(2000, 0, 0, 0, 2000, 0, 0, 0, 2000, 0, 3.70126, 0)
+shape = SubResource("ConcavePolygonShape3D_dcmoc")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(2000, 0, 0, 0, 2000, 0, 0, 0, 2000, 0, -0.877531, 0)
+shape = SubResource("ConcavePolygonShape3D_dcmoc")

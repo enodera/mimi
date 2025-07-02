@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://b6xhciv77htqc"]
+[gd_scene load_steps=31 format=3 uid="uid://b6xhciv77htqc"]
 
 [ext_resource type="Texture2D" uid="uid://blkwxes3c4ap8" path="res://istockphoto-1138179296-612x612_waifu2x_art_noise1_scale.png" id="1_8ervs"]
 [ext_resource type="PackedScene" uid="uid://pakdokc08g3p" path="res://inventory.tscn" id="2_1y0xo"]
@@ -21,7 +21,6 @@
 [ext_resource type="PackedScene" uid="uid://cjh6dthlar0bv" path="res://PatrolArea.tscn" id="19_uby3m"]
 [ext_resource type="PackedScene" uid="uid://cr5yvrgeq8haf" path="res://Items/overworld_item.tscn" id="20_ave4v"]
 [ext_resource type="PackedScene" uid="uid://dj8o0wwy0rg82" path="res://Items/pickupable_item.tscn" id="21_2isaf"]
-[ext_resource type="PackedScene" uid="uid://x7w38ugs00g1" path="res://water.tscn" id="24_j2kl8"]
 [ext_resource type="PackedScene" uid="uid://d3iipi54u7165" path="res://Ground/Grass/grass_chunk_12.tscn" id="24_wuuey"]
 [ext_resource type="PackedScene" uid="uid://6gcu07ce0tq7" path="res://Ground/Trees/tree.tscn" id="25_j2kl8"]
 
@@ -238,14 +237,14 @@ transform = Transform3D(0.230618, 0.280941, 0, -0.175588, 0.368989, 0, 0, 0, 0.2
 chunk_type = 1
 
 [node name="PatrolArea" parent="." instance=ExtResource("19_uby3m")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -155.657, 1.34424, -306.153)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -85.3336, 1.34424, -61.1271)
 loot_item_id = "mango"
 patrol_speed = 20.0
 
 [node name="PatrolArea2" parent="." instance=ExtResource("19_uby3m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 158.512, 0.985801, 182.229)
 enemy_type = "Mage"
-max_enemies = 2
+selectedtype = 1
 
 [node name="OverworldItem2" parent="." instance=ExtResource("20_ave4v")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -37.0268, 6.6988, 43.1678)
@@ -260,6 +259,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.0453, -0.677589, -20.015)
 
 [node name="GrassChunk12" parent="." instance=ExtResource("24_wuuey")]
 transform = Transform3D(0.05, 0, 0, 0, 0.01, 0, 0, 0, 0.05, 73.5664, -0.625567, 61.5963)
-
-[node name="water" parent="." instance=ExtResource("24_j2kl8")]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -8.45732, -9.1577, 18.1733)
