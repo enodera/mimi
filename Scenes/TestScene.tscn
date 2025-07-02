@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://bh55rf6fyknq0"]
+[gd_scene load_steps=33 format=3 uid="uid://bh55rf6fyknq0"]
 
 [ext_resource type="Texture2D" uid="uid://drkhwpqw3v00a" path="res://PrototypeTextures/Green/texture_08.png" id="1_b5ayd"]
 [ext_resource type="PackedScene" uid="uid://pakdokc08g3p" path="res://inventory.tscn" id="1_iufkg"]
@@ -10,17 +10,14 @@
 [ext_resource type="PackedScene" uid="uid://df8rvo3adndis" path="res://healthui.tscn" id="4_6xh1p"]
 [ext_resource type="PackedScene" uid="uid://cncrp63v3at5e" path="res://npc.tscn" id="5_0f5h7"]
 [ext_resource type="PackedScene" uid="uid://v52nrqjnq2a6" path="res://questui.tscn" id="5_201fe"]
-[ext_resource type="PackedScene" uid="uid://b4bv4j5e7yi0b" path="res://Enemies/GenericTest/enemy.tscn" id="9_5rbs6"]
 [ext_resource type="Script" uid="uid://boii7oeolcmck" path="res://Scenes/minimapfollow.gd" id="9_t2vuu"]
 [ext_resource type="PackedScene" uid="uid://yddpgwccicir" path="res://cooking_ui.tscn" id="10_c2lnq"]
 [ext_resource type="Theme" uid="uid://dmjqddcrtim6" path="res://minimap.tres" id="10_hctok"]
 [ext_resource type="Shader" uid="uid://p30er620t4m1" path="res://Scenes/MinimapShader.gdshader" id="10_t2vuu"]
 [ext_resource type="PackedScene" uid="uid://c3fdkpdxnncyy" path="res://Ground/Grass/grass_chunk_2.tscn" id="15_8c81w"]
-[ext_resource type="PackedScene" uid="uid://cjh6dthlar0bv" path="res://PatrolArea.tscn" id="15_lp1f3"]
 [ext_resource type="PackedScene" uid="uid://cmhvolfc7pvfm" path="res://Ground/Grass/grass_chunk_1.tscn" id="16_p30di"]
 [ext_resource type="PackedScene" uid="uid://0c5ljs67yis8" path="res://Ground/Grass/grass_chunk_3.tscn" id="17_dwn5r"]
 [ext_resource type="PackedScene" uid="uid://cr5yvrgeq8haf" path="res://Items/overworld_item.tscn" id="18_fi7j4"]
-[ext_resource type="PackedScene" uid="uid://bqe5hsuvprjns" path="res://Enemies/GenericTest/enemyranged.tscn" id="19_4v62a"]
 [ext_resource type="PackedScene" uid="uid://dj8o0wwy0rg82" path="res://Items/pickupable_item.tscn" id="22_1vcy8"]
 
 [sub_resource type="Gradient" id="Gradient_p30di"]
@@ -253,49 +250,10 @@ transform = Transform3D(0.0922472, 0.0702353, 0, -0.0702353, 0.0922472, 0, 0, 0,
 [node name="GrassChunk4" parent="NavigationRegion3D" instance=ExtResource("17_dwn5r")]
 transform = Transform3D(0.0922472, 0.0702353, 0, -0.0702353, 0.0922472, 0, 0, 0, 0.115942, -7.53558, 6.56794, 0.145925)
 
-[node name="CharacterBody3D3" parent="." node_paths=PackedStringArray("patrol_bounds_area") instance=ExtResource("9_5rbs6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.1297, 55.498, -80.7212)
-patrol_bounds_area = NodePath("../PatrolArea")
-
-[node name="CharacterBody3D5" parent="." node_paths=PackedStringArray("patrol_bounds_area") instance=ExtResource("9_5rbs6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -65.4123, 3, -131.997)
-patrol_speed = 10.0
-patrol_bounds_area = NodePath("../PatrolArea")
-loot_item_id = "flour"
-
-[node name="CharacterBody3D4" parent="." node_paths=PackedStringArray("patrol_bounds_area") instance=ExtResource("9_5rbs6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -43.6082, 2, -87.998)
-patrol_speed = 10.0
-patrol_bounds_area = NodePath("../PatrolArea")
-loot_item_id = "flour"
-
-[node name="CharacterBody3D2" parent="." node_paths=PackedStringArray("patrol_bounds_area") instance=ExtResource("9_5rbs6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.8041, 1, -43.999)
-patrol_bounds_area = NodePath("../PatrolArea")
-loot_item_id = "lemon"
-loot_min_amount = 5
-loot_max_amount = 10
-
-[node name="Enemy" parent="." node_paths=PackedStringArray("patrol_bounds_area") instance=ExtResource("19_4v62a")]
-transform = Transform3D(1.99785, 0.092609, 0, -0.092609, 1.99785, 0, 0, 0, 2, -4.36787, 22.7834, -51.5969)
-patrol_bounds_area = NodePath("../PatrolArea2")
-loot_item_id = "lemon"
-
-[node name="PatrolArea2" parent="." instance=ExtResource("15_lp1f3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -141.643, -0.943902, -32.6905)
-
-[node name="PatrolArea" parent="." instance=ExtResource("15_lp1f3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.5814, -0.471951, -43.7685)
-
 [node name="OverworldItem2" parent="." instance=ExtResource("18_fi7j4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -37.0268, 8.26628, 43.1678)
 item_id = "lemon"
 quantity = 5
-
-[node name="Enemy2" parent="." node_paths=PackedStringArray("patrol_bounds_area") instance=ExtResource("19_4v62a")]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -118.711, 1.92404, -56.8033)
-patrol_bounds_area = NodePath("../PatrolArea2")
-selectedtype = 1
 
 [node name="PickupableItem" parent="." instance=ExtResource("22_1vcy8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.0698, 2.74453, -26.6595)

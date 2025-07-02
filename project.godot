@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Mimi"
-run/main_scene="uid://bh55rf6fyknq0"
+run/main_scene="uid://da1pua6ast68x"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="uid://ssaf7xmbgp73"
 run/canvas_textures/default_texture_filter=1
@@ -35,6 +35,7 @@ player=""
 enemy=""
 playerattack=""
 damager=""
+health_ui=""
 
 [input]
 

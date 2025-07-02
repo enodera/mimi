@@ -9,6 +9,10 @@ enum MeleePhase { BUFFER, ATTACKING, RECOVERY }
 var melee_phase: MeleePhase = MeleePhase.BUFFER
 var melee_timer: float = 0.3
 
+var player
+var health_ui
+var selectedtype: Class
+
 @onready var class_models = {
 	Class.MAGE1: $enemy/mage1,
 	Class.MAGE2: $enemy/mage2
@@ -51,12 +55,6 @@ var multiplebullets : bool = false
 @export var idle_chance: float = 0.3
 @export var knockback_duration: float = 0.25
 
-@export_group("Enemy type")
-@export var selectedtype: Class = Class.MAGE1
-
-@onready var player = %Player
-@onready var health_ui = %HealthUI
-
 @export_group("Loot")
 @export var loot_item_id: String = "milk"
 @export var loot_min_amount: int = 1
@@ -87,6 +85,16 @@ var _state_machine: AnimationNodeStateMachinePlayback
 var dying = false
 
 func _ready() -> void:
+	if !player:
+		player = get_tree().get_first_node_in_group("player")
+	if !health_ui:
+		health_ui = get_tree().get_first_node_in_group("health_ui")
+	if !selectedtype:
+		selectedtype = get_parent().selectedtype
+	
+	if patrol_bounds_area == null and get_parent() is Area3D:
+		patrol_bounds_area = get_parent() as Area3D
+	
 	$MeshInstance3D/Area3D.area_entered.connect(_on_area_entered)
 	$VisibilityRange.body_entered.connect(_on_vision_body_entered)
 	$VisibilityRange.body_exited.connect(_on_vision_body_exited)
@@ -104,6 +112,7 @@ func _ready() -> void:
 	mesh.visible = true
 	_animation_tree = class_controller[selectedtype]
 	_state_machine = _animation_tree.get("parameters/playback")
+	$enemy/DeathParticles2.emitting = true
 	_pick_new_target()
 
 var target_velocity: Vector3 = Vector3.ZERO

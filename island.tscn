@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://b6xhciv77htqc"]
+[gd_scene load_steps=31 format=3 uid="uid://b6xhciv77htqc"]
 
 [ext_resource type="Texture2D" uid="uid://blkwxes3c4ap8" path="res://istockphoto-1138179296-612x612_waifu2x_art_noise1_scale.png" id="1_8ervs"]
 [ext_resource type="PackedScene" uid="uid://pakdokc08g3p" path="res://inventory.tscn" id="2_1y0xo"]
@@ -18,8 +18,6 @@
 [ext_resource type="PackedScene" uid="uid://cka48da76qngh" path="res://Ground/Grass/grass_chunk_10.tscn" id="14_l4q3l"]
 [ext_resource type="PackedScene" uid="uid://c3fdkpdxnncyy" path="res://Ground/Grass/grass_chunk_2.tscn" id="15_l4q3l"]
 [ext_resource type="PackedScene" uid="uid://ck6ctxbqalate" path="res://Ground/Grass/grass_chunk_4.tscn" id="17_q2og1"]
-[ext_resource type="PackedScene" uid="uid://b4bv4j5e7yi0b" path="res://Enemies/GenericTest/enemy.tscn" id="17_wuuey"]
-[ext_resource type="PackedScene" uid="uid://bqe5hsuvprjns" path="res://Enemies/GenericTest/enemyranged.tscn" id="18_j2kl8"]
 [ext_resource type="PackedScene" uid="uid://cjh6dthlar0bv" path="res://PatrolArea.tscn" id="19_uby3m"]
 [ext_resource type="PackedScene" uid="uid://cr5yvrgeq8haf" path="res://Items/overworld_item.tscn" id="20_ave4v"]
 [ext_resource type="PackedScene" uid="uid://dj8o0wwy0rg82" path="res://Items/pickupable_item.tscn" id="21_2isaf"]
@@ -239,42 +237,13 @@ transform = Transform3D(0.230618, 0.280941, 0, -0.175588, 0.368989, 0, 0, 0, 0.2
 chunk_type = 1
 
 [node name="PatrolArea" parent="." instance=ExtResource("19_uby3m")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.5814, 1.34424, -43.7685)
-
-[node name="FrogEnemy4" parent="PatrolArea" node_paths=PackedStringArray("patrol_bounds_area") instance=ExtResource("17_wuuey")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5483, 54.1538, -36.9527)
-patrol_bounds_area = NodePath("..")
-
-[node name="FrogEnemy3" parent="PatrolArea" node_paths=PackedStringArray("patrol_bounds_area") instance=ExtResource("17_wuuey")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -49.8309, 1.65576, -88.2285)
-patrol_speed = 10.0
-patrol_bounds_area = NodePath("..")
-loot_item_id = "flour"
-
-[node name="FrogEnemy2" parent="PatrolArea" node_paths=PackedStringArray("patrol_bounds_area") instance=ExtResource("17_wuuey")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28.0268, 0.655763, -44.2295)
-patrol_speed = 10.0
-patrol_bounds_area = NodePath("..")
-loot_item_id = "flour"
-
-[node name="FrogEnemy1" parent="PatrolArea" node_paths=PackedStringArray("patrol_bounds_area") instance=ExtResource("17_wuuey")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.2227, -0.344237, -0.230499)
-patrol_bounds_area = NodePath("..")
-loot_item_id = "lemon"
-loot_min_amount = 5
-loot_max_amount = 10
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -85.3336, 1.34424, -61.1271)
+loot_item_id = "mango"
+patrol_speed = 20.0
 
 [node name="PatrolArea2" parent="." instance=ExtResource("19_uby3m")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -117.558, 0.985797, -40.8275)
-
-[node name="MageEnemy1" parent="PatrolArea2" node_paths=PackedStringArray("patrol_bounds_area") instance=ExtResource("18_j2kl8")]
-transform = Transform3D(1.99785, 0.092609, 0, -0.092609, 1.99785, 0, 0, 0, 2, -11.6199, 6.4361, -10.7694)
-patrol_bounds_area = NodePath("..")
-loot_item_id = "lemon"
-
-[node name="MageEnemy2" parent="PatrolArea2" node_paths=PackedStringArray("patrol_bounds_area") instance=ExtResource("18_j2kl8")]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -1.15347, 0.938243, -15.9758)
-patrol_bounds_area = NodePath("..")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 158.512, 0.985801, 182.229)
+enemy_type = "Mage"
 selectedtype = 1
 
 [node name="OverworldItem2" parent="." instance=ExtResource("20_ave4v")]

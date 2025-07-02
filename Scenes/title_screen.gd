@@ -15,7 +15,7 @@ func _on_start_button_pressed() -> void:
 	
 	await run_transition_hide()
 	# Change the scene after transition
-	get_tree().change_scene_to_file("res://Scenes/TestScene.tscn")
+	get_tree().change_scene_to_file("res://island.tscn")
 
 func _on_options_button_pressed():
 	print("Options button pressed")

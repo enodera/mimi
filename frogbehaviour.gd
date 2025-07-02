@@ -47,8 +47,8 @@ var melee_timer: float = 0.5
 @export_group("Enemy type")
 @export var selectedtype: Class = Class.FROG
 
-@onready var player = %Player
-@onready var health_ui = %HealthUI
+var player
+var health_ui
 
 @export_group("Loot")
 @export var loot_item_id: String = "default_item"
@@ -74,6 +74,14 @@ var _animation_tree: AnimationTree  # Reference to the AnimationTree
 var _state_machine: AnimationNodeStateMachinePlayback
 
 func _ready() -> void:
+	if !player:
+		player = get_tree().get_first_node_in_group("player") # Fallback
+	if !health_ui:
+		health_ui = get_tree().get_first_node_in_group("health_ui") # Fallback
+		
+	if patrol_bounds_area == null and get_parent() is Area3D:
+		patrol_bounds_area = get_parent() as Area3D
+		
 	$MeshInstance3D/Area3D.area_entered.connect(_on_area_entered)
 	$VisibilityRange.body_entered.connect(_on_vision_body_entered)
 	$VisibilityRange.body_exited.connect(_on_vision_body_exited)
@@ -84,9 +92,10 @@ func _ready() -> void:
 	set_attack_hitbox_active(false)
 	
 	mesh = class_models[selectedtype]
-	
+	mesh.visible = true
 	_animation_tree = class_controller[selectedtype]
 	_state_machine = _animation_tree.get("parameters/playback")
+	$enemy/DeathParticles2.emitting = true
 	_pick_new_target()
 
 var target_velocity: Vector3 = Vector3.ZERO

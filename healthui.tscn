@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://ccpeiynnomu4b" path="res://healthui.gd" id="1_y7hmn"]
 [ext_resource type="Theme" uid="uid://vmsqngx3kiq2" path="res://dialogue.tres" id="2_dy385"]
 
-[node name="HealthUI" type="CanvasLayer"]
+[node name="HealthUI" type="CanvasLayer" groups=["health_ui"]]
 script = ExtResource("1_y7hmn")
 
 [node name="HealthBar" type="ProgressBar" parent="."]
