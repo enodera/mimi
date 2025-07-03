@@ -208,6 +208,38 @@ item_id = "mango"
 transform = Transform3D(-1.64959, -1.30816e-07, 0.237975, 4.91527e-07, -1.66666, -3.34077e-07, 0.237975, -5.03704e-07, 1.64959, -15.1867, 14.2478, 2.06375)
 item_id = "mango"
 
+[node name="Tree27" parent="NavigationRegion3D/World" instance=ExtResource("25_j2kl8")]
+transform = Transform3D(-0.152624, -1.41004e-07, -0.988285, -6.3189e-07, 0.999999, -4.5091e-08, 0.988284, 6.17605e-07, -0.152624, -142.728, 14.5401, 31.9774)
+tree_type = 1
+
+[node name="OverworldApple1" parent="NavigationRegion3D/World/Tree27" instance=ExtResource("20_ave4v")]
+transform = Transform3D(1.49373, -1.23826e-06, -0.739286, -9.04139e-07, -1.66666, 2.71058e-07, -0.739287, 5.14756e-07, -1.49373, 0.27206, 18.5141, -5.97978)
+item_id = "apple"
+
+[node name="OverworldApple2" parent="NavigationRegion3D/World/Tree27" instance=ExtResource("20_ave4v")]
+transform = Transform3D(1.41355, -1.5224e-06, 0.882976, -9.47879e-07, -1.66666, -4.78275e-07, 0.882978, -1.71111e-07, -1.41355, 4.62082, 21.2883, 4.23669)
+item_id = "apple"
+
+[node name="OverworldApple3" parent="NavigationRegion3D/World/Tree27" instance=ExtResource("20_ave4v")]
+transform = Transform3D(-1.64959, -1.30816e-07, 0.237975, 4.91527e-07, -1.66666, -3.34077e-07, 0.237975, -5.03704e-07, 1.64959, -15.1867, 14.2478, 2.06375)
+item_id = "apple"
+
+[node name="Tree28" parent="NavigationRegion3D/World" instance=ExtResource("25_j2kl8")]
+transform = Transform3D(0.597443, -3.34124e-07, 0.801911, 6.41895e-08, 0.999998, 3.68837e-07, -0.801911, -1.68886e-07, 0.597444, -92.7141, 14.5401, 138.116)
+tree_type = 1
+
+[node name="OverworldPear1" parent="NavigationRegion3D/World/Tree28" instance=ExtResource("20_ave4v")]
+transform = Transform3D(1.49373, -1.23826e-06, -0.739286, -9.04139e-07, -1.66666, 2.71058e-07, -0.739287, 5.14756e-07, -1.49373, 0.27206, 18.5141, -5.97978)
+item_id = "pear"
+
+[node name="OverworldPear2" parent="NavigationRegion3D/World/Tree28" instance=ExtResource("20_ave4v")]
+transform = Transform3D(1.41355, -1.5224e-06, 0.882976, -9.47879e-07, -1.66666, -4.78275e-07, 0.882978, -1.71111e-07, -1.41355, 4.62082, 21.2883, 4.23669)
+item_id = "pear"
+
+[node name="OverworldPear3" parent="NavigationRegion3D/World/Tree28" instance=ExtResource("20_ave4v")]
+transform = Transform3D(-1.64959, -1.30816e-07, 0.237975, 4.91527e-07, -1.66666, -3.34077e-07, 0.237975, -5.03704e-07, 1.64959, -15.1867, 14.2478, 2.06375)
+item_id = "pear"
+
 [node name="Tree25" parent="NavigationRegion3D/World" instance=ExtResource("25_j2kl8")]
 transform = Transform3D(-0.526036, -5.05492e-07, 0.850463, 8.45181e-08, 1, 5.77211e-07, -0.850464, 4.01782e-07, -0.526036, -68.8191, -3.05176e-05, -70.8224)
 tree_type = 1
@@ -274,7 +306,6 @@ transform = Transform3D(-1.66665, -1.50308e-06, -0.00616589, -1.47922e-06, 1.666
 
 [node name="GrassChunk3" parent="NavigationRegion3D/World" instance=ExtResource("15_l4q3l")]
 transform = Transform3D(0.455452, -5.75171e-07, -1.60323, -3.44805e-07, 1.66666, -6.50636e-07, 1.60323, 6.10908e-07, 0.455452, -118.126, 9.24243, 80.6188)
-chunk_type = 1
 
 [node name="GrassChunk4" parent="NavigationRegion3D/World" instance=ExtResource("13_nytiv")]
 transform = Transform3D(0.455452, -5.75171e-07, -1.60323, -3.44805e-07, 1.66666, -6.50636e-07, 1.60323, 6.10908e-07, 0.455452, -86.6038, 5.33186, 38.2866)

@@ -316,7 +316,6 @@ func _on_vision_body_entered(body):
 
 func _on_vision_body_exited(body):
 	if body.is_in_group("player"):
-		player = null
 		if state == State.ATTACK:
 			state = State.PATROL
 		playeraggroable = false
