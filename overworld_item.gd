@@ -22,6 +22,8 @@ func _ready():
 	$Area3D.body_entered.connect(_on_body_entered)
 	$Area3D.body_exited.connect(_on_body_exited)
 	$Label3D.visible = false
+	
+	show_item(item_id)
 
 func _process(delta):
 	if player_in_range and not collected and pickupable:
@@ -51,11 +53,9 @@ func _on_body_exited(body):
 func collect_item():
 	collected = true
 	respawn_timer = respawn_time
-	if has_node("MeshInstance3D"):
-		$MeshInstance3D.visible = false
-	elif has_node("Sprite3D"):
-		$Sprite3D.visible = false
-		
+	
+	show_item("none")
+	
 	$PickupParticles.emitting = true
 
 	# Add to inventory
@@ -69,9 +69,19 @@ func collect_item():
 func respawn_item():
 	collected = false
 
-	if has_node("MeshInstance3D"):
-		$MeshInstance3D.visible = true
-	elif has_node("Sprite3D"):
-		$Sprite3D.visible = true
+	show_item(item_id)
 
 	$Label3D.text = "Press E to pick up"
+
+func show_item(id: String):
+	var item_container = $Item
+
+	for child in item_container.get_children():
+		child.visible = false
+
+	if id == "none":
+		return
+
+	if item_container.has_node(id):
+		var item_node = item_container.get_node(id)
+		item_node.visible = true

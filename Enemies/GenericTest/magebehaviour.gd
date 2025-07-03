@@ -3,7 +3,7 @@ extends CharacterBody3D
 @onready var navigation_agent_3d: NavigationAgent3D = $NavigationAgent3D
 
 enum State { PATROL, ATTACK, MELEE, DAMAGE, DISAPPEAR }
-enum Class { MAGE1, MAGE2 }
+enum MageClass { MAGE1, MAGE2 }
 
 enum MeleePhase { BUFFER, ATTACKING, RECOVERY }
 var melee_phase: MeleePhase = MeleePhase.BUFFER
@@ -11,23 +11,26 @@ var melee_timer: float = 0.3
 
 var player
 var health_ui
-var selectedtype: Class
+var selectedtype: MageClass
+
+var patrol_walk_time: float = 0.0
+@export var max_patrol_walk_duration: float = 5.0
 
 @onready var class_models = {
-	Class.MAGE1: $enemy/mage1,
-	Class.MAGE2: $enemy/mage2
+	MageClass.MAGE1: $enemy/mage1,
+	MageClass.MAGE2: $enemy/mage2
 }
 
 @onready var class_controller = {
-	Class.MAGE1: $enemy/mage1/AnimationTree,
-	Class.MAGE2: $enemy/mage2/AnimationTree
+	MageClass.MAGE1: $enemy/mage1/AnimationTree,
+	MageClass.MAGE2: $enemy/mage2/AnimationTree
 }
 
 var multiplebullets : bool = false
 
 @onready var decidebullets = {
-	Class.MAGE1: false,
-	Class.MAGE2: true
+	MageClass.MAGE1: false,
+	MageClass.MAGE2: true
 }
 
 @export_group("Physics")
@@ -82,14 +85,15 @@ var attack_hitbox_active: bool = false
 var _animation_tree: AnimationTree
 var _state_machine: AnimationNodeStateMachinePlayback
 var dying = false
+var was_on_floor := false
 
 func _ready() -> void:
 	if !player:
 		player = get_tree().get_first_node_in_group("player")
 	if !health_ui:
 		health_ui = get_tree().get_first_node_in_group("health_ui")
-	if !selectedtype:
-		selectedtype = get_parent().selectedtype
+	if !selectedtype and get_parent().has_method("get_mageselectedtype"):
+		selectedtype = get_parent().get_mageselectedtype()
 	if !loot_item_id:
 		loot_item_id = get_parent().loot_item_id
 	if !loot_min_amount:
@@ -99,6 +103,8 @@ func _ready() -> void:
 	
 	if patrol_bounds_area == null and get_parent() is Area3D:
 		patrol_bounds_area = get_parent() as Area3D
+	
+	was_on_floor = true
 	
 	$MeshInstance3D/Area3D.area_entered.connect(_on_area_entered)
 	$VisibilityRange.body_entered.connect(_on_vision_body_entered)
@@ -132,7 +138,9 @@ func _physics_process(delta: float) -> void:
 					waiting = false
 					_pick_new_target()
 			else:
-				if navigation_agent_3d.is_navigation_finished():
+				patrol_walk_time += delta  # increment walk time
+
+				if navigation_agent_3d.is_navigation_finished() or patrol_walk_time > max_patrol_walk_duration:
 					if randf() < idle_chance:
 						waiting = true
 						wait_timer = randf_range(min_wait, max_wait)
@@ -144,11 +152,12 @@ func _physics_process(delta: float) -> void:
 					var direction = (destination - global_position).normalized()
 					target_velocity = direction * patrol_speed
 					_state_machine.travel("walk")
-					
+
 			if not is_on_floor():
 				velocity.y -= gravity * delta
 			else:
 				velocity.y = 0
+
 
 		State.ATTACK:
 			if player:
@@ -268,6 +277,7 @@ func _physics_process(delta: float) -> void:
 			var target_angle = atan2(direction.x, direction.z)
 			mesh.rotation.y = lerp_angle(mesh.rotation.y, target_angle - deg_to_rad(90), delta * 5.0)
 
+	was_on_floor = is_on_floor()
 	move_and_slide()
 
 	var desired_hitbox_state = (state == State.MELEE and melee_phase == MeleePhase.ATTACKING)
@@ -286,6 +296,7 @@ func _pick_new_target() -> void:
 		randf_range(center.z - 15.0, center.z + 15.0)
 	)
 	navigation_agent_3d.set_target_position(random_position)
+	patrol_walk_time = 0.0
 
 func _on_area_entered(area: Area3D) -> void:
 	if area.is_in_group("playerattack"):

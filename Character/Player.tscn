@@ -27,7 +27,7 @@ rings = 8
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_lgt04"]
 radius = 0.303584
-height = 2.94938
+height = 4.00586
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_lgt04"]
 
@@ -206,7 +206,7 @@ transparency = 0.7
 mesh = SubResource("CapsuleMesh_713gb")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 shape = SubResource("CapsuleShape3D_lgt04")
 
 [node name="CameraPivot" type="Node3D" parent="."]

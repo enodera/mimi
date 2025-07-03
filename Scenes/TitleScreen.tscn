@@ -74,7 +74,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("2_8l4an")
 theme_override_font_sizes/font_size = 25
-text = "Options"
+text = "Instructions"
 
 [node name="CloseButton" type="Button" parent="."]
 layout_mode = 1

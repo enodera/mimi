@@ -5,18 +5,31 @@ extends CharacterBody3D
 @onready var navigation_agent_3d: NavigationAgent3D = $NavigationAgent3D
 
 enum State { PATROL, ATTACK, MELEE, DAMAGE }
-enum Class { FROG }
+enum FrogClass { FROG1, FROG2, FROG3, FROG4 }
 
 enum MeleePhase { BUFFER, ATTACKING, RECOVERY }
 var melee_phase: MeleePhase = MeleePhase.BUFFER
 var melee_timer: float = 0.5
 
+var player
+var health_ui
+var selectedtype: FrogClass
+
+var patrol_walk_time: float = 0.0
+@export var max_patrol_walk_duration: float = 5.0
+
 @onready var class_models = {
-	Class.FROG: $enemy/frog
+	FrogClass.FROG1: $enemy/frog1,
+	FrogClass.FROG2: $enemy/frog2,
+	FrogClass.FROG3: $enemy/frog3,
+	FrogClass.FROG4: $enemy/frog4
 }
 
 @onready var class_controller = {
-	Class.FROG: $enemy/frog/AnimationTree
+	FrogClass.FROG1: $enemy/frog1/AnimationTree,
+	FrogClass.FROG2: $enemy/frog2/AnimationTree,
+	FrogClass.FROG3: $enemy/frog3/AnimationTree,
+	FrogClass.FROG4: $enemy/frog4/AnimationTree
 }
 
 @export_group("Physics")
@@ -43,13 +56,6 @@ var melee_timer: float = 0.5
 @export var idle_chance: float = 0.3
 @export var knockback_duration: float = 0.25
 
-
-@export_group("Enemy type")
-@export var selectedtype: Class = Class.FROG
-
-var player
-var health_ui
-
 var state: State = State.PATROL
 var mesh: Node3D
 
@@ -71,12 +77,16 @@ var attack_hitbox_active: bool = false  # Track hitbox state
 
 var _animation_tree: AnimationTree  # Reference to the AnimationTree
 var _state_machine: AnimationNodeStateMachinePlayback
+var was_on_floor := false
 
 func _ready() -> void:
+	
 	if !player:
 		player = get_tree().get_first_node_in_group("player") # Fallback
 	if !health_ui:
 		health_ui = get_tree().get_first_node_in_group("health_ui") # Fallback
+	if !selectedtype and get_parent().has_method("get_frogselectedtype"):
+		selectedtype = get_parent().get_frogselectedtype()
 	if !loot_item_id:
 		loot_item_id = get_parent().loot_item_id
 	if !loot_min_amount:
@@ -86,7 +96,9 @@ func _ready() -> void:
 		
 	if patrol_bounds_area == null and get_parent() is Area3D:
 		patrol_bounds_area = get_parent() as Area3D
-		
+	
+	was_on_floor = true
+	
 	$MeshInstance3D/Area3D.area_entered.connect(_on_area_entered)
 	$VisibilityRange.body_entered.connect(_on_vision_body_entered)
 	$VisibilityRange.body_exited.connect(_on_vision_body_exited)
@@ -95,6 +107,10 @@ func _ready() -> void:
 	$AttackHitbox.body_entered.connect(_on_hitbox_body_entered)
 	
 	set_attack_hitbox_active(false)
+	$enemy/frog1.visible = false
+	$enemy/frog2.visible = false
+	$enemy/frog3.visible = false
+	$enemy/frog4.visible = false
 	
 	mesh = class_models[selectedtype]
 	mesh.visible = true
@@ -115,25 +131,27 @@ func _physics_process(delta: float) -> void:
 					waiting = false
 					_pick_new_target()
 			else:
-				if navigation_agent_3d.is_navigation_finished():
+				patrol_walk_time += delta  # increment time walking to current target
+				
+				# If stuck or walking too long, pick a new target
+				if patrol_walk_time > max_patrol_walk_duration or navigation_agent_3d.is_navigation_finished():
 					if randf() < idle_chance:
-						# Randomly idle
 						waiting = true
 						wait_timer = randf_range(min_wait, max_wait)
 						target_velocity = Vector3.ZERO
 					else:
-						# Immediately pick a new patrol destination
 						_pick_new_target()
 				else:
 					var destination = navigation_agent_3d.get_next_path_position()
 					var direction = (destination - global_position).normalized()
 					target_velocity = direction * patrol_speed
 					_state_machine.travel("walk")
-					
+				
 			if not is_on_floor():
 				velocity.y -= gravity * delta
 			else:
 				velocity.y = 0
+
 
 		State.ATTACK:
 			if player:
@@ -196,7 +214,7 @@ func _physics_process(delta: float) -> void:
 				var knockback_axis = knockback_velocity.cross(Vector3.UP).normalized()
 				mesh.rotate(knockback_axis, deg_to_rad(-hitstun_rotation_speed))
 
-				if knockback_elapsed >= knockback_duration:
+				if knockback_elapsed >= knockback_duration and was_on_floor:
 					is_knocked_back = false
 
 			else:
@@ -239,7 +257,8 @@ func _physics_process(delta: float) -> void:
 			var direction = (target - mesh.global_position).normalized()
 			var target_angle = atan2(direction.x, direction.z)
 			mesh.rotation.y = lerp_angle(mesh.rotation.y, target_angle - deg_to_rad(90), delta * 5.0)
-			
+	
+	was_on_floor = is_on_floor()
 	move_and_slide()
 	
 	var desired_hitbox_state = (state == State.MELEE and melee_phase == MeleePhase.ATTACKING)
@@ -257,6 +276,7 @@ func _pick_new_target() -> void:
 		randf_range(center.z - 15.0, center.z + 15.0)
 	)
 	navigation_agent_3d.set_target_position(random_position)
+	patrol_walk_time = 0.0
 
 func _on_area_entered(area: Area3D) -> void:
 	if area.is_in_group("playerattack"):

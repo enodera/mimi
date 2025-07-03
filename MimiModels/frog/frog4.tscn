@@ -1,6 +1,13 @@
-[gd_scene load_steps=14 format=3 uid="uid://dpe0v3b8g4i0t"]
+[gd_scene load_steps=16 format=3 uid="uid://d0n8pl4px0hd8"]
 
-[ext_resource type="PackedScene" uid="uid://6pp3wka8opwy" path="res://MimiModels/frog/frog.glb" id="1_07txi"]
+[ext_resource type="PackedScene" uid="uid://6pp3wka8opwy" path="res://MimiModels/frog/frog.glb" id="1_dbb0p"]
+[ext_resource type="Texture2D" uid="uid://h82d14xuqm0x" path="res://MimiModels/frog/frog4_frogtexture.png" id="2_dbb0p"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_flyf3"]
+albedo_color = Color(0, 0, 0, 1)
+albedo_texture = ExtResource("2_dbb0p")
+emission_enabled = true
+emission_texture = ExtResource("2_dbb0p")
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_l0gv5"]
 animation = &"attack"
@@ -44,10 +51,11 @@ states/walk/node = SubResource("AnimationNodeAnimation_gu4h2")
 states/walk/position = Vector2(437, 24)
 transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_y0o85"), "idle", "attack", SubResource("AnimationNodeStateMachineTransition_dn26j"), "attack", "walk", SubResource("AnimationNodeStateMachineTransition_m4ciq"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_ea0qc"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_am0u4"), "walk", "attack", SubResource("AnimationNodeStateMachineTransition_xscrs"), "attack", "idle", SubResource("AnimationNodeStateMachineTransition_lp72k")]
 
-[node name="frog" instance=ExtResource("1_07txi")]
+[node name="frog" instance=ExtResource("1_dbb0p")]
 
 [node name="Roundcube" parent="." index="0"]
-transform = Transform3D(1.03477, 0, 0, 0, 0.981193, 0, 0, 0, 1.01835, 0, -1.7, 0)
+transform = Transform3D(1.10299, 0, 0, 0, 0.944293, 0, 0, 0, 1.05436, 0, -1.7, 0)
+surface_material_override/0 = SubResource("StandardMaterial3D_flyf3")
 
 [node name="AnimationTree" type="AnimationTree" parent="." index="2"]
 tree_root = SubResource("AnimationNodeStateMachine_eptgu")

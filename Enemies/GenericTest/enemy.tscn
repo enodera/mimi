@@ -1,10 +1,13 @@
-[gd_scene load_steps=42 format=3 uid="uid://b4bv4j5e7yi0b"]
+[gd_scene load_steps=45 format=3 uid="uid://b4bv4j5e7yi0b"]
 
 [ext_resource type="Script" uid="uid://fphwwj1sbpqo" path="res://frogbehaviour.gd" id="1_5rcum"]
 [ext_resource type="PackedScene" uid="uid://dpe0v3b8g4i0t" path="res://MimiModels/frog/frog.tscn" id="2_gsgu7"]
 [ext_resource type="Material" uid="uid://bcon13yakvxwu" path="res://attackparticles.tres" id="3_5rcum"]
 [ext_resource type="Texture2D" uid="uid://ck1li6b7jki2c" path="res://Enemies/GenericTest/spark.png" id="3_ajfth"]
+[ext_resource type="PackedScene" uid="uid://g5eaqk3pvcef" path="res://MimiModels/frog/frog2.tscn" id="3_l6hcf"]
 [ext_resource type="QuadMesh" uid="uid://cr48mhkgbw1vr" path="res://Enemies/GenericTest/circleeffect.tres" id="4_5rcum"]
+[ext_resource type="PackedScene" uid="uid://b2b22xsm5aqy5" path="res://MimiModels/frog/frog3.tscn" id="4_36d6g"]
+[ext_resource type="PackedScene" uid="uid://d0n8pl4px0hd8" path="res://MimiModels/frog/frog4.tscn" id="5_j5php"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_rbfrn"]
 radius = 2.5
@@ -244,17 +247,34 @@ debug_color = Color(0.7, 0, 0, 0.419608)
 one_shot = true
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+path_height_offset = 1.4
 path_max_distance = 10.01
+simplify_path = true
 avoidance_enabled = true
+radius = 2.0
 max_neighbors = 1
+use_3d_avoidance = true
 debug_use_custom = true
 debug_path_custom_color = Color(0, 0.593282, 0.731677, 1)
 
 [node name="enemy" type="Node3D" parent="."]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 
-[node name="frog" parent="enemy" instance=ExtResource("2_gsgu7")]
+[node name="frog1" parent="enemy" instance=ExtResource("2_gsgu7")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 1.4, 0)
+visible = false
+
+[node name="frog2" parent="enemy" instance=ExtResource("3_l6hcf")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 1.4, 0)
+visible = false
+
+[node name="frog3" parent="enemy" instance=ExtResource("4_36d6g")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 1.4, 0)
+visible = false
+
+[node name="frog4" parent="enemy" instance=ExtResource("5_j5php")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 1.4, 0)
+visible = false
 
 [node name="AttackParticles" type="GPUParticles3D" parent="enemy"]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)

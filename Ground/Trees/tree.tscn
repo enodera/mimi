@@ -1,9 +1,10 @@
-[gd_scene load_steps=35 format=4 uid="uid://6gcu07ce0tq7"]
+[gd_scene load_steps=37 format=4 uid="uid://6gcu07ce0tq7"]
 
 [ext_resource type="Script" uid="uid://chi3o8iwqed4l" path="res://picktree.gd" id="1_1wauy"]
 [ext_resource type="Texture2D" uid="uid://dvncitn4jbjps" path="res://Ground/Trees/tree_e41c024f2bd940ebbdffb11c6bb79485_RGB_Forest_texture_01.png" id="2_1wauy"]
 [ext_resource type="Material" uid="uid://b8s2364t5irjy" path="res://Ground/Trees/tree.tres" id="3_8a7k6"]
 [ext_resource type="Texture2D" uid="uid://iekcg3qqoe4w" path="res://Ground/Grass/sakuratexture.png" id="4_xu32x"]
+[ext_resource type="Texture2D" uid="uid://c33lqcx6t5sm2" path="res://Ground/Grass/snowtexture.png" id="5_ei5ub"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_8a7k6"]
 resource_name = "tree_Tree_01_Forest_mat_01_0_001"
@@ -477,6 +478,12 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_4j44p")
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eq4jb"]
+albedo_texture = ExtResource("5_ei5ub")
+emission_enabled = true
+emission_energy_multiplier = 0.25
+emission_texture = ExtResource("5_ei5ub")
+
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_8a7k6"]
 radius = 2.74389
 height = 25.5608
@@ -554,7 +561,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_ei5ub")
 [node name="Tree14" type="MeshInstance3D" parent="StaticBody3D"]
 mesh = SubResource("ArrayMesh_aywi1")
 skeleton = NodePath("")
-surface_material_override/0 = SubResource("StandardMaterial3D_ei5ub")
+surface_material_override/0 = SubResource("StandardMaterial3D_eq4jb")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 transform = Transform3D(0.996019, 0, -0.0891377, 0, 1, 0, 0.0891377, 0, 0.996019, -0.536266, 13.2115, -0.375383)

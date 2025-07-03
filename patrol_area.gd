@@ -21,8 +21,11 @@ var enemy_scene: PackedScene
 
 var loot_item_id: String = "apple"
 
-enum Class { MAGE1, MAGE2 }
-@export var selectedtype: Class
+enum FrogClass { FROG1, FROG2, FROG3, FROG4 }
+enum MageClass { MAGE1, MAGE2 }
+
+@export var frogselectedtype: FrogClass
+@export var mageselectedtype: MageClass
 
 @export_range(1, 99) var loot_min_amount: int = 1
 @export_range(1, 99) var loot_max_amount: int = 3
@@ -48,6 +51,7 @@ func _ready():
 	spawn_timer.timeout.connect(_on_spawn_timer_timeout)
 	add_child(spawn_timer)
 	spawn_timer.start()
+	_on_spawn_timer_timeout()
 
 func _on_spawn_timer_timeout():
 	if _get_enemy_count_in_area() >= max_enemies:
@@ -69,7 +73,10 @@ func _on_spawn_timer_timeout():
 	if enemy.has_meta("loot_max_amount"):
 		enemy.loot_max_amount = loot_max_amount
 	if enemy.has_meta("selectedtype"):
-		enemy.selectedtype = selectedtype
+		if enemy_type == "Frog":
+			enemy.selectedtype = frogselectedtype
+		else:
+			enemy.selectedtype = mageselectedtype
 
 	add_child(enemy)
 	enemy.add_to_group("enemy")
@@ -80,3 +87,18 @@ func _get_enemy_count_in_area() -> int:
 		if child.is_in_group("enemy"):
 			count += 1
 	return count
+
+func get_frogselectedtype() -> FrogClass:
+	return frogselectedtype
+
+func get_mageselectedtype() -> MageClass:
+	return mageselectedtype
+
+func get_loot_item_id() -> String:
+	return loot_item_id
+
+func get_loot_min_amount() -> int:
+	return loot_min_amount
+
+func get_loot_max_amount() -> int:
+	return loot_max_amount
