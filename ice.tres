@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://4if1a2bw67lv"]
+
+[ext_resource type="Texture2D" uid="uid://bw5lrp10wl7ss" path="res://Items/Meshes/icetexture.png" id="1_v18ig"]
+
+[resource]
+albedo_texture = ExtResource("1_v18ig")
+emission_enabled = true
+emission_texture = ExtResource("1_v18ig")

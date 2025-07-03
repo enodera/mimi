@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://xg3p865b0cw4"]
+
+[ext_resource type="Texture2D" uid="uid://u2sdpq02lyy0" path="res://Items/Meshes/sugartexture.png" id="1_cgfp5"]
+
+[resource]
+albedo_color = Color(0.65834, 0.65834, 0.65834, 1)
+albedo_texture = ExtResource("1_cgfp5")
+emission_enabled = true
+emission_texture = ExtResource("1_cgfp5")

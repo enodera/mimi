@@ -51,7 +51,7 @@ var dialogue = {
 
 	"elric": {
 		"intro": [
-			"Ah, greetings Mimi! I'm just taking in the fresh air over here.",
+			"Ah, greetings! I'm just taking in the fresh air over here.",
 			{
 				"text": "What brings you out here?",
 				"options": [
@@ -92,46 +92,39 @@ var dialogue = {
 		]
 	},
 
-	"npc_2": {
+	"lyra": {
 		"intro": [
-			"hello there!",
+			"Oh, hello there. It's a pleasure to meet you.",
 			{
-				"text": "what brings you here?",
+				"text": "How can I help you today?",
 				"options": [
-					{"text": "just exploring.", "next": "casual"},
-					{"text": "looking for work.", "next": "job"},
-					{"text": "got any tasks?", "next": "quest_offer"}
+					{"text": "Recipies nearby?", "next": "recipe_hint"},
+					{"text": "Just saying hello.", "next": "greeting"}
 				]
 			}
 		],
-		"casual": [
-			{"text": "nice to have you around! enjoy your time here.", "set_branch": "again"}
+		"recipe_hint": [
+			"Hmm... A recipe, you say?",
+			"I believe I caught a glimpse of something like that on the far side of this icy island.",
+			"There are a few small ice islets scattered around it — perhaps try searching there.",
+			{"text": "Best of luck. I hope you find what you're looking for.", "set_branch": "again"}
 		],
-		"job": [
-			"i might have a job for you soon. stay ready!"
-		],
-		"quest_offer": [
-			{"text": "", "check_quest": "npc2_quest"}
-		],
-		"npc2_quest_start": [
-			"i need help gathering 4 herbs for a potion.",
-			"could you find them for me?",
-			"thank you!"
-		],
-		"npc2_quest_done": [
-			"perfect, these herbs will do nicely!"
-		],
-		"npc2_quest_fail": [
-			"haven't found the herbs yet? keep searching!"
+		"greeting": [
+			"How lovely. It's always nice to exchange a kind word.",
+			{"text": "Stay warm out here, won't you?", "set_branch": "again"}
 		],
 		"again": [
-			"you sure like to talk, don't you?"
-		],
-		"already_done_quest": [
-			"you've already completed this one."
+			"Back again? You're always welcome.",
+			{
+				"text": "How can I help you today?",
+				"options": [
+					{"text": "Recipies nearby?", "next": "recipe_hint"},
+					{"text": "Just saying hello.", "next": "greeting"}
+				]
+			}
 		],
 		"error": [
-			"error occurred. please try again."
+			"Oh dear, something seems to have gone wrong. Please try again later."
 		]
 	},
 
