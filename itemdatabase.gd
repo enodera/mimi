@@ -293,7 +293,7 @@ var recipes = {
 	},
 
 	"smoothie": {
-		"name": "Fruit Smoothie",
+		"name": "Blueberry Smoothie",
 		"description": "Blended fruits with milk and ice.",
 		"type": "consumable",
 		"use_effect": "heal",
@@ -303,13 +303,13 @@ var recipes = {
 	},
 
 	"cake": {
-		"name": "Simple Cake",
+		"name": "Strawberry Cake",
 		"description": "Soft and fluffy baked goodness.",
 		"type": "consumable",
 		"use_effect": "heal",
 		"heal_amount": 14,
 		"value": 25,
-		"ingredients": ["flour", "egg", "butter", "milk", "sugar"]
+		"ingredients": ["strawberry", "flour", "egg", "butter", "milk", "sugar"]
 	},
 
 	"cookies": {
@@ -362,14 +362,14 @@ var recipes = {
 		"ingredients": ["sugar", "lemon", "orange"]
 	},
 
-	"lemon_bar": {
-		"name": "Lemon Bar",
-		"description": "Tart and sweet pastry.",
+	"mango_lassi": {
+		"name": "Mango Lassi",
+		"description": "A creamy mango and pineapple drink.",
 		"type": "consumable",
 		"use_effect": "heal",
 		"heal_amount": 13,
-		"value": 16,
-		"ingredients": ["lemon", "flour", "butter", "egg", "sugar"]
+		"value": 18,
+		"ingredients": ["mango", "pineapple", "milk", "sugar", "ice"]
 	},
 
 	"muffin": {
@@ -382,14 +382,14 @@ var recipes = {
 		"ingredients": ["flour", "egg", "butter", "sugar", "blueberry"]
 	},
 
-	"coconut_ball": {
-		"name": "Coconut Ball",
-		"description": "A sweet and chewy coconut dessert.",
+	"carrot_cake": {
+		"name": "Carrot Cake",
+		"description": "Tasty carrot treat!",
 		"type": "consumable",
 		"use_effect": "heal",
 		"heal_amount": 11,
 		"value": 15,
-		"ingredients": ["coconut", "sugar", "milk"]
+		"ingredients": ["carrot", "flour", "egg", "butter", "sugar"]
 	}
 }
 

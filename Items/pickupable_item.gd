@@ -1,6 +1,6 @@
 extends Node3D
 
-@export_enum("fruit_salad", "smoothie", "cake", "cookies", "pumpkin_pie", "fruit_pie", "ice_cream", "candied_fruit", "lemon_bar", "muffin", "coconut_ball")
+@export_enum("fruit_salad", "smoothie", "cake", "cookies", "pumpkin_pie", "fruit_pie", "ice_cream", "candied_fruit", "mango_lassi", "muffin", "carrot_cake")
 var recipe_id: String = "fruit_salad"
 
 @export var despawn_time: float = 2.0  # In seconds

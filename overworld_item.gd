@@ -6,7 +6,7 @@ extends Node3D
 	"papaya", "peach", "peanut", "pear", "pineapple", "pumpkin", "raspberry",
 	"starfruit", "strawberry", "watermelon", "sugar", "butter", "egg", "ice",
 	"milk", "flour", "fruit_salad", "smoothie", "cake", "cookies", "pumpkin_pie",
-	"fruit_pie", "ice_cream", "candied_fruit", "lemon_bar", "muffin", "coconut_ball"
+	"fruit_pie", "ice_cream", "candied_fruit", "mango_lassi", "muffin", "carrot_cake"
 )
 
 var item_id: String = "apple"
