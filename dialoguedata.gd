@@ -1,53 +1,311 @@
 extends Node
 
 var dialogue = {
-	
+
 	"liz": {
 		"intro": [
-			"Hi, Mimi!",
+			"Hello, Mimi. Have you been practicing your cooking spells?",
 			{
-				"text": "How are you today?",
+				"text": "Remember, the Sweets Archipelago is where sugar magic is strongest.",
 				"options": [
-					{"text": "I'm okay.", "next": "relieved"},
-					{"text": "Well...", "next": "panics"},
-					{"text": "Lemons for Liz (Quest)", "next": "lemons_for_liz"}
+					{"text": "Yes, teacher. Ready for a task!", "next": "greeting"}
 				]
 			}
 		],
-		"relieved": [
-			"That's good! Let me know if you need anything."
-			# {"text": "That's good! Let me know if you need anything.", "set_branch": "again"}
+		"greeting": [
+			"Good to see you again, Mimi. Keep striving to be the best cook you can be!",
+			"I'm going to ask you with delivering some food to me, okay? \nAll you have to do is cook on your Cooking menu! (Press J)",
+			"If you dont know how to make it, search for the recipies! They should be scattered around the archipelago.",
+			{"text": "You can talk to me to choose a mission when you're ready.", "set_branch": "mission_select"}
 		],
-		"panics": [
-			"Oh no...\nIf you need any help with anything, let me know!"
+		"mission_select": [
+			{
+				"text": "Greetings! Choose a sweet dish to deliver:",
+				"options": [
+					{"text": "3 Strawberry Cakes", "next": "quest_offer1"},
+					{"text": "3 Nut Cookies", "next": "quest_offer2"},
+					{"text": "3 Pumpkin Pies", "next": "quest_offer3"},
+					{"text": "3 Ice Creams", "next": "quest_offer4"},
+					{"text": "3 Mango Lassis", "next": "quest_offer5"},
+					{"text": "3 Berry Muffins", "next": "quest_offer6"},
+					{"text": "3 Carrot Cakes", "next": "quest_offer7"}
+				]
+			}
 		],
-		"lemons_for_liz": [
-			{"text": "", "check_quest": "lemons_for_liz"}
+		
+		"quest_offer1": [
+			{"text": "", "check_quest": "delivery_cake"}
 		],
-		"lemons_for_liz_start": [
-			"Oh, I need to ask a favour! Could you give me 3 lemons?",
-			"Truth is, I need them for my lesson...",
-			"Thank you so much!"
+		"quest_offer2": [
+			{"text": "", "check_quest": "delivery_cookies"}
 		],
-		"lemons_for_liz_done": [
-			"Thank you for the lemons! You're a lifesaver."
+		"quest_offer3": [
+			{"text": "", "check_quest": "delivery_pumpkin_pie"}
 		],
-		"lemons_for_liz_fail": [
-			"Hmm... looks like you don't have any lemons yet."
+		"quest_offer4": [
+			{"text": "", "check_quest": "delivery_ice_cream"}
 		],
-		"again": [
-			"Talking to me again? You're too kind!"
+		"quest_offer5": [
+			{"text": "", "check_quest": "delivery_mango_lassi"}
 		],
-		"already_done_quest" : [
-			"Um... You already did this quest... Sorry..."
+		"quest_offer6": [
+			{"text": "", "check_quest": "delivery_muffin"}
 		],
-		"quest_already" : [
-			"You're already doing a quest! Finish it up and then get back to me, okay?"
+		"quest_offer7": [
+			{"text": "", "check_quest": "delivery_carrot_cake"}
 		],
-		"error" : [
-			"Error!"
+		
+		"delivery_cake_start": [
+			"You must deliver 3 Strawberry Cakes to complete this task.",
+			"The softness and fluffiness of the cake is to die for.",
+			"Please, return once the delivery is done."
+		],
+
+		"delivery_cookies_start": [
+			"Would you mind giving me 3 Nut cookies?",
+			"I've heard enjoy their crunchiness a lot, and I'd love to try it for myself...",
+			"Do come back once you're done."
+		],
+
+		"delivery_pumpkin_pie_start": [
+			"Please, make 3 Pumpkin Pies for me.",
+			"Pumpkins are so fascinating... Don't you agree? Heehee...",
+			"The recipe should be somewhere in that rocky island.\n They're actually chocolate, though!",
+			"Let me know when you're done."
+		],
+
+		"delivery_ice_cream_start": [
+			"Deliver 3 Ice Creams to the hot springs resort on Cream Island.",
+			"They need a frozen treat to cool down.",
+			"The recipe should be somewhere in those snowy peaks.\n Did you know they're actually made of cream?",
+			"Come back once completed."
+		],
+
+		"delivery_mango_lassi_start": [
+			"3 Mango Lassis are to be delivered to the tropical fruit market in Rose Islands.",
+			"Have you heard of those before? They seem to be a real delicacy of a smoothie.",
+			"The recipe should be somewhere in those snowy peaks.\n Did you know they're actually made of cream?",
+			"Return once the delivery is done."
+		],
+
+		"delivery_muffin_start": [
+			"I'd like to have 3 Berry Muffins, if it's not too much trouble.",
+			"The soft muffins filled with berries are very popular.",
+			"The recipe should be somewhere in the pink biome.\n It seems that pink hue is actually whipping that fell out of the trees...\nIntriguing, isn't it?",
+			"Come back when you've delivered them."
+		],
+
+		"delivery_carrot_cake_start": [
+			"3 Carrot Cakes are to be delivered to the community center on Choco Island.",
+			"They love the tasty carrot treats there.",
+			"Return once the delivery is done."
+		],
+
+
+		"delivery_cake_done": [
+			"Strawberry Cakes delivered perfectly! Great job as always, Mimi."
+		],
+		"delivery_cake_fail": [
+			"You haven't baked the Strawberry Cakes yet.",
+			"Keep at it, you'll get there soon!"
+		],
+
+		"delivery_cookies_done": [
+			"Nut Cookies delivered! Outstanding."
+		],
+		"delivery_cookies_fail": [
+			"You don't have enough Nut Cookies prepared.",
+			"Practice makes perfect!"
+		],
+
+		"delivery_pumpkin_pie_done": [
+			"Pumpkin Pies delivered! I'm delighted."
+		],
+		"delivery_pumpkin_pie_fail": [
+			"The Pumpkin Pies aren’t ready yet.",
+			"Keep working on your baking!"
+		],
+
+		"delivery_ice_cream_done": [
+			"Ice Creams delivered! A perfect cool treat. Thank you!"
+		],
+		"delivery_ice_cream_fail": [
+			"You don’t have enough Ice Cream prepared.",
+			"Try again after practicing!"
+		],
+
+		"delivery_mango_lassi_done": [
+			"Mango Lassis! Just as I asked. Thank you!"
+		],
+		"delivery_mango_lassi_fail": [
+			"No Mango Lassis ready yet.",
+			"Keep at it to get better!"
+		],
+
+		"delivery_muffin_done": [
+			"Berry Muffins delivered! These berries are a hit, I've heard."
+		],
+		"delivery_muffin_fail": [
+			"You need more Berry Muffins before you can deliver.",
+			"Keep baking!"
+		],
+
+		"delivery_carrot_cake_done": [
+			"Carrot Cakes delivered! Isn't it amazing how carrots can be used in this way?"
+		],
+		"delivery_carrot_cake_fail": [
+			"Carrot Cakes aren’t ready yet.",
+			"Keep practicing and try again!"
+		],
+		"quest_already": [
+			"You're already on a quest, Mimi... Always finish your current duties before starting new ones!"
+		],
+		"already_done_quest": [
+			"You already did this mission, Mimi... Don't overwork yourself, okay?"
+		],
+		"error": [
+			"Something's not right, try again later."
 		]
 	},
+
+
+	"npc_pink_area": {
+		"intro": [
+			"Have you seen the pink trees around here? They glow softly at dusk.",
+			{
+				"text": "It's a magical place filled with sweet aromas.",
+				"options": [
+					{"text": "Tell me more.", "next": "pink_trees_info"},
+					{"text": "Thanks, just passing by.", "next": "casual"}
+				]
+			}
+		],
+		"pink_trees_info": [
+			"The pink trees' sap is sweet and can be used for powerful cooking spells.",
+			"Watch out for the pink frog slimes—they love the sap too!",
+			{"text": "Stay safe!", "set_branch": "again"}
+		],
+		"casual": [
+			"Enjoy the pink hues while they last!"
+		],
+		"again": [
+			"Come back anytime to enjoy the pink woods."
+		]
+	},
+
+	"npc_mountain_area": {
+		"intro": [
+			"The mountain's chocolate ground is unlike anything else in the archipelago.",
+			{
+				"text": "It's said the earth itself is sweet and magical.",
+				"options": [
+					{"text": "What about the mages here?", "next": "mages_info"},
+					{"text": "Thanks for the info.", "next": "casual"}
+				]
+			}
+		],
+		"mages_info": [
+			"The mages here use chocolate magic to enhance cooking and healing spells.",
+			"They are very secretive but will open up if you bring them special treats.",
+			{"text": "Try to befriend them!", "set_branch": "again"}
+		],
+		"casual": [
+			"Enjoy the rich smells of chocolate as you explore."
+		],
+		"again": [
+			"The mountain holds many secrets; keep exploring."
+		]
+	},
+
+	"npc_pink_frog_slimes": {
+		"intro": [
+			"Have you encountered the pink frog slimes around here?",
+			{
+				"text": "They're cute but tricky little creatures.",
+				"options": [
+					{"text": "What do they eat?", "next": "frog_slimes_food"},
+					{"text": "Just curious.", "next": "casual"}
+				]
+			}
+		],
+		"frog_slimes_food": [
+			"Pink frog slimes love sweet nectar from the pink trees and sometimes drop rare ingredients.",
+			"Catch them gently; they might become your allies.",
+			{"text": "Good luck!", "set_branch": "again"}
+		],
+		"casual": [
+			"They add charm to the pink area, don't they?"
+		],
+		"again": [
+			"Come back and tell me if you meet any."
+		]
+	},
+
+	"npc_mages": {
+		"intro": [
+			"Mages around these islands specialize in sweet magic.",
+			{
+				"text": "They study sugar and sweets to amplify their powers.",
+				"options": [
+					{"text": "Where can I find them?", "next": "mages_location"},
+					{"text": "Thanks for the info.", "next": "casual"}
+				]
+			}
+		],
+		"mages_location": [
+			"You can find them near the Cream Island and the mountain village.",
+			"They often gather to share recipes and spells.",
+			{"text": "Try bringing them cooked sweets to gain their favor.", "set_branch": "again"}
+		],
+		"casual": [
+			"Sweet magic is powerful when wielded well."
+		],
+		"again": [
+			"May the sugar guide your path!"
+		]
+	},
+
+	"flavia": {
+		"intro": [
+			"Looking for ingredients? Each island has its specialty.",
+			"It's all about the flora and fauna...",
+			{
+				"text": "Want to hear about them?\nI'll warn you, my explanations can be a bit long...",
+				"options": [
+					{"text": "Yes, please.", "next": "ingredients_info"},
+					{"text": "Maybe later.", "next": "casual"}
+				]
+			}
+		],
+		"ingredients_info": [
+			"Really?! Thank you! Alright then, ahem...",
+			"First there's Rose Islands. It's that big pink island over there, impossible to miss.",
+			"There, you can find bushes with strawberries and pink slimes to defeat, which will give you sugar.",
+			"Next is Cream Island, that icy looking one with the big mountain.",
+			"The mages there will drop milk, and the blue frogs will give you ice!",
+			"Besides that though, there's no ingredients to collect.",
+			"After that, there's Choco Island, the brown island.",
+			"You can find pumpkins and nuts scattered everywhere... And there, mages give you flour upon defeating them.",
+			"And finally, there's Jelly Island: the one we're on now!",
+			"There's A LOT of trees here! Mangos, carrots, pineapples... It's amazing!",
+			"...Ahem. Sorry for the long explanation... I just get so passionate!",
+			{"text": "If you need anything else, let me know!", "set_branch": "again"}
+		],
+		"casual": [
+			"Got it! Come back if you want any tips."
+		],
+		"again": [
+			"Good luck with your ingredient gathering!",
+			{
+				"text": "Did you want to hear my explanation again?",
+				"options": [
+					{"text": "Yes, please.", "next": "ingredients_info"},
+					{"text": "Maybe later.", "next": "casual"}
+				]
+			}
+		]
+	},
+
 
 	"elric": {
 		"intro": [

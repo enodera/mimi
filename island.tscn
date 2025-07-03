@@ -361,10 +361,6 @@ chunk_type = 3
 transform = Transform3D(1.48733, -2.4469e-06, -2.98312, 1.64528e-06, 3.33333, -1.66757e-06, 2.98312, -8.88378e-07, 1.48733, -389.296, 13.1845, 227.821)
 chunk_type = 3
 
-[node name="OverworldItem2" parent="NavigationRegion3D/World" instance=ExtResource("20_ave4v")]
-transform = Transform3D(0.455452, -5.75171e-07, -1.60323, -3.44805e-07, 1.66666, -6.50636e-07, 1.60323, 6.10908e-07, 0.455452, -111.49, 15.5418, 113.29)
-quantity = 5
-
 [node name="GrassChunk15" parent="NavigationRegion3D/World" instance=ExtResource("24_wuuey")]
 transform = Transform3D(-0.0795879, -1.39013e-06, -0.0247027, -1.34732e-05, 0.0166667, 1.99697e-05, 0.0247028, 4.61395e-06, -0.0795879, 119.265, -14.585, 587.644)
 
@@ -679,14 +675,14 @@ patrol_speed = 20.0
 transform = Transform3D(0.939889, 0, 0.341479, 0, 1, 0, -0.341479, 0, 0.939889, 78.5082, -0.795454, 147.507)
 enemy_type = "Mage"
 max_enemies = 1
-loot_item_id = "ice"
+loot_item_id = "milk"
 patrol_speed = 20.0
 
 [node name="PatrolArea5" parent="." instance=ExtResource("19_uby3m")]
 transform = Transform3D(0.939889, 0, 0.341479, 0, 1, 0, -0.341479, 0, 0.939889, 88.5486, -0.795454, 181.229)
 enemy_type = "Mage"
 max_enemies = 1
-loot_item_id = "ice"
+loot_item_id = "milk"
 patrol_speed = 20.0
 
 [node name="PatrolRange" parent="." instance=ExtResource("19_uby3m")]
@@ -779,3 +775,10 @@ recipe_id = "cake"
 [node name="PickupableItem5" parent="." instance=ExtResource("21_2isaf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -95.0283, -3.83911, 219.662)
 recipe_id = "mango_lassi"
+
+[node name="NPC5" parent="." instance=ExtResource("13_q2og1")]
+transform = Transform3D(0.97722, 0, -0.212229, 0, 1, 0, 0.212229, 0, 0.97722, -39.5526, 3.90955, 51.4869)
+selected_npc = 3
+hair_color = 4
+outfit_color = 1
+show_hairfringeemoright = true

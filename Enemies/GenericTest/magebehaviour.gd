@@ -382,7 +382,7 @@ func die():
 	if $MinimapSign.visible:
 		$MinimapSign.visible = false
 	
-	if $CollisionShape3D:
+	if $CollisionShape3D != null:
 		$CollisionShape3D.queue_free()
 	
 	$enemy/DeathParticles1.emitting = false

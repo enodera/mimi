@@ -10,39 +10,68 @@ var quests := {}  # { "quest_id": QuestState }
 
 # Embedded quest database
 var quest_data := {
-	"lemons_for_liz": {
-		"title": "Lemons for Liz",
-		"description": "Liz needs some lemons. Deliver 3 lemons to her.",
+	"delivery_cake": {
+		"title": "Strawberry Cake Delivery",
+		"description": "Deliver 3 Strawberry Cakes to Liz.",
 		"reward": "100 Gold",
 		"type": "delivery",
-		"item": "lemon",
+		"item": "cake",
 		"item_count": 3,
 		"recipient": "liz"
 	},
-	"elric_gathering": {
-		"title": "Mango mania!",
-		"description": "Elric wants you to try gathering mangos.\nThey're in the ground near the trees, try to get three!",
+	"delivery_cookies": {
+		"title": "Nut Cookies Delivery",
+		"description": "Deliver 3 Nut Cookies to Liz.",
 		"reward": "100 Gold",
 		"type": "delivery",
-		"item": "mango",
+		"item": "cookies",
 		"item_count": 3,
-		"recipient": "elric"
+		"recipient": "liz"
 	},
-	"collect_lemons": {
-		"title": "Get some lemons!",
-		"description": "Get 5 lemons to start cooking!",
-		"reward": "muffin",
-		"type": "collect",
-		"target_item": "lemon",
-		"target_count": 5
+	"delivery_pumpkin_pie": {
+		"title": "Pumpkin Pie Delivery",
+		"description": "Deliver 3 Pumpkin Pies to Liz.",
+		"reward": "100 Gold",
+		"type": "delivery",
+		"item": "pumpkin_pie",
+		"item_count": 3,
+		"recipient": "liz"
 	},
-	"defeat_frogs": {
-		"title": "Frogs!",
-		"description": "Frogs have taken over! Defeat 3 of them to restore peace.",
-		"reward": "lemon",
-		"type": "kill",
-		"target_enemy": "frog",
-		"target_count": 3
+	"delivery_ice_cream": {
+		"title": "Ice Cream Delivery",
+		"description": "Deliver 3 Ice Creams to Liz.",
+		"reward": "100 Gold",
+		"type": "delivery",
+		"item": "ice_cream",
+		"item_count": 3,
+		"recipient": "liz"
+	},
+	"delivery_mango_lassi": {
+		"title": "Mango Lassi Delivery",
+		"description": "Deliver 3 Mango Lassis to Liz.",
+		"reward": "100 Gold",
+		"type": "delivery",
+		"item": "mango_lassi",
+		"item_count": 3,
+		"recipient": "liz"
+	},
+	"delivery_muffin": {
+		"title": "Berry Muffin Delivery",
+		"description": "Deliver 3 Berry Muffins to Liz.",
+		"reward": "100 Gold",
+		"type": "delivery",
+		"item": "muffin",
+		"item_count": 3,
+		"recipient": "liz"
+	},
+	"delivery_carrot_cake": {
+		"title": "Carrot Cake Delivery",
+		"description": "Deliver 3 Carrot Cakes to Liz.",
+		"reward": "100 Gold",
+		"type": "delivery",
+		"item": "carrot_cake",
+		"item_count": 3,
+		"recipient": "liz"
 	}
 }
 
