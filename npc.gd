@@ -32,7 +32,7 @@ var dialog_npc: String
 enum NPCType {
 	ELRIC,
 	LYRA,
-	NPC3,
+	JACK,
 	NPC4,
 	NPC5,
 	NPC6,
@@ -47,7 +47,7 @@ enum NPCType {
 var npc_dialogue_keys = {
 	NPCType.ELRIC: "elric",
 	NPCType.LYRA: "lyra",
-	NPCType.NPC3: "npc_3",
+	NPCType.JACK: "jack",
 	NPCType.NPC4: "npc_4",
 	NPCType.NPC5: "npc_5",
 	NPCType.NPC6: "npc_6",

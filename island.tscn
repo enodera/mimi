@@ -514,6 +514,22 @@ tree_type = 12
 transform = Transform3D(-1.54382, -4.19887e-07, -0.628011, -5.24562e-07, 1.66666, 2.72196e-07, 0.628011, 5.66794e-07, -1.54382, 351.544, 6.58341, 258.879)
 tree_type = 12
 
+[node name="bush1" parent="NavigationRegion3D/World" instance=ExtResource("25_j2kl8")]
+transform = Transform3D(0.028895, -2.28308e-07, 0.499164, 1.7836e-07, 0.5, 2.18366e-07, -0.499164, 1.65442e-07, 0.028895, 409.599, 0.228, 200.612)
+tree_type = 12
+
+[node name="OverworldStrawberry1" parent="NavigationRegion3D/World/bush1" instance=ExtResource("20_ave4v")]
+transform = Transform3D(-1.54779, 4.08291e-07, 0.618164, 5.58011e-07, 1.66666, 1.74516e-07, -0.618164, 2.93061e-07, -1.54779, -13.8891, 22.338, 3.0351)
+item_id = "strawberry"
+
+[node name="OverworldStrawberry2" parent="NavigationRegion3D/World/bush1" instance=ExtResource("20_ave4v")]
+transform = Transform3D(-1.54779, 3.77688e-07, 0.618164, 5.58011e-07, 1.66666, 2.24187e-07, -0.618164, 3.56289e-07, -1.54779, 5.4332, 21.96, 0.412781)
+item_id = "strawberry"
+
+[node name="OverworldStrawberry3" parent="NavigationRegion3D/World/bush1" instance=ExtResource("20_ave4v")]
+transform = Transform3D(-1.54779, 3.77688e-07, 0.618164, 5.58011e-07, 1.66666, 2.24187e-07, -0.618164, 3.56289e-07, -1.54779, -7.96088, 21.5812, -11.2725)
+item_id = "strawberry"
+
 [node name="Tree6" parent="NavigationRegion3D/World" instance=ExtResource("25_j2kl8")]
 transform = Transform3D(1.66664, -9.77498e-07, -0.0090476, 9.29065e-07, 1.66666, -4.16948e-07, 0.00904757, 4.67023e-07, 1.66664, 396.127, 6.58316, -89.1776)
 tree_type = 12
@@ -604,7 +620,7 @@ frogselectedtype = 3
 patrol_speed = 20.0
 
 [node name="PinkFrogPatrolArea3" parent="." instance=ExtResource("19_uby3m")]
-transform = Transform3D(0.899085, 0, -0.437775, 0, 1, 0, 0.437775, 0, 0.899085, 99.1505, 1.34418, -236.936)
+transform = Transform3D(0.899085, 0, -0.437775, 0, 1, 0, 0.437775, 0, 0.899085, 116.355, 1.34418, -224.841)
 max_enemies = 1
 loot_item_id = "sugar"
 frogselectedtype = 3
@@ -653,12 +669,24 @@ patrol_speed = 20.0
 [node name="PatrolRange2" parent="." instance=ExtResource("19_uby3m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38.0761, 1.49867, -72.1195)
 max_enemies = 1
-loot_item_id = "lime"
+loot_item_id = "egg"
 
 [node name="PatrolRange3" parent="." instance=ExtResource("19_uby3m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.1106, 1.49866, -73.5001)
 max_enemies = 1
-loot_item_id = "lime"
+loot_item_id = "egg"
+
+[node name="PatrolRange5" parent="." instance=ExtResource("19_uby3m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -103.795, 1.49879, 156.405)
+max_enemies = 1
+loot_item_id = "ice"
+frogselectedtype = 1
+
+[node name="PatrolRange6" parent="." instance=ExtResource("19_uby3m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -130.313, 1.49878, 157.627)
+max_enemies = 1
+loot_item_id = "ice"
+frogselectedtype = 1
 
 [node name="water" parent="." instance=ExtResource("24_j2kl8")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -9.158, 0)
@@ -693,3 +721,14 @@ show_hairsidewave = true
 [node name="PickupableItem3" parent="." instance=ExtResource("21_2isaf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38.2534, 43.0865, 206.281)
 recipe_id = "ice_cream"
+
+[node name="NPC4" parent="." instance=ExtResource("13_q2og1")]
+transform = Transform3D(0.958993, 0, 0.28343, 0, 1, 0, -0.28343, 0, 0.958993, -45.5227, 10.3269, 147.499)
+selected_npc = 2
+show_hairbacklong = false
+show_hairbackshort = true
+show_hairbackwave = false
+show_hairbaseshort = true
+show_hairfringeemoleft = false
+show_hairfringemiddle = false
+show_hairsideshort = true

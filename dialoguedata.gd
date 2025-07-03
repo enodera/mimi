@@ -128,42 +128,39 @@ var dialogue = {
 		]
 	},
 
-	"npc_3": {
+	"jack": {
 		"intro": [
-			"hi friend!",
+			"Hey there, kiddo. Quite the view from up here, huh?",
 			{
-				"text": "need something?",
+				"text": "Need something?",
 				"options": [
-					{"text": "just saying hi.", "next": "friendly"},
-					{"text": "looking for a quest.", "next": "quest_offer"}
+					{"text": "Any recipes nearby?", "next": "recipe_hint"},
+					{"text": "Just enjoying the view.", "next": "greeting"}
 				]
 			}
 		],
-		"friendly": [
-			{"text": "nice to hear from you! take care.", "set_branch": "again"}
+		"recipe_hint": [
+			"Ah, recipes, huh?",
+			"Y'know, while I was looking out from the ridge up the mountain, I thought I saw something tucked away near the cliff edge.",
+			"Could've been a scrap of paper or maybe the wind playing tricks — either way, worth checking out.",
+			{"text": "Good luck, kiddo. Watch your step up there.", "set_branch": "again"}
 		],
-		"quest_offer": [
-			{"text": "", "check_quest": "npc3_quest"}
-		],
-		"npc3_quest_start": [
-			"can you fetch me 2 jars of honey?",
-			"i'm baking something special.",
-			"thanks for helping!"
-		],
-		"npc3_quest_done": [
-			"awesome, the honey is just what i needed!"
-		],
-		"npc3_quest_fail": [
-			"you still need to get those jars of honey."
+		"greeting": [
+			"Heh, nothing wrong with that. Some days it's enough to just take it all in.",
+			{"text": "Stay sharp out here, kiddo.", "set_branch": "again"}
 		],
 		"again": [
-			"good to see you again!"
-		],
-		"already_done_quest": [
-			"you've already done this quest."
+			"Back again, kiddo? Not tired of the cold yet?",
+			{
+				"text": "Need something?",
+				"options": [
+					{"text": "Any recipes nearby?", "next": "recipe_hint"},
+					{"text": "Just enjoying the view.", "next": "greeting"}
+				]
+			}
 		],
 		"error": [
-			"oops, something went wrong."
+			"Hm. Something went wrong there, kiddo. Try again in a bit."
 		]
 	},
 
