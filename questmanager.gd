@@ -112,6 +112,9 @@ func complete_quest(quest_id: String) -> void:
 		quests[quest_id] = QuestState.COMPLETED
 		print("Quest completed:", quest_id)
 		emit_signal("quest_completed", quest_id)
+		if are_all_liz_delivery_quests_completed():
+			print("All Liz delivery quests completed. Going to title screen.")
+			Global.gamedone = true
 
 func is_quest_started(quest_id: String) -> bool:
 	return quests.get(quest_id, QuestState.NOT_STARTED) != QuestState.NOT_STARTED
@@ -246,3 +249,11 @@ func on_item_delivered(quest_id: String) -> String:
 		next_line += "_" + completed
 
 	return next_line
+
+func are_all_liz_delivery_quests_completed() -> bool:
+	for quest_id in quest_data.keys():
+		var data = quest_data[quest_id]
+		if data.get("type") == "delivery" and data.get("recipient") == "liz":
+			if not is_quest_completed(quest_id):
+				return false
+	return true

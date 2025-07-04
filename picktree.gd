@@ -19,20 +19,20 @@ enum TreeType {
 
 # Diccionario para asociar cada tipo de árbol con su nodo correspondiente
 @onready var tree_models = {
-	TreeType.TREE1: $StaticBody3D/Tree1,
-	TreeType.TREE2: $StaticBody3D/Tree2,
-	TreeType.TREE3: $StaticBody3D/Tree3,
-	TreeType.TREE4: $StaticBody3D/Tree4,
-	TreeType.TREE5: $StaticBody3D/Tree5,
-	TreeType.TREE6: $StaticBody3D/Tree6,
-	TreeType.TREE7: $StaticBody3D/Tree7,
-	TreeType.TREE8: $StaticBody3D/Tree8,
-	TreeType.TREE9: $StaticBody3D/Tree9,
-	TreeType.TREE10: $StaticBody3D/Tree10,
-	TreeType.TREE11: $StaticBody3D/Tree11,
-	TreeType.TREE12: $StaticBody3D/Tree12,
-	TreeType.TREE13: $StaticBody3D/Tree13,
-	TreeType.TREE14: $StaticBody3D/Tree14
+	TreeType.TREE1: $Tree1,
+	TreeType.TREE2: $Tree2,
+	TreeType.TREE3: $Tree3,
+	TreeType.TREE4: $Tree4,
+	TreeType.TREE5: $Tree5,
+	TreeType.TREE6: $Tree6,
+	TreeType.TREE7: $Tree7,
+	TreeType.TREE8: $Tree8,
+	TreeType.TREE9: $Tree9,
+	TreeType.TREE10: $Tree10,
+	TreeType.TREE11: $Tree11,
+	TreeType.TREE12: $Tree12,
+	TreeType.TREE13: $Tree13,
+	TreeType.TREE14: $Tree14
 }
 
 @export var tree_type: TreeType = TreeType.TREE1

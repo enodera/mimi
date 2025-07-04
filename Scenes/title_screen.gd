@@ -14,6 +14,7 @@ func _on_start_button_pressed() -> void:
 	$StartButton.disabled = true
 	$OptionsButton.disabled = true
 	$CloseButton.disabled = true
+	Global.gamedone = false
 	
 	await run_transition_hide()
 	# Change the scene after transition

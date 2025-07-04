@@ -24,7 +24,7 @@ func _ready():
 		$Panel.set_pivot_offset($Panel.size * (1 / projscale))
 	$Panel.scale = Vector2(0, 0)
 	
-	inventory.add_recipe("muffin")
+	#inventory.add_recipe("muffin")
 	show_item("none")
 
 	update_ui()
@@ -118,7 +118,8 @@ func _on_close_button_pressed():
 	var tween := create_tween()
 	tween.tween_property($Panel, "scale", Vector2(0, 0), 0.00002).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 	await get_tree().create_timer(0.00002).timeout
-
+	
+	_on_item_hover_exited()
 	visible = false
 	Engine.time_scale = 1
 	Global.cookingpaused = false

@@ -6,3 +6,5 @@ var inventorypaused := false
 var cookingpaused := false
 var dialoguepaused := false
 var inventory_ref := Inventory.new()
+
+var gamedone := false

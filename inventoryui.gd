@@ -25,9 +25,9 @@ func _ready():
 		$Panel.set_pivot_offset($Panel.size * (1 / projscale))
 	$Panel.scale = Vector2(0, 0)
 
-	# Add one of every item in the database
-	for item_id in ItemDatabase.items.keys():
-		inventory.add_item(item_id, 10)
+	# Adding one of every item in the database for testing!!!!
+	#for item_id in ItemDatabase.items.keys():
+		#inventory.add_item(item_id, 10)
 
 	show_item("none")
 
@@ -110,7 +110,7 @@ func _on_close_button_pressed():
 	var tween := create_tween()
 	tween.tween_property($Panel, "scale", Vector2(0, 0), 0.00002).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 	await get_tree().create_timer(0.00002).timeout
-
+	_on_item_hover_exited()
 	visible = false
 	Engine.time_scale = 1
 	Global.inventorypaused = false

@@ -481,6 +481,3 @@ func shoot_projectile():
 		get_tree().current_scene.add_child(projectile)
 		projectile.global_position = spawn_position
 		projectile.direction = base_direction
-
-
-	

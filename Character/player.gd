@@ -47,6 +47,8 @@ var is_knockback_active := false
 
 var good_def := false
 var is_on_water := false
+var gamedoneinstanced := false
+
 # -----------------------
 # --- NODE REFERENCES ---
 # -----------------------
@@ -57,8 +59,6 @@ var is_on_water := false
 @onready var _skin: MimiSkin = %Mimi
 @onready var health_ui = %HealthUI
 @onready var shader_material: ShaderMaterial = $ScreenTransition/ColorRect.material
-
-
 # ---------------
 # ---- READY ----
 # ---------------
@@ -67,6 +67,8 @@ func _ready() -> void:
 	was_on_floor = true
 	_can_move = true
 	is_on_water = false
+	Global.dialoguepaused = false
+	Global.gamedone = false
 
 	_attack_timer = Timer.new()
 	_attack_timer.one_shot = true
@@ -216,8 +218,12 @@ func _physics_process(delta: float) -> void:
 	
 	# print("State: ", state, " | _can_move: ", _can_move, " | Vel: ", velocity)
 	
-	if Global.dialoguepaused:
+	if Global.dialoguepaused or is_on_water or Global.gamedone:
 		disable_movement()
+		if Global.gamedone and gamedoneinstanced == false:
+			gamedoneinstanced = true
+			await run_transition_hide()
+			get_tree().change_scene_to_file("res://Scenes/TitleScreen.tscn")
 		return
 	
 	update_broom_visibility()
@@ -238,7 +244,9 @@ func _physics_process(delta: float) -> void:
 	update_state_and_animation()
 	update_particles()
 	check_landing()
-
+	
+	
+		
 	was_on_floor = is_on_floor()
 	move_and_slide()
 
@@ -452,7 +460,7 @@ func _on_attack_recovery_timeout() -> void:
 # ----------------------
 
 func _process(_delta: float) -> void:
-	if not is_knockback_active:
+	if not is_knockback_active and not Global.gamedone:
 		if Input.is_action_just_pressed("inventory"):
 			if not Global.cookingpaused and not Global.dialoguepaused:
 				if not Global.inventorypaused:
@@ -527,6 +535,7 @@ func run_transition_show() -> void:
 		# Wait for the next frame (~60fps)
 		await get_tree().process_frame
 		
+
 func die() -> void:
 	is_on_water = true
 	_can_move = false

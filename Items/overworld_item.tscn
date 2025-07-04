@@ -1371,7 +1371,7 @@ mesh = SubResource("ArrayMesh_4xh6w")
 skeleton = NodePath("")
 
 [node name="peanut" type="MeshInstance3D" parent="Item"]
-transform = Transform3D(0.0455208, -0.0206846, 0, 0.0206846, 0.0455208, 0, 0, 0, 0.05, 0, 1.82418, 0)
+transform = Transform3D(-0.0575634, -0.0480776, 0, 0.0480776, -0.0575634, 0, 0, 0, 0.075, -0.0709085, 0.937825, 0)
 visible = false
 mesh = SubResource("ArrayMesh_eg5vo")
 skeleton = NodePath("")
