@@ -441,7 +441,7 @@ func _teleport_nearby() -> void:
 			
 			var random_pos = Vector3(
 				randf_range(min_global.x, max_global.x),
-				global_position.y,
+				global_position.y + 1.5,
 				randf_range(min_global.z, max_global.z)
 			)
 			

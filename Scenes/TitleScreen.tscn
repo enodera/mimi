@@ -6,12 +6,14 @@
 [ext_resource type="Texture2D" uid="uid://ctv3m3bi4ah2m" path="res://Particles/PNG (Transparent)/gamelogo.png" id="4_n15yj"]
 
 [node name="TitleScreen" type="Control"]
+auto_translate_mode = 1
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("1_vmg2h")
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -93,12 +95,7 @@ theme = ExtResource("2_8l4an")
 theme_override_font_sizes/font_size = 25
 text = "Close"
 
-[node name="Control" type="Control" parent="."]
-layout_mode = 1
-anchor_right = 1.0
-anchor_bottom = 1.0
-
-[node name="Gamelogo" type="Sprite2D" parent="Control"]
+[node name="Gamelogo" type="Sprite2D" parent="."]
 position = Vector2(566, 197)
 scale = Vector2(1.1, 1.1)
 texture = ExtResource("4_n15yj")

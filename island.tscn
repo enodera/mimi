@@ -294,15 +294,15 @@ tree_type = 1
 
 [node name="OverworldPear1" parent="NavigationRegion3D/World/Tree28" instance=ExtResource("20_ave4v")]
 transform = Transform3D(1.49373, -1.23826e-06, -0.739286, -9.04139e-07, -1.66666, 2.71058e-07, -0.739287, 5.14756e-07, -1.49373, 0.27206, 18.5141, -5.97978)
-item_id = "pear"
+item_id = "mango"
 
 [node name="OverworldPear2" parent="NavigationRegion3D/World/Tree28" instance=ExtResource("20_ave4v")]
 transform = Transform3D(1.41355, -1.5224e-06, 0.882976, -9.47879e-07, -1.66666, -4.78275e-07, 0.882978, -1.71111e-07, -1.41355, 4.62082, 21.2883, 4.23669)
-item_id = "pear"
+item_id = "mango"
 
 [node name="OverworldPear3" parent="NavigationRegion3D/World/Tree28" instance=ExtResource("20_ave4v")]
 transform = Transform3D(-1.64959, -1.30816e-07, 0.237975, 4.91527e-07, -1.66666, -3.34077e-07, 0.237975, -5.03704e-07, 1.64959, -15.1867, 14.2478, 2.06375)
-item_id = "pear"
+item_id = "mango"
 
 [node name="Tree33" parent="NavigationRegion3D/World" instance=ExtResource("25_j2kl8")]
 transform = Transform3D(0.597443, -3.34124e-07, 0.801911, 6.41895e-08, 0.999998, 3.68837e-07, -0.801911, -1.68886e-07, 0.597444, 72.1831, 2.39093, 101.57)
@@ -310,15 +310,15 @@ tree_type = 1
 
 [node name="OverworldPear1" parent="NavigationRegion3D/World/Tree33" instance=ExtResource("20_ave4v")]
 transform = Transform3D(1.49373, -1.23826e-06, -0.739286, -9.04139e-07, -1.66666, 2.71058e-07, -0.739287, 5.14756e-07, -1.49373, 0.27206, 18.5141, -5.97978)
-item_id = "pear"
+item_id = "pineapple"
 
 [node name="OverworldPear2" parent="NavigationRegion3D/World/Tree33" instance=ExtResource("20_ave4v")]
 transform = Transform3D(1.41355, -1.5224e-06, 0.882976, -9.47879e-07, -1.66666, -4.78275e-07, 0.882978, -1.71111e-07, -1.41355, 4.62082, 21.2883, 4.23669)
-item_id = "pear"
+item_id = "pineapple"
 
 [node name="OverworldPear3" parent="NavigationRegion3D/World/Tree33" instance=ExtResource("20_ave4v")]
 transform = Transform3D(-1.64959, -1.30816e-07, 0.237975, 4.91527e-07, -1.66666, -3.34077e-07, 0.237975, -5.03704e-07, 1.64959, -15.1867, 14.2478, 2.06375)
-item_id = "pear"
+item_id = "pineapple"
 
 [node name="Tree25" parent="NavigationRegion3D/World" instance=ExtResource("25_j2kl8")]
 transform = Transform3D(-0.526036, -5.05492e-07, 0.850463, 8.45181e-08, 1, 5.77211e-07, -0.850464, 4.01782e-07, -0.526036, -68.8191, -3.05176e-05, -70.8224)
@@ -563,7 +563,7 @@ transform = Transform3D(-1.12029, -5.03549e-07, -4.87544, 4.17534e-06, 2.15625, 
 chunk_type = 2
 
 [node name="GrassChunk30" parent="NavigationRegion3D/World" instance=ExtResource("15_l4q3l")]
-transform = Transform3D(-0.0933587, -2.02766e-06, -1.63916, -1.81874e-07, 2.15625, -1.44944e-06, 0.406287, 5.05027e-07, -0.376655, 198.306, -3.07236, 191.93)
+transform = Transform3D(-0.101897, -2.2132e-06, -1.79034, -1.98507e-07, 2.355, -1.58722e-06, 0.443443, 5.45654e-07, -0.411394, 199.962, -3.07236, 192.786)
 chunk_type = 2
 
 [node name="GrassChunk31" parent="NavigationRegion3D/World" instance=ExtResource("15_l4q3l")]
@@ -579,7 +579,7 @@ transform = Transform3D(-0.384267, 8.61641e-08, 0.483267, 4.77653e-08, 2.15625, 
 chunk_type = 2
 
 [node name="GrassChunk34" parent="NavigationRegion3D/World" instance=ExtResource("15_l4q3l")]
-transform = Transform3D(-0.384267, 1.67605e-07, 0.483267, 7.26006e-08, 2.15625, 2.49647e-07, -0.161089, 7.07562e-07, -1.1528, 386.78, -3.07252, 364.604)
+transform = Transform3D(-0.384267, 1.67605e-07, 0.483267, 7.26006e-08, 2.15625, 2.49647e-07, -0.161089, 7.07562e-07, -1.1528, 384.884, -3.07252, 357.928)
 chunk_type = 2
 
 [node name="GrassChunk35" parent="NavigationRegion3D/World" instance=ExtResource("15_l4q3l")]
@@ -804,7 +804,6 @@ transform = Transform3D(0.939889, 0, 0.341479, 0, 1, 0, -0.341479, 0, 0.939889, 
 enemy_type = "Mage"
 max_enemies = 2
 loot_item_id = "milk"
-mageselectedtype = 1
 loot_min_amount = 3
 loot_max_amount = 6
 patrol_speed = 20.0
@@ -849,7 +848,7 @@ loot_min_amount = 3
 loot_max_amount = 6
 patrol_speed = 20.0
 
-[node name="EggMagePatrolArea2" parent="." instance=ExtResource("19_uby3m")]
+[node name="EggFrogPatrolArea2" parent="." instance=ExtResource("19_uby3m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38.0761, 1.49867, -72.1195)
 max_enemies = 1
 loot_item_id = "egg"
@@ -857,7 +856,7 @@ loot_min_amount = 3
 loot_max_amount = 6
 patrol_speed = 20.0
 
-[node name="EggMagePatrolArea1" parent="." instance=ExtResource("19_uby3m")]
+[node name="EggFrogPatrolArea1" parent="." instance=ExtResource("19_uby3m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.1106, 1.49866, -73.5001)
 max_enemies = 1
 loot_item_id = "egg"
@@ -962,5 +961,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 253.087, 1.36786, 59.1727)
 recipe_id = "pumpkin_pie"
 
 [node name="PickupableItem7" parent="." instance=ExtResource("21_2isaf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 189.811, 0.193298, -204.927)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 185.647, 0.193298, -204.927)
 recipe_id = "carrot_cake"

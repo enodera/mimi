@@ -37,8 +37,8 @@ var patrol_walk_time: float = 0.0
 @export var gravity: float = 125.0
 
 @export_group("Stats")
-@export var health: float = 10.0
-@export var damagedealt: int = 10
+@export var health: float = 5.0
+@export var damagedealt: int = 5
 
 @export_group("Movement")
 @export var patrol_speed: float = 20.0

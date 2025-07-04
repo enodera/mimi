@@ -298,7 +298,7 @@ var recipes = {
 		"type": "consumable",
 		"use_effect": "heal",
 		"heal_amount": 12,
-		"value": 18,
+		"value": 20,
 		"ingredients": ["milk", "banana", "blueberry", "ice", "sugar"]
 	},
 
@@ -318,7 +318,7 @@ var recipes = {
 		"type": "consumable",
 		"use_effect": "heal",
 		"heal_amount": 8,
-		"value": 12,
+		"value": 25,
 		"ingredients": ["flour", "butter", "sugar", "egg", "peanut"]
 	},
 
@@ -328,7 +328,7 @@ var recipes = {
 		"type": "consumable",
 		"use_effect": "heal",
 		"heal_amount": 18,
-		"value": 22,
+		"value": 35,
 		"ingredients": ["pumpkin", "flour", "egg", "butter", "sugar"]
 	},
 
@@ -348,7 +348,7 @@ var recipes = {
 		"type": "consumable",
 		"use_effect": "heal",
 		"heal_amount": 14,
-		"value": 20,
+		"value": 25,
 		"ingredients": ["milk", "sugar", "egg", "ice"]
 	},
 
@@ -367,7 +367,7 @@ var recipes = {
 		"description": "A creamy mango and pineapple drink.",
 		"type": "consumable",
 		"use_effect": "heal",
-		"heal_amount": 13,
+		"heal_amount": 25,
 		"value": 18,
 		"ingredients": ["mango", "pineapple", "milk", "sugar", "ice"]
 	},
@@ -377,7 +377,7 @@ var recipes = {
 		"description": "Soft muffin filled with berries.",
 		"type": "consumable",
 		"use_effect": "heal",
-		"heal_amount": 14,
+		"heal_amount": 35,
 		"value": 17,
 		"ingredients": ["flour", "egg", "butter", "sugar", "blueberry"]
 	},
@@ -387,7 +387,7 @@ var recipes = {
 		"description": "Tasty carrot treat!",
 		"type": "consumable",
 		"use_effect": "heal",
-		"heal_amount": 11,
+		"heal_amount": 40,
 		"value": 15,
 		"ingredients": ["carrot", "flour", "egg", "butter", "sugar"]
 	}

@@ -127,6 +127,12 @@ func get_quest_info(quest_id: String) -> Dictionary:
 
 func reset_quests():
 	quests.clear()
+	for quest_id in quest_data.keys():
+		var data = quest_data[quest_id]
+		if data.has("delivered"):
+			data.erase("delivered")
+		if data.has("progress"):
+			data.erase("progress")
 
 func on_enemy_defeated(enemy_type: String) -> void:
 	for quest_id in quests.keys():

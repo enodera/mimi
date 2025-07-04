@@ -109,7 +109,7 @@ func _input(event: InputEvent) -> void:
 					combo_queued = true
 				else:
 					perform_attack()
-			elif state == "jump" and 35 >= velocity.y and velocity.y >= -15:
+			elif state == "jump" and 35 >= velocity.y and velocity.y >= -25:
 				perform_air_attack()
 	
 	if event.is_action_pressed("ui_cancel"):
@@ -193,7 +193,7 @@ func perform_attack() -> void:
 
 func perform_air_attack() -> void:
 	set_state("airattack")
-	velocity.y = 50
+	velocity.y = 55
 	_skin.spin_around(attack_durations[2]/3)
 	_skin.set_airbroom_position()
 	_air_attack_timer.wait_time = attack_durations[2]/1.5

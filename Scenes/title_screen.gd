@@ -15,6 +15,8 @@ func _on_start_button_pressed() -> void:
 	$OptionsButton.disabled = true
 	$CloseButton.disabled = true
 	Global.gamedone = false
+	Global.inventory_ref.clear_recipes()
+	QuestManager.reset_quests()
 	
 	await run_transition_hide()
 	# Change the scene after transition

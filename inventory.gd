@@ -82,3 +82,8 @@ func get_items() -> Array:
 
 func get_recipes() -> Array:
 	return recipes
+
+# Clears all recipes from the inventory
+func clear_recipes():
+	recipes.clear()
+	print("All recipes cleared from inventory.")
