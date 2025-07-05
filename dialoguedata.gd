@@ -8,13 +8,13 @@ var dialogue = {
 			{
 				"text": "Remember, the Sweets Archipelago is where sugar magic is strongest.",
 				"options": [
-					{"text": "Yes, teacher. Ready for a task!", "next": "greeting"}
+					{"text": "Yup. Ready for a task!", "next": "greeting"}
 				]
 			}
 		],
 		"greeting": [
 			"Good to see you again, Mimi. Keep striving to be the best cook you can be!",
-			"I'm going to ask you with delivering some food to me, okay? \nAll you have to do is cook on your Cooking menu! (Press J)",
+			"I'm going to ask you with delivering some food to me, okay?\nAll you have to do is cook on your cooking menu! (Press R)",
 			"If you dont know how to make it, search for the recipies! They should be scattered around the archipelago.",
 			{"text": "You can talk to me to choose a mission when you're ready.", "set_branch": "mission_select"}
 		],
@@ -70,28 +70,28 @@ var dialogue = {
 		"delivery_pumpkin_pie_start": [
 			"Please, make 3 Pumpkin Pies for me.",
 			"Pumpkins are so fascinating... Don't you agree? Heehee...",
-			"The recipe should be somewhere in that rocky island.\n They're actually chocolate, though!",
+			"The recipe should be somewhere in that rocky island.\nThey're actually chocolate, though!",
 			"Let me know when you're done."
 		],
 
 		"delivery_ice_cream_start": [
 			"Deliver 3 Ice Creams to the hot springs resort on Cream Island.",
 			"They need a frozen treat to cool down.",
-			"The recipe should be somewhere in those snowy peaks.\n Did you know they're actually made of cream?",
+			"The recipe should be somewhere in those snowy peaks.\nDid you know they're actually made of cream?",
 			"Come back once completed."
 		],
 
 		"delivery_mango_lassi_start": [
 			"3 Mango Lassis are to be delivered to the tropical fruit market in Rose Islands.",
 			"Have you heard of those before? They seem to be a real delicacy of a smoothie.",
-			"The recipe should be somewhere in those snowy peaks.\n Did you know they're actually made of cream?",
+			"The recipe should be somewhere in those snowy peaks.\nDid you know they're actually made of cream?",
 			"Return once the delivery is done."
 		],
 
 		"delivery_muffin_start": [
 			"I'd like to have 3 Berry Muffins, if it's not too much trouble.",
 			"The soft muffins filled with berries are very popular.",
-			"The recipe should be somewhere in the pink biome.\n It seems that pink hue is actually whipping that fell out of the trees...\nIntriguing, isn't it?",
+			"The recipe should be somewhere in the pink biome.\nIt seems that pink hue is actually whipping that fell out of the trees...\nIntriguing, isn't it?",
 			"Come back when you've delivered them."
 		],
 

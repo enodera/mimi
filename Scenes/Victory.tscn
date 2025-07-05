@@ -1,0 +1,97 @@
+[gd_scene load_steps=5 format=3 uid="uid://bd03wgyb45b0q"]
+
+[ext_resource type="Script" uid="uid://c00kveha81k3m" path="res://Scenes/victory.gd" id="1_1ttpw"]
+[ext_resource type="Material" uid="uid://b0tejma582nok" path="res://Scenes/TransitionShader.tres" id="2_f2md5"]
+[ext_resource type="Theme" uid="uid://brxy2r70hypxg" path="res://titlescreentheme.tres" id="3_ebpg4"]
+[ext_resource type="Texture2D" uid="uid://dgk4q5rrffx0p" path="res://Ground/Grass/final art.png" id="4_f6307"]
+
+[node name="Victory" type="Control"]
+auto_translate_mode = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_1ttpw")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -250.0
+offset_bottom = 254.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(576, 576)
+mouse_filter = 2
+color = Color(1, 0.911713, 0.85144, 1)
+
+[node name="ScreenTransition" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="ScreenTransition"]
+material = ExtResource("2_f2md5")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -250.0
+offset_bottom = 254.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(576, 576)
+mouse_filter = 2
+color = Color(0.21, 0.0882, 0.13895, 1)
+
+[node name="BackButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.411
+anchor_top = 0.602
+anchor_right = 0.585
+anchor_bottom = 0.679
+offset_left = 423.528
+offset_top = -348.096
+offset_right = 423.08
+offset_bottom = -347.992
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_ebpg4")
+theme_override_font_sizes/font_size = 25
+text = "Back to title"
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 1
+offset_left = 68.0
+offset_top = 38.0
+offset_right = 521.0
+offset_bottom = 120.0
+theme = ExtResource("3_ebpg4")
+theme_override_font_sizes/font_size = 50
+text = "You did it!"
+vertical_alignment = 1
+
+[node name="Description" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -494.0
+offset_top = -185.0
+offset_right = 150.0
+offset_bottom = 217.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_ebpg4")
+theme_override_font_sizes/font_size = 25
+text = "Congratulations! You finished your assingments.
+
+Thank you for playing!"
+autowrap_mode = 2
+
+[node name="FinalArt" type="Sprite2D" parent="."]
+position = Vector2(585, 453)
+texture = ExtResource("4_f6307")

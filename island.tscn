@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://b6xhciv77htqc"]
+[gd_scene load_steps=36 format=3 uid="uid://b6xhciv77htqc"]
 
 [ext_resource type="Texture2D" uid="uid://blkwxes3c4ap8" path="res://istockphoto-1138179296-612x612_waifu2x_art_noise1_scale.png" id="1_8ervs"]
 [ext_resource type="PackedScene" uid="uid://pakdokc08g3p" path="res://inventory.tscn" id="2_1y0xo"]
@@ -27,6 +27,7 @@
 [ext_resource type="PackedScene" uid="uid://6gcu07ce0tq7" path="res://Ground/Trees/tree.tscn" id="25_j2kl8"]
 [ext_resource type="PackedScene" uid="uid://coki6rii27akm" path="res://Ground/Grass/grass_chunk_9.tscn" id="25_uby3m"]
 [ext_resource type="PackedScene" uid="uid://dw3d4tbet5nww" path="res://Ground/Grass/grass_chunk_11.tscn" id="26_ave4v"]
+[ext_resource type="PackedScene" uid="uid://ct13n8qumh4mw" path="res://Scenes/LizNPC.tscn" id="28_2isaf"]
 
 [sub_resource type="Gradient" id="Gradient_i5yj6"]
 offsets = PackedFloat32Array(0, 0.0052356, 0.217277, 0.445026, 1)
@@ -909,9 +910,6 @@ recipe_id = "cookies"
 transform = Transform3D(0.02414, 0.0358931, -0.999064, -0.00102262, 0.999356, 0.0358789, 0.999708, 0.000155552, 0.0241611, 102.274, -4.77754, 265.742)
 recipe_id = "muffin"
 
-[node name="NPC" parent="." instance=ExtResource("13_q2og1")]
-transform = Transform3D(0.504723, 0, -0.863281, 0, 1, 0, 0.863281, 0, 0.504724, -17.5009, -3.83927, 5.80314)
-
 [node name="NPC2" parent="." instance=ExtResource("13_q2og1")]
 transform = Transform3D(0.850252, 0, -0.526377, 0, 1, 0, 0.526377, 0, 0.850252, -124.641, -3.83927, 34.163)
 selected_npc = 0
@@ -963,3 +961,6 @@ recipe_id = "pumpkin_pie"
 [node name="PickupableItem7" parent="." instance=ExtResource("21_2isaf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 185.647, 0.193298, -204.927)
 recipe_id = "carrot_cake"
+
+[node name="LizNPC" parent="." instance=ExtResource("28_2isaf")]
+transform = Transform3D(0.444792, 0, -0.895634, 0, 1, 0, 0.895634, 0, 0.444792, -17.4902, -3.83936, 5.75781)

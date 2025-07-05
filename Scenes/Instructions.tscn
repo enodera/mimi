@@ -1,0 +1,309 @@
+[gd_scene load_steps=8 format=3 uid="uid://bmj16g00dbvl5"]
+
+[ext_resource type="Script" uid="uid://mq16b67m2u6h" path="res://Scenes/instructions.gd" id="1_81lal"]
+[ext_resource type="Material" uid="uid://b0tejma582nok" path="res://Scenes/TransitionShader.tres" id="2_mq808"]
+[ext_resource type="Theme" uid="uid://brxy2r70hypxg" path="res://titlescreentheme.tres" id="3_1232k"]
+[ext_resource type="Texture2D" uid="uid://bv8lwgyj7nq6u" path="res://Ground/Grass/liz art.png" id="4_mq808"]
+[ext_resource type="Texture2D" uid="uid://4rr4sdw3005t" path="res://Ground/Grass/mimi art.png" id="5_1232k"]
+[ext_resource type="Texture2D" uid="uid://5aorvagbv7d7" path="res://Ground/Grass/muffin art.png" id="6_h8uks"]
+[ext_resource type="Texture2D" uid="uid://dsgroelirlfqa" path="res://Ground/Grass/mage art.png" id="7_yfgou"]
+
+[node name="Instructions" type="Control"]
+auto_translate_mode = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_81lal")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -250.0
+offset_bottom = 254.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(576, 576)
+mouse_filter = 2
+color = Color(1, 0.911713, 0.85144, 1)
+
+[node name="ScreenTransition" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="ScreenTransition"]
+material = ExtResource("2_mq808")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -250.0
+offset_bottom = 254.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(576, 576)
+mouse_filter = 2
+color = Color(0.21, 0.0882, 0.13895, 1)
+
+[node name="LeftButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.411
+anchor_top = 0.602
+anchor_right = 0.585
+anchor_bottom = 0.679
+offset_left = -322.472
+offset_top = 142.904
+offset_right = -322.92
+offset_bottom = 143.008
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_1232k")
+theme_override_font_sizes/font_size = 25
+text = "Left"
+
+[node name="RightButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.411
+anchor_top = 0.602
+anchor_right = 0.585
+anchor_bottom = 0.679
+offset_left = -88.472
+offset_top = 142.904
+offset_right = -88.92
+offset_bottom = 143.008
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_1232k")
+theme_override_font_sizes/font_size = 25
+text = "Right"
+
+[node name="BackButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.411
+anchor_top = 0.602
+anchor_right = 0.585
+anchor_bottom = 0.679
+offset_left = 423.528
+offset_top = -348.096
+offset_right = 423.08
+offset_bottom = -347.992
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_1232k")
+theme_override_font_sizes/font_size = 25
+text = "Back to title"
+
+[node name="Pages" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+mouse_filter = 2
+
+[node name="0" type="Control" parent="Pages"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Title" type="Label" parent="Pages/0"]
+layout_mode = 1
+offset_left = 68.0
+offset_top = 38.0
+offset_right = 521.0
+offset_bottom = 120.0
+theme = ExtResource("3_1232k")
+theme_override_font_sizes/font_size = 50
+text = "Goal"
+vertical_alignment = 1
+
+[node name="Description" type="Label" parent="Pages/0"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -494.0
+offset_top = -185.0
+offset_right = 150.0
+offset_bottom = 217.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_1232k")
+theme_override_font_sizes/font_size = 25
+text = "Welcome to Mimi's Cooking Trip!
+
+This game's objective is to gather all recipes scattered across the world,
+so that you can cook a bunch of food and deliver it to your teacher, Liz!     
+
+Liz is the mage on the right, by the way.
+
+To make these recipes, you have to gather the recipe's book and it's ingredients, so go out there and try to do all quests!"
+autowrap_mode = 2
+
+[node name="LizArt" type="Sprite2D" parent="Pages/0"]
+position = Vector2(936, 414)
+scale = Vector2(0.795, 0.795)
+texture = ExtResource("4_mq808")
+
+[node name="1" type="Control" parent="Pages"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Title" type="Label" parent="Pages/1"]
+layout_mode = 1
+offset_left = 68.0
+offset_top = 38.0
+offset_right = 521.0
+offset_bottom = 120.0
+theme = ExtResource("3_1232k")
+theme_override_font_sizes/font_size = 50
+text = "Controls"
+vertical_alignment = 1
+
+[node name="Description" type="Label" parent="Pages/1"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -494.0
+offset_top = -185.0
+offset_right = 495.0
+offset_bottom = 217.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_1232k")
+theme_override_font_sizes/font_size = 25
+text = "This is Mimi, the main character of the game.
+
+Use WASD to move her around.
+You can also move while pressing Shift to run.
+
+If on the ground, you can attack with Left Click
+and shield with Right Click.
+
+You can jump with space and, while airborne,
+you can Left Click to do a double jump"
+autowrap_mode = 2
+
+[node name="MimiArt" type="Sprite2D" parent="Pages/1"]
+position = Vector2(922, 416)
+scale = Vector2(0.835, 0.835)
+texture = ExtResource("5_1232k")
+
+[node name="2" type="Control" parent="Pages"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Title" type="Label" parent="Pages/2"]
+layout_mode = 1
+offset_left = 68.0
+offset_top = 38.0
+offset_right = 521.0
+offset_bottom = 120.0
+theme = ExtResource("3_1232k")
+theme_override_font_sizes/font_size = 50
+text = "Menus"
+vertical_alignment = 1
+
+[node name="Description" type="Label" parent="Pages/2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -494.0
+offset_top = -185.0
+offset_right = 495.0
+offset_bottom = 217.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_1232k")
+theme_override_font_sizes/font_size = 25
+text = "The game has three main menus: 
+
+To open your inventory, press Q.
+Here, all your dishes and ingredients are stored.
+
+To open the cooking menu, press R.
+You can make any item you have the recipe of here!
+
+To talk to NPCs and collect items in the overworld, press E."
+autowrap_mode = 2
+
+[node name="MuffinArt" type="Sprite2D" parent="Pages/2"]
+position = Vector2(932, 508)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("6_h8uks")
+
+[node name="3" type="Control" parent="Pages"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Title" type="Label" parent="Pages/3"]
+layout_mode = 1
+offset_left = 68.0
+offset_top = 38.0
+offset_right = 521.0
+offset_bottom = 120.0
+theme = ExtResource("3_1232k")
+theme_override_font_sizes/font_size = 50
+text = "Dying"
+vertical_alignment = 1
+
+[node name="Description" type="Label" parent="Pages/3"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -494.0
+offset_top = -185.0
+offset_right = 177.0
+offset_bottom = 217.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_1232k")
+theme_override_font_sizes/font_size = 25
+text = "If you die, you'll lose all your recipies and your mission progress, so watch out!
+
+Mimi will die when her HP is depleted to zero, or when she falls into water.
+
+Watch out for enemies and try to defeat them to get exclusive ingredients! (like sugar)
+"
+autowrap_mode = 2
+
+[node name="MageArt" type="Sprite2D" parent="Pages/3"]
+position = Vector2(889, 445)
+scale = Vector2(1.265, 1.265)
+texture = ExtResource("7_yfgou")

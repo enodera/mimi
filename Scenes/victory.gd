@@ -1,41 +1,23 @@
 extends Control
 
+@onready var back_button: Button = $BackButton
 @onready var shader_material: ShaderMaterial = $ScreenTransition/ColorRect.material
 
+var current_page_index := 0
+const MAX_PAGE := 3
+
 func _ready():
-	$StartButton.pressed.connect(_on_start_button_pressed)
-	$OptionsButton.pressed.connect(_on_options_button_pressed)
-	$CloseButton.pressed.connect(_on_close_button_pressed)
-	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	run_transition_show()
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	back_button.pressed.connect(_on_back_pressed)
 
-func _on_start_button_pressed() -> void:
-	# Disable buttons during transition
-	$StartButton.disabled = true
-	$OptionsButton.disabled = true
-	$CloseButton.disabled = true
-	Global.gamedone = false
-	Global.inventory_ref.clear_recipes()
-	QuestManager.reset_quests()
+
+func _on_back_pressed():
+	back_button.disabled = true
 	
 	await run_transition_hide()
 	# Change the scene after transition
-	get_tree().change_scene_to_file("res://island.tscn")
-
-func _on_options_button_pressed():
-	$StartButton.disabled = true
-	$OptionsButton.disabled = true
-	$CloseButton.disabled = true
-	Global.gamedone = false
-	Global.inventory_ref.clear_recipes()
-	QuestManager.reset_quests()
-	
-	await run_transition_hide()
-	# Change the scene after transition
-	get_tree().change_scene_to_file("res://Scenes/Instructions.tscn")
-
-func _on_close_button_pressed():
-	get_tree().quit()
+	get_tree().change_scene_to_file("res://Scenes/TitleScreen.tscn")
 
 func run_transition_hide() -> void:
 	var duration = 1.0  # seconds

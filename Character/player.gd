@@ -220,10 +220,10 @@ func _physics_process(delta: float) -> void:
 	
 	if Global.dialoguepaused or is_on_water or Global.gamedone:
 		disable_movement()
-		if Global.gamedone and gamedoneinstanced == false:
+		if Global.gamedone and gamedoneinstanced == false and not Global.dialoguepaused:
 			gamedoneinstanced = true
 			await run_transition_hide()
-			get_tree().change_scene_to_file("res://Scenes/TitleScreen.tscn")
+			get_tree().change_scene_to_file("res://Scenes/Victory.tscn")
 		return
 	
 	update_broom_visibility()
@@ -520,20 +520,26 @@ func take_damage(amount: int, knockback_dir: Vector3, knockback_strength: float,
 		velocity.y = upward_force
 
 func run_transition_hide() -> void:
-	var circle_size = 1.0
-	while circle_size > 0.0:
-		circle_size -= 0.005
+	var duration = 1.0  # seconds
+	var elapsed = 0.0
+	while elapsed < duration:
+		elapsed += get_process_delta_time()
+		var circle_size = lerp(1.0, 0.0, elapsed / duration)
 		shader_material.set_shader_parameter("circle_size", circle_size)
-		# Wait for the next frame (~60fps)
 		await get_tree().process_frame
+	# Ensure it ends exactly at 0
+	shader_material.set_shader_parameter("circle_size", 0.0)
 
 func run_transition_show() -> void:
-	var circle_size = 0.0
-	while circle_size < 1.0:
-		circle_size += 0.005
+	var duration = 1.0  # seconds
+	var elapsed = 0.0
+	while elapsed < duration:
+		elapsed += get_process_delta_time()
+		var circle_size = lerp(0.0, 1.0, elapsed / duration)
 		shader_material.set_shader_parameter("circle_size", circle_size)
-		# Wait for the next frame (~60fps)
 		await get_tree().process_frame
+	# Ensure it ends exactly at 1
+	shader_material.set_shader_parameter("circle_size", 1.0)
 		
 
 func die() -> void:

@@ -1,11 +1,11 @@
-[gd_scene load_steps=80 format=4 uid="uid://cncrp63v3at5e"]
+[gd_scene load_steps=80 format=4 uid="uid://ct13n8qumh4mw"]
 
-[ext_resource type="Script" uid="uid://024swtnp6bei" path="res://npc.gd" id="1_ideak"]
-[ext_resource type="PackedScene" uid="uid://cqpcme6tyvhom" path="res://MimiModels/Liz1.0/liz.tscn" id="2_kh24r"]
-[ext_resource type="FontFile" uid="uid://dwuutcq4tl2fm" path="res://Fonts/FOT-Seurat Pro B.otf" id="2_xxcha"]
-[ext_resource type="Texture2D" uid="uid://et18gok6rcj2" path="res://MimiModels/NPC1.0/NPCmaker_npcoutfit.png" id="3_bc6q4"]
-[ext_resource type="Material" uid="uid://btudh12xx0tas" path="res://npcoutfits/pink.tres" id="4_d61ma"]
-[ext_resource type="Texture2D" uid="uid://c8vwwymn677p4" path="res://MimiModels/NPC1.0/NPCmaker_tx_npcface.png" id="4_mcvl2"]
+[ext_resource type="Script" uid="uid://024swtnp6bei" path="res://npc.gd" id="1_e7ort"]
+[ext_resource type="PackedScene" uid="uid://cqpcme6tyvhom" path="res://MimiModels/Liz1.0/liz.tscn" id="2_f3bg6"]
+[ext_resource type="Texture2D" uid="uid://et18gok6rcj2" path="res://MimiModels/NPC1.0/NPCmaker_npcoutfit.png" id="3_pfkkm"]
+[ext_resource type="Material" uid="uid://btudh12xx0tas" path="res://npcoutfits/pink.tres" id="4_msnmv"]
+[ext_resource type="Texture2D" uid="uid://c8vwwymn677p4" path="res://MimiModels/NPC1.0/NPCmaker_tx_npcface.png" id="5_3rsup"]
+[ext_resource type="FontFile" uid="uid://dwuutcq4tl2fm" path="res://Fonts/FOT-Seurat Pro B.otf" id="6_6nndy"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_kh24r"]
 radius = 1.5
@@ -588,7 +588,7 @@ vertex_color_use_as_albedo = true
 albedo_color = Color(0, 0, 0, 1)
 metallic = 1.0
 emission_enabled = true
-emission_texture = ExtResource("3_bc6q4")
+emission_texture = ExtResource("3_pfkkm")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_ur8k0"]
 resource_name = "NPCmaker_Body"
@@ -720,7 +720,7 @@ vertex_color_use_as_albedo = true
 albedo_color = Color(0, 0, 0, 1)
 metallic = 1.0
 emission_enabled = true
-emission_texture = ExtResource("3_bc6q4")
+emission_texture = ExtResource("3_pfkkm")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_pvame"]
 resource_name = "NPCmaker_Cylinder_001"
@@ -748,7 +748,7 @@ cull_mode = 2
 albedo_color = Color(0, 0, 0, 1)
 metallic = 1.0
 emission_enabled = true
-emission_texture = ExtResource("4_mcvl2")
+emission_texture = ExtResource("5_3rsup")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c81ad"]
 resource_name = "mouth"
@@ -756,7 +756,7 @@ cull_mode = 2
 albedo_color = Color(0, 0, 0, 1)
 metallic = 1.0
 emission_enabled = true
-emission_texture = ExtResource("4_mcvl2")
+emission_texture = ExtResource("5_3rsup")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_1mjj1"]
 resource_name = "NPCmaker_Cube_003"
@@ -4888,7 +4888,7 @@ radius = 0.75119
 height = 4.0
 
 [node name="NPC" type="Node3D"]
-script = ExtResource("1_ideak")
+script = ExtResource("1_e7ort")
 outfit_color = 0
 show_hairbacklong = true
 show_hairbackwave = true
@@ -4898,16 +4898,17 @@ show_hairfringemiddle = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.47286, 0)
+visible = false
 layers = 2
 mesh = SubResource("SphereMesh_kh24r")
 surface_material_override/0 = SubResource("StandardMaterial3D_ul7y6")
 
-[node name="Liz" parent="." instance=ExtResource("2_kh24r")]
+[node name="Liz" parent="." instance=ExtResource("2_f3bg6")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
-visible = false
 
 [node name="NPCmaker" type="Node3D" parent="."]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
+visible = false
 
 [node name="Armature" type="Node3D" parent="NPCmaker"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.68691, -0.098702)
@@ -4917,7 +4918,7 @@ bones/0/name = "stomach"
 bones/0/parent = -1
 bones/0/rest = Transform3D(1, 0, 0, 0, 0.997383, -0.0723025, 0, 0.0723025, 0.997383, 0, -0.16227, 0.0129816)
 bones/0/enabled = true
-bones/0/position = Vector3(0, -0.169324, 0.0124702)
+bones/0/position = Vector3(0, -0.162873, 0.012938)
 bones/0/rotation = Quaternion(0.0361749, 0, 0, 0.999345)
 bones/0/scale = Vector3(1, 1, 1)
 bones/1/name = "chest"
@@ -4925,7 +4926,7 @@ bones/1/parent = 0
 bones/1/rest = Transform3D(1, 0, 2.38419e-07, -1.32519e-08, 0.998454, 0.0555824, -2.3805e-07, -0.0555824, 0.998454, 0, 0.538639, 1.11759e-08)
 bones/1/enabled = true
 bones/1/position = Vector3(0, 0.538639, 1.11759e-08)
-bones/1/rotation = Quaternion(-0.0253253, 1.19155e-07, -3.60947e-09, 0.999679)
+bones/1/rotation = Quaternion(-0.0276473, 1.19163e-07, -3.33268e-09, 0.999618)
 bones/1/scale = Vector3(1, 1, 1)
 bones/2/name = "head"
 bones/2/parent = 1
@@ -5044,7 +5045,7 @@ bones/18/parent = 1
 bones/18/rest = Transform3D(0.0199219, 0.999802, -2.13281e-07, -0.999661, 0.0199191, 0.0167526, 0.0167493, -0.00033353, 0.99986, 0.18932, 0.438515, 0.0049791)
 bones/18/enabled = true
 bones/18/position = Vector3(0.18932, 0.438515, 0.0049791)
-bones/18/rotation = Quaternion(0.882421, 0.184721, -0.420151, 0.103369)
+bones/18/rotation = Quaternion(0.883827, 0.181769, -0.419277, 0.100081)
 bones/18/scale = Vector3(1, 1, 1)
 bones/19/name = "uparm.l"
 bones/19/parent = 18
@@ -5072,7 +5073,7 @@ bones/22/parent = 1
 bones/22/rest = Transform3D(0.0199219, -0.999802, -2.6176e-07, 0.999661, 0.0199191, 0.0167526, -0.0167492, -0.000334005, 0.99986, -0.18932, 0.438515, 0.00497901)
 bones/22/enabled = true
 bones/22/position = Vector3(-0.18932, 0.438515, 0.00497901)
-bones/22/rotation = Quaternion(0.88242, -0.184721, 0.420152, 0.103369)
+bones/22/rotation = Quaternion(0.883827, -0.181769, 0.419277, 0.100081)
 bones/22/scale = Vector3(1, 1, 1)
 bones/23/name = "uparm.r"
 bones/23/parent = 22
@@ -5100,62 +5101,62 @@ bones/26/parent = 0
 bones/26/rest = Transform3D(0.00014931, -0.0191486, -0.999817, -0.0392968, -0.999044, 0.0191279, -0.999228, 0.0392867, -0.000901645, 0.181662, -0.0479791, 0.0446945)
 bones/26/enabled = true
 bones/26/position = Vector3(0.181662, -0.0479791, 0.0446945)
-bones/26/rotation = Quaternion(0.722979, -0.0422714, -0.688961, 0.0291106)
+bones/26/rotation = Quaternion(0.723854, -0.0233939, -0.689506, 0.00834613)
 bones/26/scale = Vector3(1, 1, 1)
 bones/27/name = "shin.l"
 bones/27/parent = 26
 bones/27/rest = Transform3D(0.992154, 0.125018, 0.000873748, -0.125004, 0.992111, -0.0094568, -0.00204912, 0.00927338, 0.999955, -5.72618e-09, 0.636472, 1.05501e-09)
 bones/27/enabled = true
 bones/27/position = Vector3(-5.72618e-09, 0.636472, 1.05501e-09)
-bones/27/rotation = Quaternion(0.00882078, 0.000728479, -0.117745, 0.993004)
+bones/27/rotation = Quaternion(0.00502365, 0.00073195, -0.0670587, 0.997736)
 bones/27/scale = Vector3(1, 1, 1)
 bones/28/name = "ankle.l"
 bones/28/parent = 27
 bones/28/rest = Transform3D(-0.157733, -0.987482, -0.000385773, 0.98748, -0.157734, 0.00192518, -0.00196193, -7.72781e-05, 0.999998, 1.36206e-08, 0.781097, 1.80826e-08)
 bones/28/enabled = true
 bones/28/position = Vector3(1.36206e-08, 0.781097, 1.80826e-08)
-bones/28/rotation = Quaternion(-0.0153432, -0.0164763, 0.775817, 0.630556)
+bones/28/rotation = Quaternion(-0.0154139, -0.0165601, 0.761942, 0.64725)
 bones/28/scale = Vector3(1, 1, 1)
 bones/29/name = "toes.l"
 bones/29/parent = 28
 bones/29/rest = Transform3D(1, 2.34142e-08, 8.08888e-15, -2.34142e-08, 1, 1.36772e-10, -8.08568e-15, -1.36772e-10, 1, 1.06238e-08, 0.165275, -8.37868e-09)
 bones/29/enabled = true
 bones/29/position = Vector3(1.06238e-08, 0.165275, -8.37868e-09)
-bones/29/rotation = Quaternion(-0.0025516, -2.21261e-10, 0.00267978, 0.999993)
+bones/29/rotation = Quaternion(-0.00246142, 9.79767e-10, 0.000294041, 0.999997)
 bones/29/scale = Vector3(1, 1, 1)
 bones/30/name = "thigh.r"
 bones/30/parent = 0
 bones/30/rest = Transform3D(0.000149727, 0.0191486, 0.999817, 0.0392968, -0.999044, 0.0191279, 0.999228, 0.0392867, -0.000902063, -0.181662, -0.0479791, 0.0446945)
 bones/30/enabled = true
 bones/30/position = Vector3(-0.181662, -0.0479791, 0.0446945)
-bones/30/rotation = Quaternion(0.722979, 0.0422714, 0.688961, 0.0291106)
+bones/30/rotation = Quaternion(0.723854, 0.0233939, 0.689506, 0.00834615)
 bones/30/scale = Vector3(1, 1, 1)
 bones/31/name = "shin.r"
 bones/31/parent = 30
 bones/31/rest = Transform3D(0.992154, -0.125018, -0.000873242, 0.125004, 0.992111, -0.00945677, 0.00204862, 0.00927342, 0.999955, 1.41881e-10, 0.636472, -1.59489e-08)
 bones/31/enabled = true
 bones/31/position = Vector3(1.41881e-10, 0.636472, -1.59489e-08)
-bones/31/rotation = Quaternion(0.00882079, -0.000728228, 0.117745, 0.993004)
+bones/31/rotation = Quaternion(0.00502366, -0.000731698, 0.0670588, 0.997736)
 bones/31/scale = Vector3(1, 1, 1)
 bones/32/name = "ankle.r"
 bones/32/parent = 31
 bones/32/rest = Transform3D(-0.157733, 0.987482, 0.000385803, -0.98748, -0.157734, 0.00192518, 0.00196193, -7.73079e-05, 0.999998, -1.36206e-08, 0.781097, 9.15861e-09)
 bones/32/enabled = true
 bones/32/position = Vector3(-1.36206e-08, 0.781097, 9.15861e-09)
-bones/32/rotation = Quaternion(-0.0153425, 0.0164755, -0.775816, 0.630557)
+bones/32/rotation = Quaternion(-0.015412, 0.0165578, -0.761942, 0.64725)
 bones/32/scale = Vector3(1, 1, 1)
 bones/33/name = "toes.r"
 bones/33/parent = 32
 bones/33/rest = Transform3D(1, -2.25607e-08, -1.86265e-09, 2.25607e-08, 1, 1.21285e-10, 1.86265e-09, -1.21285e-10, 1, -1.0644e-08, 0.165275, -8.37904e-09)
 bones/33/enabled = true
 bones/33/position = Vector3(-1.0644e-08, 0.165275, -8.37904e-09)
-bones/33/rotation = Quaternion(-0.00255253, -6.20824e-10, -0.00268033, 0.999993)
+bones/33/rotation = Quaternion(-0.00246703, -2.86424e-09, -0.000294565, 0.999997)
 bones/33/scale = Vector3(1, 1, 1)
 bones/34/name = "ikhand.r"
 bones/34/parent = 0
 bones/34/rest = Transform3D(0.0105405, 7.85327e-11, -0.999945, 0.997327, -0.0723027, 0.0105129, -0.0722987, -0.997383, -0.000762106, -1.36307, 0.981069, -0.0197152)
 bones/34/enabled = true
-bones/34/position = Vector3(-0.790953, -0.321764, 0.0747303)
+bones/34/position = Vector3(-0.777694, -0.321764, 0.0747302)
 bones/34/rotation = Quaternion(0.520482, 0.47904, -0.515024, -0.484117)
 bones/34/scale = Vector3(1, 1, 1)
 bones/35/name = "ikuparm.r"
@@ -5169,7 +5170,7 @@ bones/36/name = "ikhand.l"
 bones/36/parent = 0
 bones/36/rest = Transform3D(0.0105404, 6.01544e-08, 0.999945, -0.997327, -0.0723026, 0.0105128, 0.0722986, -0.997383, -0.000762036, 1.36307, 0.981069, -0.0197152)
 bones/36/enabled = true
-bones/36/position = Vector3(0.790953, -0.321764, 0.0747302)
+bones/36/position = Vector3(0.777694, -0.321764, 0.0747302)
 bones/36/rotation = Quaternion(0.520482, -0.479041, 0.515024, -0.484117)
 bones/36/scale = Vector3(1, 1, 1)
 bones/37/name = "ikuparm.l"
@@ -5225,7 +5226,7 @@ bones/44/name = "eyeselect"
 bones/44/parent = -1
 bones/44/rest = Transform3D(1, 0, -1.81993e-06, -1.81993e-06, 0, -1, 0, 1, 0, 2.21717, 1.26178, 0.0959769)
 bones/44/enabled = true
-bones/44/position = Vector3(2.21717, 1.18719, 0.0959769)
+bones/44/position = Vector3(2.21717, 1.18739, 0.0959769)
 bones/44/rotation = Quaternion(0.707107, -6.43441e-07, -6.43441e-07, 0.707107)
 bones/44/scale = Vector3(1, 1, 1)
 bones/45/name = "mouthselect"
@@ -5244,7 +5245,7 @@ bones/46/rotation = Quaternion(-0.707107, 0, 0, 0.707107)
 bones/46/scale = Vector3(1, 1, 1)
 
 [node name="hairbacklong" type="BoneAttachment3D" parent="NPCmaker/Armature/Skeleton3D"]
-transform = Transform3D(2.07532e-07, -8.29341e-08, -1.21312, 0.16933, 1.09947, -3.76217e-08, 0.900641, -0.206711, 2.86609e-07, 0.00888652, 1.26387, -0.0987014)
+transform = Transform3D(2.07326e-07, -8.41475e-08, -1.21312, 0.173512, 1.09849, -3.76334e-08, 0.899845, -0.211816, 2.86762e-07, 0.00888652, 1.26962, -0.102394)
 bone_name = "hairbacklong"
 bone_idx = 4
 
@@ -5253,7 +5254,7 @@ mesh = SubResource("ArrayMesh_d61ma")
 skeleton = NodePath("")
 
 [node name="hairbackshort" type="BoneAttachment3D" parent="NPCmaker/Armature/Skeleton3D"]
-transform = Transform3D(2.07532e-07, -8.29341e-08, -1.21312, 0.16933, 1.09947, -3.76217e-08, 0.900641, -0.206711, 2.86609e-07, 0.00888652, 1.26387, -0.0987014)
+transform = Transform3D(2.07326e-07, -8.41475e-08, -1.21312, 0.173512, 1.09849, -3.76334e-08, 0.899845, -0.211816, 2.86762e-07, 0.00888652, 1.26962, -0.102394)
 bone_name = "hairbackshort"
 bone_idx = 5
 
@@ -5262,7 +5263,7 @@ mesh = SubResource("ArrayMesh_slxoh")
 skeleton = NodePath("")
 
 [node name="hairbackwave" type="BoneAttachment3D" parent="NPCmaker/Armature/Skeleton3D"]
-transform = Transform3D(2.07532e-07, -8.29341e-08, -1.21312, 0.16933, 1.09947, -3.76217e-08, 0.900641, -0.206711, 2.86609e-07, 0.00888652, 1.26387, -0.0987014)
+transform = Transform3D(2.07326e-07, -8.41475e-08, -1.21312, 0.173512, 1.09849, -3.76334e-08, 0.899845, -0.211816, 2.86762e-07, 0.00888652, 1.26962, -0.102394)
 bone_name = "hairbackwave"
 bone_idx = 6
 
@@ -5271,7 +5272,7 @@ mesh = SubResource("ArrayMesh_l64hl")
 skeleton = NodePath("")
 
 [node name="hairbaseshort" type="BoneAttachment3D" parent="NPCmaker/Armature/Skeleton3D"]
-transform = Transform3D(5.87678e-08, 1.77555e-08, -0.248587, -0.00123168, 0.170283, 2.71587e-08, 0.248583, 0.000843719, 6.34823e-08, -0.00891562, 1.49073, 0.139776)
+transform = Transform3D(5.87641e-08, 1.75669e-08, -0.248587, -7.68416e-05, 0.170285, 2.7178e-08, 0.248586, 5.26365e-05, 6.33516e-08, -0.00891562, 1.49758, 0.135026)
 bone_name = "hairbaseshort"
 bone_idx = 7
 
@@ -5280,7 +5281,7 @@ mesh = SubResource("ArrayMesh_215dd")
 skeleton = NodePath("")
 
 [node name="hairbaseshorter" type="BoneAttachment3D" parent="NPCmaker/Armature/Skeleton3D"]
-transform = Transform3D(5.87678e-08, 1.77555e-08, -0.248587, -0.00123168, 0.170283, 2.71587e-08, 0.248583, 0.000843719, 6.34823e-08, -0.00891562, 1.49073, 0.139776)
+transform = Transform3D(5.87641e-08, 1.75669e-08, -0.248587, -7.68416e-05, 0.170285, 2.7178e-08, 0.248586, 5.26365e-05, 6.33516e-08, -0.00891562, 1.49758, 0.135026)
 bone_name = "hairbaseshorter"
 bone_idx = 8
 
@@ -5289,7 +5290,7 @@ mesh = SubResource("ArrayMesh_p5bpe")
 skeleton = NodePath("")
 
 [node name="hairfringeemoleft" type="BoneAttachment3D" parent="NPCmaker/Armature/Skeleton3D"]
-transform = Transform3D(5.87678e-08, 1.77555e-08, -0.248587, -0.00123168, 0.170283, 2.71587e-08, 0.248583, 0.000843719, 6.34823e-08, 1.32814e-09, 1.49073, 0.138276)
+transform = Transform3D(5.87641e-08, 1.75669e-08, -0.248587, -7.68416e-05, 0.170285, 2.7178e-08, 0.248586, 5.26365e-05, 6.33516e-08, 8.28935e-11, 1.49758, 0.133527)
 bone_name = "hairfringeemoleft"
 bone_idx = 9
 
@@ -5298,7 +5299,7 @@ mesh = SubResource("ArrayMesh_upjdb")
 skeleton = NodePath("")
 
 [node name="hairfringeemoright" type="BoneAttachment3D" parent="NPCmaker/Armature/Skeleton3D"]
-transform = Transform3D(5.87678e-08, 2.02929e-08, 0.248587, -0.00123168, 0.170283, -2.71587e-08, 0.248583, 0.000843719, -6.34823e-08, 1.32814e-09, 1.49073, 0.138276)
+transform = Transform3D(5.87641e-08, 2.01043e-08, 0.248587, -7.68416e-05, 0.170285, -2.7178e-08, 0.248586, 5.26365e-05, -6.33516e-08, 8.28935e-11, 1.49758, 0.133527)
 bone_name = "hairfringeemoright"
 bone_idx = 10
 
@@ -5307,7 +5308,7 @@ mesh = SubResource("ArrayMesh_u41a8")
 skeleton = NodePath("")
 
 [node name="hairfringemiddle" type="BoneAttachment3D" parent="NPCmaker/Armature/Skeleton3D"]
-transform = Transform3D(5.87678e-08, 1.77555e-08, -0.248587, -0.00123168, 0.170283, 2.71587e-08, 0.248583, 0.000843719, 6.34823e-08, 1.32816e-09, 1.49073, 0.139776)
+transform = Transform3D(5.87641e-08, 1.75669e-08, -0.248587, -7.68416e-05, 0.170285, 2.7178e-08, 0.248586, 5.26365e-05, 6.33516e-08, 8.28962e-11, 1.49758, 0.135026)
 bone_name = "hairfringemiddle"
 bone_idx = 11
 
@@ -5316,7 +5317,7 @@ mesh = SubResource("ArrayMesh_cgete")
 skeleton = NodePath("")
 
 [node name="hairfringepart" type="BoneAttachment3D" parent="NPCmaker/Armature/Skeleton3D"]
-transform = Transform3D(5.86383e-08, -4.47227e-09, -0.248587, 0.00284477, 0.170274, -7.70927e-09, 0.24857, -0.0019487, 5.87306e-08, -0.00891562, 1.51547, 0.122782)
+transform = Transform3D(5.863e-08, -4.6608e-09, -0.248587, 0.0039995, 0.170263, -7.71166e-09, 0.248554, -0.00273971, 5.8762e-08, -0.00891562, 1.52224, 0.117918)
 bone_name = "hairfringepart"
 bone_idx = 12
 
@@ -5325,7 +5326,7 @@ mesh = SubResource("ArrayMesh_gu3sj")
 skeleton = NodePath("")
 
 [node name="hairfringestraight" type="BoneAttachment3D" parent="NPCmaker/Armature/Skeleton3D"]
-transform = Transform3D(5.87678e-08, 1.77555e-08, -0.248587, -0.00123168, 0.170283, 2.71587e-08, 0.248583, 0.000843719, 6.34823e-08, -0.00891562, 1.49073, 0.139776)
+transform = Transform3D(5.87641e-08, 1.75669e-08, -0.248587, -7.68416e-05, 0.170285, 2.7178e-08, 0.248586, 5.26365e-05, 6.33516e-08, -0.00891562, 1.49758, 0.135026)
 bone_name = "hairfringestraight"
 bone_idx = 13
 
@@ -5334,7 +5335,7 @@ mesh = SubResource("ArrayMesh_ytjd8")
 skeleton = NodePath("")
 
 [node name="hairfringetiny" type="BoneAttachment3D" parent="NPCmaker/Armature/Skeleton3D"]
-transform = Transform3D(5.87678e-08, 1.77555e-08, -0.248587, -0.00123168, 0.170283, 2.71587e-08, 0.248583, 0.000843719, 6.34823e-08, -0.00891562, 1.49073, 0.139776)
+transform = Transform3D(5.87641e-08, 1.75669e-08, -0.248587, -7.68416e-05, 0.170285, 2.7178e-08, 0.248586, 5.26365e-05, 6.33516e-08, -0.00891562, 1.49758, 0.135026)
 bone_name = "hairfringetiny"
 bone_idx = 14
 
@@ -5343,7 +5344,7 @@ mesh = SubResource("ArrayMesh_hivs1")
 skeleton = NodePath("")
 
 [node name="hairsidelong" type="BoneAttachment3D" parent="NPCmaker/Armature/Skeleton3D"]
-transform = Transform3D(3.48972e-08, -2.18448e-08, -0.0621839, 0.0259355, 0.30526, -1.92847e-09, 0.151112, -0.0523918, 1.46914e-08, 0.00888656, 1.28145, 0.14793)
+transform = Transform3D(3.48654e-08, -2.21818e-08, -0.0621839, 0.0266372, 0.305013, -1.92907e-09, 0.15099, -0.0538093, 1.46993e-08, 0.00888656, 1.28834, 0.144152)
 bone_name = "hairsidelong"
 bone_idx = 15
 
@@ -5352,7 +5353,7 @@ mesh = SubResource("ArrayMesh_faxwa")
 skeleton = NodePath("")
 
 [node name="hairsideshort" type="BoneAttachment3D" parent="NPCmaker/Armature/Skeleton3D"]
-transform = Transform3D(-1.84614e-07, 4.62306e-08, -0.0621839, 0.0284101, 0.304359, -3.68888e-09, 0.150667, -0.0573906, -7.53255e-08, 0.00888656, 1.30636, 0.134367)
+transform = Transform3D(-1.84648e-07, 4.58947e-08, -0.0621839, 0.0291097, 0.30409, -4.10764e-09, 0.150533, -0.058804, -7.53085e-08, 0.00888655, 1.31318, 0.130474)
 bone_name = "hairsideshort"
 bone_idx = 16
 
@@ -5361,7 +5362,7 @@ mesh = SubResource("ArrayMesh_bwlqr")
 skeleton = NodePath("")
 
 [node name="hairsidewave" type="BoneAttachment3D" parent="NPCmaker/Armature/Skeleton3D"]
-transform = Transform3D(3.48972e-08, -2.18448e-08, -0.0621839, 0.0259355, 0.30526, -1.92847e-09, 0.151112, -0.0523918, 1.46914e-08, 0.00888656, 1.28145, 0.14793)
+transform = Transform3D(3.48654e-08, -2.21818e-08, -0.0621839, 0.0266372, 0.305013, -1.92907e-09, 0.15099, -0.0538093, 1.46993e-08, 0.00888656, 1.28834, 0.144152)
 bone_name = "hairsidewave"
 bone_idx = 17
 
@@ -5372,12 +5373,12 @@ skeleton = NodePath("")
 [node name="Body" type="MeshInstance3D" parent="NPCmaker/Armature/Skeleton3D"]
 mesh = SubResource("ArrayMesh_ur8k0")
 skin = SubResource("Skin_hlw2c")
-surface_material_override/0 = ExtResource("4_d61ma")
+surface_material_override/0 = ExtResource("4_msnmv")
 
 [node name="Cylinder" type="MeshInstance3D" parent="NPCmaker/Armature/Skeleton3D"]
 mesh = SubResource("ArrayMesh_pvame")
 skin = SubResource("Skin_hlw2c")
-surface_material_override/0 = ExtResource("4_d61ma")
+surface_material_override/0 = ExtResource("4_msnmv")
 
 [node name="Face" type="MeshInstance3D" parent="NPCmaker/Armature/Skeleton3D"]
 mesh = SubResource("ArrayMesh_1mjj1")
@@ -5390,12 +5391,12 @@ skin = SubResource("Skin_hlw2c")
 [node name="Hat" type="MeshInstance3D" parent="NPCmaker/Armature/Skeleton3D"]
 mesh = SubResource("ArrayMesh_8d7p2")
 skin = SubResource("Skin_hlw2c")
-surface_material_override/0 = ExtResource("4_d61ma")
+surface_material_override/0 = ExtResource("4_msnmv")
 
 [node name="legs" type="MeshInstance3D" parent="NPCmaker/Armature/Skeleton3D"]
 mesh = SubResource("ArrayMesh_swplc")
 skin = SubResource("Skin_hlw2c")
-surface_material_override/0 = ExtResource("4_d61ma")
+surface_material_override/0 = ExtResource("4_msnmv")
 
 [node name="Neck" type="MeshInstance3D" parent="NPCmaker/Armature/Skeleton3D"]
 mesh = SubResource("ArrayMesh_ujo46")
@@ -5421,7 +5422,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.57637, 0)
 visible = false
 billboard = 1
 text = "Press E to talk"
-font = ExtResource("2_xxcha")
+font = ExtResource("6_6nndy")
 font_size = 72
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]

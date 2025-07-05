@@ -14,25 +14,25 @@ corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eifol"]
-bg_color = Color(0.85098, 0.321569, 0.505882, 1)
+bg_color = Color(0.937885, 0.538319, 0.656641, 1)
+border_width_bottom = 5
+border_color = Color(0.851724, 0.321011, 0.507437, 1)
 corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j6w57"]
-bg_color = Color(0.85098, 0.321569, 0.505882, 1)
+bg_color = Color(0.937885, 0.538319, 0.656641, 1)
+border_width_bottom = 5
+border_color = Color(0.851724, 0.321011, 0.507437, 1)
 corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bfrbo"]
-bg_color = Color(0.937255, 0.537255, 0.654902, 1)
-border_width_left = 3
-border_width_right = 3
-border_width_bottom = 4
-border_color = Color(0.85098, 0.321569, 0.505882, 1)
+bg_color = Color(0.85098, 0.321569, 0.505882, 1)
 corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
@@ -71,6 +71,8 @@ Button/styles/hover = SubResource("StyleBoxFlat_j6w57")
 Button/styles/hover_pressed = SubResource("StyleBoxFlat_bfrbo")
 Button/styles/normal = SubResource("StyleBoxFlat_ndmua")
 Button/styles/pressed = SubResource("StyleBoxFlat_akn7b")
+Label/colors/font_outline_color = Color(0.85098, 0.321569, 0.505882, 1)
+Label/constants/outline_size = 10
 Label/fonts/font = ExtResource("1_ndmua")
 MenuButton/fonts/font = ExtResource("1_ndmua")
 Panel/styles/panel = SubResource("StyleBoxFlat_ju0yn")
