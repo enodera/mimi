@@ -13,7 +13,7 @@ var quest_data := {
 	"delivery_cake": {
 		"title": "Strawberry Cake Delivery",
 		"description": "Deliver 3 Strawberry Cakes to Liz.",
-		"reward": "100 Gold",
+		"reward": "none",
 		"type": "delivery",
 		"item": "cake",
 		"item_count": 3,
@@ -22,7 +22,7 @@ var quest_data := {
 	"delivery_cookies": {
 		"title": "Nut Cookies Delivery",
 		"description": "Deliver 3 Nut Cookies to Liz.",
-		"reward": "100 Gold",
+		"reward": "none",
 		"type": "delivery",
 		"item": "cookies",
 		"item_count": 3,
@@ -31,7 +31,7 @@ var quest_data := {
 	"delivery_pumpkin_pie": {
 		"title": "Pumpkin Pie Delivery",
 		"description": "Deliver 3 Pumpkin Pies to Liz.",
-		"reward": "100 Gold",
+		"reward": "none",
 		"type": "delivery",
 		"item": "pumpkin_pie",
 		"item_count": 3,
@@ -40,7 +40,7 @@ var quest_data := {
 	"delivery_ice_cream": {
 		"title": "Ice Cream Delivery",
 		"description": "Deliver 3 Ice Creams to Liz.",
-		"reward": "100 Gold",
+		"reward": "none",
 		"type": "delivery",
 		"item": "ice_cream",
 		"item_count": 3,
@@ -49,7 +49,7 @@ var quest_data := {
 	"delivery_mango_lassi": {
 		"title": "Mango Lassi Delivery",
 		"description": "Deliver 3 Mango Lassis to Liz.",
-		"reward": "100 Gold",
+		"reward": "none",
 		"type": "delivery",
 		"item": "mango_lassi",
 		"item_count": 3,
@@ -58,7 +58,7 @@ var quest_data := {
 	"delivery_muffin": {
 		"title": "Berry Muffin Delivery",
 		"description": "Deliver 3 Berry Muffins to Liz.",
-		"reward": "100 Gold",
+		"reward": "none",
 		"type": "delivery",
 		"item": "muffin",
 		"item_count": 3,
@@ -67,7 +67,7 @@ var quest_data := {
 	"delivery_carrot_cake": {
 		"title": "Carrot Cake Delivery",
 		"description": "Deliver 3 Carrot Cakes to Liz.",
-		"reward": "100 Gold",
+		"reward": "none",
 		"type": "delivery",
 		"item": "carrot_cake",
 		"item_count": 3,
