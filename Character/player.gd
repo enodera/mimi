@@ -1,5 +1,4 @@
-# This script controls a 3D character with movement, combat, and camera systems
-# It includes states for idle, walking/running, jumping, attacking, defending, and hit reactions
+# player.gd
 
 extends CharacterBody3D
 
