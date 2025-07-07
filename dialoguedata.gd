@@ -70,7 +70,7 @@ var dialogue = {
 		"delivery_pumpkin_pie_start": [
 			"Please, make 3 Pumpkin Pies for me.",
 			"Pumpkins are so fascinating... Don't you agree? Heehee...",
-			"The recipe should be somewhere in that rocky island.\nThey're actually chocolate, though!",
+			"The recipe should be somewhere in Choco Island, the brown one over there.",
 			"Let me know when you're done."
 		],
 
@@ -169,7 +169,7 @@ var dialogue = {
 	},
 
 
-	"npc_pink_area": {
+	"laura": {
 		"intro": [
 			"Have you seen the pink trees around here? They glow softly at dusk.",
 			{
@@ -193,7 +193,7 @@ var dialogue = {
 		]
 	},
 
-	"npc_mountain_area": {
+	"avery": {
 		"intro": [
 			"The mountain's chocolate ground is unlike anything else in the archipelago.",
 			{
@@ -229,8 +229,7 @@ var dialogue = {
 			}
 		],
 		"frog_slimes_food": [
-			"Pink frog slimes love sweet nectar from the pink trees and sometimes drop rare ingredients.",
-			"Catch them gently; they might become your allies.",
+			"Pink frog slimes love sweet nectar from the pink trees and always drop sugar.",
 			{"text": "Good luck!", "set_branch": "again"}
 		],
 		"casual": [
@@ -279,7 +278,7 @@ var dialogue = {
 		],
 		"ingredients_info": [
 			"Really?! Thank you! Alright then, ahem...",
-			"First there's Rose Islands. It's that big pink island over there, impossible to miss.",
+			"First there's the Rose Island. It's that big pink island over there, impossible to miss.",
 			"There, you can find bushes with strawberries and pink slimes to defeat, which will give you sugar.",
 			"Next is Cream Island, that icy looking one with the big mountain.",
 			"The mages there will drop milk, and the blue frogs will give you ice!",
@@ -327,7 +326,8 @@ var dialogue = {
 		"elric_gathering_start": [
 			"I see you're free...",
 			"How about you try collecting some mangos then?",
-			"In this place, mangos grow on the ground... They're over here, near the trees! But you won't know which are mangos until you pluck them...",
+			"In this place, mangos grow on the ground... They're over here, near the trees!
+			But you won't know which are mangos until you pluck them...",
 			"Try collecting 3 of them!"
 		],
 		"elric_gathering_done": [
