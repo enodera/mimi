@@ -1,18 +1,22 @@
 # npc.gd
 extends Node3D
 
+# NPC dialog identifier
 var dialog_npc: String
+
+# Character configuration exports
 @export_group("Character Data")
-@export var selected_npc: NPCType = NPCType.LIZ
-@export var dialog_text: String = "intro"
-@export var itemgiven: String = "none"
+@export var selected_npc: NPCType = NPCType.LIZ  # Selected NPC type from enum
+@export var dialog_text: String = "intro"  # Default dialog branch
+@export var itemgiven: String = "none"  # Item this NPC can give
 
+# Visual customization exports
 @export_group("Colors")
-@export var hair_color: HairColor = HairColor.BLACK
-@export var outfit_color: OutfitColor = OutfitColor.PINK
+@export var hair_color: HairColor = HairColor.BLACK  # Hair color selection
+@export var outfit_color: OutfitColor = OutfitColor.PINK  # Outfit color selection
 
+# Hair style toggle exports
 @export_group("Hair")
-
 @export var show_hairbacklong: bool = false
 @export var show_hairbackshort: bool = false
 @export var show_hairbackwave: bool = false
@@ -28,7 +32,7 @@ var dialog_npc: String
 @export var show_hairsideshort: bool = false
 @export var show_hairsidewave: bool = false
 
-# Define the NPCs
+# Enum defining all NPC types
 enum NPCType {
 	ELRIC,
 	LYRA,
@@ -44,6 +48,7 @@ enum NPCType {
 	NARRATOR
 }
 
+# Mapping of NPC types to dialogue keys
 var npc_dialogue_keys = {
 	NPCType.ELRIC: "elric",
 	NPCType.LYRA: "lyra",
@@ -59,6 +64,7 @@ var npc_dialogue_keys = {
 	NPCType.NARRATOR: "narrator"
 }
 
+# Hair color options
 enum HairColor {
 	BLACK,
 	BLONDE,
@@ -67,6 +73,7 @@ enum HairColor {
 	ORANGE
 }
 
+# Outfit color options
 enum OutfitColor {
 	BLUE,
 	GREEN,
@@ -74,15 +81,10 @@ enum OutfitColor {
 	PINK
 }
 
-#var text_dialogue_keys = {
-	#NPCType.GREETING: "npc_john",
-	#NPCType.MISSION1: "npc_luna",
-	#NPCType.MISSION2: "narrator",
-	#NPCType.MISSION2: "narrator"
-#}
-
+# Tracks if player is in interaction range
 var player_in_range = false
 
+# Preloaded hair materials for different colors
 var hair_materials = {
 	HairColor.BLACK: preload("res://npchairs/blackhair.tres"),
 	HairColor.BLONDE: preload("res://npchairs/blondehair.tres"),
@@ -91,6 +93,7 @@ var hair_materials = {
 	HairColor.ORANGE: preload("res://npchairs/orangehair.tres")
 }
 
+# Preloaded outfit materials for different colors
 var outfit_materials = {
 	OutfitColor.BLUE: preload("res://npcoutfits/blue.tres"),
 	OutfitColor.GREEN: preload("res://npcoutfits/green.tres"),
@@ -99,102 +102,97 @@ var outfit_materials = {
 }
 
 func _ready():
+	# Connect signals for interaction area
 	$Area3D.body_entered.connect(_on_body_entered)
 	$Area3D.body_exited.connect(_on_body_exited)
+	
+	# Set up initial dialog NPC key
 	dialog_npc = npc_dialogue_keys[selected_npc]
+	
+	# Connect to dialogue UI signal
 	%DialogueUI.npc_set_branch.connect(_on_npc_set_branch)
 	
+	# Initialize visual appearance
 	update_hair_visibility()
 	update_outfit_material()
 
 func _process(_delta):
+	# Handle player interaction input
 	if player_in_range and Input.is_action_just_pressed("interact") and not Global.gamedone and not Global.inventorypaused and not Global.cookingpaused and not Global.dialoguepaused:
 		show_dialog()
 		
+		# Make NPC face player during interaction
 		var player_position = %Player.global_transform.origin
 		self.look_at(player_position, Vector3.UP)
 
+# Called when body enters interaction area
 func _on_body_entered(body):
-	if body.is_in_group("player"):  # Or use group checking
+	if body.is_in_group("player"):  # Check if it's the player
 		print(body, body.is_on_floor())
 		player_in_range = true
-		$Label3D.visible = true  # Optional
-		
+		$Label3D.visible = true  # Show interaction prompt
 
+# Called when body exits interaction area
 func _on_body_exited(body):
 	if body.is_in_group("player"):
 		player_in_range = false
-		$Label3D.visible = false  # Optional
+		$Label3D.visible = false  # Hide interaction prompt
 
+# Called when dialogue branch changes externally
 func _on_npc_set_branch(character_id: String, new_branch: String):
 	if dialog_npc == character_id:
 		dialog_text = new_branch
 
+# Start dialogue interaction
 func show_dialog():
 	print(dialog_text)
 	
+	# Pause game for dialogue
 	Global.dialoguepaused = true
 	
+	# Start dialogue from global system
 	%DialogueUI.start_from_global(dialog_npc, dialog_text)
 	
+	# Wait for dialogue to finish
 	await %DialogueUI.dialogue_finished
-	
-	#%DialogueUI.start_dialogue([
-		#"Hello, witch!",
-		#"What's up? Not much, I assume...",
-		#"it works heeheehee"
-	#], "Yes")
-	#
-	#await %DialogueUI.dialogue_finished
 
+# Update visible hair parts based on export toggles
 func update_hair_visibility():
 	var hair_mat = hair_materials[hair_color]
 
-	$NPCmaker/Armature/Skeleton3D/hairbacklong/hairbacklong.visible = show_hairbacklong
-	$NPCmaker/Armature/Skeleton3D/hairbacklong/hairbacklong.material_override = hair_mat
+	# Mapping of hair properties to node paths
+	var hair_parts = {
+		"show_hairbacklong": "hairbacklong/hairbacklong",
+		"show_hairbackshort": "hairbackshort/hairbackshort",
+		"show_hairbackwave": "hairbackwave/hairbackwave",
+		"show_hairbaseshort": "hairbaseshort/hairbaseshort",
+		"show_hairbaseshorter": "hairbaseshorter/hairbaseshorter",
+		"show_hairfringeemoleft": "hairfringeemoleft/hairfringeemoleft",
+		"show_hairfringeemoright": "hairfringeemoright/hairfringeemoright",
+		"show_hairfringemiddle": "hairfringemiddle/hairfringemiddle",
+		"show_hairfringepart": "hairfringepart/hairfringepart",
+		"show_hairfringestraight": "hairfringestraight/hairfringestraight",
+		"show_hairfringetiny": "hairfringetiny/hairfringetiny",
+		"show_hairsidelong": "hairsidelong/hairsidelong",
+		"show_hairsideshort": "hairsideshort/hairsideshort",
+		"show_hairsidewave": "hairsidewave/hairsidewave"
+	}
 
-	$NPCmaker/Armature/Skeleton3D/hairbackshort/hairbackshort.visible = show_hairbackshort
-	$NPCmaker/Armature/Skeleton3D/hairbackshort/hairbackshort.material_override = hair_mat
+	# Toggle visibility and apply material for each hair part
+	for prop_name in hair_parts.keys():
+		var node_path = "NPCmaker/Armature/Skeleton3D/" + hair_parts[prop_name]
+		var node = get_node(node_path)
+		if node:
+			node.visible = self.get(prop_name)
+			node.material_override = hair_mat
 
-	$NPCmaker/Armature/Skeleton3D/hairbackwave/hairbackwave.visible = show_hairbackwave
-	$NPCmaker/Armature/Skeleton3D/hairbackwave/hairbackwave.material_override = hair_mat
-
-	$NPCmaker/Armature/Skeleton3D/hairbaseshort/hairbaseshort.visible = show_hairbaseshort
-	$NPCmaker/Armature/Skeleton3D/hairbaseshort/hairbaseshort.material_override = hair_mat
-
-	$NPCmaker/Armature/Skeleton3D/hairbaseshorter/hairbaseshorter.visible = show_hairbaseshorter
-	$NPCmaker/Armature/Skeleton3D/hairbaseshorter/hairbaseshorter.material_override = hair_mat
-
-	$NPCmaker/Armature/Skeleton3D/hairfringeemoleft/hairfringeemoleft.visible = show_hairfringeemoleft
-	$NPCmaker/Armature/Skeleton3D/hairfringeemoleft/hairfringeemoleft.material_override = hair_mat
-
-	$NPCmaker/Armature/Skeleton3D/hairfringeemoright/hairfringeemoright.visible = show_hairfringeemoright
-	$NPCmaker/Armature/Skeleton3D/hairfringeemoright/hairfringeemoright.material_override = hair_mat
-
-	$NPCmaker/Armature/Skeleton3D/hairfringemiddle/hairfringemiddle.visible = show_hairfringemiddle
-	$NPCmaker/Armature/Skeleton3D/hairfringemiddle/hairfringemiddle.material_override = hair_mat
-
-	$NPCmaker/Armature/Skeleton3D/hairfringepart/hairfringepart.visible = show_hairfringepart
-	$NPCmaker/Armature/Skeleton3D/hairfringepart/hairfringepart.material_override = hair_mat
-
-	$NPCmaker/Armature/Skeleton3D/hairfringestraight/hairfringestraight.visible = show_hairfringestraight
-	$NPCmaker/Armature/Skeleton3D/hairfringestraight/hairfringestraight.material_override = hair_mat
-
-	$NPCmaker/Armature/Skeleton3D/hairfringetiny/hairfringetiny.visible = show_hairfringetiny
-	$NPCmaker/Armature/Skeleton3D/hairfringetiny/hairfringetiny.material_override = hair_mat
-
-	$NPCmaker/Armature/Skeleton3D/hairsidelong/hairsidelong.visible = show_hairsidelong
-	$NPCmaker/Armature/Skeleton3D/hairsidelong/hairsidelong.material_override = hair_mat
-
-	$NPCmaker/Armature/Skeleton3D/hairsideshort/hairsideshort.visible = show_hairsideshort
-	$NPCmaker/Armature/Skeleton3D/hairsideshort/hairsideshort.material_override = hair_mat
-
-	$NPCmaker/Armature/Skeleton3D/hairsidewave/hairsidewave.visible = show_hairsidewave
-	$NPCmaker/Armature/Skeleton3D/hairsidewave/hairsidewave.material_override = hair_mat
-
+# Update outfit materials based on selected color
 func update_outfit_material():
 	var outfit_mat = outfit_materials[outfit_color]
-	$NPCmaker/Armature/Skeleton3D/Body.material_override = outfit_mat
-	$NPCmaker/Armature/Skeleton3D/Cylinder.material_override = outfit_mat
-	$NPCmaker/Armature/Skeleton3D/Hat.material_override = outfit_mat
-	$NPCmaker/Armature/Skeleton3D/legs.material_override = outfit_mat
+	var outfit_parts = ["Body", "Cylinder", "Hat", "legs"]
+
+	# Apply material to each outfit part
+	for part in outfit_parts:
+		var node = get_node("NPCmaker/Armature/Skeleton3D/" + part)
+		if node:
+			node.material_override = outfit_mat
