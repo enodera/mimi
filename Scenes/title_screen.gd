@@ -7,6 +7,7 @@ func _ready():
 	$OptionsButton.pressed.connect(_on_options_button_pressed)
 	$CloseButton.pressed.connect(_on_close_button_pressed)
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	MusicManager.play_music(preload("res://Sound/music/title-screen.ogg"))
 	run_transition_show()
 
 func _on_start_button_pressed() -> void:

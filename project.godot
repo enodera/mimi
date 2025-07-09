@@ -23,6 +23,7 @@ Global="*res://global.gd"
 DialogueData="*res://dialoguedata.gd"
 NotificationUI="*res://notificationui.gd"
 QuestManager="*res://questmanager.gd"
+MusicManager="*res://musicplayer.tscn"
 
 [display]
 

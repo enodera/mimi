@@ -95,6 +95,8 @@ func _ready() -> void:
 	_air_attack_timer.timeout.connect(_on_air_attack_timeout)
 	add_child(_air_attack_timer)
 	
+	MusicManager.play_music(preload("res://Sound/music/overworld.ogg"))
+	
 	# Initialize health UI if available
 	if health_ui:
 		health_ui.set_health(max_health, current_health)
