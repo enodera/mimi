@@ -13,7 +13,7 @@ func add_item(item_id: String, amount: int = 1):
 	var itemname = ItemDatabase.items[item_id]["name"]
 	var item_type = ItemDatabase.items[item_id]["type"]
 	print("Adding item:", item_id, "Name:", itemname, "Amount:", amount, "Type:", item_type)
-
+	MusicManager.play_sfx(preload("res://Sound/sfx/collect.ogg"))
 	if amount == 1:
 		NotificationUI.show_notification("You got %s!" % [itemname], 2.0)
 	else:

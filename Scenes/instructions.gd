@@ -8,6 +8,8 @@ extends Control
 @onready var back_button: Button = $BackButton
 @onready var shader_material: ShaderMaterial = $ScreenTransition/ColorRect.material
 
+var playedsfx = false
+
 var current_page_index := 0
 const MAX_PAGE := 3
 
@@ -17,6 +19,7 @@ func _ready():
 	left_button.pressed.connect(_on_left_pressed)
 	right_button.pressed.connect(_on_right_pressed)
 	back_button.pressed.connect(_on_back_pressed)
+	playedsfx = false
 
 func _on_left_pressed():
 	if current_page_index > 0:
@@ -60,9 +63,13 @@ func run_transition_hide() -> void:
 	while elapsed < duration:
 		elapsed += get_process_delta_time()
 		var circle_size = lerp(1.0, 0.0, elapsed / duration)
+		if elapsed >= 0.5 and not playedsfx:
+			MusicManager.play_sfx(preload("res://Sound/sfx/fadeout.ogg"))
+			playedsfx = true
 		shader_material.set_shader_parameter("circle_size", circle_size)
 		await get_tree().process_frame
 	# Ensure it ends exactly at 0
+	playedsfx = false
 	shader_material.set_shader_parameter("circle_size", 0.0)
 
 func run_transition_show() -> void:
@@ -71,7 +78,11 @@ func run_transition_show() -> void:
 	while elapsed < duration:
 		elapsed += get_process_delta_time()
 		var circle_size = lerp(0.0, 1.0, elapsed / duration)
+		if not playedsfx:
+			MusicManager.play_sfx(preload("res://Sound/sfx/fadein.ogg"))
+			playedsfx = true
 		shader_material.set_shader_parameter("circle_size", circle_size)
 		await get_tree().process_frame
 	# Ensure it ends exactly at 1
+	playedsfx = false
 	shader_material.set_shader_parameter("circle_size", 1.0)

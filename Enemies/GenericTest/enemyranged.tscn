@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://bqe5hsuvprjns"]
+[gd_scene load_steps=50 format=3 uid="uid://bqe5hsuvprjns"]
 
 [ext_resource type="Script" uid="uid://bncfavxct77il" path="res://Enemies/GenericTest/magebehaviour.gd" id="1_gg36u"]
 [ext_resource type="PackedScene" uid="uid://bfanf6xq0q2eq" path="res://projectile.tscn" id="2_gg36u"]
@@ -7,6 +7,11 @@
 [ext_resource type="QuadMesh" uid="uid://cr48mhkgbw1vr" path="res://Enemies/GenericTest/circleeffect.tres" id="5_0cs84"]
 [ext_resource type="PackedScene" uid="uid://0npg7e1cmhi7" path="res://Enemies/GenericTest/mage_1.tscn" id="6_gg36u"]
 [ext_resource type="PackedScene" uid="uid://dgmj5knh2pa0s" path="res://Enemies/GenericTest/mage_2.tscn" id="7_hci6a"]
+[ext_resource type="AudioStream" uid="uid://b3ma0m6ybl4pa" path="res://Sound/sfx/attack.ogg" id="8_0cs84"]
+[ext_resource type="AudioStream" uid="uid://bxx4lwk7v5taq" path="res://Sound/sfx/explosion.ogg" id="9_a3auh"]
+[ext_resource type="AudioStream" uid="uid://d0yfl2qfabvgx" path="res://Sound/sfx/magicdissapear.ogg" id="10_wxunj"]
+[ext_resource type="AudioStream" uid="uid://dr2h3inlb6tx7" path="res://Sound/sfx/magicreappear.ogg" id="11_micoc"]
+[ext_resource type="AudioStream" uid="uid://bwymux543upln" path="res://Sound/sfx/nyoom.ogg" id="12_micoc"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_rbfrn"]
 radius = 1.5
@@ -195,6 +200,11 @@ hue_variation_curve = SubResource("CurveTexture_j5php")
 [sub_resource type="BoxShape3D" id="BoxShape3D_hci6a"]
 size = Vector3(1.21682, 2.07956, 2.21466)
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_qfvla"]
+random_pitch = 1.1
+streams_count = 1
+stream_0/stream = ExtResource("12_micoc")
+
 [node name="MageEnemy" type="CharacterBody3D" groups=["enemy"]]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 script = ExtResource("1_gg36u")
@@ -305,3 +315,37 @@ monitorable = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4971, 1.7419, -0.00662231)
 shape = SubResource("BoxShape3D_hci6a")
 debug_color = Color(0.7, 0, 0, 0.419608)
+
+[node name="disappearsound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("10_wxunj")
+attenuation_model = 3
+volume_db = -15.0
+unit_size = 20.0
+panning_strength = 0.25
+
+[node name="reappearsound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("11_micoc")
+attenuation_model = 3
+volume_db = -15.0
+unit_size = 20.0
+panning_strength = 0.25
+
+[node name="hitsound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("8_0cs84")
+attenuation_model = 3
+volume_db = -5.0
+panning_strength = 0.25
+
+[node name="explosionsound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("9_a3auh")
+attenuation_model = 3
+volume_db = -7.5
+panning_strength = 0.25
+
+[node name="attacksound" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+stream = SubResource("AudioStreamRandomizer_qfvla")
+attenuation_model = 3
+volume_db = -9.0
+pitch_scale = 0.9
+panning_strength = 0.25

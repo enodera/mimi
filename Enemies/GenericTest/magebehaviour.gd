@@ -183,6 +183,7 @@ func _physics_process(delta: float) -> void:
 					if melee_timer <= 0.0:
 						melee_timer = 0.25
 						melee_phase = MeleePhase.ATTACKING
+						$attacksound.play()
 						_state_machine.travel("attack")
 						if not dying:
 							shoot_projectile()
@@ -201,6 +202,7 @@ func _physics_process(delta: float) -> void:
 						disappear_timer = 0.4
 						melee_timer = 0.3
 						state = State.DISAPPEAR
+						$disappearsound.play()
 
 		State.DAMAGE:
 			if is_knocked_back:
@@ -245,6 +247,7 @@ func _physics_process(delta: float) -> void:
 					just_disappeared = true
 					set_player_detection_areas(not just_disappeared)
 					print("STATE PLAY: JUST DISSAPEARED")
+					$reappearsound.play()
 
 				else:
 					print("STATE PLAY: NOT JUST DISSAPEARED")
@@ -305,6 +308,7 @@ func _on_area_entered(area: Area3D) -> void:
 		apply_knockback(direction)
 		$enemy/AttackParticles.restart()
 		$enemy/AttackParticles.emitting = true
+		$hitsound.play()
 		if health <= 0:
 			die()
 
@@ -381,6 +385,8 @@ func die():
 	
 	if $MinimapSign.visible:
 		$MinimapSign.visible = false
+	
+	$explosionsound.play()
 	
 	if $CollisionShape3D != null:
 		$CollisionShape3D.queue_free()

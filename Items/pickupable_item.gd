@@ -17,6 +17,7 @@ func _process(delta):
 
 func _on_body_entered(body):
 	if pickupable and body.is_in_group("player"):
+		MusicManager.play_sfx(preload("res://Sound/sfx/recipecollect.ogg"))
 		collect_item()
 
 func collect_item():

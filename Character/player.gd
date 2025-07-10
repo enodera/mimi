@@ -55,6 +55,8 @@ var good_def := false  # Flag for successful defense
 var is_on_water := false  # Flag for water interaction
 var gamedoneinstanced := false  # Flag for game completion state
 
+var playedsfx = false # This is for the transition sounds
+
 # -----------------------
 # --- NODE REFERENCES ---
 # -----------------------
@@ -101,6 +103,7 @@ func _ready() -> void:
 	if health_ui:
 		health_ui.set_health(max_health, current_health)
 	
+	playedsfx = false
 	# Set mouse mode and run screen transition
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	run_transition_show()
@@ -159,7 +162,7 @@ func perform_attack() -> void:
 	# Don't attack if already at max combo
 	if combo_step >= combo_max:
 		return
-
+	MusicManager.play_sfx(preload("res://Sound/sfx/swoosh.ogg"))
 	# Set attack state and initialize attack variables
 	set_state("attack")
 	_can_move = false
@@ -218,6 +221,7 @@ func perform_attack() -> void:
 
 func perform_air_attack() -> void:
 	# Set up air attack state
+	MusicManager.play_sfx(preload("res://Sound/sfx/doublejump.ogg"))
 	set_state("airattack")
 	velocity.y = 55  # Apply upward force
 	_skin.spin_around(attack_durations[2]/3)  # Spin animation
@@ -370,6 +374,7 @@ func handle_jump_and_gravity(delta: float):
 	# Handle jump input
 	elif Input.is_action_just_pressed("jump"):
 		velocity.y = jump_strength
+		MusicManager.play_sfx(preload("res://Sound/sfx/jump.ogg"))
 		set_state("jump")
 	# Reset vertical velocity when on ground
 	elif not is_knockback_active:
@@ -424,7 +429,9 @@ func set_state(new_state: String) -> void:
 		"hitstun":
 			if good_def:
 				_skin.set_move_state("good_def")
+				MusicManager.play_sfx(preload("res://Sound/sfx/defend.ogg"))
 			else:
+				MusicManager.play_sfx(preload("res://Sound/sfx/ouch.ogg"))
 				_skin.set_move_state("hitstun")
 			
 		"recovery":
@@ -581,21 +588,28 @@ func run_transition_hide() -> void:
 	while elapsed < duration:
 		elapsed += get_process_delta_time()
 		var circle_size = lerp(1.0, 0.0, elapsed / duration)
+		if elapsed >= 0.5 and not playedsfx:
+			MusicManager.play_sfx(preload("res://Sound/sfx/fadeout.ogg"))
+			playedsfx = true
 		shader_material.set_shader_parameter("circle_size", circle_size)
 		await get_tree().process_frame
 	# Ensure it ends exactly at 0
+	playedsfx = false
 	shader_material.set_shader_parameter("circle_size", 0.0)
 
-# Screen transition animation (show)
 func run_transition_show() -> void:
 	var duration = 1.0  # seconds
 	var elapsed = 0.0
 	while elapsed < duration:
 		elapsed += get_process_delta_time()
 		var circle_size = lerp(0.0, 1.0, elapsed / duration)
+		if not playedsfx:
+			MusicManager.play_sfx(preload("res://Sound/sfx/fadein.ogg"))
+			playedsfx = true
 		shader_material.set_shader_parameter("circle_size", circle_size)
 		await get_tree().process_frame
 	# Ensure it ends exactly at 1
+	playedsfx = false
 	shader_material.set_shader_parameter("circle_size", 1.0)
 
 # Handle death state

@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://b4bv4j5e7yi0b"]
+[gd_scene load_steps=49 format=3 uid="uid://b4bv4j5e7yi0b"]
 
 [ext_resource type="Script" uid="uid://fphwwj1sbpqo" path="res://frogbehaviour.gd" id="1_5rcum"]
 [ext_resource type="PackedScene" uid="uid://dpe0v3b8g4i0t" path="res://MimiModels/frog/frog.tscn" id="2_gsgu7"]
@@ -8,6 +8,9 @@
 [ext_resource type="QuadMesh" uid="uid://cr48mhkgbw1vr" path="res://Enemies/GenericTest/circleeffect.tres" id="4_5rcum"]
 [ext_resource type="PackedScene" uid="uid://b2b22xsm5aqy5" path="res://MimiModels/frog/frog3.tscn" id="4_36d6g"]
 [ext_resource type="PackedScene" uid="uid://d0n8pl4px0hd8" path="res://MimiModels/frog/frog4.tscn" id="5_j5php"]
+[ext_resource type="AudioStream" uid="uid://b3ma0m6ybl4pa" path="res://Sound/sfx/attack.ogg" id="9_sli65"]
+[ext_resource type="AudioStream" uid="uid://bxx4lwk7v5taq" path="res://Sound/sfx/explosion.ogg" id="10_7w4ni"]
+[ext_resource type="AudioStream" uid="uid://cyy0jbwj763ya" path="res://Sound/sfx/swoosh.ogg" id="11_2kna6"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_rbfrn"]
 radius = 2.5
@@ -195,6 +198,11 @@ hue_variation_min = -1.0
 hue_variation_max = 1.0
 hue_variation_curve = SubResource("CurveTexture_o6yyl")
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_uvlc3"]
+random_pitch = 1.1
+streams_count = 1
+stream_0/stream = ExtResource("11_2kna6")
+
 [node name="FrogEnemy" type="CharacterBody3D" groups=["enemy"]]
 script = ExtResource("1_5rcum")
 
@@ -317,3 +325,23 @@ fixed_fps = 60
 trail_lifetime = 2.5
 process_material = SubResource("ParticleProcessMaterial_l6hcf")
 draw_pass_1 = SubResource("QuadMesh_5rcum")
+
+[node name="hitsound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("9_sli65")
+attenuation_model = 3
+volume_db = -5.0
+panning_strength = 0.25
+
+[node name="explosionsound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("10_7w4ni")
+attenuation_model = 3
+volume_db = -7.5
+panning_strength = 0.25
+
+[node name="attacksound" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+stream = SubResource("AudioStreamRandomizer_uvlc3")
+attenuation_model = 3
+volume_db = -5.0
+pitch_scale = 1.53
+panning_strength = 0.25

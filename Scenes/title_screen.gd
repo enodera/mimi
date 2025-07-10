@@ -1,6 +1,7 @@
 extends Control
 
 @onready var shader_material: ShaderMaterial = $ScreenTransition/ColorRect.material
+var playedsfx = false
 
 func _ready():
 	$StartButton.pressed.connect(_on_start_button_pressed)
@@ -8,6 +9,7 @@ func _ready():
 	$CloseButton.pressed.connect(_on_close_button_pressed)
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	MusicManager.play_music(preload("res://Sound/music/title-screen.ogg"))
+	playedsfx = false
 	run_transition_show()
 
 func _on_start_button_pressed() -> void:
@@ -44,9 +46,13 @@ func run_transition_hide() -> void:
 	while elapsed < duration:
 		elapsed += get_process_delta_time()
 		var circle_size = lerp(1.0, 0.0, elapsed / duration)
+		if elapsed >= 0.5 and not playedsfx:
+			MusicManager.play_sfx(preload("res://Sound/sfx/fadeout.ogg"))
+			playedsfx = true
 		shader_material.set_shader_parameter("circle_size", circle_size)
 		await get_tree().process_frame
 	# Ensure it ends exactly at 0
+	playedsfx = false
 	shader_material.set_shader_parameter("circle_size", 0.0)
 
 func run_transition_show() -> void:
@@ -55,7 +61,11 @@ func run_transition_show() -> void:
 	while elapsed < duration:
 		elapsed += get_process_delta_time()
 		var circle_size = lerp(0.0, 1.0, elapsed / duration)
+		if not playedsfx:
+			MusicManager.play_sfx(preload("res://Sound/sfx/fadein.ogg"))
+			playedsfx = true
 		shader_material.set_shader_parameter("circle_size", circle_size)
 		await get_tree().process_frame
 	# Ensure it ends exactly at 1
+	playedsfx = false
 	shader_material.set_shader_parameter("circle_size", 1.0)

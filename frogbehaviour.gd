@@ -177,6 +177,7 @@ func _physics_process(delta: float) -> void:
 					melee_timer -= delta
 					if melee_timer <= 0.0:
 						melee_phase = MeleePhase.ATTACKING
+						$attacksound.play()
 						melee_timer = 0.5  # duration of the attack animation
 						_state_machine.travel("attack")
 						# Deal damage once, e.g., instantly or use an animation event system if you have one
@@ -287,6 +288,7 @@ func _on_area_entered(area: Area3D) -> void:
 		$enemy/AttackParticles.restart()
 		$enemy/AttackParticles.emitting = true
 		print("ENEMY: Took damage! Health now: ", health)
+		$hitsound.play()
 		if health <= 0:
 			die()
 
@@ -378,6 +380,7 @@ func die():
 	if $MinimapSign.visible:
 		$MinimapSign.visible = false
 	
+	$explosionsound.play()
 		
 	if $CollisionShape3D:
 		$CollisionShape3D.queue_free()

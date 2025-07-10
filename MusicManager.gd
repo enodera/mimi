@@ -2,6 +2,7 @@
 extends Node
 
 @onready var music_player: AudioStreamPlayer = $AudioStreamPlayer
+@onready var sfx_player: AudioStreamPlayer = $AudioStreamPlayer2
 
 var current_track: AudioStream = null
 
@@ -14,6 +15,12 @@ func play_music(stream: AudioStream):
 		music_player.play()
 		current_track = stream
 
+func play_sfx(stream: AudioStream):
+	sfx_player.stream = stream
+	sfx_player.stop()
+	sfx_player.play()
+
 func stop_music():
 	music_player.stop()
 	current_track = null
+	

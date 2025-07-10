@@ -8,3 +8,8 @@ script = ExtResource("1_ryb5w")
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 volume_db = -15.0
 bus = &"Music"
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="."]
+volume_db = -15.0
+autoplay = true
+bus = &"sfx"
