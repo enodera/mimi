@@ -26,8 +26,8 @@ func _ready():
 	$Panel.scale = Vector2(0, 0)
 
 	# Adding one of every item in the database for testing!!!!
-	for item_id in ItemDatabase.items.keys():
-		inventory.add_item(item_id, 10)
+	# for item_id in ItemDatabase.items.keys():
+		# inventory.add_item(item_id, 10)
 
 	show_item("none")
 
