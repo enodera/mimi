@@ -313,7 +313,7 @@ var dialogue = {
 				"text": "What brings you out here?",
 				"options": [
 					{"text": "Just enjoying nature.", "next": "friendly"},
-					{"text": "Bored...", "next": "quest_offer"}
+					{"text": "Nothing to do...", "next": "quest_offer"}
 				]
 			}
 		],
@@ -326,12 +326,18 @@ var dialogue = {
 		"elric_gathering_start": [
 			"I see you're free...",
 			"How about you try collecting some mangos then?",
-			"In this place, mangos grow on the ground... They're over here, near the trees!
-			But you won't know which are mangos until you pluck them...",
-			"Try collecting 3 of them!"
+			"In this place, mangos grow on the ground... They're over here, near the trees!",
+			"But you won't know which are mangos until you pluck them...",
+			"Try collecting 3 of them! I'll give you some sugar in exchange."
 		],
 		"elric_gathering_done": [
-			"Ah, perfect! These will help so many people. You're a true friend."
+			"Ah, perfect! These will help so many people. You're a true friend.",
+			{
+				"text": "Here's the sugar, as promised. Enjoy!",
+				"action": "give_item",
+				"item": "sugar",
+				"itemnumber": 10
+			}
 		],
 		"elric_gathering_fail": [
 			"Still missing the berries. They’re out there—don’t give up!"

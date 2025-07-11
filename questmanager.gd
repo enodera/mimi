@@ -72,6 +72,15 @@ var quest_data := {
 		"item": "carrot_cake",
 		"item_count": 3,
 		"recipient": "liz"
+	},
+	"elric_gathering": {
+		"title": "Mangos for Elric",
+		"description": "Deliver 3 Mangos to Elric.",
+		"reward": "none",
+		"type": "delivery",
+		"item": "mango",
+		"item_count": 3,
+		"recipient": "elric"
 	}
 }
 

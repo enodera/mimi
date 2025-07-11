@@ -429,7 +429,6 @@ func set_state(new_state: String) -> void:
 		"hitstun":
 			if good_def:
 				_skin.set_move_state("good_def")
-				MusicManager.play_sfx(preload("res://Sound/sfx/defend.ogg"))
 			else:
 				MusicManager.play_sfx(preload("res://Sound/sfx/ouch.ogg"))
 				_skin.set_move_state("hitstun")

@@ -219,7 +219,10 @@ func process_action(line: Dictionary):
 	match line["action"]:
 		"give_item":
 			if line.has("item"):
-				%InventoryUI.inevntory.add_item(line["item"])  # Assuming you have something like this
+				if line.has("itemnumber"):
+					Global.inventory_ref.add_item(line["item"], line["itemnumber"])
+				else:
+					Global.inventory_ref.add_item(line["item"])  # Assuming you have something like this
 		"start_quest":
 			if line.has("quest_id"):
 				QuestManager.start_quest(line["quest_id"])
