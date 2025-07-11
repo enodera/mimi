@@ -70,34 +70,30 @@ var dialogue = {
 		"delivery_pumpkin_pie_start": [
 			"Please, make 3 Pumpkin Pies for me.",
 			"Pumpkins are so fascinating... Don't you agree? Heehee...",
-			"The recipe should be somewhere in Choco Island, the brown one over there.",
 			"Let me know when you're done."
 		],
 
 		"delivery_ice_cream_start": [
-			"Deliver 3 Ice Creams to the hot springs resort on Cream Island.",
-			"They need a frozen treat to cool down.",
-			"The recipe should be somewhere in those snowy peaks.\nDid you know they're actually made of cream?",
+			"It's getting a bit warm, could you bring me 3 Ice Creams?",
+			"They're so chilly and refreshing...",
 			"Come back once completed."
 		],
 
 		"delivery_mango_lassi_start": [
-			"3 Mango Lassis are to be delivered to the tropical fruit market in Rose Islands.",
+			"I wish I could have 3 Mango Lassis.",
 			"Have you heard of those before? They seem to be a real delicacy of a smoothie.",
-			"The recipe should be somewhere in those snowy peaks.\nDid you know they're actually made of cream?",
-			"Return once the delivery is done."
+			"How about you make some? It'd be a learning experience."
 		],
 
 		"delivery_muffin_start": [
 			"I'd like to have 3 Berry Muffins, if it's not too much trouble.",
 			"The soft muffins filled with berries are very popular.",
-			"The recipe should be somewhere in the pink biome.\nIt seems that pink hue is actually whipping that fell out of the trees...\nIntriguing, isn't it?",
 			"Come back when you've delivered them."
 		],
 
 		"delivery_carrot_cake_start": [
-			"3 Carrot Cakes are to be delivered to the community center on Choco Island.",
-			"They love the tasty carrot treats there.",
+			"I'd like to have 3 Carrot Cakes, please.",
+			"They're my favourite!",
 			"Return once the delivery is done."
 		],
 
@@ -106,7 +102,7 @@ var dialogue = {
 			"Strawberry Cakes delivered perfectly! Great job as always, Mimi."
 		],
 		"delivery_cake_fail": [
-			"You haven't baked the Strawberry Cakes yet.",
+			"You haven't baked all Strawberry Cakes yet.",
 			"Keep at it, you'll get there soon!"
 		],
 
@@ -138,12 +134,12 @@ var dialogue = {
 			"Mango Lassis! Just as I asked. Thank you!"
 		],
 		"delivery_mango_lassi_fail": [
-			"No Mango Lassis ready yet.",
+			"Not all Mango Lassis ready yet.",
 			"Keep at it to get better!"
 		],
 
 		"delivery_muffin_done": [
-			"Berry Muffins delivered! These berries are a hit, I've heard."
+			"Berry Muffins delivered! These are a hit, I've heard."
 		],
 		"delivery_muffin_fail": [
 			"You need more Berry Muffins before you can deliver.",
@@ -151,10 +147,10 @@ var dialogue = {
 		],
 
 		"delivery_carrot_cake_done": [
-			"Carrot Cakes delivered! Isn't it amazing how carrots can be used in this way?"
+			"Carrot Cakes delivered! Isn't it amazing how versatile carrots can be?"
 		],
 		"delivery_carrot_cake_fail": [
-			"Carrot Cakes aren’t ready yet.",
+			"All Carrot Cakes aren’t ready yet.",
 			"Keep practicing and try again!"
 		],
 		"quest_already": [
@@ -331,7 +327,7 @@ var dialogue = {
 			"Try collecting 3 of them! I'll give you some sugar in exchange."
 		],
 		"elric_gathering_done": [
-			"Ah, perfect! These will help so many people. You're a true friend.",
+			"Ah, perfect! You're a true friend.",
 			{
 				"text": "Here's the sugar, as promised. Enjoy!",
 				"action": "give_item",
@@ -340,7 +336,7 @@ var dialogue = {
 			}
 		],
 		"elric_gathering_fail": [
-			"Still missing the berries. They’re out there—don’t give up!"
+			"Still missing the mangos. They're out there—don't give up!"
 		],
 		"again": [
 			"Back again? I’m always happy to share forest stories!"

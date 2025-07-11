@@ -913,6 +913,7 @@ recipe_id = "muffin"
 [node name="NPC2" parent="." instance=ExtResource("13_q2og1")]
 transform = Transform3D(0.850252, 0, -0.526377, 0, 1, 0, 0.526377, 0, 0.850252, -124.641, -3.83927, 34.163)
 selected_npc = 0
+outfit_color = 2
 
 [node name="NPC3" parent="." instance=ExtResource("13_q2og1")]
 transform = Transform3D(0.46478, 0, 0.885426, 0, 1, 0, -0.885426, 0, 0.46478, -112.383, -3.83936, 240.225)
